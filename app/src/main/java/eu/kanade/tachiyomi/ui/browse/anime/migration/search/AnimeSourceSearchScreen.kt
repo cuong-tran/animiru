@@ -23,13 +23,13 @@ import eu.kanade.presentation.browse.anime.BrowseAnimeSourceContent
 import eu.kanade.presentation.components.SearchToolbar
 import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
-import eu.kanade.tachiyomi.core.Constants
 import eu.kanade.tachiyomi.ui.browse.anime.source.browse.BrowseAnimeSourceScreenModel
 import eu.kanade.tachiyomi.ui.browse.anime.source.browse.SourceFilterAnimeDialog
 import eu.kanade.tachiyomi.ui.entries.anime.AnimeScreen
 import eu.kanade.tachiyomi.ui.home.HomeScreen
 import eu.kanade.tachiyomi.ui.webview.WebViewScreen
 import kotlinx.coroutines.launch
+import tachiyomi.core.common.Constants
 import tachiyomi.domain.entries.anime.model.Anime
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.ExtendedFloatingActionButton

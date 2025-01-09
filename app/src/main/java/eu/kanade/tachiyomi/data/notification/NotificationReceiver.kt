@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.core.net.toUri
-import eu.kanade.tachiyomi.core.Constants
 import eu.kanade.tachiyomi.data.backup.restore.BackupRestoreJob
 import eu.kanade.tachiyomi.data.connection.syncmiru.SyncDataJob
 import eu.kanade.tachiyomi.data.download.anime.AnimeDownloadManager
@@ -20,6 +19,7 @@ import eu.kanade.tachiyomi.util.system.notificationManager
 import eu.kanade.tachiyomi.util.system.toShareIntent
 import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.coroutines.runBlocking
+import tachiyomi.core.common.Constants
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.domain.download.service.DownloadPreferences

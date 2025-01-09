@@ -70,7 +70,6 @@ import eu.kanade.presentation.util.AssistContentScreen
 import eu.kanade.presentation.util.DefaultNavigatorScreenTransition
 import eu.kanade.tachiyomi.BuildConfig
 import eu.kanade.tachiyomi.animesource.model.Video
-import eu.kanade.tachiyomi.core.Constants
 import eu.kanade.tachiyomi.data.connection.discord.DiscordRPCService
 import eu.kanade.tachiyomi.data.download.anime.AnimeDownloadCache
 import eu.kanade.tachiyomi.data.notification.NotificationReceiver
@@ -103,6 +102,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import logcat.LogPriority
 import mihon.core.migration.Migrator
+import tachiyomi.core.common.Constants
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.lang.withUIContext
 import tachiyomi.core.common.util.system.logcat

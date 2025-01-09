@@ -25,12 +25,12 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.components.relativeDateText
 import eu.kanade.presentation.util.isTabletUi
-import eu.kanade.tachiyomi.core.Constants
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableMap
 import kotlinx.coroutines.launch
 import mihon.feature.upcoming.anime.components.UpcomingItem
 import mihon.feature.upcoming.components.calendar.Calendar
+import tachiyomi.core.common.Constants
 import tachiyomi.domain.entries.anime.model.Anime
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.FastScrollLazyColumn

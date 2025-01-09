@@ -1,4 +1,4 @@
-package eu.kanade.tachiyomi.core
+package tachiyomi.core.common
 
 object Constants {
     const val URL_HELP = "https://aniyomi.org/docs/guides/troubleshooting/"

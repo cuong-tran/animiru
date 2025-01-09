@@ -46,7 +46,6 @@ import eu.kanade.presentation.util.AssistContentScreen
 import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.animesource.AnimeCatalogueSource
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
-import eu.kanade.tachiyomi.core.Constants
 import eu.kanade.tachiyomi.ui.browse.anime.extension.details.AnimeSourcePreferencesScreen
 import eu.kanade.tachiyomi.ui.browse.anime.migration.search.MigrateAnimeDialog
 import eu.kanade.tachiyomi.ui.browse.anime.migration.search.MigrateAnimeDialogScreenModel
@@ -57,6 +56,7 @@ import eu.kanade.tachiyomi.ui.webview.WebViewScreen
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
+import tachiyomi.core.common.Constants
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.domain.source.anime.model.StubAnimeSource
 import tachiyomi.i18n.MR
