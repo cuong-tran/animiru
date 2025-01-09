@@ -31,7 +31,7 @@ import androidx.preference.forEach
 import androidx.preference.getOnBindEditTextListener
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import eu.kanade.core.util.ifAnimeSourcesLoaded
+import eu.kanade.core.util.ifSourcesLoaded
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.R
@@ -49,7 +49,7 @@ class AnimeSourcePreferencesScreen(val sourceId: Long) : Screen() {
 
     @Composable
     override fun Content() {
-        if (!ifAnimeSourcesLoaded()) {
+        if (!ifSourcesLoaded()) {
             LoadingScreen()
             return
         }

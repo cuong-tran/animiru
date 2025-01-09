@@ -18,7 +18,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import eu.kanade.core.util.ifAnimeSourcesLoaded
+import eu.kanade.core.util.ifSourcesLoaded
 import eu.kanade.presentation.browse.anime.BrowseAnimeSourceContent
 import eu.kanade.presentation.components.SearchToolbar
 import eu.kanade.presentation.util.Screen
@@ -46,7 +46,7 @@ data class AnimeSourceSearchScreen(
 
     @Composable
     override fun Content() {
-        if (!ifAnimeSourcesLoaded()) {
+        if (!ifSourcesLoaded()) {
             LoadingScreen()
             return
         }

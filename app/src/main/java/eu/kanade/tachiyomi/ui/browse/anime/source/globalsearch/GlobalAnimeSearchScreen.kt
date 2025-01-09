@@ -10,7 +10,7 @@ import androidx.compose.runtime.setValue
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import eu.kanade.core.util.ifAnimeSourcesLoaded
+import eu.kanade.core.util.ifSourcesLoaded
 import eu.kanade.presentation.browse.anime.GlobalAnimeSearchScreen
 import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.ui.browse.anime.source.browse.BrowseAnimeSourceScreen
@@ -24,7 +24,7 @@ class GlobalAnimeSearchScreen(
 
     @Composable
     override fun Content() {
-        if (!ifAnimeSourcesLoaded()) {
+        if (!ifSourcesLoaded()) {
             LoadingScreen()
             return
         }

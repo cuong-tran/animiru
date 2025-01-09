@@ -8,6 +8,6 @@ import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
 @Composable
-fun ifAnimeSourcesLoaded(): Boolean {
+fun ifSourcesLoaded(): Boolean {
     return remember { Injekt.get<AnimeSourceManager>().isInitialized }.collectAsState().value
 }
