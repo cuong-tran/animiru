@@ -6,8 +6,8 @@ import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
 import eu.kanade.tachiyomi.animesource.model.AnimesPage
 import eu.kanade.tachiyomi.animesource.model.SAnime
 import tachiyomi.core.common.util.lang.withIOContext
-import tachiyomi.domain.items.episode.model.NoEpisodesException
-import tachiyomi.domain.source.anime.repository.AnimeSourcePagingSourceType
+import tachiyomi.domain.episode.model.NoEpisodesException
+import tachiyomi.domain.source.repository.AnimeSourcePagingSourceType
 
 class AnimeSourceSearchPagingSource(
     source: AnimeCatalogueSource,

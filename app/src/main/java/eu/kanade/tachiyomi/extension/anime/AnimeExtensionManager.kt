@@ -27,7 +27,7 @@ import kotlinx.coroutines.flow.stateIn
 import logcat.LogPriority
 import tachiyomi.core.common.util.lang.withUIContext
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.source.anime.model.StubAnimeSource
+import tachiyomi.domain.source.model.StubAnimeSource
 import tachiyomi.i18n.MR
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get

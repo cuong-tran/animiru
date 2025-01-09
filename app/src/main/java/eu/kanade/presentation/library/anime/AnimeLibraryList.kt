@@ -14,8 +14,8 @@ import eu.kanade.presentation.library.components.GlobalSearchItem
 import eu.kanade.presentation.library.components.LanguageBadge
 import eu.kanade.presentation.library.components.UnviewedBadge
 import eu.kanade.tachiyomi.ui.library.anime.AnimeLibraryItem
-import tachiyomi.domain.entries.anime.model.AnimeCover
-import tachiyomi.domain.library.anime.LibraryAnime
+import tachiyomi.domain.anime.model.AnimeCover
+import tachiyomi.domain.library.LibraryAnime
 import tachiyomi.presentation.core.components.FastScrollLazyColumn
 import tachiyomi.presentation.core.util.plus
 

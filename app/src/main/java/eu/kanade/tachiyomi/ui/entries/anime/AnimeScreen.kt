@@ -64,8 +64,8 @@ import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.entries.anime.model.Anime
-import tachiyomi.domain.items.episode.model.Episode
+import tachiyomi.domain.anime.model.Anime
+import tachiyomi.domain.episode.model.Episode
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.LoadingScreen

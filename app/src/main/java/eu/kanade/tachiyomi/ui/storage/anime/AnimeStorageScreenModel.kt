@@ -5,11 +5,11 @@ import eu.kanade.tachiyomi.data.download.anime.AnimeDownloadCache
 import eu.kanade.tachiyomi.data.download.anime.AnimeDownloadManager
 import eu.kanade.tachiyomi.ui.storage.CommonStorageScreenModel
 import tachiyomi.core.common.util.lang.launchNonCancellable
-import tachiyomi.domain.category.anime.interactor.GetAnimeCategories
-import tachiyomi.domain.category.anime.interactor.GetVisibleAnimeCategories
-import tachiyomi.domain.entries.anime.interactor.GetLibraryAnime
-import tachiyomi.domain.library.anime.LibraryAnime
-import tachiyomi.domain.source.anime.service.AnimeSourceManager
+import tachiyomi.domain.anime.interactor.GetLibraryAnime
+import tachiyomi.domain.category.interactor.GetAnimeCategories
+import tachiyomi.domain.category.interactor.GetVisibleAnimeCategories
+import tachiyomi.domain.library.LibraryAnime
+import tachiyomi.domain.source.service.AnimeSourceManager
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 

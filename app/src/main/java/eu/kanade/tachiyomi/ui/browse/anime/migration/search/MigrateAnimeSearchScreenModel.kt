@@ -6,7 +6,7 @@ import eu.kanade.tachiyomi.ui.browse.anime.source.globalsearch.AnimeSearchScreen
 import eu.kanade.tachiyomi.ui.browse.anime.source.globalsearch.AnimeSourceFilter
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import tachiyomi.domain.entries.anime.interactor.GetAnime
+import tachiyomi.domain.anime.interactor.GetAnime
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 

@@ -9,8 +9,8 @@ import logcat.LogPriority
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.storage.displayablePath
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.entries.anime.model.Anime
-import tachiyomi.domain.items.episode.model.Episode
+import tachiyomi.domain.anime.model.Anime
+import tachiyomi.domain.episode.model.Episode
 import tachiyomi.domain.storage.service.StorageManager
 import tachiyomi.i18n.MR
 import tachiyomi.source.local.entries.anime.isLocal

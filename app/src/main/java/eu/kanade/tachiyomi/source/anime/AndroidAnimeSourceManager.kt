@@ -17,9 +17,9 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import tachiyomi.domain.source.anime.model.StubAnimeSource
-import tachiyomi.domain.source.anime.repository.AnimeStubSourceRepository
-import tachiyomi.domain.source.anime.service.AnimeSourceManager
+import tachiyomi.domain.source.model.StubAnimeSource
+import tachiyomi.domain.source.repository.AnimeStubSourceRepository
+import tachiyomi.domain.source.service.AnimeSourceManager
 import tachiyomi.source.local.entries.anime.LocalAnimeSource
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get

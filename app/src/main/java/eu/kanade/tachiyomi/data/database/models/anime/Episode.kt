@@ -4,7 +4,7 @@ package eu.kanade.tachiyomi.data.database.models.anime
 
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import java.io.Serializable
-import tachiyomi.domain.items.episode.model.Episode as DomainEpisode
+import tachiyomi.domain.episode.model.Episode as DomainEpisode
 
 interface Episode : SEpisode, Serializable {
 

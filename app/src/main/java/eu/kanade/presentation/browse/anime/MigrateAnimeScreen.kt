@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.entries.anime.components.BaseAnimeListItem
 import eu.kanade.tachiyomi.ui.browse.anime.migration.anime.MigrateAnimeScreenModel
-import tachiyomi.domain.entries.anime.model.Anime
+import tachiyomi.domain.anime.model.Anime
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.FastScrollLazyColumn
 import tachiyomi.presentation.core.components.material.Scaffold

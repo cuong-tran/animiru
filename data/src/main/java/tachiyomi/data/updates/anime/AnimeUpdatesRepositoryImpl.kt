@@ -2,9 +2,9 @@ package tachiyomi.data.updates.anime
 
 import kotlinx.coroutines.flow.Flow
 import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
-import tachiyomi.domain.entries.anime.model.AnimeCover
-import tachiyomi.domain.updates.anime.model.AnimeUpdatesWithRelations
-import tachiyomi.domain.updates.anime.repository.AnimeUpdatesRepository
+import tachiyomi.domain.anime.model.AnimeCover
+import tachiyomi.domain.updates.model.AnimeUpdatesWithRelations
+import tachiyomi.domain.updates.repository.AnimeUpdatesRepository
 
 class AnimeUpdatesRepositoryImpl(
     private val databaseHandler: AnimeDatabaseHandler,

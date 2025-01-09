@@ -45,9 +45,9 @@ import eu.kanade.tachiyomi.data.download.anime.AnimeDownloadProvider
 import eu.kanade.tachiyomi.data.download.anime.model.AnimeDownload
 import eu.kanade.tachiyomi.ui.updates.anime.AnimeUpdatesItem
 import tachiyomi.core.common.util.lang.withIOContext
-import tachiyomi.domain.source.anime.service.AnimeSourceManager
+import tachiyomi.domain.source.service.AnimeSourceManager
 import tachiyomi.domain.storage.service.StoragePreferences
-import tachiyomi.domain.updates.anime.model.AnimeUpdatesWithRelations
+import tachiyomi.domain.updates.model.AnimeUpdatesWithRelations
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.ListGroupHeader
 import tachiyomi.presentation.core.components.material.DISABLED_ALPHA

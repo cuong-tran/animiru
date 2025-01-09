@@ -11,7 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import eu.kanade.presentation.browse.BaseBrowseItem
 import eu.kanade.tachiyomi.util.system.LocaleHelper
-import tachiyomi.domain.source.anime.model.AnimeSource
+import tachiyomi.domain.source.model.AnimeSource
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.util.secondaryItemAlpha
 

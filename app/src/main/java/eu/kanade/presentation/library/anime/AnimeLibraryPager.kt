@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import eu.kanade.core.preference.PreferenceMutableState
 import eu.kanade.presentation.library.components.GlobalSearchItem
 import eu.kanade.tachiyomi.ui.library.anime.AnimeLibraryItem
-import tachiyomi.domain.library.anime.LibraryAnime
+import tachiyomi.domain.library.LibraryAnime
 import tachiyomi.domain.library.model.LibraryDisplayMode
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.screens.EmptyScreen

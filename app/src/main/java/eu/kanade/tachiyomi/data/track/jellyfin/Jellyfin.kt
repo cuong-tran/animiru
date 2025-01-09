@@ -12,9 +12,9 @@ import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import okhttp3.Dns
-import tachiyomi.domain.entries.anime.model.Anime
+import tachiyomi.domain.anime.model.Anime
 import tachiyomi.i18n.MR
-import tachiyomi.domain.track.anime.model.AnimeTrack as DomainTrack
+import tachiyomi.domain.track.model.AnimeTrack as DomainTrack
 
 class Jellyfin(id: Long) : BaseTracker(id, "Jellyfin"), EnhancedAnimeTracker, AnimeTracker {
 

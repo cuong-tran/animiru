@@ -10,11 +10,11 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
-import mihon.domain.extensionrepo.anime.interactor.CreateAnimeExtensionRepo
-import mihon.domain.extensionrepo.anime.interactor.DeleteAnimeExtensionRepo
-import mihon.domain.extensionrepo.anime.interactor.GetAnimeExtensionRepo
-import mihon.domain.extensionrepo.anime.interactor.ReplaceAnimeExtensionRepo
-import mihon.domain.extensionrepo.anime.interactor.UpdateAnimeExtensionRepo
+import mihon.domain.extensionrepo.interactor.CreateAnimeExtensionRepo
+import mihon.domain.extensionrepo.interactor.DeleteAnimeExtensionRepo
+import mihon.domain.extensionrepo.interactor.GetAnimeExtensionRepo
+import mihon.domain.extensionrepo.interactor.ReplaceAnimeExtensionRepo
+import mihon.domain.extensionrepo.interactor.UpdateAnimeExtensionRepo
 import mihon.domain.extensionrepo.model.ExtensionRepo
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.i18n.MR

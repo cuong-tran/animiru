@@ -3,8 +3,8 @@ package eu.kanade.tachiyomi.util.episode
 import eu.kanade.domain.items.episode.model.applyFilters
 import eu.kanade.tachiyomi.data.download.anime.AnimeDownloadManager
 import eu.kanade.tachiyomi.ui.entries.anime.EpisodeList
-import tachiyomi.domain.entries.anime.model.Anime
-import tachiyomi.domain.items.episode.model.Episode
+import tachiyomi.domain.anime.model.Anime
+import tachiyomi.domain.episode.model.Episode
 
 /**
  * Gets next unseen episode with filters and sorting applied

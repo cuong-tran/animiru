@@ -31,10 +31,10 @@ import eu.kanade.tachiyomi.util.system.notify
 import tachiyomi.core.common.Constants
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.lang.launchUI
-import tachiyomi.domain.entries.anime.model.Anime
-import tachiyomi.domain.items.episode.model.Episode
-import tachiyomi.domain.library.anime.LibraryAnime
-import tachiyomi.domain.source.anime.service.AnimeSourceManager
+import tachiyomi.domain.anime.model.Anime
+import tachiyomi.domain.episode.model.Episode
+import tachiyomi.domain.library.LibraryAnime
+import tachiyomi.domain.source.service.AnimeSourceManager
 import tachiyomi.i18n.MR
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get

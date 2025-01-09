@@ -3,10 +3,10 @@ package eu.kanade.domain.items.episode.model
 import eu.kanade.domain.entries.anime.model.downloadedFilter
 import eu.kanade.tachiyomi.data.download.anime.AnimeDownloadManager
 import eu.kanade.tachiyomi.ui.entries.anime.EpisodeList
-import tachiyomi.domain.entries.anime.model.Anime
-import tachiyomi.domain.entries.applyFilter
-import tachiyomi.domain.items.episode.model.Episode
-import tachiyomi.domain.items.episode.service.getEpisodeSort
+import tachiyomi.domain.anime.applyFilter
+import tachiyomi.domain.anime.model.Anime
+import tachiyomi.domain.episode.model.Episode
+import tachiyomi.domain.episode.service.getEpisodeSort
 import tachiyomi.source.local.entries.anime.isLocal
 
 /**

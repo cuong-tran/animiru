@@ -1,6 +1,6 @@
 package tachiyomi.data.track.anime
 
-import tachiyomi.domain.track.anime.model.AnimeTrack
+import tachiyomi.domain.track.model.AnimeTrack
 
 object AnimeTrackMapper {
     fun mapTrack(

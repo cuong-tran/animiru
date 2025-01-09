@@ -31,7 +31,7 @@ import kotlinx.coroutines.launch
 import mihon.feature.upcoming.anime.components.UpcomingItem
 import mihon.feature.upcoming.components.calendar.Calendar
 import tachiyomi.core.common.Constants
-import tachiyomi.domain.entries.anime.model.Anime
+import tachiyomi.domain.anime.model.Anime
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.FastScrollLazyColumn
 import tachiyomi.presentation.core.components.TwoPanelBox

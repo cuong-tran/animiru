@@ -1,8 +1,8 @@
 package tachiyomi.data.entries.anime
 
 import eu.kanade.tachiyomi.animesource.model.AnimeUpdateStrategy
-import tachiyomi.domain.entries.anime.model.Anime
-import tachiyomi.domain.library.anime.LibraryAnime
+import tachiyomi.domain.anime.model.Anime
+import tachiyomi.domain.library.LibraryAnime
 
 object AnimeMapper {
     fun mapAnime(

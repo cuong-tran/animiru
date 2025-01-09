@@ -6,10 +6,10 @@ import tachiyomi.core.common.util.system.logcat
 import tachiyomi.data.AnimeUpdateStrategyColumnAdapter
 import tachiyomi.data.StringListColumnAdapter
 import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
-import tachiyomi.domain.entries.anime.model.Anime
-import tachiyomi.domain.entries.anime.model.AnimeUpdate
-import tachiyomi.domain.entries.anime.repository.AnimeRepository
-import tachiyomi.domain.library.anime.LibraryAnime
+import tachiyomi.domain.anime.model.Anime
+import tachiyomi.domain.anime.model.AnimeUpdate
+import tachiyomi.domain.anime.repository.AnimeRepository
+import tachiyomi.domain.library.LibraryAnime
 import java.time.LocalDate
 import java.time.ZoneId
 

@@ -4,10 +4,10 @@ import kotlinx.coroutines.flow.Flow
 import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
-import tachiyomi.domain.history.anime.model.AnimeHistory
-import tachiyomi.domain.history.anime.model.AnimeHistoryUpdate
-import tachiyomi.domain.history.anime.model.AnimeHistoryWithRelations
-import tachiyomi.domain.history.anime.repository.AnimeHistoryRepository
+import tachiyomi.domain.history.model.AnimeHistory
+import tachiyomi.domain.history.model.AnimeHistoryUpdate
+import tachiyomi.domain.history.model.AnimeHistoryWithRelations
+import tachiyomi.domain.history.repository.AnimeHistoryRepository
 
 class AnimeHistoryRepositoryImpl(
     private val handler: AnimeDatabaseHandler,

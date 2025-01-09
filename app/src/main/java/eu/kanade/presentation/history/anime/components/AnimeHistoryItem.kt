@@ -26,7 +26,7 @@ import eu.kanade.presentation.entries.components.ItemCover
 import eu.kanade.presentation.theme.TachiyomiPreviewTheme
 import eu.kanade.presentation.util.formatEpisodeNumber
 import eu.kanade.tachiyomi.util.lang.toTimestampString
-import tachiyomi.domain.history.anime.model.AnimeHistoryWithRelations
+import tachiyomi.domain.history.model.AnimeHistoryWithRelations
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource

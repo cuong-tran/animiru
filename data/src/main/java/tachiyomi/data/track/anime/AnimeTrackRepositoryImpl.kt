@@ -3,8 +3,8 @@ package tachiyomi.data.track.anime
 import kotlinx.coroutines.flow.Flow
 import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
 import tachiyomi.data.track.anime.AnimeTrackMapper.mapTrack
-import tachiyomi.domain.track.anime.model.AnimeTrack
-import tachiyomi.domain.track.anime.repository.AnimeTrackRepository
+import tachiyomi.domain.track.model.AnimeTrack
+import tachiyomi.domain.track.repository.AnimeTrackRepository
 
 class AnimeTrackRepositoryImpl(
     private val handler: AnimeDatabaseHandler,

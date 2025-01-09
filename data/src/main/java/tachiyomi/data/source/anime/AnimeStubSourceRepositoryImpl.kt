@@ -2,8 +2,8 @@ package tachiyomi.data.source.anime
 
 import kotlinx.coroutines.flow.Flow
 import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
-import tachiyomi.domain.source.anime.model.StubAnimeSource
-import tachiyomi.domain.source.anime.repository.AnimeStubSourceRepository
+import tachiyomi.domain.source.model.StubAnimeSource
+import tachiyomi.domain.source.repository.AnimeStubSourceRepository
 
 class AnimeStubSourceRepositoryImpl(
     private val handler: AnimeDatabaseHandler,

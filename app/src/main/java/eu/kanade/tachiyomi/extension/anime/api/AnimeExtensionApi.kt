@@ -15,8 +15,8 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import logcat.LogPriority
-import mihon.domain.extensionrepo.anime.interactor.GetAnimeExtensionRepo
-import mihon.domain.extensionrepo.anime.interactor.UpdateAnimeExtensionRepo
+import mihon.domain.extensionrepo.interactor.GetAnimeExtensionRepo
+import mihon.domain.extensionrepo.interactor.UpdateAnimeExtensionRepo
 import mihon.domain.extensionrepo.model.ExtensionRepo
 import tachiyomi.core.common.preference.Preference
 import tachiyomi.core.common.preference.PreferenceStore

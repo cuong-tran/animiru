@@ -4,8 +4,8 @@ import android.content.Context
 import eu.kanade.tachiyomi.network.HttpException
 import eu.kanade.tachiyomi.util.system.isOnline
 import tachiyomi.core.common.i18n.stringResource
-import tachiyomi.domain.items.episode.model.NoEpisodesException
-import tachiyomi.domain.source.anime.model.AnimeSourceNotInstalledException
+import tachiyomi.domain.episode.model.NoEpisodesException
+import tachiyomi.domain.source.model.AnimeSourceNotInstalledException
 import tachiyomi.i18n.MR
 import java.net.UnknownHostException
 

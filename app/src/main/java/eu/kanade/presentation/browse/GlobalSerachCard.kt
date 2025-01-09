@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import eu.kanade.presentation.library.components.CommonEntryItemDefaults
 import eu.kanade.presentation.library.components.EntryComfortableGridItem
-import tachiyomi.domain.entries.EntryCover
+import tachiyomi.domain.anime.EntryCover
 
 @Composable
 fun GlobalSearchCard(

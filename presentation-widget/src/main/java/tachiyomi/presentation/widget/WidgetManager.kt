@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.updates.anime.interactor.GetAnimeUpdates
+import tachiyomi.domain.updates.interactor.GetAnimeUpdates
 
 class WidgetManager(
     private val getUpdates: GetAnimeUpdates,

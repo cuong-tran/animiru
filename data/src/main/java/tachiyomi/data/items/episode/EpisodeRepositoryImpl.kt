@@ -4,9 +4,9 @@ import kotlinx.coroutines.flow.Flow
 import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
-import tachiyomi.domain.items.episode.model.Episode
-import tachiyomi.domain.items.episode.model.EpisodeUpdate
-import tachiyomi.domain.items.episode.repository.EpisodeRepository
+import tachiyomi.domain.episode.model.Episode
+import tachiyomi.domain.episode.model.EpisodeUpdate
+import tachiyomi.domain.episode.repository.EpisodeRepository
 
 class EpisodeRepositoryImpl(
     private val handler: AnimeDatabaseHandler,

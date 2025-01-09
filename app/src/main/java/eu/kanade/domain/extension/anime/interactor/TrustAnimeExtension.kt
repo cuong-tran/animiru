@@ -3,7 +3,7 @@ package eu.kanade.domain.extension.anime.interactor
 import android.content.pm.PackageInfo
 import androidx.core.content.pm.PackageInfoCompat
 import eu.kanade.domain.source.service.SourcePreferences
-import mihon.domain.extensionrepo.anime.repository.AnimeExtensionRepoRepository
+import mihon.domain.extensionrepo.repository.AnimeExtensionRepoRepository
 import tachiyomi.core.common.preference.getAndSet
 
 class TrustAnimeExtension(

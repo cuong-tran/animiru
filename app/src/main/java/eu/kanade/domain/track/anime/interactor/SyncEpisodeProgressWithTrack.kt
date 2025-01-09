@@ -5,11 +5,11 @@ import eu.kanade.tachiyomi.data.track.AnimeTracker
 import eu.kanade.tachiyomi.data.track.EnhancedAnimeTracker
 import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.items.episode.interactor.GetEpisodesByAnimeId
-import tachiyomi.domain.items.episode.interactor.UpdateEpisode
-import tachiyomi.domain.items.episode.model.toEpisodeUpdate
-import tachiyomi.domain.track.anime.interactor.InsertAnimeTrack
-import tachiyomi.domain.track.anime.model.AnimeTrack
+import tachiyomi.domain.episode.interactor.GetEpisodesByAnimeId
+import tachiyomi.domain.episode.interactor.UpdateEpisode
+import tachiyomi.domain.episode.model.toEpisodeUpdate
+import tachiyomi.domain.track.interactor.InsertAnimeTrack
+import tachiyomi.domain.track.model.AnimeTrack
 import kotlin.math.max
 
 class SyncEpisodeProgressWithTrack(

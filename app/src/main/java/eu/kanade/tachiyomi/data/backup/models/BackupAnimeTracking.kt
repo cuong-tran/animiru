@@ -2,7 +2,7 @@ package eu.kanade.tachiyomi.data.backup.models
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.protobuf.ProtoNumber
-import tachiyomi.domain.track.anime.model.AnimeTrack
+import tachiyomi.domain.track.model.AnimeTrack
 
 @Serializable
 data class BackupAnimeTracking(

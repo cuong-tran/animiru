@@ -28,7 +28,7 @@ import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import kotlin.time.Duration.Companion.minutes
-import tachiyomi.domain.track.anime.model.AnimeTrack as DomainAnimeTrack
+import tachiyomi.domain.track.model.AnimeTrack as DomainAnimeTrack
 
 class AnilistApi(val client: OkHttpClient, interceptor: AnilistInterceptor) {
 

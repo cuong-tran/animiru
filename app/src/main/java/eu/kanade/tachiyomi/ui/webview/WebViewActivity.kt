@@ -24,7 +24,7 @@ import logcat.LogPriority
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.source.anime.service.AnimeSourceManager
+import tachiyomi.domain.source.service.AnimeSourceManager
 import tachiyomi.i18n.MR
 import uy.kohesive.injekt.injectLazy
 

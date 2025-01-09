@@ -56,11 +56,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.lang.launchIO
-import tachiyomi.domain.category.anime.interactor.GetAnimeCategories
+import tachiyomi.domain.anime.model.Anime
+import tachiyomi.domain.category.interactor.GetAnimeCategories
 import tachiyomi.domain.category.model.Category
-import tachiyomi.domain.entries.anime.model.Anime
-import tachiyomi.domain.items.episode.model.Episode
-import tachiyomi.domain.library.anime.LibraryAnime
+import tachiyomi.domain.episode.model.Episode
+import tachiyomi.domain.library.LibraryAnime
 import tachiyomi.domain.library.model.AnimeLibraryGroup
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.Scaffold

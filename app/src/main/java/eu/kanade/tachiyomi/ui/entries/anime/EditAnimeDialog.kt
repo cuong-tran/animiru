@@ -38,7 +38,7 @@ import eu.kanade.tachiyomi.util.trimOrNull
 import eu.kanade.tachiyomi.widget.materialdialogs.setTextInput
 import kotlinx.coroutines.CoroutineScope
 import tachiyomi.core.common.i18n.stringResource
-import tachiyomi.domain.entries.anime.model.Anime
+import tachiyomi.domain.anime.model.Anime
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.source.local.entries.anime.isLocal

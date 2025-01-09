@@ -2,7 +2,7 @@ package eu.kanade.domain.items.episode.model
 
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.data.database.models.anime.EpisodeImpl
-import tachiyomi.domain.items.episode.model.Episode
+import tachiyomi.domain.episode.model.Episode
 import eu.kanade.tachiyomi.data.database.models.anime.Episode as DbEpisode
 
 // TODO: Remove when all deps are migrated

@@ -24,8 +24,8 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.launch
-import tachiyomi.domain.category.anime.interactor.GetAnimeCategories
-import tachiyomi.domain.category.anime.interactor.ResetAnimeCategoryFlags
+import tachiyomi.domain.category.interactor.GetAnimeCategories
+import tachiyomi.domain.category.interactor.ResetAnimeCategoryFlags
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.library.model.GroupAnimeLibraryMode
 import tachiyomi.domain.library.service.LibraryPreferences

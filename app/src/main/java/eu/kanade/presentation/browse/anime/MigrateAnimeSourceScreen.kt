@@ -30,7 +30,7 @@ import eu.kanade.presentation.components.AppBar
 import eu.kanade.tachiyomi.ui.browse.anime.migration.sources.MigrateAnimeSourceScreenModel
 import eu.kanade.tachiyomi.util.system.copyToClipboard
 import kotlinx.collections.immutable.ImmutableList
-import tachiyomi.domain.source.anime.model.AnimeSource
+import tachiyomi.domain.source.model.AnimeSource
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.Badge
 import tachiyomi.presentation.core.components.BadgeGroup

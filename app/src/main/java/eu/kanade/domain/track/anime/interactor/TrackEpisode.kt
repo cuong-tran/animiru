@@ -12,8 +12,8 @@ import kotlinx.coroutines.awaitAll
 import logcat.LogPriority
 import tachiyomi.core.common.util.lang.withNonCancellableContext
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.track.anime.interactor.GetAnimeTracks
-import tachiyomi.domain.track.anime.interactor.InsertAnimeTrack
+import tachiyomi.domain.track.interactor.GetAnimeTracks
+import tachiyomi.domain.track.interactor.InsertAnimeTrack
 
 class TrackEpisode(
     private val getTracks: GetAnimeTracks,

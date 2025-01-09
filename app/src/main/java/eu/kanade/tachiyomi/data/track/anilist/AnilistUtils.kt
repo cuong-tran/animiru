@@ -3,7 +3,7 @@ package eu.kanade.tachiyomi.data.track.anilist
 import eu.kanade.domain.track.service.TrackPreferences
 import eu.kanade.tachiyomi.data.database.models.anime.AnimeTrack
 import uy.kohesive.injekt.injectLazy
-import tachiyomi.domain.track.anime.model.AnimeTrack as DomainAnimeTrack
+import tachiyomi.domain.track.model.AnimeTrack as DomainAnimeTrack
 
 fun AnimeTrack.toApiStatus() = when (status) {
     Anilist.WATCHING -> "CURRENT"

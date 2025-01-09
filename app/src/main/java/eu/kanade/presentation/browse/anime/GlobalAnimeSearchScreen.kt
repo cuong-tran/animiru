@@ -15,7 +15,7 @@ import eu.kanade.tachiyomi.ui.browse.anime.source.globalsearch.AnimeSearchItemRe
 import eu.kanade.tachiyomi.ui.browse.anime.source.globalsearch.AnimeSearchScreenModel
 import eu.kanade.tachiyomi.ui.browse.anime.source.globalsearch.AnimeSourceFilter
 import eu.kanade.tachiyomi.util.system.LocaleHelper
-import tachiyomi.domain.entries.anime.model.Anime
+import tachiyomi.domain.anime.model.Anime
 import tachiyomi.presentation.core.components.material.Scaffold
 
 @Composable

@@ -32,7 +32,7 @@ import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.extension.anime.model.AnimeExtension
 import eu.kanade.tachiyomi.extension.anime.util.AnimeExtensionLoader
 import tachiyomi.core.common.util.lang.withIOContext
-import tachiyomi.domain.source.anime.model.AnimeSource
+import tachiyomi.domain.source.model.AnimeSource
 import tachiyomi.source.local.entries.anime.LocalAnimeSource
 
 private val defaultModifier = Modifier

@@ -42,8 +42,8 @@ import eu.kanade.tachiyomi.ui.browse.anime.source.AnimeSourcesScreenModel
 import eu.kanade.tachiyomi.ui.browse.anime.source.browse.BrowseAnimeSourceScreenModel.Listing
 import eu.kanade.tachiyomi.ui.browse.anime.source.globalsearch.GlobalAnimeSearchScreen
 import eu.kanade.tachiyomi.util.system.LocaleHelper
-import tachiyomi.domain.source.anime.model.AnimeSource
-import tachiyomi.domain.source.anime.model.Pin
+import tachiyomi.domain.source.model.AnimeSource
+import tachiyomi.domain.source.model.Pin
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.ScrollbarLazyColumn
 import tachiyomi.presentation.core.components.material.ExtendedFloatingActionButton

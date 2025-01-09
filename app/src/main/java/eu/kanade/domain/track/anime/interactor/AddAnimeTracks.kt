@@ -13,10 +13,10 @@ import logcat.LogPriority
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.lang.withNonCancellableContext
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.entries.anime.model.Anime
-import tachiyomi.domain.history.anime.interactor.GetAnimeHistory
-import tachiyomi.domain.items.episode.interactor.GetEpisodesByAnimeId
-import tachiyomi.domain.track.anime.interactor.InsertAnimeTrack
+import tachiyomi.domain.anime.model.Anime
+import tachiyomi.domain.episode.interactor.GetEpisodesByAnimeId
+import tachiyomi.domain.history.interactor.GetAnimeHistory
+import tachiyomi.domain.track.interactor.InsertAnimeTrack
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.time.ZoneOffset

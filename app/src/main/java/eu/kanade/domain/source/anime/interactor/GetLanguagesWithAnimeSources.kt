@@ -4,8 +4,8 @@ import eu.kanade.domain.source.service.SourcePreferences
 import eu.kanade.tachiyomi.util.system.LocaleHelper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import tachiyomi.domain.source.anime.model.AnimeSource
-import tachiyomi.domain.source.anime.repository.AnimeSourceRepository
+import tachiyomi.domain.source.model.AnimeSource
+import tachiyomi.domain.source.repository.AnimeSourceRepository
 import java.util.SortedMap
 
 class GetLanguagesWithAnimeSources(

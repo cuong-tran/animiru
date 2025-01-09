@@ -24,11 +24,11 @@ import logcat.LogPriority
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.history.anime.interactor.GetAnimeHistory
-import tachiyomi.domain.history.anime.interactor.GetNextEpisodes
-import tachiyomi.domain.history.anime.interactor.RemoveAnimeHistory
-import tachiyomi.domain.history.anime.model.AnimeHistoryWithRelations
-import tachiyomi.domain.items.episode.model.Episode
+import tachiyomi.domain.episode.model.Episode
+import tachiyomi.domain.history.interactor.GetAnimeHistory
+import tachiyomi.domain.history.interactor.GetNextEpisodes
+import tachiyomi.domain.history.interactor.RemoveAnimeHistory
+import tachiyomi.domain.history.model.AnimeHistoryWithRelations
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 

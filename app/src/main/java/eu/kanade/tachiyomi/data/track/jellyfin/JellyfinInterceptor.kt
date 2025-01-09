@@ -5,7 +5,7 @@ import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.sourcePreferences
 import okhttp3.Interceptor
 import okhttp3.Response
-import tachiyomi.domain.source.anime.service.AnimeSourceManager
+import tachiyomi.domain.source.service.AnimeSourceManager
 import uy.kohesive.injekt.injectLazy
 import java.io.IOException
 import java.security.MessageDigest

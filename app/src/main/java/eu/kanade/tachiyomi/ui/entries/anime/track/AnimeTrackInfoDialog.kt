@@ -71,11 +71,11 @@ import tachiyomi.core.common.util.lang.launchNonCancellable
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.lang.withUIContext
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.entries.anime.interactor.GetAnime
-import tachiyomi.domain.source.anime.service.AnimeSourceManager
-import tachiyomi.domain.track.anime.interactor.DeleteAnimeTrack
-import tachiyomi.domain.track.anime.interactor.GetAnimeTracks
-import tachiyomi.domain.track.anime.model.AnimeTrack
+import tachiyomi.domain.anime.interactor.GetAnime
+import tachiyomi.domain.source.service.AnimeSourceManager
+import tachiyomi.domain.track.interactor.DeleteAnimeTrack
+import tachiyomi.domain.track.interactor.GetAnimeTracks
+import tachiyomi.domain.track.model.AnimeTrack
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.LabeledCheckbox
 import tachiyomi.presentation.core.components.material.AlertDialogContent
@@ -87,7 +87,7 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.ZoneOffset
-import tachiyomi.domain.track.anime.model.AnimeTrack as DbAnimeTrack
+import tachiyomi.domain.track.model.AnimeTrack as DbAnimeTrack
 
 data class AnimeTrackInfoDialogHomeScreen(
     private val animeId: Long,

@@ -28,11 +28,11 @@ import kotlinx.coroutines.sync.withPermit
 import logcat.LogPriority
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.entries.anime.interactor.GetLibraryAnime
-import tachiyomi.domain.entries.anime.model.Anime
-import tachiyomi.domain.entries.anime.model.toAnimeUpdate
-import tachiyomi.domain.library.anime.LibraryAnime
-import tachiyomi.domain.source.anime.service.AnimeSourceManager
+import tachiyomi.domain.anime.interactor.GetLibraryAnime
+import tachiyomi.domain.anime.model.Anime
+import tachiyomi.domain.anime.model.toAnimeUpdate
+import tachiyomi.domain.library.LibraryAnime
+import tachiyomi.domain.source.service.AnimeSourceManager
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.util.concurrent.CopyOnWriteArrayList

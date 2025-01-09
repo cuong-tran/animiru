@@ -7,8 +7,8 @@ import eu.kanade.tachiyomi.data.track.TrackerManager
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.supervisorScope
-import tachiyomi.domain.track.anime.interactor.GetAnimeTracks
-import tachiyomi.domain.track.anime.interactor.InsertAnimeTrack
+import tachiyomi.domain.track.interactor.GetAnimeTracks
+import tachiyomi.domain.track.interactor.InsertAnimeTrack
 
 class RefreshAnimeTracks(
     private val getTracks: GetAnimeTracks,

@@ -13,8 +13,8 @@ import eu.kanade.presentation.library.components.LazyLibraryGrid
 import eu.kanade.presentation.library.components.UnviewedBadge
 import eu.kanade.presentation.library.components.globalSearchItem
 import eu.kanade.tachiyomi.ui.library.anime.AnimeLibraryItem
-import tachiyomi.domain.entries.anime.model.AnimeCover
-import tachiyomi.domain.library.anime.LibraryAnime
+import tachiyomi.domain.anime.model.AnimeCover
+import tachiyomi.domain.library.LibraryAnime
 
 @Composable
 internal fun AnimeLibraryComfortableGrid(

@@ -5,7 +5,6 @@ import io.kotest.matchers.shouldNotBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode
-import tachiyomi.domain.library.anime.model.AnimeLibrarySort
 
 @Execution(ExecutionMode.CONCURRENT)
 class LibraryFlagsTest {

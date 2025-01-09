@@ -37,9 +37,9 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.map
 import tachiyomi.core.common.util.lang.withIOContext
-import tachiyomi.domain.entries.anime.model.AnimeCover
-import tachiyomi.domain.updates.anime.interactor.GetAnimeUpdates
-import tachiyomi.domain.updates.anime.model.AnimeUpdatesWithRelations
+import tachiyomi.domain.anime.model.AnimeCover
+import tachiyomi.domain.updates.interactor.GetAnimeUpdates
+import tachiyomi.domain.updates.model.AnimeUpdatesWithRelations
 import tachiyomi.presentation.widget.components.CoverHeight
 import tachiyomi.presentation.widget.components.CoverWidth
 import tachiyomi.presentation.widget.components.LockedWidget

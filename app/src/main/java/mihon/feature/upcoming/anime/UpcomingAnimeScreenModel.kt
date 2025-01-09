@@ -15,8 +15,8 @@ import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import mihon.domain.upcoming.anime.interactor.GetUpcomingAnime
-import tachiyomi.domain.entries.anime.model.Anime
+import mihon.domain.upcoming.interactor.GetUpcomingAnime
+import tachiyomi.domain.anime.model.Anime
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.time.LocalDate

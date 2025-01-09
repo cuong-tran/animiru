@@ -14,7 +14,7 @@ import eu.kanade.tachiyomi.util.system.workManager
 import logcat.LogPriority
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.track.anime.interactor.GetAnimeTracks
+import tachiyomi.domain.track.interactor.GetAnimeTracks
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import kotlin.time.Duration.Companion.minutes
