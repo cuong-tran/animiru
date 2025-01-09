@@ -1,4 +1,4 @@
-package tachiyomi.presentation.widget.components.anime
+package tachiyomi.presentation.widget.components
 
 import android.content.Intent
 import androidx.compose.runtime.Composable
@@ -20,7 +20,7 @@ import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Composable
-fun LockedAnimeWidget(
+fun LockedWidget(
     foreground: ColorProvider,
     modifier: GlanceModifier = GlanceModifier,
 ) {

@@ -1,4 +1,4 @@
-package tachiyomi.presentation.widget.components.anime
+package tachiyomi.presentation.widget.components
 
 import android.graphics.Bitmap
 import androidx.compose.runtime.Composable

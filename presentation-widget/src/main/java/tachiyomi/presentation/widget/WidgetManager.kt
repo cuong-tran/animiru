@@ -1,4 +1,4 @@
-package tachiyomi.presentation.widget.entries.anime
+package tachiyomi.presentation.widget
 
 import android.content.Context
 import androidx.glance.appwidget.updateAll
@@ -14,14 +14,14 @@ import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.updates.anime.interactor.GetAnimeUpdates
 
-class AnimeWidgetManager(
+class WidgetManager(
     private val getUpdates: GetAnimeUpdates,
     private val securityPreferences: SecurityPreferences,
 ) {
 
     fun Context.init(scope: LifecycleCoroutineScope) {
         combine(
-            getUpdates.subscribe(seen = false, after = BaseAnimeUpdatesGridGlanceWidget.DateLimit.toEpochMilli()),
+            getUpdates.subscribe(seen = false, after = BaseUpdatesGridGlanceWidget.DateLimit.toEpochMilli()),
             securityPreferences.useAuthenticator().changes(),
             transform = { a, b -> a to b },
         )
@@ -31,8 +31,8 @@ class AnimeWidgetManager(
             }
             .onEach {
                 try {
-                    AnimeUpdatesGridGlanceWidget().updateAll(this)
-                    AnimeUpdatesGridCoverScreenGlanceWidget().updateAll(this)
+                    UpdatesGridGlanceWidget().updateAll(this)
+                    UpdatesGridCoverScreenGlanceWidget().updateAll(this)
                 } catch (e: Exception) {
                     logcat(LogPriority.ERROR, e) { "Failed to update widget" }
                 }

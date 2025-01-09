@@ -1,4 +1,4 @@
-package tachiyomi.presentation.widget.components.anime
+package tachiyomi.presentation.widget.components
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -28,7 +28,7 @@ import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.widget.util.calculateRowAndColumnCount
 
 @Composable
-fun UpdatesAnimeWidget(
+fun UpdatesWidget(
     data: ImmutableList<Pair<Long, Bitmap?>>?,
     contentColor: ColorProvider,
     topPadding: Dp,

@@ -3,7 +3,7 @@
     <application>
 
         <receiver
-            android:name="tachiyomi.presentation.widget.entries.anime.AnimeUpdatesGridGlanceReceiver"
+            android:name="tachiyomi.presentation.widget.UpdatesGridGlanceReceiver"
             android:enabled="@bool/glance_appwidget_available"
             android:exported="false"
             android:label="@string/label_recent_updates">
@@ -16,7 +16,7 @@
         </receiver>
 
         <receiver
-            android:name="tachiyomi.presentation.widget.entries.anime.AnimeUpdatesGridCoverScreenGlanceReceiver"
+            android:name="tachiyomi.presentation.widget.UpdatesGridCoverScreenGlanceReceiver"
             android:enabled="@bool/glance_appwidget_available"
             android:exported="false"
             android:label="@string/label_recent_updates">

@@ -1,4 +1,4 @@
-package tachiyomi.presentation.widget.entries.anime
+package tachiyomi.presentation.widget
 
 import android.app.Application
 import android.content.Context
@@ -40,11 +40,10 @@ import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.domain.entries.anime.model.AnimeCover
 import tachiyomi.domain.updates.anime.interactor.GetAnimeUpdates
 import tachiyomi.domain.updates.anime.model.AnimeUpdatesWithRelations
-import tachiyomi.presentation.widget.R
-import tachiyomi.presentation.widget.components.anime.CoverHeight
-import tachiyomi.presentation.widget.components.anime.CoverWidth
-import tachiyomi.presentation.widget.components.anime.LockedAnimeWidget
-import tachiyomi.presentation.widget.components.anime.UpdatesAnimeWidget
+import tachiyomi.presentation.widget.components.CoverHeight
+import tachiyomi.presentation.widget.components.CoverWidth
+import tachiyomi.presentation.widget.components.LockedWidget
+import tachiyomi.presentation.widget.components.UpdatesWidget
 import tachiyomi.presentation.widget.util.appWidgetBackgroundRadius
 import tachiyomi.presentation.widget.util.calculateRowAndColumnCount
 import uy.kohesive.injekt.Injekt
@@ -52,7 +51,7 @@ import uy.kohesive.injekt.api.get
 import java.time.Instant
 import java.time.ZonedDateTime
 
-abstract class BaseAnimeUpdatesGridGlanceWidget(
+abstract class BaseUpdatesGridGlanceWidget(
     private val context: Context = Injekt.get<Application>(),
     private val getUpdates: GetAnimeUpdates = Injekt.get(),
     private val preferences: SecurityPreferences = Injekt.get(),
@@ -84,7 +83,7 @@ abstract class BaseAnimeUpdatesGridGlanceWidget(
         provideContent {
             // If app lock enabled, don't do anything
             if (locked) {
-                LockedAnimeWidget(
+                LockedWidget(
                     foreground = foreground,
                     modifier = containerModifier,
                 )
@@ -99,7 +98,7 @@ abstract class BaseAnimeUpdatesGridGlanceWidget(
                     }
             }
             val data by flow.collectAsState(initial = null)
-            UpdatesAnimeWidget(
+            UpdatesWidget(
                 data = data,
                 contentColor = foreground,
                 topPadding = topPadding,
