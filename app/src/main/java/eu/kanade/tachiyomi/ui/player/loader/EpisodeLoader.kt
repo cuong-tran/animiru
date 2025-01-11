@@ -7,8 +7,8 @@ import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
 import eu.kanade.tachiyomi.data.download.anime.AnimeDownloadManager
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.episode.model.Episode
-import tachiyomi.source.local.entries.anime.LocalAnimeSource
-import tachiyomi.source.local.io.anime.LocalAnimeSourceFileSystem
+import tachiyomi.source.local.LocalAnimeSource
+import tachiyomi.source.local.io.LocalAnimeSourceFileSystem
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 

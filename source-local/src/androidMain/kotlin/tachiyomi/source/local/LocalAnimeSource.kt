@@ -1,4 +1,4 @@
-package tachiyomi.source.local.entries.anime
+package tachiyomi.source.local
 
 import android.content.Context
 import com.hippo.unifile.UniFile
@@ -30,10 +30,10 @@ import tachiyomi.core.metadata.tachiyomi.EpisodeDetails
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.episode.service.EpisodeRecognition
 import tachiyomi.i18n.MR
-import tachiyomi.source.local.filter.anime.AnimeOrderBy
-import tachiyomi.source.local.image.anime.LocalAnimeCoverManager
+import tachiyomi.source.local.filter.AnimeOrderBy
+import tachiyomi.source.local.image.LocalAnimeCoverManager
 import tachiyomi.source.local.io.ArchiveAnime
-import tachiyomi.source.local.io.anime.LocalAnimeSourceFileSystem
+import tachiyomi.source.local.io.LocalAnimeSourceFileSystem
 import uy.kohesive.injekt.injectLazy
 import java.io.File
 import java.text.SimpleDateFormat
@@ -106,6 +106,7 @@ actual class LocalAnimeSource(
                         )
                     }
                 }
+
                 is AnimeOrderBy.Latest -> {
                     animeDirs = if (filter.state!!.ascending) {
                         animeDirs.sortedBy(UniFile::lastModified)
@@ -113,6 +114,7 @@ actual class LocalAnimeSource(
                         animeDirs.sortedByDescending(UniFile::lastModified)
                     }
                 }
+
                 else -> {
                     /* Do nothing */
                 }
@@ -226,11 +228,12 @@ actual class LocalAnimeSource(
 
                     // Overwrite data from episodes.json file
                     episodesData?.also { dataList ->
-                        dataList.firstOrNull { it.episode_number.equalsTo(episodeNumber) }?.also { data ->
-                            data.name?.also { name = it }
-                            data.date_upload?.also { date_upload = parseDate(it) }
-                            scanlator = data.scanlator
-                        }
+                        dataList.firstOrNull { it.episode_number.equalsTo(episodeNumber) }
+                            ?.also { data ->
+                                data.name?.also { name = it }
+                                data.date_upload?.also { date_upload = parseDate(it) }
+                                scanlator = data.scanlator
+                            }
                     }
                 }
             }

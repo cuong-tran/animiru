@@ -24,7 +24,7 @@ import tachiyomi.domain.library.service.LibraryPreferences.Companion.ENTRY_NON_C
 import tachiyomi.domain.library.service.LibraryPreferences.Companion.ENTRY_NON_VIEWED
 import tachiyomi.domain.track.interactor.GetAnimeTracks
 import tachiyomi.domain.track.model.AnimeTrack
-import tachiyomi.source.local.entries.anime.isLocal
+import tachiyomi.source.local.isLocal
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 

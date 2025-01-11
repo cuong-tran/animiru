@@ -75,8 +75,8 @@ import tachiyomi.domain.track.interactor.GetAnimeTracks
 import tachiyomi.domain.track.interactor.GetTracksPerAnime
 import tachiyomi.domain.track.model.AnimeTrack
 import tachiyomi.i18n.MR
-import tachiyomi.source.local.entries.anime.LocalAnimeSource
-import tachiyomi.source.local.entries.anime.isLocal
+import tachiyomi.source.local.LocalAnimeSource
+import tachiyomi.source.local.isLocal
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import kotlin.random.Random

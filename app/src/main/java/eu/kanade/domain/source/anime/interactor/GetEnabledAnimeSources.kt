@@ -8,7 +8,7 @@ import tachiyomi.domain.source.model.AnimeSource
 import tachiyomi.domain.source.model.Pin
 import tachiyomi.domain.source.model.Pins
 import tachiyomi.domain.source.repository.AnimeSourceRepository
-import tachiyomi.source.local.entries.anime.LocalAnimeSource
+import tachiyomi.source.local.LocalAnimeSource
 
 class GetEnabledAnimeSources(
     private val repository: AnimeSourceRepository,

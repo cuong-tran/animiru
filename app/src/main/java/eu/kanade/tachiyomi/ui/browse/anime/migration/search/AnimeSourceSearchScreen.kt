@@ -36,7 +36,7 @@ import tachiyomi.presentation.core.components.material.ExtendedFloatingActionBut
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.LoadingScreen
-import tachiyomi.source.local.entries.anime.LocalAnimeSource
+import tachiyomi.source.local.LocalAnimeSource
 
 data class AnimeSourceSearchScreen(
     private val oldAnime: Anime,

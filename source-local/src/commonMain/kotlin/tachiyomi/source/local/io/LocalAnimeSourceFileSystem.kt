@@ -1,4 +1,4 @@
-package tachiyomi.source.local.io.anime
+package tachiyomi.source.local.io
 
 import com.hippo.unifile.UniFile
 

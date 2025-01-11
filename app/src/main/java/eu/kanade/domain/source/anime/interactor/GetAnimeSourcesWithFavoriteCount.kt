@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.combine
 import tachiyomi.core.common.util.lang.compareToWithCollator
 import tachiyomi.domain.source.model.AnimeSource
 import tachiyomi.domain.source.repository.AnimeSourceRepository
-import tachiyomi.source.local.entries.anime.LocalAnimeSource
+import tachiyomi.source.local.LocalAnimeSource
 import java.util.Collections
 
 class GetAnimeSourcesWithFavoriteCount(

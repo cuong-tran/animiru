@@ -22,7 +22,7 @@ import kotlinx.collections.immutable.persistentListOf
 import tachiyomi.domain.library.model.LibraryDisplayMode
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.i18n.stringResource
-import tachiyomi.source.local.entries.anime.LocalAnimeSource
+import tachiyomi.source.local.LocalAnimeSource
 
 @Composable
 fun BrowseAnimeSourceToolbar(

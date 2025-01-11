@@ -20,7 +20,7 @@ import kotlinx.coroutines.runBlocking
 import tachiyomi.domain.source.model.StubAnimeSource
 import tachiyomi.domain.source.repository.AnimeStubSourceRepository
 import tachiyomi.domain.source.service.AnimeSourceManager
-import tachiyomi.source.local.entries.anime.LocalAnimeSource
+import tachiyomi.source.local.LocalAnimeSource
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import uy.kohesive.injekt.injectLazy

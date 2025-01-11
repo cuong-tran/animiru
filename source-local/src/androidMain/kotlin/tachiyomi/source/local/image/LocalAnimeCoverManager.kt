@@ -1,4 +1,4 @@
-package tachiyomi.source.local.image.anime
+package tachiyomi.source.local.image
 
 import android.content.Context
 import com.hippo.unifile.UniFile
@@ -6,7 +6,7 @@ import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.util.storage.DiskUtil
 import tachiyomi.core.common.storage.nameWithoutExtension
 import tachiyomi.core.common.util.system.ImageUtil
-import tachiyomi.source.local.io.anime.LocalAnimeSourceFileSystem
+import tachiyomi.source.local.io.LocalAnimeSourceFileSystem
 import java.io.InputStream
 
 private const val DEFAULT_COVER_NAME = "cover.jpg"

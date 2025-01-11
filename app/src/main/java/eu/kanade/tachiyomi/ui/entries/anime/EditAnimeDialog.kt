@@ -41,7 +41,7 @@ import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.i18n.stringResource
-import tachiyomi.source.local.entries.anime.isLocal
+import tachiyomi.source.local.isLocal
 
 @Composable
 fun EditAnimeDialog(

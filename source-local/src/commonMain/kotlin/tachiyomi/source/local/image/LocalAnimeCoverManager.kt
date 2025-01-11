@@ -1,4 +1,4 @@
-package tachiyomi.source.local.image.anime
+package tachiyomi.source.local.image
 
 import com.hippo.unifile.UniFile
 import eu.kanade.tachiyomi.animesource.model.SAnime
