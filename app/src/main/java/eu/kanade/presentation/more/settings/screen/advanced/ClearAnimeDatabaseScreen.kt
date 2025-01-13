@@ -45,11 +45,11 @@ import kotlinx.coroutines.flow.update
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.launchUI
 import tachiyomi.core.common.util.lang.withNonCancellableContext
+import tachiyomi.data.Database
 import tachiyomi.domain.source.interactor.GetAnimeSourcesWithNonLibraryAnime
 import tachiyomi.domain.source.model.AnimeSource
 import tachiyomi.domain.source.model.AnimeSourceWithCount
 import tachiyomi.i18n.MR
-import tachiyomi.mi.data.AnimeDatabase
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen
@@ -214,7 +214,7 @@ private class ClearAnimeDatabaseScreenModel : StateScreenModel<ClearAnimeDatabas
     State.Loading,
 ) {
     private val getSourcesWithNonLibraryAnime: GetAnimeSourcesWithNonLibraryAnime = Injekt.get()
-    private val database: AnimeDatabase = Injekt.get()
+    private val database: Database = Injekt.get()
 
     init {
         screenModelScope.launchIO {

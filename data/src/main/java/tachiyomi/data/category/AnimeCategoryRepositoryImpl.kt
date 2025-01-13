@@ -2,10 +2,10 @@ package tachiyomi.data.category
 
 import kotlinx.coroutines.flow.Flow
 import tachiyomi.data.AnimeDatabaseHandler
+import tachiyomi.data.Database
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.category.model.CategoryUpdate
 import tachiyomi.domain.category.repository.AnimeCategoryRepository
-import tachiyomi.mi.data.AnimeDatabase
 
 class AnimeCategoryRepositoryImpl(
     private val handler: AnimeDatabaseHandler,
@@ -79,7 +79,7 @@ class AnimeCategoryRepositoryImpl(
         }
     }
 
-    private fun AnimeDatabase.updatePartialBlocking(update: CategoryUpdate) {
+    private fun Database.updatePartialBlocking(update: CategoryUpdate) {
         categoriesQueries.update(
             name = update.name,
             order = update.order,

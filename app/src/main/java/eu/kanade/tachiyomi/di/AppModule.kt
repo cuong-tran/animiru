@@ -6,8 +6,6 @@ import androidx.core.content.ContextCompat
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
-import dataanime.Animehistory
-import dataanime.Animes
 import eu.kanade.domain.track.anime.store.DelayedAnimeTrackingStore
 import eu.kanade.tachiyomi.BuildConfig
 import eu.kanade.tachiyomi.data.cache.AnimeCoverCache
@@ -33,12 +31,14 @@ import tachiyomi.core.common.storage.AndroidStorageFolderProvider
 import tachiyomi.data.AndroidAnimeDatabaseHandler
 import tachiyomi.data.AnimeDatabaseHandler
 import tachiyomi.data.AnimeUpdateStrategyColumnAdapter
+import tachiyomi.data.Animehistory
+import tachiyomi.data.Animes
+import tachiyomi.data.Database
 import tachiyomi.data.DateColumnAdapter
 import tachiyomi.data.StringListColumnAdapter
 import tachiyomi.domain.anime.interactor.GetCustomAnimeInfo
 import tachiyomi.domain.source.service.AnimeSourceManager
 import tachiyomi.domain.storage.service.StorageManager
-import tachiyomi.mi.data.AnimeDatabase
 import tachiyomi.source.local.image.LocalAnimeCoverManager
 import tachiyomi.source.local.io.LocalAnimeSourceFileSystem
 import uy.kohesive.injekt.api.InjektModule
@@ -53,7 +53,7 @@ class AppModule(val app: Application) : InjektModule {
         addSingleton(app)
 
         val sqlDriverAnime = AndroidSqliteDriver(
-            schema = AnimeDatabase.Schema,
+            schema = Database.Schema,
             context = app,
             name = "tachiyomi.animedb",
             factory = if (BuildConfig.DEBUG && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -62,7 +62,7 @@ class AppModule(val app: Application) : InjektModule {
             } else {
                 RequerySQLiteOpenHelperFactory()
             },
-            callback = object : AndroidSqliteDriver.Callback(AnimeDatabase.Schema) {
+            callback = object : AndroidSqliteDriver.Callback(Database.Schema) {
                 override fun onOpen(db: SupportSQLiteDatabase) {
                     super.onOpen(db)
                     setPragma(db, "foreign_keys = ON")
@@ -78,7 +78,7 @@ class AppModule(val app: Application) : InjektModule {
         )
 
         addSingletonFactory {
-            AnimeDatabase(
+            Database(
                 driver = sqlDriverAnime,
                 animehistoryAdapter = Animehistory.Adapter(
                     last_seenAdapter = DateColumnAdapter,
@@ -159,7 +159,7 @@ class AppModule(val app: Application) : InjektModule {
 
             get<AnimeSourceManager>()
 
-            get<AnimeDatabase>()
+            get<Database>()
 
             get<AnimeDownloadManager>()
 

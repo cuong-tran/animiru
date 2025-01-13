@@ -3,7 +3,6 @@ package eu.kanade.tachiyomi.data.connection.syncmiru
 
 import android.content.Context
 import android.net.Uri
-import dataanime.Episodes
 import eu.kanade.domain.connection.SyncPreferences
 import eu.kanade.tachiyomi.data.backup.create.BackupCreator
 import eu.kanade.tachiyomi.data.backup.create.BackupOptions
@@ -21,6 +20,7 @@ import kotlinx.serialization.protobuf.ProtoBuf
 import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.data.AnimeDatabaseHandler
+import tachiyomi.data.Episodes
 import tachiyomi.data.anime.AnimeMapper.mapAnime
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.category.interactor.GetAnimeCategories

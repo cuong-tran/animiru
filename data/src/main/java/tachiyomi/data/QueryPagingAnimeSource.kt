@@ -3,13 +3,13 @@ package tachiyomi.data
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import app.cash.sqldelight.Query
-import tachiyomi.mi.data.AnimeDatabase
+import tachiyomi.data.Database
 import kotlin.properties.Delegates
 
 class QueryPagingAnimeSource<RowType : Any>(
     val handler: AnimeDatabaseHandler,
-    val countQuery: AnimeDatabase.() -> Query<Long>,
-    val queryProvider: AnimeDatabase.(Long, Long) -> Query<RowType>,
+    val countQuery: Database.() -> Query<Long>,
+    val queryProvider: Database.(Long, Long) -> Query<RowType>,
 ) : PagingSource<Long, RowType>(), Query.Listener {
 
     override val jumpingSupported: Boolean = true
