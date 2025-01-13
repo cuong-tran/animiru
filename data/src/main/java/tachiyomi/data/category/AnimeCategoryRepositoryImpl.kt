@@ -1,7 +1,7 @@
-package tachiyomi.data.category.anime
+package tachiyomi.data.category
 
 import kotlinx.coroutines.flow.Flow
-import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
+import tachiyomi.data.AnimeDatabaseHandler
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.category.model.CategoryUpdate
 import tachiyomi.domain.category.repository.AnimeCategoryRepository

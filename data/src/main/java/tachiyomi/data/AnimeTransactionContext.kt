@@ -1,4 +1,4 @@
-package tachiyomi.data.handlers.anime
+package tachiyomi.data
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job

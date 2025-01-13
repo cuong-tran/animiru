@@ -1,7 +1,7 @@
-package tachiyomi.data.updates.anime
+package tachiyomi.data.updates
 
 import kotlinx.coroutines.flow.Flow
-import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
+import tachiyomi.data.AnimeDatabaseHandler
 import tachiyomi.domain.anime.model.AnimeCover
 import tachiyomi.domain.updates.model.AnimeUpdatesWithRelations
 import tachiyomi.domain.updates.repository.AnimeUpdatesRepository

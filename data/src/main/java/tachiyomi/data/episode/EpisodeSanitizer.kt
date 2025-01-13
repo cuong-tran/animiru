@@ -1,4 +1,4 @@
-package tachiyomi.data.items.episode
+package tachiyomi.data.episode
 
 object EpisodeSanitizer {
 

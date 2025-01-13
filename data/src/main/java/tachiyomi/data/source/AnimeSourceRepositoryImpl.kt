@@ -1,4 +1,4 @@
-package tachiyomi.data.source.anime
+package tachiyomi.data.source
 
 import eu.kanade.tachiyomi.animesource.AnimeCatalogueSource
 import eu.kanade.tachiyomi.animesource.AnimeSource
@@ -7,7 +7,7 @@ import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
-import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
+import tachiyomi.data.AnimeDatabaseHandler
 import tachiyomi.domain.source.model.AnimeSourceWithCount
 import tachiyomi.domain.source.model.StubAnimeSource
 import tachiyomi.domain.source.repository.AnimeSourcePagingSourceType

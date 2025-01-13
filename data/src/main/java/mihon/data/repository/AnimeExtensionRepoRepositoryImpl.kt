@@ -1,4 +1,4 @@
-package mihon.data.repository.anime
+package mihon.data.repository
 
 import android.database.sqlite.SQLiteException
 import kotlinx.coroutines.flow.Flow
@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.map
 import mihon.domain.extensionrepo.exception.SaveExtensionRepoException
 import mihon.domain.extensionrepo.model.ExtensionRepo
 import mihon.domain.extensionrepo.repository.AnimeExtensionRepoRepository
-import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
+import tachiyomi.data.AnimeDatabaseHandler
 
 class AnimeExtensionRepoRepositoryImpl(
     private val handler: AnimeDatabaseHandler,

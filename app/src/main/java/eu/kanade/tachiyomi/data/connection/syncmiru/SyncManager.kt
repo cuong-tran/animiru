@@ -20,8 +20,8 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
 import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.data.entries.anime.AnimeMapper.mapAnime
-import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
+import tachiyomi.data.AnimeDatabaseHandler
+import tachiyomi.data.anime.AnimeMapper.mapAnime
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.category.interactor.GetAnimeCategories
 import uy.kohesive.injekt.Injekt

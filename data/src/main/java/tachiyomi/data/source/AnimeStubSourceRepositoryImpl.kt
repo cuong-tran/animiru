@@ -1,7 +1,7 @@
-package tachiyomi.data.source.anime
+package tachiyomi.data.source
 
 import kotlinx.coroutines.flow.Flow
-import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
+import tachiyomi.data.AnimeDatabaseHandler
 import tachiyomi.domain.source.model.StubAnimeSource
 import tachiyomi.domain.source.repository.AnimeStubSourceRepository
 

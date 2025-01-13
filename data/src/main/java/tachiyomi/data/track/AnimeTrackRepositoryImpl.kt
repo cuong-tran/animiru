@@ -1,8 +1,8 @@
-package tachiyomi.data.track.anime
+package tachiyomi.data.track
 
 import kotlinx.coroutines.flow.Flow
-import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
-import tachiyomi.data.track.anime.AnimeTrackMapper.mapTrack
+import tachiyomi.data.AnimeDatabaseHandler
+import tachiyomi.data.track.AnimeTrackMapper.mapTrack
 import tachiyomi.domain.track.model.AnimeTrack
 import tachiyomi.domain.track.repository.AnimeTrackRepository
 

@@ -1,11 +1,11 @@
-package tachiyomi.data.entries.anime
+package tachiyomi.data.anime
 
 import kotlinx.coroutines.flow.Flow
 import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
+import tachiyomi.data.AnimeDatabaseHandler
 import tachiyomi.data.AnimeUpdateStrategyColumnAdapter
 import tachiyomi.data.StringListColumnAdapter
-import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.anime.model.AnimeUpdate
 import tachiyomi.domain.anime.repository.AnimeRepository

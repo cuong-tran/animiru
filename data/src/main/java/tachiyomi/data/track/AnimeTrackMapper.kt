@@ -1,4 +1,4 @@
-package tachiyomi.data.track.anime
+package tachiyomi.data.track
 
 import tachiyomi.domain.track.model.AnimeTrack
 

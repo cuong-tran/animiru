@@ -6,8 +6,8 @@ import eu.kanade.tachiyomi.data.backup.models.BackupAnimeHistory
 import eu.kanade.tachiyomi.data.backup.models.BackupAnimeTracking
 import eu.kanade.tachiyomi.data.backup.models.BackupCategory
 import eu.kanade.tachiyomi.data.backup.models.BackupEpisode
+import tachiyomi.data.AnimeDatabaseHandler
 import tachiyomi.data.AnimeUpdateStrategyColumnAdapter
-import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
 import tachiyomi.domain.anime.interactor.AnimeFetchInterval
 import tachiyomi.domain.anime.interactor.GetAnimeByUrlAndSourceId
 import tachiyomi.domain.anime.interactor.SetCustomAnimeInfo

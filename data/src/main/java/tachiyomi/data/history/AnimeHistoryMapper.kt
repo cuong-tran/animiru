@@ -1,4 +1,4 @@
-package tachiyomi.data.history.anime
+package tachiyomi.data.history
 
 import tachiyomi.domain.anime.model.AnimeCover
 import tachiyomi.domain.history.model.AnimeHistory

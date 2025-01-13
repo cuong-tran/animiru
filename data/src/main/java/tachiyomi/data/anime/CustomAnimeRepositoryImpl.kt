@@ -1,4 +1,4 @@
-package tachiyomi.data.entries.anime
+package tachiyomi.data.anime
 
 import android.content.Context
 import kotlinx.serialization.Serializable

@@ -1,4 +1,4 @@
-package tachiyomi.data.source.anime
+package tachiyomi.data.source
 
 import androidx.paging.PagingState
 import eu.kanade.tachiyomi.animesource.AnimeCatalogueSource

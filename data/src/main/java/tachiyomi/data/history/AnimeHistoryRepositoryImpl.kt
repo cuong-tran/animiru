@@ -1,9 +1,9 @@
-package tachiyomi.data.history.anime
+package tachiyomi.data.history
 
 import kotlinx.coroutines.flow.Flow
 import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
+import tachiyomi.data.AnimeDatabaseHandler
 import tachiyomi.domain.history.model.AnimeHistory
 import tachiyomi.domain.history.model.AnimeHistoryUpdate
 import tachiyomi.domain.history.model.AnimeHistoryWithRelations

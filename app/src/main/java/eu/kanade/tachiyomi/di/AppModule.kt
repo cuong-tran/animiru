@@ -30,11 +30,11 @@ import nl.adaptivity.xmlutil.XmlDeclMode.Charset
 import nl.adaptivity.xmlutil.core.XmlVersion
 import nl.adaptivity.xmlutil.serialization.XML
 import tachiyomi.core.common.storage.AndroidStorageFolderProvider
+import tachiyomi.data.AndroidAnimeDatabaseHandler
+import tachiyomi.data.AnimeDatabaseHandler
 import tachiyomi.data.AnimeUpdateStrategyColumnAdapter
 import tachiyomi.data.DateColumnAdapter
 import tachiyomi.data.StringListColumnAdapter
-import tachiyomi.data.handlers.anime.AndroidAnimeDatabaseHandler
-import tachiyomi.data.handlers.anime.AnimeDatabaseHandler
 import tachiyomi.domain.anime.interactor.GetCustomAnimeInfo
 import tachiyomi.domain.source.service.AnimeSourceManager
 import tachiyomi.domain.storage.service.StorageManager
