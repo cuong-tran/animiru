@@ -1,6 +1,6 @@
 package eu.kanade.tachiyomi.data.track.shikimori
 
-import eu.kanade.tachiyomi.data.database.models.anime.AnimeTrack
+import eu.kanade.tachiyomi.data.database.models.AnimeTrack
 
 fun AnimeTrack.toShikimoriStatus() = when (status) {
     Shikimori.READING -> "watching"

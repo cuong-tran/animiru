@@ -1,7 +1,7 @@
 package mihon.core.migration.migrations
 
 import eu.kanade.tachiyomi.App
-import eu.kanade.tachiyomi.data.library.anime.AnimeLibraryUpdateJob
+import eu.kanade.tachiyomi.data.library.AnimeLibraryUpdateJob
 import mihon.core.migration.Migration
 import mihon.core.migration.MigrationContext
 import tachiyomi.domain.library.service.LibraryPreferences

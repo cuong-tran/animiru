@@ -1,10 +1,10 @@
 package eu.kanade.tachiyomi.ui.player.loader
 
-import eu.kanade.domain.items.episode.model.toSEpisode
+import eu.kanade.domain.episode.model.toSEpisode
 import eu.kanade.tachiyomi.animesource.AnimeSource
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
-import eu.kanade.tachiyomi.data.download.anime.AnimeDownloadManager
+import eu.kanade.tachiyomi.data.download.AnimeDownloadManager
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.episode.model.Episode
 import tachiyomi.source.local.LocalAnimeSource

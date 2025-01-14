@@ -1,6 +1,6 @@
 package eu.kanade.tachiyomi.util.episode
 
-import eu.kanade.tachiyomi.data.download.anime.AnimeDownloadCache
+import eu.kanade.tachiyomi.data.download.AnimeDownloadCache
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.episode.model.Episode
 import tachiyomi.source.local.isLocal

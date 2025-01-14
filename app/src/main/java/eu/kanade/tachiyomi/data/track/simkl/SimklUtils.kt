@@ -1,6 +1,6 @@
 package eu.kanade.tachiyomi.data.track.simkl
 
-import eu.kanade.tachiyomi.data.database.models.anime.AnimeTrack
+import eu.kanade.tachiyomi.data.database.models.AnimeTrack
 
 fun AnimeTrack.toSimklStatus() = when (status) {
     Simkl.WATCHING -> "watching"

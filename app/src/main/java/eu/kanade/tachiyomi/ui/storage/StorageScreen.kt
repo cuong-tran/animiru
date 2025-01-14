@@ -10,7 +10,6 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.more.storage.StorageScreenContent
 import eu.kanade.presentation.util.Screen
-import eu.kanade.tachiyomi.ui.storage.anime.AnimeStorageScreenModel
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource

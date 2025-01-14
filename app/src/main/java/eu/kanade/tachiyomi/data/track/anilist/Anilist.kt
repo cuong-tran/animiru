@@ -2,9 +2,9 @@ package eu.kanade.tachiyomi.data.track.anilist
 
 import android.graphics.Color
 import dev.icerock.moko.resources.StringResource
-import eu.kanade.domain.track.anime.model.toDbTrack
+import eu.kanade.domain.track.model.toDbTrack
 import eu.kanade.tachiyomi.R
-import eu.kanade.tachiyomi.data.database.models.anime.AnimeTrack
+import eu.kanade.tachiyomi.data.database.models.AnimeTrack
 import eu.kanade.tachiyomi.data.track.AnimeTracker
 import eu.kanade.tachiyomi.data.track.BaseTracker
 import eu.kanade.tachiyomi.data.track.DeletableAnimeTracker

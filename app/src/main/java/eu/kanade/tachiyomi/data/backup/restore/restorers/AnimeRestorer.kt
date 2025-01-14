@@ -1,6 +1,6 @@
 package eu.kanade.tachiyomi.data.backup.restore.restorers
 
-import eu.kanade.domain.entries.anime.interactor.UpdateAnime
+import eu.kanade.domain.anime.interactor.UpdateAnime
 import eu.kanade.tachiyomi.data.backup.models.BackupAnime
 import eu.kanade.tachiyomi.data.backup.models.BackupAnimeHistory
 import eu.kanade.tachiyomi.data.backup.models.BackupAnimeTracking

@@ -1,6 +1,6 @@
 package eu.kanade.tachiyomi.data.track.bangumi
 
-import eu.kanade.tachiyomi.data.database.models.anime.AnimeTrack
+import eu.kanade.tachiyomi.data.database.models.AnimeTrack
 
 fun AnimeTrack.toApiStatus() = when (status) {
     Bangumi.READING -> "do"

@@ -1,7 +1,7 @@
 package eu.kanade.tachiyomi.data.track.kitsu
 
 import androidx.core.net.toUri
-import eu.kanade.tachiyomi.data.database.models.anime.AnimeTrack
+import eu.kanade.tachiyomi.data.database.models.AnimeTrack
 import eu.kanade.tachiyomi.data.track.kitsu.dto.KitsuAddEntryResult
 import eu.kanade.tachiyomi.data.track.kitsu.dto.KitsuAlgoliaSearchResult
 import eu.kanade.tachiyomi.data.track.kitsu.dto.KitsuCurrentUserResult

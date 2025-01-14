@@ -1,6 +1,6 @@
 package eu.kanade.tachiyomi.data.track.kitsu
 
-import eu.kanade.tachiyomi.data.database.models.anime.AnimeTrack
+import eu.kanade.tachiyomi.data.database.models.AnimeTrack
 
 fun AnimeTrack.toApiStatus() = when (status) {
     Kitsu.WATCHING -> "current"

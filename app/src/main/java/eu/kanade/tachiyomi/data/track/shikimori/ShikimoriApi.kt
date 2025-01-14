@@ -2,7 +2,7 @@ package eu.kanade.tachiyomi.data.track.shikimori
 
 import android.net.Uri
 import androidx.core.net.toUri
-import eu.kanade.tachiyomi.data.database.models.anime.AnimeTrack
+import eu.kanade.tachiyomi.data.database.models.AnimeTrack
 import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
 import eu.kanade.tachiyomi.data.track.shikimori.dto.SMAddEntryResponse
 import eu.kanade.tachiyomi.data.track.shikimori.dto.SMEntry

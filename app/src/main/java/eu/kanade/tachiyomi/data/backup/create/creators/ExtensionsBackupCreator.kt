@@ -3,7 +3,7 @@ package eu.kanade.tachiyomi.data.backup.create.creators
 import android.content.Context
 import android.content.pm.PackageManager
 import eu.kanade.tachiyomi.data.backup.models.BackupExtension
-import eu.kanade.tachiyomi.extension.anime.AnimeExtensionManager
+import eu.kanade.tachiyomi.extension.AnimeExtensionManager
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.io.File

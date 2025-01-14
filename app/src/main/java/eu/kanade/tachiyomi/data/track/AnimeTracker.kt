@@ -2,9 +2,9 @@ package eu.kanade.tachiyomi.data.track
 
 import android.app.Application
 import dev.icerock.moko.resources.StringResource
-import eu.kanade.domain.track.anime.interactor.AddAnimeTracks
-import eu.kanade.domain.track.anime.model.toDomainTrack
-import eu.kanade.tachiyomi.data.database.models.anime.AnimeTrack
+import eu.kanade.domain.track.interactor.AddAnimeTracks
+import eu.kanade.domain.track.model.toDomainTrack
+import eu.kanade.tachiyomi.data.database.models.AnimeTrack
 import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
 import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.collections.immutable.ImmutableList

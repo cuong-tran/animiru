@@ -3,7 +3,7 @@ package eu.kanade.tachiyomi.data.track.simkl
 import android.net.Uri
 import android.util.Log
 import androidx.core.net.toUri
-import eu.kanade.tachiyomi.data.database.models.anime.AnimeTrack
+import eu.kanade.tachiyomi.data.database.models.AnimeTrack
 import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
 import eu.kanade.tachiyomi.data.track.simkl.dto.SimklOAuth
 import eu.kanade.tachiyomi.data.track.simkl.dto.SimklSearchResult

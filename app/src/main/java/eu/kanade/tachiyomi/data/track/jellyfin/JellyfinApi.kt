@@ -1,6 +1,6 @@
 package eu.kanade.tachiyomi.data.track.jellyfin
 
-import eu.kanade.tachiyomi.data.database.models.anime.AnimeTrack
+import eu.kanade.tachiyomi.data.database.models.AnimeTrack
 import eu.kanade.tachiyomi.data.track.jellyfin.dto.JFItem
 import eu.kanade.tachiyomi.data.track.jellyfin.dto.JFItemList
 import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch

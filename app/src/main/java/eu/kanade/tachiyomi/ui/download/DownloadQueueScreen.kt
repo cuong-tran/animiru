@@ -54,9 +54,6 @@ import eu.kanade.presentation.components.DropdownMenu
 import eu.kanade.presentation.components.NestedMenuItem
 import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.databinding.DownloadListBinding
-import eu.kanade.tachiyomi.ui.download.anime.AnimeDownloadAdapter
-import eu.kanade.tachiyomi.ui.download.anime.AnimeDownloadHeaderItem
-import eu.kanade.tachiyomi.ui.download.anime.AnimeDownloadQueueScreenModel
 import kotlinx.collections.immutable.persistentListOf
 import tachiyomi.core.common.util.lang.launchUI
 import tachiyomi.i18n.MR
