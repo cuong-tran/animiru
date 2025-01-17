@@ -64,7 +64,7 @@ class StorageManager(
         return baseDir?.createDirectory(DOWNLOADS_PATH)
     }
 
-    fun getLocalAnimeSourceDirectory(): UniFile? {
+    fun getLocalSourceDirectory(): UniFile? {
         return baseDir?.createDirectory(LOCAL_ANIMESOURCE_PATH)
     }
 
