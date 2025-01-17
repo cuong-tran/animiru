@@ -572,9 +572,9 @@ class LibraryScreenModel(
                             downloadManager.isEpisodeDownloaded(
                                 episode.name,
                                 episode.scanlator,
-                                // AM (CUSTOM_INFORMATION) -->
+                                // SY -->
                                 anime.ogTitle,
-                                // <-- AM (CUSTOM_INFORMATION),
+                                // SY <--,
                                 anime.source,
                             )
                     }

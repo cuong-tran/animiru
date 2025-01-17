@@ -195,10 +195,10 @@ class DomainModule : InjektModule {
         addFactory { ReplaceExtensionRepo(get()) }
         addFactory { UpdateExtensionRepo(get(), get()) }
 
-        // AM (CUSTOM_INFORMATION) -->
+        // SY -->
         addSingletonFactory<CustomAnimeRepository> { CustomAnimeRepositoryImpl(get<Application>()) }
         addFactory { GetCustomAnimeInfo(get()) }
         addFactory { SetCustomAnimeInfo(get()) }
-        // <-- AM (CUSTOM_INFORMATION)
+        // SY <--
     }
 }

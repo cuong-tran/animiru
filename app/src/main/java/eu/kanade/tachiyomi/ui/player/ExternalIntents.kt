@@ -99,9 +99,9 @@ class ExternalIntents {
                     playerData = PlayerData(
                         incognitoMode = source.isNsfw() || basePreferences.incognitoMode().get(),
                         animeId = anime.id,
-                        // AM (CUSTOM_INFORMATION) -->
+                        // SY -->
                         animeTitle = anime.ogTitle,
-                        // <-- AM (CUSTOM_INFORMATION)
+                        // SY <--
                         episodeNumber = episode.episodeNumber.toString(),
                         thumbnailUrl = anime.thumbnailUrl,
                     ),
@@ -140,9 +140,9 @@ class ExternalIntents {
                 downloadManager.isEpisodeDownloaded(
                     episodeName = episode.name,
                     episodeScanlator = episode.scanlator,
-                    // AM (CUSTOM_INFORMATION) -->
+                    // SY -->
                     animeTitle = anime.ogTitle,
-                    // <-- AM (CUSTOM_INFORMATION)
+                    // SY <--
                     sourceId = anime.source,
                     skipCache = true,
                 )

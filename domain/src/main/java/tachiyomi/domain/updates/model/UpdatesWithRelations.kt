@@ -6,9 +6,9 @@ import uy.kohesive.injekt.injectLazy
 
 data class UpdatesWithRelations(
     val animeId: Long,
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     val ogAnimeTitle: String,
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
     val episodeId: Long,
     val episodeName: String,
     val scanlator: String?,
@@ -23,11 +23,11 @@ data class UpdatesWithRelations(
     val dateFetch: Long,
     val coverData: AnimeCover,
 ) {
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     val animeTitle: String = getCustomAnimeInfo.get(animeId)?.title ?: ogAnimeTitle
 
     companion object {
         private val getCustomAnimeInfo: GetCustomAnimeInfo by injectLazy()
     }
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
 }

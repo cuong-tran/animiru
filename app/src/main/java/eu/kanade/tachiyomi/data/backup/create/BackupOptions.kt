@@ -16,9 +16,9 @@ data class BackupOptions(
     val sourceSettings: Boolean = true,
     val privateSettings: Boolean = false,
     val extensions: Boolean = false,
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     val customInfo: Boolean = false,
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
 ) {
 
     fun asBooleanArray() = booleanArrayOf(
@@ -33,9 +33,9 @@ data class BackupOptions(
         sourceSettings,
         privateSettings,
         extensions,
-        // AM (CUSTOM_INFORMATION) -->
+        // SY -->
         customInfo,
-        // <-- AM (CUSTOM_INFORMATION)
+        // SY <--
     )
 
     fun canCreate() = libraryEntries || categories || appSettings || extensionRepoSettings || sourceSettings
@@ -76,14 +76,14 @@ data class BackupOptions(
                 setter = { options, enabled -> options.copy(readEntries = enabled) },
                 enabled = { it.libraryEntries },
             ),
-            // AM (CUSTOM_INFORMATION) -->
+            // SY -->
             Entry(
                 label = MR.strings.custom_entry_info,
                 getter = BackupOptions::customInfo,
                 setter = { options, enabled -> options.copy(customInfo = enabled) },
                 enabled = { it.libraryEntries },
             ),
-            // <-- AM (CUSTOM_INFORMATION)
+            // SY <--
         )
 
         val settingsOptions = persistentListOf(
@@ -130,9 +130,9 @@ data class BackupOptions(
             sourceSettings = array[8],
             privateSettings = array[9],
             extensions = array[10],
-            // AM (CUSTOM_INFORMATION) -->
+            // SY -->
             customInfo = array[11],
-            // <-- AM (CUSTOM_INFORMATION)
+            // SY <--
         )
     }
 

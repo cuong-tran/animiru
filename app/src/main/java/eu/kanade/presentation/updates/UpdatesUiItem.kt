@@ -263,9 +263,9 @@ private fun UpdatesUiItem(
                         update.episodeName,
                         null,
                         update.scanlator,
-                        // AM (CUSTOM_INFORMATION) -->
+                        // SY -->
                         update.ogAnimeTitle,
-                        // <-- AM (CUSTOM_INFORMATION)
+                        // SY <--
                         sourceManager.getOrStub(update.sourceId),
                     )
                 }

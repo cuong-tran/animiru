@@ -135,9 +135,9 @@ fun AnimeScreen(
     onEditFetchIntervalClicked: (() -> Unit)?,
     onMigrateClicked: (() -> Unit)?,
     changeAnimeSkipIntro: (() -> Unit)?,
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     onEditInfoClicked: () -> Unit,
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
 
     // For bottom action menu
     onMultiBookmarkClicked: (List<Episode>, bookmarked: Boolean) -> Unit,
@@ -200,9 +200,9 @@ fun AnimeScreen(
             onEditIntervalClicked = onEditFetchIntervalClicked,
             onMigrateClicked = onMigrateClicked,
             changeAnimeSkipIntro = changeAnimeSkipIntro,
-            // AM (CUSTOM_INFORMATION) -->
+            // SY -->
             onEditInfoClicked = onEditInfoClicked,
-            // <-- AM (CUSTOM_INFORMATION)
+            // SY <--
             onMultiBookmarkClicked = onMultiBookmarkClicked,
             // AM (FILLERMARK) -->
             onMultiFillermarkClicked = onMultiFillermarkClicked,
@@ -247,9 +247,9 @@ fun AnimeScreen(
             onEditCategoryClicked = onEditCategoryClicked,
             onEditIntervalClicked = onEditFetchIntervalClicked,
             changeAnimeSkipIntro = changeAnimeSkipIntro,
-            // AM (CUSTOM_INFORMATION) -->
+            // SY -->
             onEditInfoClicked = onEditInfoClicked,
-            // <-- AM (CUSTOM_INFORMATION)
+            // SY <--
             onMigrateClicked = onMigrateClicked,
             onMultiBookmarkClicked = onMultiBookmarkClicked,
             // AM (FILLERMARK) -->
@@ -308,9 +308,9 @@ private fun AnimeScreenSmallImpl(
     onMigrateClicked: (() -> Unit)?,
     changeAnimeSkipIntro: (() -> Unit)?,
     onSettingsClicked: (() -> Unit)?,
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     onEditInfoClicked: () -> Unit,
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
 
     // For bottom action menu
     onMultiBookmarkClicked: (List<Episode>, bookmarked: Boolean) -> Unit,
@@ -381,9 +381,9 @@ private fun AnimeScreenSmallImpl(
                 onClickMigrate = onMigrateClicked,
                 onClickSettings = onSettingsClicked,
                 changeAnimeSkipIntro = changeAnimeSkipIntro,
-                // AM (CUSTOM_INFORMATION) -->
+                // SY -->
                 onClickEditInfo = onEditInfoClicked.takeIf { state.anime.favorite },
-                // <-- AM (CUSTOM_INFORMATION)
+                // SY <--
                 actionModeCounter = selectedEpisodeCount,
                 onSelectAll = { onAllEpisodeSelected(true) },
                 onInvertSelection = { onInvertSelection() },
@@ -617,9 +617,9 @@ fun AnimeScreenLargeImpl(
     onMigrateClicked: (() -> Unit)?,
     changeAnimeSkipIntro: (() -> Unit)?,
     onSettingsClicked: (() -> Unit)?,
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     onEditInfoClicked: () -> Unit,
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
 
     // For bottom action menu
     onMultiBookmarkClicked: (List<Episode>, bookmarked: Boolean) -> Unit,
@@ -684,9 +684,9 @@ fun AnimeScreenLargeImpl(
                 onClickMigrate = onMigrateClicked,
                 onClickSettings = onSettingsClicked,
                 changeAnimeSkipIntro = changeAnimeSkipIntro,
-                // AM (CUSTOM_INFORMATION) -->
+                // SY -->
                 onClickEditInfo = onEditInfoClicked.takeIf { state.anime.favorite },
-                // <-- AM (CUSTOM_INFORMATION)
+                // SY <--
                 actionModeCounter = selectedChapterCount,
                 onSelectAll = { onAllEpisodeSelected(true) },
                 onInvertSelection = { onInvertSelection() },
@@ -980,9 +980,9 @@ private fun LazyListScope.sharedEpisodeItems(
                                 episodeItem.episode.name,
                                 episodeItem.episode.url,
                                 episodeItem.episode.scanlator,
-                                // AM (CUSTOM_INFORMATION) -->
+                                // SY -->
                                 anime.ogTitle,
-                                // <-- AM (CUSTOM_INFORMATION)
+                                // SY <--
                                 source,
                             )
                         }

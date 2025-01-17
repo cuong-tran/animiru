@@ -78,9 +78,9 @@ class SyncManager(
             appSettings = syncOptions.appSettings,
             sourceSettings = syncOptions.sourceSettings,
             privateSettings = syncOptions.privateSettings,
-            // AM (CUSTOM_INFORMATION) -->
+            // SY -->
             customInfo = syncOptions.customInfo,
-            // <-- AM (CUSTOM_INFORMATION)
+            // SY <--
         )
 
         log(LogPriority.DEBUG) { "Begin create backup" }

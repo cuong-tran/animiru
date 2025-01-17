@@ -57,9 +57,9 @@ class SyncPreferences(
             appSettings = preferenceStore.getBoolean("sync_app_settings", true).get(),
             sourceSettings = preferenceStore.getBoolean("sync_source_settings", true).get(),
             privateSettings = preferenceStore.getBoolean("sync_private_settings", true).get(),
-            // AM (CUSTOM_INFORMATION) -->
+            // SY -->
             customInfo = preferenceStore.getBoolean("sync_custom_information", true).get(),
-            // <-- AM (CUSTOM_INFORMATION)
+            // SY <--
         )
     }
 
@@ -71,9 +71,9 @@ class SyncPreferences(
         preferenceStore.getBoolean("sync_app_settings", true).set(syncSettings.appSettings)
         preferenceStore.getBoolean("sync_source_settings", true).set(syncSettings.sourceSettings)
         preferenceStore.getBoolean("sync_private_settings", true).set(syncSettings.privateSettings)
-        // AM (CUSTOM_INFORMATION) -->
+        // SY -->
         preferenceStore.getBoolean("sync_custom_information", true).set(syncSettings.customInfo)
-        // <-- AM (CUSTOM_INFORMATION)
+        // SY <--
     }
 
     fun getSyncTriggerOptions(): SyncTriggerOptions {

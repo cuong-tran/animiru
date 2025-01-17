@@ -111,9 +111,9 @@ class UpdatesScreenModel(
                 val downloaded = downloadManager.isEpisodeDownloaded(
                     update.episodeName,
                     update.scanlator,
-                    // AM (CUSTOM_INFORMATION) -->
+                    // SY -->
                     update.ogAnimeTitle,
-                    // <-- AM (CUSTOM_INFORMATION)
+                    // SY <--
                     update.sourceId,
                 )
                 val downloadState = when {

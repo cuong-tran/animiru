@@ -9,18 +9,18 @@ data class HistoryWithRelations(
     val id: Long,
     val episodeId: Long,
     val animeId: Long,
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     val ogTitle: String,
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
     val episodeNumber: Double,
     val seenAt: Date?,
     val coverData: AnimeCover,
 ) {
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     val title: String = customAnimeManager.get(animeId)?.title ?: ogTitle
 
     companion object {
         private val customAnimeManager: GetCustomAnimeInfo by injectLazy()
     }
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
 }

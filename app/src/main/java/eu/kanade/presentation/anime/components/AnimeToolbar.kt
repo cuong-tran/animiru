@@ -45,9 +45,9 @@ fun AnimeToolbar(
     onClickRefresh: () -> Unit,
     onClickMigrate: (() -> Unit)?,
     onClickSettings: (() -> Unit)?,
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     onClickEditInfo: (() -> Unit)?,
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
     // Anime only
     changeAnimeSkipIntro: (() -> Unit)?,
     // For action mode
@@ -163,7 +163,7 @@ fun AnimeToolbar(
                                         ),
                                     )
                                 }
-                                // AM (CUSTOM_INFORMATION) -->
+                                // SY -->
                                 if (onClickEditInfo != null) {
                                     add(
                                         AppBar.OverflowAction(
@@ -172,7 +172,7 @@ fun AnimeToolbar(
                                         ),
                                     )
                                 }
-                                // <-- AM (CUSTOM_INFORMATION)
+                                // SY <--
                                 if (onClickSettings != null) {
                                     add(
                                         AppBar.OverflowAction(

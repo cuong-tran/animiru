@@ -2075,9 +2075,9 @@ class PlayerActivity : BaseActivity() {
                         PlayerData(
                             incognitoMode = viewModel.currentSource.isNsfw() || viewModel.incognitoMode,
                             animeId = viewModel.currentAnime?.id,
-                            // AM (CUSTOM_INFORMATION) -->
+                            // SY -->
                             animeTitle = viewModel.currentAnime?.ogTitle,
-                            // <-- AM (CUSTOM_INFORMATION)
+                            // SY <--
                             episodeNumber = viewModel.currentEpisode?.episode_number?.toString(),
                             thumbnailUrl = viewModel.currentAnime?.thumbnailUrl,
                         ),

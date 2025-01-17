@@ -182,9 +182,9 @@ class DownloadCache(
 
         val sourceDir = rootDownloadsDir.sourceDirs[anime.source]
         if (sourceDir != null) {
-            // AM (CUSTOM_INFORMATION) -->
+            // SY -->
             val animeDir = sourceDir.animeDirs[provider.getAnimeDirName(anime.ogTitle)]
-            // <-- AM (CUSTOM_INFORMATION)
+            // SY <--
             if (animeDir != null) {
                 return animeDir.episodeDirs.size
             }
@@ -213,9 +213,9 @@ class DownloadCache(
 
         return rootDownloadsDir.sourceDirs[anime.source]?.animeDirs?.get(
             provider.getAnimeDirName(
-                // AM (CUSTOM_INFORMATION) -->
+                // SY -->
                 anime.ogTitle,
-                // <-- AM (CUSTOM_INFORMATION)
+                // SY <--
             ),
         )?.dir?.size() ?: 0
     }
@@ -239,9 +239,9 @@ class DownloadCache(
             }
 
             // Retrieve the cached anime directory or cache a new one
-            // AM (CUSTOM_INFORMATION) -->
+            // SY -->
             val animeDirName = provider.getAnimeDirName(anime.ogTitle)
-            // <-- AM (CUSTOM_INFORMATION)
+            // SY <--
             var animeDir = sourceDir.animeDirs[animeDirName]
             if (animeDir == null) {
                 animeDir = AnimeDirectory(animeUniFile)
@@ -264,9 +264,9 @@ class DownloadCache(
     suspend fun removeEpisode(episode: Episode, anime: Anime) {
         rootDownloadsDirMutex.withLock {
             val sourceDir = rootDownloadsDir.sourceDirs[anime.source] ?: return
-            // AM (CUSTOM_INFORMATION) -->
+            // SY -->
             val animeDir = sourceDir.animeDirs[provider.getAnimeDirName(anime.ogTitle)] ?: return
-            // <-- AM (CUSTOM_INFORMATION)
+            // SY <--
             provider.getValidEpisodeDirNames(episode.name, episode.scanlator).forEach {
                 if (it in animeDir.episodeDirs) {
                     animeDir.episodeDirs -= it
@@ -286,9 +286,9 @@ class DownloadCache(
     suspend fun removeEpisodes(episodes: List<Episode>, anime: Anime) {
         rootDownloadsDirMutex.withLock {
             val sourceDir = rootDownloadsDir.sourceDirs[anime.source] ?: return
-            // AM (CUSTOM_INFORMATION) -->
+            // SY -->
             val animeDir = sourceDir.animeDirs[provider.getAnimeDirName(anime.ogTitle)] ?: return
-            // <-- AM (CUSTOM_INFORMATION)
+            // SY <--
             episodes.forEach { episode ->
                 provider.getValidEpisodeDirNames(episode.name, episode.scanlator).forEach {
                     if (it in animeDir.episodeDirs) {
@@ -309,9 +309,9 @@ class DownloadCache(
     suspend fun removeAnime(anime: Anime) {
         rootDownloadsDirMutex.withLock {
             val sourceDir = rootDownloadsDir.sourceDirs[anime.source] ?: return
-            // AM (CUSTOM_INFORMATION) -->
+            // SY -->
             val animeDirName = provider.getAnimeDirName(anime.ogTitle)
-            // <-- AM (CUSTOM_INFORMATION)
+            // SY <--
             if (sourceDir.animeDirs.containsKey(animeDirName)) {
                 sourceDir.animeDirs -= animeDirName
             }

@@ -6,9 +6,9 @@ class SAnimeImpl : SAnime {
 
     override lateinit var url: String
 
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     override var title: String = ""
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
 
     override var artist: String? = null
 
@@ -26,7 +26,7 @@ class SAnimeImpl : SAnime {
 
     override var update_strategy: AnimeUpdateStrategy = AnimeUpdateStrategy.ALWAYS_UPDATE
 
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     override val originalTitle: String
         get() = title
     override val originalAuthor: String?
@@ -39,5 +39,5 @@ class SAnimeImpl : SAnime {
         get() = genre
     override val originalStatus: Int
         get() = status
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
 }

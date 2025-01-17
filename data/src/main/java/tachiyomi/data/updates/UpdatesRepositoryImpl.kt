@@ -63,9 +63,9 @@ class UpdatesRepositoryImpl(
         dateFetch: Long,
     ): UpdatesWithRelations = UpdatesWithRelations(
         animeId = animeId,
-        // AM (CUSTOM_INFORMATION) -->
+        // SY -->
         ogAnimeTitle = animeTitle,
-        // <-- AM (CUSTOM_INFORMATION)
+        // SY <--
         episodeId = episodeId,
         episodeName = episodeName,
         scanlator = scanlator,

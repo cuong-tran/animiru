@@ -43,14 +43,14 @@ object AnimeMapper {
         episodeFlags = episodeFlags,
         coverLastModified = coverLastModified,
         url = url,
-        // AM (CUSTOM_INFORMATION) -->
+        // SY -->
         ogTitle = title,
         ogArtist = artist,
         ogAuthor = author,
         ogDescription = description,
         ogGenre = genre,
         ogStatus = status,
-        // <-- AM (CUSTOM_INFORMATION)
+        // SY <--
         thumbnailUrl = thumbnailUrl,
         updateStrategy = updateStrategy,
         initialized = initialized,

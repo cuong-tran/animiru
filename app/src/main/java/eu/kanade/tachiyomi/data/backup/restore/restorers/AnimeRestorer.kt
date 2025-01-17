@@ -33,9 +33,9 @@ class AnimeRestorer(
     private val updateAnime: UpdateAnime = Injekt.get(),
     private val getTracks: GetTracks = Injekt.get(),
     private val insertTrack: InsertTrack = Injekt.get(),
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     private val setCustomAnimeInfo: SetCustomAnimeInfo = Injekt.get(),
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
     fetchInterval: FetchInterval = Injekt.get(),
 ) {
 
@@ -61,9 +61,9 @@ class AnimeRestorer(
     suspend fun restore(
         backupAnime: BackupAnime,
         backupCategories: List<BackupCategory>,
-        // AM (CUSTOM_INFORMATION) -->
+        // SY -->
         customInfo: CustomAnimeInfo?,
-        // <-- AM (CUSTOM_INFORMATION)
+        // SY <--
     ) {
         handler.await(inTransaction = true) {
             val dbAnime = findExistingAnime(backupAnime)
@@ -81,9 +81,9 @@ class AnimeRestorer(
                 backupCategories = backupCategories,
                 history = backupAnime.history,
                 tracks = backupAnime.tracking,
-                // AM (CUSTOM_INFORMATION) -->
+                // SY -->
                 customInfo = customInfo,
-                // <-- AM (CUSTOM_INFORMATION)
+                // SY <--
             )
         }
     }
@@ -103,14 +103,14 @@ class AnimeRestorer(
     private fun Anime.copyFrom(newer: Anime): Anime {
         return this.copy(
             favorite = this.favorite || newer.favorite,
-            // AM (CUSTOM_INFORMATION) -->
+            // SY -->
             ogAuthor = newer.ogAuthor,
             ogArtist = newer.ogArtist,
             ogDescription = newer.ogDescription,
             ogGenre = newer.ogGenre,
             thumbnailUrl = newer.thumbnailUrl,
             ogStatus = newer.ogStatus,
-            // <-- AM (CUSTOM_INFORMATION)
+            // SY <--
             initialized = this.initialized || newer.initialized,
             version = newer.version,
         )
@@ -296,17 +296,17 @@ class AnimeRestorer(
         backupCategories: List<BackupCategory>,
         history: List<BackupHistory>,
         tracks: List<BackupTracking>,
-        // AM (CUSTOM_INFORMATION) -->
+        // SY -->
         customInfo: CustomAnimeInfo?,
-        // <-- AM (CUSTOM_INFORMATION)
+        // SY <--
     ): Anime {
         restoreCategories(anime, categories, backupCategories)
         restoreEpisodes(anime, episodes)
         restoreTracking(anime, tracks)
         restoreHistory(history)
-        // AM (CUSTOM_INFORMATION) -->
+        // SY -->
         restoreEditedInfo(customInfo?.copy(id = anime.id))
-        // <-- AM (CUSTOM_INFORMATION)
+        // SY <--
         updateAnime.awaitUpdateFetchInterval(anime, now, currentFetchWindow)
         return anime
     }
@@ -436,12 +436,12 @@ class AnimeRestorer(
         }
     }
 
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     private fun restoreEditedInfo(animeJson: CustomAnimeInfo?) {
         animeJson ?: return
         setCustomAnimeInfo.set(animeJson)
     }
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
 
     private fun Track.forComparison() = this.copy(id = 0L, animeId = 0L)
 }

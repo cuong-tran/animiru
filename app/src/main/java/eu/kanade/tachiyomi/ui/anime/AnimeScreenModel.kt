@@ -127,10 +127,10 @@ class AnimeScreenModel(
     // AM (FILE_SIZE) -->
     private val storagePreferences: StoragePreferences = Injekt.get(),
     // <-- AM (FILE_SIZE)
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     private val sourceManager: SourceManager = Injekt.get(),
     private val setCustomAnimeInfo: SetCustomAnimeInfo = Injekt.get(),
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
 ) : StateScreenModel<AnimeScreenModel.State>(State.Loading) {
 
     private val successState: State.Success?
@@ -279,7 +279,7 @@ class AnimeScreenModel(
         }
     }
 
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     fun updateAnimeInfo(
         title: String?,
         author: String?,
@@ -342,7 +342,7 @@ class AnimeScreenModel(
             successState.copy(anime = anime)
         }
     }
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
 
     fun toggleFavorite() {
         toggleFavorite(
@@ -597,9 +597,9 @@ class AnimeScreenModel(
                 downloadManager.isEpisodeDownloaded(
                     episode.name,
                     episode.scanlator,
-                    // AM (CUSTOM_INFORMATION) -->
+                    // SY -->
                     anime.ogTitle,
-                    // <-- AM (CUSTOM_INFORMATION)
+                    // SY <--
                     anime.source,
                 )
             }
@@ -1201,10 +1201,10 @@ class AnimeScreenModel(
         data class SetAnimeFetchInterval(val anime: Anime) : Dialog
         data class ShowQualities(val episode: Episode, val anime: Anime, val source: AnimeSource) : Dialog
 
-        // AM (CUSTOM_INFORMATION) -->
+        // SY -->
         data class EditAnimeInfo(val anime: Anime) : Dialog
 
-        // <-- AM (CUSTOM_INFORMATION)
+        // SY <--
         data object ChangeAnimeSkipIntro : Dialog
         data object SettingsSheet : Dialog
         data object TrackSheet : Dialog
@@ -1244,11 +1244,11 @@ class AnimeScreenModel(
         updateSuccessState { it.copy(dialog = Dialog.ShowQualities(episode, it.anime, it.source)) }
     }
 
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     fun showEditAnimeInfoDialog() {
         updateSuccessState { it.copy(dialog = Dialog.EditAnimeInfo(it.anime)) }
     }
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
 
     sealed interface State {
         @Immutable

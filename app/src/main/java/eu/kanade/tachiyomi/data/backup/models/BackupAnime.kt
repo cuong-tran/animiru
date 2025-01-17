@@ -40,7 +40,7 @@ data class BackupAnime(
     @ProtoNumber(107) var favoriteModifiedAt: Long? = null,
     @ProtoNumber(109) var version: Long = 0,
 
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     // Bump values by 200
     @ProtoNumber(200) var customStatus: Int = 0,
     @ProtoNumber(201) var customTitle: String? = null,
@@ -48,19 +48,19 @@ data class BackupAnime(
     @ProtoNumber(203) var customAuthor: String? = null,
     @ProtoNumber(204) var customDescription: String? = null,
     @ProtoNumber(205) var customGenre: List<String>? = null,
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
 ) {
     fun getAnimeImpl(): Anime {
         return Anime.create().copy(
             url = this@BackupAnime.url,
-            // AM (CUSTOM_INFORMATION) -->
+            // SY -->
             ogTitle = this@BackupAnime.title,
             ogArtist = this@BackupAnime.artist,
             ogAuthor = this@BackupAnime.author,
             ogDescription = this@BackupAnime.description,
             ogGenre = this@BackupAnime.genre,
             ogStatus = this@BackupAnime.status.toLong(),
-            // <-- AM (CUSTOM_INFORMATION)
+            // SY <--
             thumbnailUrl = this@BackupAnime.thumbnailUrl,
             favorite = this@BackupAnime.favorite,
             source = this@BackupAnime.source,
@@ -74,7 +74,7 @@ data class BackupAnime(
         )
     }
 
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     fun getCustomAnimeInfo(): CustomAnimeInfo? {
         if (customTitle != null ||
             customArtist != null ||
@@ -95,5 +95,5 @@ data class BackupAnime(
         }
         return null
     }
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
 }

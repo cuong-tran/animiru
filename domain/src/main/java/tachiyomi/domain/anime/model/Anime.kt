@@ -23,14 +23,14 @@ data class Anime(
     val episodeFlags: Long,
     val coverLastModified: Long,
     val url: String,
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     val ogTitle: String,
     val ogArtist: String?,
     val ogAuthor: String?,
     val ogDescription: String?,
     val ogGenre: List<String>?,
     val ogStatus: Long,
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
     val thumbnailUrl: String?,
     val updateStrategy: AnimeUpdateStrategy,
     val initialized: Boolean,
@@ -39,7 +39,7 @@ data class Anime(
     val version: Long,
 ) : Serializable {
 
-    // AM (CUSTOM_INFORMATION) -->
+    // SY -->
     private val customAnimeInfo = if (favorite) {
         getCustomAnimeInfo.get(id)
     } else {
@@ -63,7 +63,7 @@ data class Anime(
 
     val status: Long
         get() = customAnimeInfo?.status ?: ogStatus
-    // <-- AM (CUSTOM_INFORMATION)
+    // SY <--
 
     val expectedNextUpdate: Instant?
         get() = nextUpdate
@@ -174,9 +174,9 @@ data class Anime(
         fun create() = Anime(
             id = -1L,
             url = "",
-            // AM (CUSTOM_INFORMATION) -->
+            // SY -->
             ogTitle = "",
-            // <-- AM (CUSTOM_INFORMATION)
+            // SY <--
             source = -1L,
             favorite = false,
             lastUpdate = 0L,
@@ -186,13 +186,13 @@ data class Anime(
             viewerFlags = 0L,
             episodeFlags = 0L,
             coverLastModified = 0L,
-            // AM (CUSTOM_INFORMATION) -->
+            // SY -->
             ogArtist = null,
             ogAuthor = null,
             ogDescription = null,
             ogGenre = null,
             ogStatus = 0L,
-            // <-- AM (CUSTOM_INFORMATION)
+            // SY <--
             thumbnailUrl = null,
             updateStrategy = AnimeUpdateStrategy.ALWAYS_UPDATE,
             initialized = false,
@@ -201,8 +201,8 @@ data class Anime(
             version = 0L,
         )
 
-        // AM (CUSTOM_INFORMATION) -->
+        // SY -->
         private val getCustomAnimeInfo: GetCustomAnimeInfo by injectLazy()
-        // <-- AM (CUSTOM_INFORMATION)
+        // SY <--
     }
 }

@@ -1,4 +1,4 @@
-// AM (CUSTOM_INFORMATION) -->
+// SY -->
 package tachiyomi.domain.anime.interactor
 
 import tachiyomi.domain.anime.repository.CustomAnimeRepository
@@ -8,4 +8,4 @@ class GetCustomAnimeInfo(
 ) {
     fun get(animeId: Long) = customAnimeRepository.get(animeId)
 }
-// <-- AM (CUSTOM_INFORMATION)
+// SY <--

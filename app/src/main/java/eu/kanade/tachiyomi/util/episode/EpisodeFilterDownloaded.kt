@@ -19,9 +19,9 @@ fun List<Episode>.filterDownloadedEpisodes(anime: Anime): List<Episode> {
         downloadCache.isEpisodeDownloaded(
             it.name,
             it.scanlator,
-            // AM (CUSTOM_INFORMATION) -->
+            // SY -->
             anime.ogTitle,
-            // <-- AM (CUSTOM_INFORMATION)
+            // SY <--
             anime.source,
             false,
         )
