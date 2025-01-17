@@ -1,7 +1,7 @@
 package eu.kanade.domain.episode.model
 
 import eu.kanade.domain.anime.model.downloadedFilter
-import eu.kanade.tachiyomi.data.download.AnimeDownloadManager
+import eu.kanade.tachiyomi.data.download.DownloadManager
 import eu.kanade.tachiyomi.ui.anime.EpisodeList
 import tachiyomi.domain.anime.applyFilter
 import tachiyomi.domain.anime.model.Anime
@@ -13,7 +13,7 @@ import tachiyomi.source.local.isLocal
  * Applies the view filters to the list of episodes obtained from the database.
  * @return an observable of the list of episodes filtered and sorted.
  */
-fun List<Episode>.applyFilters(anime: Anime, downloadManager: AnimeDownloadManager): List<Episode> {
+fun List<Episode>.applyFilters(anime: Anime, downloadManager: DownloadManager): List<Episode> {
     val isLocalAnime = anime.isLocal()
     val unseenFilter = anime.unseenFilter
     val downloadedFilter = anime.downloadedFilter

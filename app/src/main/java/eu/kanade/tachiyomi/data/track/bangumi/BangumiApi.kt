@@ -2,12 +2,12 @@ package eu.kanade.tachiyomi.data.track.bangumi
 
 import android.net.Uri
 import androidx.core.net.toUri
-import eu.kanade.tachiyomi.data.database.models.AnimeTrack
+import eu.kanade.tachiyomi.data.database.models.Track
 import eu.kanade.tachiyomi.data.track.bangumi.dto.BGMCollectionResponse
 import eu.kanade.tachiyomi.data.track.bangumi.dto.BGMOAuth
 import eu.kanade.tachiyomi.data.track.bangumi.dto.BGMSearchItem
 import eu.kanade.tachiyomi.data.track.bangumi.dto.BGMSearchResult
-import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
+import eu.kanade.tachiyomi.data.track.model.TrackSearch
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.POST
 import eu.kanade.tachiyomi.network.awaitSuccess
@@ -38,7 +38,7 @@ class BangumiApi(
 
     private val authClient = client.newBuilder().addInterceptor(interceptor).build()
 
-    suspend fun addLibAnime(track: AnimeTrack): AnimeTrack {
+    suspend fun addLibAnime(track: Track): Track {
         return withIOContext {
             val body = FormBody.Builder()
                 .add("rating", track.score.toInt().toString())
@@ -50,7 +50,7 @@ class BangumiApi(
         }
     }
 
-    suspend fun updateLibAnime(track: AnimeTrack): AnimeTrack {
+    suspend fun updateLibAnime(track: Track): Track {
         return withIOContext {
             // read status update
             val sbody = FormBody.Builder()
@@ -72,7 +72,7 @@ class BangumiApi(
         }
     }
 
-    suspend fun searchAnime(search: String): List<AnimeTrackSearch> {
+    suspend fun searchAnime(search: String): List<TrackSearch> {
         return withIOContext {
             val url = "$API_URL/search/subject/${URLEncoder.encode(
                 search,
@@ -89,7 +89,7 @@ class BangumiApi(
                     .awaitSuccess()
                     .parseAs<BGMSearchResult>()
                     .let { result ->
-                        if (result.code == 404) emptyList<AnimeTrackSearch>()
+                        if (result.code == 404) emptyList<TrackSearch>()
 
                         result.list
                             ?.map { it.toAnimeTrackSearch(trackId) }
@@ -99,7 +99,7 @@ class BangumiApi(
         }
     }
 
-    private fun jsonToSearchAnime(obj: JsonObject): AnimeTrackSearch {
+    private fun jsonToSearchAnime(obj: JsonObject): TrackSearch {
         val coverUrl = if (obj["images"] is JsonObject) {
             obj["images"]?.jsonObject?.get("common")?.jsonPrimitive?.contentOrNull ?: ""
         } else {
@@ -113,7 +113,7 @@ class BangumiApi(
         }
 
         val rating = obj["rating"]?.jsonObject?.get("score")?.jsonPrimitive?.doubleOrNull ?: -1.0
-        return AnimeTrackSearch.create(trackId).apply {
+        return TrackSearch.create(trackId).apply {
             remote_id = obj["id"]!!.jsonPrimitive.long
             title = obj["name_cn"]!!.jsonPrimitive.content
             cover_url = coverUrl
@@ -124,7 +124,7 @@ class BangumiApi(
         }
     }
 
-    suspend fun findLibAnime(track: AnimeTrack): AnimeTrack? {
+    suspend fun findLibAnime(track: Track): Track? {
         return withIOContext {
             with(json) {
                 authClient.newCall(GET("$API_URL/subject/${track.remote_id}"))
@@ -135,7 +135,7 @@ class BangumiApi(
         }
     }
 
-    suspend fun statusLibAnime(track: AnimeTrack): AnimeTrack? {
+    suspend fun statusLibAnime(track: Track): Track? {
         return withIOContext {
             val urlUserRead = "$API_URL/collection/${track.remote_id}"
             val requestUserRead = Request.Builder()

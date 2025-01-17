@@ -22,9 +22,9 @@ import eu.kanade.presentation.components.SEARCH_DEBOUNCE_MILLIS
 import eu.kanade.presentation.library.components.LibraryToolbarTitle
 import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
-import eu.kanade.tachiyomi.data.cache.AnimeCoverCache
-import eu.kanade.tachiyomi.data.download.AnimeDownloadCache
-import eu.kanade.tachiyomi.data.download.AnimeDownloadManager
+import eu.kanade.tachiyomi.data.cache.CoverCache
+import eu.kanade.tachiyomi.data.download.DownloadCache
+import eu.kanade.tachiyomi.data.download.DownloadManager
 import eu.kanade.tachiyomi.data.track.TrackStatus
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.util.episode.getNextUnseen
@@ -97,10 +97,10 @@ class LibraryScreenModel(
     private val setAnimeCategories: SetAnimeCategories = Injekt.get(),
     private val preferences: BasePreferences = Injekt.get(),
     private val libraryPreferences: LibraryPreferences = Injekt.get(),
-    private val coverCache: AnimeCoverCache = Injekt.get(),
+    private val coverCache: CoverCache = Injekt.get(),
     private val sourceManager: AnimeSourceManager = Injekt.get(),
-    private val downloadManager: AnimeDownloadManager = Injekt.get(),
-    private val downloadCache: AnimeDownloadCache = Injekt.get(),
+    private val downloadManager: DownloadManager = Injekt.get(),
+    private val downloadCache: DownloadCache = Injekt.get(),
     private val trackerManager: TrackerManager = Injekt.get(),
     // AM (GROUPING) -->
     private val getAnimeTracks: GetAnimeTracks = Injekt.get(),

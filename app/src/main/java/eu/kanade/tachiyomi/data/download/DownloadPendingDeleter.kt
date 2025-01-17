@@ -15,7 +15,7 @@ import uy.kohesive.injekt.api.get
  *
  * @param context the application context.
  */
-class AnimeDownloadPendingDeleter(
+class DownloadPendingDeleter(
     context: Context,
     private val json: Json = Injekt.get(),
 ) {

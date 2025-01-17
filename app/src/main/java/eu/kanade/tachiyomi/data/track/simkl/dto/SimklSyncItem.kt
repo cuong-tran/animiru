@@ -1,6 +1,6 @@
 package eu.kanade.tachiyomi.data.track.simkl.dto
 
-import eu.kanade.tachiyomi.data.database.models.AnimeTrack
+import eu.kanade.tachiyomi.data.database.models.Track
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.data.track.simkl.toTrackStatus
 import kotlinx.serialization.SerialName
@@ -33,10 +33,10 @@ data class SimklSyncItem(
     @SerialName("user_rating")
     val userRating: Int?,
 ) {
-    fun toAnimeTrack(typeName: String, type: String, statusString: String): AnimeTrack {
+    fun toAnimeTrack(typeName: String, type: String, statusString: String): Track {
         val resultData = getFromType(typeName)
 
-        return AnimeTrack.create(TrackerManager.SIMKL).apply {
+        return Track.create(TrackerManager.SIMKL).apply {
             title = resultData.title
             remote_id = resultData.ids.simkl
             if (typeName != "movie") {

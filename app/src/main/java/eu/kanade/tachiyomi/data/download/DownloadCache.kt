@@ -62,9 +62,9 @@ import kotlin.time.Duration.Companion.seconds
  * defined in [renewInterval] as we don't have any control over the filesystem and the user can
  * delete the folders at any time without the app noticing.
  */
-class AnimeDownloadCache(
+class DownloadCache(
     private val context: Context,
-    private val provider: AnimeDownloadProvider = Injekt.get(),
+    private val provider: DownloadProvider = Injekt.get(),
     private val sourceManager: AnimeSourceManager = Injekt.get(),
     private val extensionManager: ExtensionManager = Injekt.get(),
     private val storageManager: StorageManager = Injekt.get(),
@@ -383,7 +383,7 @@ class AnimeDownloadCache(
                                 .mapNotNull {
                                     when {
                                         // Ignore incomplete downloads
-                                        it.name?.endsWith(AnimeDownloader.TMP_DIR_SUFFIX) == true -> null
+                                        it.name?.endsWith(Downloader.TMP_DIR_SUFFIX) == true -> null
                                         // Folder of videos
                                         it.isDirectory -> it.name
                                         // MP4 files

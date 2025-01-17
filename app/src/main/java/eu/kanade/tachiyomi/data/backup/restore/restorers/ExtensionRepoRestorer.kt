@@ -6,7 +6,7 @@ import tachiyomi.data.AnimeDatabaseHandler
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
-class AnimeExtensionRepoRestorer(
+class ExtensionRepoRestorer(
     private val animeHandler: AnimeDatabaseHandler = Injekt.get(),
     private val getExtensionRepos: GetAnimeExtensionRepo = Injekt.get(),
 ) {

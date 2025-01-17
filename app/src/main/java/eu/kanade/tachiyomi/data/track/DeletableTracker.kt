@@ -5,7 +5,7 @@ import tachiyomi.domain.track.model.AnimeTrack
 /**
  *Tracker that support deleting am entry from a user's list
  */
-interface DeletableAnimeTracker {
+interface DeletableTracker {
 
     suspend fun delete(track: AnimeTrack)
 }

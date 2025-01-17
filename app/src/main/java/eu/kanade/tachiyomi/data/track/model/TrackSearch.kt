@@ -2,9 +2,9 @@
 
 package eu.kanade.tachiyomi.data.track.model
 
-import eu.kanade.tachiyomi.data.database.models.AnimeTrack
+import eu.kanade.tachiyomi.data.database.models.Track
 
-class AnimeTrackSearch : AnimeTrack {
+class TrackSearch : Track {
 
     override var id: Long? = null
 
@@ -46,7 +46,7 @@ class AnimeTrackSearch : AnimeTrack {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as AnimeTrackSearch
+        other as TrackSearch
 
         if (anime_id != other.anime_id) return false
         if (tracker_id != other.tracker_id) return false
@@ -63,7 +63,7 @@ class AnimeTrackSearch : AnimeTrack {
     }
 
     companion object {
-        fun create(serviceId: Long): AnimeTrackSearch = AnimeTrackSearch().apply {
+        fun create(serviceId: Long): TrackSearch = TrackSearch().apply {
             tracker_id = serviceId
         }
     }

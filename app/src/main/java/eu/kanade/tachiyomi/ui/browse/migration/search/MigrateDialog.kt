@@ -26,9 +26,9 @@ import eu.kanade.domain.anime.model.toSAnime
 import eu.kanade.domain.episode.interactor.SyncEpisodesWithSource
 import eu.kanade.tachiyomi.animesource.AnimeSource
 import eu.kanade.tachiyomi.animesource.model.SEpisode
-import eu.kanade.tachiyomi.data.cache.AnimeCoverCache
-import eu.kanade.tachiyomi.data.download.AnimeDownloadManager
-import eu.kanade.tachiyomi.data.track.EnhancedAnimeTracker
+import eu.kanade.tachiyomi.data.cache.CoverCache
+import eu.kanade.tachiyomi.data.download.DownloadManager
+import eu.kanade.tachiyomi.data.track.EnhancedTracker
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.ui.browse.migration.MigrationFlags
 import kotlinx.coroutines.flow.update
@@ -148,7 +148,7 @@ internal fun MigrateDialog(
 
 internal class MigrateAnimeDialogScreenModel(
     private val sourceManager: AnimeSourceManager = Injekt.get(),
-    private val downloadManager: AnimeDownloadManager = Injekt.get(),
+    private val downloadManager: DownloadManager = Injekt.get(),
     private val updateAnime: UpdateAnime = Injekt.get(),
     private val getEpisodesByAnimeId: GetEpisodesByAnimeId = Injekt.get(),
     private val syncEpisodesWithSource: SyncEpisodesWithSource = Injekt.get(),
@@ -157,7 +157,7 @@ internal class MigrateAnimeDialogScreenModel(
     private val setAnimeCategories: SetAnimeCategories = Injekt.get(),
     private val getTracks: GetAnimeTracks = Injekt.get(),
     private val insertTrack: InsertAnimeTrack = Injekt.get(),
-    private val coverCache: AnimeCoverCache = Injekt.get(),
+    private val coverCache: CoverCache = Injekt.get(),
     private val preferenceStore: PreferenceStore = Injekt.get(),
 ) : StateScreenModel<MigrateAnimeDialogScreenModel.State>(State()) {
 
@@ -166,7 +166,7 @@ internal class MigrateAnimeDialogScreenModel(
     }
 
     private val enhancedServices by lazy {
-        Injekt.get<TrackerManager>().trackers.filterIsInstance<EnhancedAnimeTracker>()
+        Injekt.get<TrackerManager>().trackers.filterIsInstance<EnhancedTracker>()
     }
 
     suspend fun migrateAnime(

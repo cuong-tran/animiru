@@ -3,12 +3,12 @@ package eu.kanade.tachiyomi.data.track.kitsu
 import android.graphics.Color
 import dev.icerock.moko.resources.StringResource
 import eu.kanade.tachiyomi.R
-import eu.kanade.tachiyomi.data.database.models.AnimeTrack
+import eu.kanade.tachiyomi.data.database.models.Track
 import eu.kanade.tachiyomi.data.track.AnimeTracker
 import eu.kanade.tachiyomi.data.track.BaseTracker
-import eu.kanade.tachiyomi.data.track.DeletableAnimeTracker
+import eu.kanade.tachiyomi.data.track.DeletableTracker
 import eu.kanade.tachiyomi.data.track.kitsu.dto.KitsuOAuth
-import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
+import eu.kanade.tachiyomi.data.track.model.TrackSearch
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.serialization.encodeToString
@@ -24,7 +24,7 @@ class Kitsu(id: Long) :
         "Kitsu",
     ),
     AnimeTracker,
-    DeletableAnimeTracker {
+    DeletableTracker {
 
     companion object {
         const val READING = 1L
@@ -81,11 +81,11 @@ class Kitsu(id: Long) :
         return df.format(track.score)
     }
 
-    private suspend fun add(track: AnimeTrack): AnimeTrack {
+    private suspend fun add(track: Track): Track {
         return api.addLibAnime(track, getUserId())
     }
 
-    override suspend fun update(track: AnimeTrack, didWatchEpisode: Boolean): AnimeTrack {
+    override suspend fun update(track: Track, didWatchEpisode: Boolean): Track {
         if (track.status != COMPLETED) {
             if (didWatchEpisode) {
                 if (track.last_episode_seen.toLong() == track.total_episodes && track.total_episodes > 0) {
@@ -107,7 +107,7 @@ class Kitsu(id: Long) :
         api.removeLibAnime(track)
     }
 
-    override suspend fun bind(track: AnimeTrack, hasSeenEpisodes: Boolean): AnimeTrack {
+    override suspend fun bind(track: Track, hasSeenEpisodes: Boolean): Track {
         val remoteTrack = api.findLibAnime(track, getUserId())
         return if (remoteTrack != null) {
             track.copyPersonalFrom(remoteTrack)
@@ -125,11 +125,11 @@ class Kitsu(id: Long) :
         }
     }
 
-    override suspend fun searchAnime(query: String): List<AnimeTrackSearch> {
+    override suspend fun searchAnime(query: String): List<TrackSearch> {
         return api.searchAnime(query)
     }
 
-    override suspend fun refresh(track: AnimeTrack): AnimeTrack {
+    override suspend fun refresh(track: Track): Track {
         val remoteTrack = api.getLibAnime(track)
         track.copyPersonalFrom(remoteTrack)
         track.total_episodes = remoteTrack.total_episodes

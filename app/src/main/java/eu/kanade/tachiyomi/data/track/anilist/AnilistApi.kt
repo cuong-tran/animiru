@@ -2,13 +2,13 @@ package eu.kanade.tachiyomi.data.track.anilist
 
 import android.net.Uri
 import androidx.core.net.toUri
-import eu.kanade.tachiyomi.data.database.models.AnimeTrack
-import eu.kanade.tachiyomi.data.track.anilist.dto.ALAddEntryResult
+import eu.kanade.tachiyomi.data.database.models.Track
+import eu.kanade.tachiyomi.data.track.anilist.dto.ALAddAnimeResult
 import eu.kanade.tachiyomi.data.track.anilist.dto.ALCurrentUserResult
 import eu.kanade.tachiyomi.data.track.anilist.dto.ALOAuth
 import eu.kanade.tachiyomi.data.track.anilist.dto.ALSearchResult
 import eu.kanade.tachiyomi.data.track.anilist.dto.ALUserListEntryQueryResult
-import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
+import eu.kanade.tachiyomi.data.track.model.TrackSearch
 import eu.kanade.tachiyomi.network.POST
 import eu.kanade.tachiyomi.network.awaitSuccess
 import eu.kanade.tachiyomi.network.interceptor.rateLimit
@@ -39,7 +39,7 @@ class AnilistApi(val client: OkHttpClient, interceptor: AnilistInterceptor) {
         .rateLimit(permits = 85, period = 1.minutes)
         .build()
 
-    suspend fun addLibAnime(track: AnimeTrack): AnimeTrack {
+    suspend fun addLibAnime(track: Track): Track {
         return withIOContext {
             val query = """
             |mutation AddAnime(${'$'}animeId: Int, ${'$'}progress: Int, ${'$'}status: MediaListStatus) {
@@ -66,7 +66,7 @@ class AnilistApi(val client: OkHttpClient, interceptor: AnilistInterceptor) {
                     ),
                 )
                     .awaitSuccess()
-                    .parseAs<ALAddEntryResult>()
+                    .parseAs<ALAddAnimeResult>()
                     .let {
                         track
                     }
@@ -74,7 +74,7 @@ class AnilistApi(val client: OkHttpClient, interceptor: AnilistInterceptor) {
         }
     }
 
-    suspend fun updateLibAnime(track: AnimeTrack): AnimeTrack {
+    suspend fun updateLibAnime(track: Track): Track {
         return withIOContext {
             val query = """
             |mutation UpdateAnime(
@@ -130,7 +130,7 @@ class AnilistApi(val client: OkHttpClient, interceptor: AnilistInterceptor) {
         }
     }
 
-    suspend fun searchAnime(search: String): List<AnimeTrackSearch> {
+    suspend fun searchAnime(search: String): List<TrackSearch> {
         return withIOContext {
             val query = """
             |query Search(${'$'}query: String) {
@@ -179,7 +179,7 @@ class AnilistApi(val client: OkHttpClient, interceptor: AnilistInterceptor) {
         }
     }
 
-    suspend fun findLibAnime(track: AnimeTrack, userid: Int): AnimeTrack? {
+    suspend fun findLibAnime(track: Track, userid: Int): Track? {
         return withIOContext {
             val query = """
             |query (${'$'}id: Int!, ${'$'}anime_id: Int!) {
@@ -246,7 +246,7 @@ class AnilistApi(val client: OkHttpClient, interceptor: AnilistInterceptor) {
         }
     }
 
-    suspend fun getLibAnime(track: AnimeTrack, userId: Int): AnimeTrack {
+    suspend fun getLibAnime(track: Track, userId: Int): Track {
         return findLibAnime(track, userId) ?: throw Exception("Could not find anime")
     }
 

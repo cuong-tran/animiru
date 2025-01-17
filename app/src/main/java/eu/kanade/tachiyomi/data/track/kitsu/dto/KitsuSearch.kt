@@ -2,7 +2,7 @@ package eu.kanade.tachiyomi.data.track.kitsu.dto
 
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.data.track.kitsu.KitsuApi
-import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
+import eu.kanade.tachiyomi.data.track.model.TrackSearch
 import kotlinx.serialization.Serializable
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -37,8 +37,8 @@ data class KitsuAlgoliaSearchItem(
     val endDate: Long?,
 ) {
 
-    fun toAnimeTrack(): AnimeTrackSearch {
-        return AnimeTrackSearch.create(TrackerManager.KITSU).apply {
+    fun toAnimeTrack(): TrackSearch {
+        return TrackSearch.create(TrackerManager.KITSU).apply {
             remote_id = this@KitsuAlgoliaSearchItem.id
             title = canonicalTitle
             total_episodes = episodeCount ?: 0

@@ -10,8 +10,8 @@ import eu.kanade.tachiyomi.data.backup.models.BackupExtension
 import eu.kanade.tachiyomi.data.backup.models.BackupExtensionRepos
 import eu.kanade.tachiyomi.data.backup.models.BackupPreference
 import eu.kanade.tachiyomi.data.backup.models.BackupSourcePreferences
-import eu.kanade.tachiyomi.data.backup.restore.restorers.AnimeCategoriesRestorer
-import eu.kanade.tachiyomi.data.backup.restore.restorers.AnimeExtensionRepoRestorer
+import eu.kanade.tachiyomi.data.backup.restore.restorers.CategoriesRestorer
+import eu.kanade.tachiyomi.data.backup.restore.restorers.ExtensionRepoRestorer
 import eu.kanade.tachiyomi.data.backup.restore.restorers.AnimeRestorer
 import eu.kanade.tachiyomi.data.backup.restore.restorers.ExtensionsRestorer
 import eu.kanade.tachiyomi.data.backup.restore.restorers.PreferenceRestorer
@@ -32,9 +32,9 @@ class BackupRestorer(
     private val notifier: BackupNotifier,
     private val isSync: Boolean,
 
-    private val animeCategoriesRestorer: AnimeCategoriesRestorer = AnimeCategoriesRestorer(),
+    private val categoriesRestorer: CategoriesRestorer = CategoriesRestorer(),
     private val preferenceRestorer: PreferenceRestorer = PreferenceRestorer(context),
-    private val animeExtensionRepoRestorer: AnimeExtensionRepoRestorer = AnimeExtensionRepoRestorer(),
+    private val extensionRepoRestorer: ExtensionRepoRestorer = ExtensionRepoRestorer(),
     private val animeRestorer: AnimeRestorer = AnimeRestorer(),
     private val extensionsRestorer: ExtensionsRestorer = ExtensionsRestorer(context),
 ) {
@@ -70,7 +70,7 @@ class BackupRestorer(
         val backup = BackupDecoder(context).decode(uri)
 
         // Store source mapping for error messages
-        val backupAnimeMaps = backup.backupAnimeSources
+        val backupAnimeMaps = backup.backupSources
         animeSourceMapping = backupAnimeMaps.associate { it.sourceId to it.name }
 
         if (options.libraryEntries) {
@@ -122,7 +122,7 @@ class BackupRestorer(
         backupAnimeCategories: List<BackupCategory>,
     ) = launch {
         ensureActive()
-        animeCategoriesRestorer(backupAnimeCategories)
+        categoriesRestorer(backupAnimeCategories)
 
         restoreProgress += 1
         notifier.showRestoreProgress(
@@ -190,7 +190,7 @@ class BackupRestorer(
                 ensureActive()
 
                 try {
-                    animeExtensionRepoRestorer(it)
+                    extensionRepoRestorer(it)
                 } catch (e: Exception) {
                     errors.add(Date() to "Error Adding Anime Repo: ${it.name} : ${e.message}")
                 }

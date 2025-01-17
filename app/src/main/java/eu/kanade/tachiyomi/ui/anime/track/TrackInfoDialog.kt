@@ -49,11 +49,11 @@ import eu.kanade.presentation.track.TrackScoreSelector
 import eu.kanade.presentation.track.TrackStatusSelector
 import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.data.track.AnimeTracker
-import eu.kanade.tachiyomi.data.track.DeletableAnimeTracker
-import eu.kanade.tachiyomi.data.track.EnhancedAnimeTracker
+import eu.kanade.tachiyomi.data.track.DeletableTracker
+import eu.kanade.tachiyomi.data.track.EnhancedTracker
 import eu.kanade.tachiyomi.data.track.Tracker
 import eu.kanade.tachiyomi.data.track.TrackerManager
-import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
+import eu.kanade.tachiyomi.data.track.model.TrackSearch
 import eu.kanade.tachiyomi.util.lang.convertEpochMillisZone
 import eu.kanade.tachiyomi.util.system.copyToClipboard
 import eu.kanade.tachiyomi.util.system.openInBrowser
@@ -153,7 +153,7 @@ data class TrackInfoDialogHomeScreen(
                 )
             },
             onNewSearch = {
-                if (it.tracker is EnhancedAnimeTracker) {
+                if (it.tracker is EnhancedTracker) {
                     screenModel.registerEnhancedTracking(it)
                 } else {
                     navigator.push(
@@ -224,7 +224,7 @@ data class TrackInfoDialogHomeScreen(
         }
 
         fun registerEnhancedTracking(item: TrackItem) {
-            item.tracker as EnhancedAnimeTracker
+            item.tracker as EnhancedTracker
             screenModelScope.launchNonCancellable {
                 val anime = Injekt.get<GetAnime>().await(animeId) ?: return@launchNonCancellable
                 try {
@@ -267,7 +267,7 @@ data class TrackInfoDialogHomeScreen(
                 // Map to TrackItem
                 .map { service -> TrackItem(find { it.trackerId == service.id }, service) }
                 // Show only if the service supports this anime's source
-                .filter { (it.tracker as? EnhancedAnimeTracker)?.accept(source) ?: true }
+                .filter { (it.tracker as? EnhancedTracker)?.accept(source) ?: true }
         }
 
         @Immutable
@@ -741,18 +741,18 @@ data class TrackServiceSearchScreen(
             }
         }
 
-        fun registerTracking(item: AnimeTrackSearch) {
+        fun registerTracking(item: TrackSearch) {
             screenModelScope.launchNonCancellable { tracker.animeService.register(item, animeId) }
         }
 
-        fun updateSelection(selected: AnimeTrackSearch) {
+        fun updateSelection(selected: TrackSearch) {
             mutableState.update { it.copy(selected = selected) }
         }
 
         @Immutable
         data class State(
-            val queryResult: Result<List<AnimeTrackSearch>>? = null,
-            val selected: AnimeTrackSearch? = null,
+            val queryResult: Result<List<TrackSearch>>? = null,
+            val selected: TrackSearch? = null,
         )
     }
 }
@@ -843,12 +843,12 @@ private data class TrackerRemoveScreen(
 
         fun getName() = tracker.name
 
-        fun isDeletable() = tracker is DeletableAnimeTracker
+        fun isDeletable() = tracker is DeletableTracker
 
         fun deleteAnimeFromService() {
             screenModelScope.launchNonCancellable {
                 try {
-                    (tracker as DeletableAnimeTracker).delete(track)
+                    (tracker as DeletableTracker).delete(track)
                 } catch (e: Exception) {
                     logcat(LogPriority.ERROR, e) { "Failed to delete anime entry from service" }
                 }

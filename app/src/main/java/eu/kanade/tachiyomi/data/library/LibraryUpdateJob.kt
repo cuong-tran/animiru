@@ -22,9 +22,9 @@ import eu.kanade.domain.connection.SyncPreferences
 import eu.kanade.domain.episode.interactor.SyncEpisodesWithSource
 import eu.kanade.tachiyomi.animesource.model.AnimeUpdateStrategy
 import eu.kanade.tachiyomi.animesource.model.SAnime
-import eu.kanade.tachiyomi.data.cache.AnimeCoverCache
+import eu.kanade.tachiyomi.data.cache.CoverCache
 import eu.kanade.tachiyomi.data.connection.syncmiru.SyncDataJob
-import eu.kanade.tachiyomi.data.download.AnimeDownloadManager
+import eu.kanade.tachiyomi.data.download.DownloadManager
 import eu.kanade.tachiyomi.data.notification.Notifications
 import eu.kanade.tachiyomi.data.track.TrackStatus
 import eu.kanade.tachiyomi.data.track.TrackerManager
@@ -80,13 +80,13 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 
-class AnimeLibraryUpdateJob(private val context: Context, workerParams: WorkerParameters) :
+class LibraryUpdateJob(private val context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {
 
     private val sourceManager: AnimeSourceManager = Injekt.get()
     private val libraryPreferences: LibraryPreferences = Injekt.get()
-    private val downloadManager: AnimeDownloadManager = Injekt.get()
-    private val coverCache: AnimeCoverCache = Injekt.get()
+    private val downloadManager: DownloadManager = Injekt.get()
+    private val coverCache: CoverCache = Injekt.get()
     private val getLibraryAnime: GetLibraryAnime = Injekt.get()
     private val getAnime: GetAnime = Injekt.get()
     private val updateAnime: UpdateAnime = Injekt.get()
@@ -99,7 +99,7 @@ class AnimeLibraryUpdateJob(private val context: Context, workerParams: WorkerPa
     private val trackerManager: TrackerManager = Injekt.get()
     // <-- AM (GROUPING)
 
-    private val notifier = AnimeLibraryUpdateNotifier(context)
+    private val notifier = LibraryUpdateNotifier(context)
 
     private var animeToUpdate: List<LibraryAnime> = mutableListOf()
 
@@ -151,7 +151,7 @@ class AnimeLibraryUpdateJob(private val context: Context, workerParams: WorkerPa
     }
 
     override suspend fun getForegroundInfo(): ForegroundInfo {
-        val notifier = AnimeLibraryUpdateNotifier(context)
+        val notifier = LibraryUpdateNotifier(context)
         return ForegroundInfo(
             Notifications.ID_LIBRARY_PROGRESS,
             notifier.progressNotificationBuilder.build(),
@@ -522,7 +522,7 @@ class AnimeLibraryUpdateJob(private val context: Context, workerParams: WorkerPa
                     requiresBatteryNotLow = true,
                 )
 
-                val request = PeriodicWorkRequestBuilder<AnimeLibraryUpdateJob>(
+                val request = PeriodicWorkRequestBuilder<LibraryUpdateJob>(
                     interval.toLong(),
                     TimeUnit.HOURS,
                     10,
@@ -584,8 +584,8 @@ class AnimeLibraryUpdateJob(private val context: Context, workerParams: WorkerPa
                     .addTag(SyncDataJob.TAG_MANUAL)
                     .build()
 
-                // Chain SyncDataJob to run before AnimeLibraryUpdateJob
-                val libraryUpdateJob = OneTimeWorkRequestBuilder<AnimeLibraryUpdateJob>()
+                // Chain SyncDataJob to run before LibraryUpdateJob
+                val libraryUpdateJob = OneTimeWorkRequestBuilder<LibraryUpdateJob>()
                     .addTag(TAG)
                     .addTag(WORK_NAME_MANUAL)
                     .setInputData(inputData)
@@ -595,7 +595,7 @@ class AnimeLibraryUpdateJob(private val context: Context, workerParams: WorkerPa
                     .then(libraryUpdateJob)
                     .enqueue()
             } else {
-                val request = OneTimeWorkRequestBuilder<AnimeLibraryUpdateJob>()
+                val request = OneTimeWorkRequestBuilder<LibraryUpdateJob>()
                     .addTag(TAG)
                     .addTag(WORK_NAME_MANUAL)
                     .setInputData(inputData)

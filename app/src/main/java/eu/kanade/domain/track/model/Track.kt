@@ -1,7 +1,7 @@
 package eu.kanade.domain.track.model
 
 import tachiyomi.domain.track.model.AnimeTrack
-import eu.kanade.tachiyomi.data.database.models.AnimeTrack as DbAnimeTrack
+import eu.kanade.tachiyomi.data.database.models.Track as DbAnimeTrack
 
 fun AnimeTrack.copyPersonalFrom(other: AnimeTrack): AnimeTrack {
     return this.copy(

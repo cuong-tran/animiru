@@ -32,9 +32,9 @@ import uy.kohesive.injekt.api.get
  * This worker is used to manage the downloader. The system can decide to stop the worker, in
  * which case the downloader is also stopped. It's also stopped while there's no network available.
  */
-class AnimeDownloadJob(context: Context, workerParams: WorkerParameters) : CoroutineWorker(context, workerParams) {
+class DownloadJob(context: Context, workerParams: WorkerParameters) : CoroutineWorker(context, workerParams) {
 
-    private val downloadManager: AnimeDownloadManager = Injekt.get()
+    private val downloadManager: DownloadManager = Injekt.get()
     private val downloadPreferences: DownloadPreferences = Injekt.get()
 
     override suspend fun getForegroundInfo(): ForegroundInfo {
@@ -100,10 +100,10 @@ class AnimeDownloadJob(context: Context, workerParams: WorkerParameters) : Corou
     }
 
     companion object {
-        private const val TAG = "AnimeDownloader"
+        private const val TAG = "Downloader"
 
         fun start(context: Context) {
-            val request = OneTimeWorkRequestBuilder<AnimeDownloadJob>()
+            val request = OneTimeWorkRequestBuilder<DownloadJob>()
                 .addTag(TAG)
                 .build()
             WorkManager.getInstance(context)

@@ -43,7 +43,7 @@ import dev.icerock.moko.resources.StringResource
 import eu.kanade.domain.track.model.AutoTrackState
 import eu.kanade.domain.track.service.TrackPreferences
 import eu.kanade.presentation.more.settings.Preference
-import eu.kanade.tachiyomi.data.track.EnhancedAnimeTracker
+import eu.kanade.tachiyomi.data.track.EnhancedTracker
 import eu.kanade.tachiyomi.data.track.Tracker
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.data.track.anilist.AnilistApi
@@ -109,18 +109,18 @@ object SettingsTrackingScreen : SearchableSettings {
             }
         }
 
-        val enhancedAnimeTrackers = trackerManager.trackers
-            .filter { it is EnhancedAnimeTracker }
+        val enhancedTrackers = trackerManager.trackers
+            .filter { it is EnhancedTracker }
             .partition { service ->
-                val acceptedAnimeSources = (service as EnhancedAnimeTracker).getAcceptedSources()
+                val acceptedAnimeSources = (service as EnhancedTracker).getAcceptedSources()
                 animeSourceManager.getCatalogueSources().any { it::class.qualifiedName in acceptedAnimeSources }
             }
 
         var enhancedTrackerInfo = stringResource(MR.strings.enhanced_tracking_info)
-        if (enhancedAnimeTrackers.second.isNotEmpty()) {
+        if (enhancedTrackers.second.isNotEmpty()) {
             val missingSourcesInfo = stringResource(
                 MR.strings.enhanced_services_not_installed,
-                (enhancedAnimeTrackers.second).joinToString { it.name },
+                (enhancedTrackers.second).joinToString { it.name },
             )
             enhancedTrackerInfo += "\n\n$missingSourcesInfo"
         }
@@ -215,12 +215,12 @@ object SettingsTrackingScreen : SearchableSettings {
             Preference.PreferenceGroup(
                 title = stringResource(MR.strings.enhanced_services),
                 preferenceItems = (
-                    enhancedAnimeTrackers.first
+                    enhancedTrackers.first
                         .map { service ->
                             Preference.PreferenceItem.TrackerPreference(
                                 title = service.name,
                                 tracker = service,
-                                login = { (service as EnhancedAnimeTracker).loginNoop() },
+                                login = { (service as EnhancedTracker).loginNoop() },
                                 logout = service::logout,
                             )
                         } + listOf(Preference.PreferenceItem.InfoPreference(enhancedTrackerInfo))

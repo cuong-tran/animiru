@@ -13,7 +13,7 @@ import tachiyomi.domain.source.service.AnimeSourceManager
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
-data class AnimeDownload(
+data class Download(
     val source: AnimeHttpSource,
     val anime: Anime,
     val episode: Episode,
@@ -94,12 +94,12 @@ data class AnimeDownload(
             getEpisode: GetEpisode = Injekt.get(),
             getAnimeById: GetAnime = Injekt.get(),
             sourceManager: AnimeSourceManager = Injekt.get(),
-        ): AnimeDownload? {
+        ): Download? {
             val episode = getEpisode.await(episodeId) ?: return null
             val anime = getAnimeById.await(episode.animeId) ?: return null
             val source = sourceManager.get(anime.source) as? AnimeHttpSource ?: return null
 
-            return AnimeDownload(source, anime, episode)
+            return Download(source, anime, episode)
         }
     }
 }

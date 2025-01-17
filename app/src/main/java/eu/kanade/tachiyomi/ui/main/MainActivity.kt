@@ -71,7 +71,7 @@ import eu.kanade.presentation.util.DefaultNavigatorScreenTransition
 import eu.kanade.tachiyomi.BuildConfig
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.data.connection.discord.DiscordRPCService
-import eu.kanade.tachiyomi.data.download.AnimeDownloadCache
+import eu.kanade.tachiyomi.data.download.DownloadCache
 import eu.kanade.tachiyomi.data.notification.NotificationReceiver
 import eu.kanade.tachiyomi.data.updater.AppUpdateChecker
 import eu.kanade.tachiyomi.data.updater.RELEASE_URL
@@ -123,7 +123,7 @@ class MainActivity : BaseActivity() {
     private val connectionPreferences: ConnectionPreferences by injectLazy()
     // <-- AM (CONNECTION)
 
-    private val animeDownloadCache: AnimeDownloadCache by injectLazy()
+    private val downloadCache: DownloadCache by injectLazy()
 
     // To be checked by splash screen. If true then splash screen will be removed.
     var ready = false
@@ -155,7 +155,7 @@ class MainActivity : BaseActivity() {
 
             val incognito by preferences.incognitoMode().collectAsState()
             val downloadOnly by preferences.downloadedOnly().collectAsState()
-            val indexingAnime by animeDownloadCache.isInitializing.collectAsState()
+            val indexingAnime by downloadCache.isInitializing.collectAsState()
 
             val isSystemInDarkTheme = isSystemInDarkTheme()
             val statusBarBackgroundColor = when {

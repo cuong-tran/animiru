@@ -4,7 +4,7 @@ package eu.kanade.tachiyomi.data.database.models
 
 import java.io.Serializable
 
-interface AnimeTrack : Serializable {
+interface Track : Serializable {
 
     var id: Long?
 
@@ -32,7 +32,7 @@ interface AnimeTrack : Serializable {
 
     var tracking_url: String
 
-    fun copyPersonalFrom(other: AnimeTrack) {
+    fun copyPersonalFrom(other: Track) {
         last_episode_seen = other.last_episode_seen
         score = other.score
         status = other.status
@@ -41,7 +41,7 @@ interface AnimeTrack : Serializable {
     }
 
     companion object {
-        fun create(serviceId: Long): AnimeTrack = AnimeTrackImpl().apply {
+        fun create(serviceId: Long): Track = TrackImpl().apply {
             tracker_id = serviceId
         }
     }

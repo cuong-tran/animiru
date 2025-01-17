@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import eu.kanade.presentation.components.DropdownMenu
 import eu.kanade.tachiyomi.R
-import eu.kanade.tachiyomi.data.download.model.AnimeDownload
+import eu.kanade.tachiyomi.data.download.model.Download
 import tachiyomi.domain.download.service.DownloadPreferences
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.IconButtonTokens
@@ -55,7 +55,7 @@ enum class EpisodeDownloadAction {
 @Composable
 fun EpisodeDownloadIndicator(
     enabled: Boolean,
-    downloadStateProvider: () -> AnimeDownload.State,
+    downloadStateProvider: () -> Download.State,
     downloadProgressProvider: () -> Int,
     onClick: (EpisodeDownloadAction) -> Unit,
     // AM (FILE_SIZE) -->
@@ -64,19 +64,19 @@ fun EpisodeDownloadIndicator(
     modifier: Modifier = Modifier,
 ) {
     when (val downloadState = downloadStateProvider()) {
-        AnimeDownload.State.NOT_DOWNLOADED -> NotDownloadedIndicator(
+        Download.State.NOT_DOWNLOADED -> NotDownloadedIndicator(
             enabled = enabled,
             modifier = modifier,
             onClick = onClick,
         )
-        AnimeDownload.State.QUEUE, AnimeDownload.State.DOWNLOADING -> DownloadingIndicator(
+        Download.State.QUEUE, Download.State.DOWNLOADING -> DownloadingIndicator(
             enabled = enabled,
             modifier = modifier,
             downloadState = downloadState,
             downloadProgressProvider = downloadProgressProvider,
             onClick = onClick,
         )
-        AnimeDownload.State.DOWNLOADED -> DownloadedIndicator(
+        Download.State.DOWNLOADED -> DownloadedIndicator(
             enabled = enabled,
             modifier = modifier,
             onClick = onClick,
@@ -84,7 +84,7 @@ fun EpisodeDownloadIndicator(
             fileSize = fileSize,
             // <-- AM (FILE_SIZE)
         )
-        AnimeDownload.State.ERROR -> ErrorIndicator(
+        Download.State.ERROR -> ErrorIndicator(
             enabled = enabled,
             modifier = modifier,
             onClick = onClick,
@@ -122,7 +122,7 @@ private fun NotDownloadedIndicator(
 @Composable
 private fun DownloadingIndicator(
     enabled: Boolean,
-    downloadState: AnimeDownload.State,
+    downloadState: Download.State,
     downloadProgressProvider: () -> Int,
     onClick: (EpisodeDownloadAction) -> Unit,
     modifier: Modifier = Modifier,
@@ -142,8 +142,8 @@ private fun DownloadingIndicator(
         val arrowColor: Color
         val strokeColor = MaterialTheme.colorScheme.onSurfaceVariant
         val downloadProgress = downloadProgressProvider()
-        val indeterminate = downloadState == AnimeDownload.State.QUEUE ||
-            (downloadState == AnimeDownload.State.DOWNLOADING && downloadProgress == 0)
+        val indeterminate = downloadState == Download.State.QUEUE ||
+            (downloadState == Download.State.DOWNLOADING && downloadProgress == 0)
         if (indeterminate) {
             arrowColor = strokeColor
             CircularProgressIndicator(

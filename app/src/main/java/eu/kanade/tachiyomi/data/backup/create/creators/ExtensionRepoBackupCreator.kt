@@ -6,7 +6,7 @@ import mihon.domain.extensionrepo.interactor.GetAnimeExtensionRepo
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
-class AnimeExtensionRepoBackupCreator(
+class ExtensionRepoBackupCreator(
     private val getAnimeExtensionRepos: GetAnimeExtensionRepo = Injekt.get(),
 ) {
 

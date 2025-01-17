@@ -2,7 +2,7 @@ package eu.kanade.domain.track.interactor
 
 import eu.kanade.domain.track.model.toDbTrack
 import eu.kanade.tachiyomi.data.track.AnimeTracker
-import eu.kanade.tachiyomi.data.track.EnhancedAnimeTracker
+import eu.kanade.tachiyomi.data.track.EnhancedTracker
 import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.episode.interactor.GetEpisodesByAnimeId
@@ -23,7 +23,7 @@ class SyncEpisodeProgressWithTrack(
         remoteTrack: AnimeTrack,
         service: AnimeTracker,
     ) {
-        if (service !is EnhancedAnimeTracker) {
+        if (service !is EnhancedTracker) {
             return
         }
 

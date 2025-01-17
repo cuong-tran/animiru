@@ -2,8 +2,8 @@ package eu.kanade.tachiyomi.data.backup.restore.restorers
 
 import eu.kanade.domain.anime.interactor.UpdateAnime
 import eu.kanade.tachiyomi.data.backup.models.BackupAnime
-import eu.kanade.tachiyomi.data.backup.models.BackupAnimeHistory
-import eu.kanade.tachiyomi.data.backup.models.BackupAnimeTracking
+import eu.kanade.tachiyomi.data.backup.models.BackupHistory
+import eu.kanade.tachiyomi.data.backup.models.BackupTracking
 import eu.kanade.tachiyomi.data.backup.models.BackupCategory
 import eu.kanade.tachiyomi.data.backup.models.BackupEpisode
 import tachiyomi.data.AnimeDatabaseHandler
@@ -294,8 +294,8 @@ class AnimeRestorer(
         episodes: List<BackupEpisode>,
         categories: List<Long>,
         backupCategories: List<BackupCategory>,
-        history: List<BackupAnimeHistory>,
-        tracks: List<BackupAnimeTracking>,
+        history: List<BackupHistory>,
+        tracks: List<BackupTracking>,
         // AM (CUSTOM_INFORMATION) -->
         customInfo: CustomAnimeInfo?,
         // <-- AM (CUSTOM_INFORMATION)
@@ -345,7 +345,7 @@ class AnimeRestorer(
         }
     }
 
-    private suspend fun restoreHistory(backupHistory: List<BackupAnimeHistory>) {
+    private suspend fun restoreHistory(backupHistory: List<BackupHistory>) {
         val toUpdate = backupHistory.mapNotNull { history ->
             val dbHistory = handler.awaitOneOrNull { animehistoryQueries.getHistoryByEpisodeUrl(history.url) }
             val item = history.getHistoryImpl()
@@ -383,7 +383,7 @@ class AnimeRestorer(
         }
     }
 
-    private suspend fun restoreTracking(anime: Anime, backupTracks: List<BackupAnimeTracking>) {
+    private suspend fun restoreTracking(anime: Anime, backupTracks: List<BackupTracking>) {
         val dbTrackByTrackerId = getTracks.await(anime.id).associateBy { it.trackerId }
 
         val (existingTracks, newTracks) = backupTracks

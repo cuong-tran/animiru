@@ -1,14 +1,14 @@
 package eu.kanade.tachiyomi.data.track.kitsu
 
 import androidx.core.net.toUri
-import eu.kanade.tachiyomi.data.database.models.AnimeTrack
-import eu.kanade.tachiyomi.data.track.kitsu.dto.KitsuAddEntryResult
+import eu.kanade.tachiyomi.data.database.models.Track
+import eu.kanade.tachiyomi.data.track.kitsu.dto.KitsuAddAnimeResult
 import eu.kanade.tachiyomi.data.track.kitsu.dto.KitsuAlgoliaSearchResult
 import eu.kanade.tachiyomi.data.track.kitsu.dto.KitsuCurrentUserResult
 import eu.kanade.tachiyomi.data.track.kitsu.dto.KitsuListSearchResult
 import eu.kanade.tachiyomi.data.track.kitsu.dto.KitsuOAuth
 import eu.kanade.tachiyomi.data.track.kitsu.dto.KitsuSearchResult
-import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
+import eu.kanade.tachiyomi.data.track.model.TrackSearch
 import eu.kanade.tachiyomi.network.DELETE
 import eu.kanade.tachiyomi.network.GET
 import eu.kanade.tachiyomi.network.POST
@@ -38,7 +38,7 @@ class KitsuApi(private val client: OkHttpClient, interceptor: KitsuInterceptor) 
 
     private val authClient = client.newBuilder().addInterceptor(interceptor).build()
 
-    suspend fun addLibAnime(track: AnimeTrack, userId: String): AnimeTrack {
+    suspend fun addLibAnime(track: Track, userId: String): Track {
         return withIOContext {
             val data = buildJsonObject {
                 putJsonObject("data") {
@@ -73,7 +73,7 @@ class KitsuApi(private val client: OkHttpClient, interceptor: KitsuInterceptor) 
                     ),
                 )
                     .awaitSuccess()
-                    .parseAs<KitsuAddEntryResult>()
+                    .parseAs<KitsuAddAnimeResult>()
                     .let {
                         track.remote_id = it.data.id
                         track
@@ -82,7 +82,7 @@ class KitsuApi(private val client: OkHttpClient, interceptor: KitsuInterceptor) 
         }
     }
 
-    suspend fun updateLibAnime(track: AnimeTrack): AnimeTrack {
+    suspend fun updateLibAnime(track: Track): Track {
         return withIOContext {
             val data = buildJsonObject {
                 putJsonObject("data") {
@@ -125,7 +125,7 @@ class KitsuApi(private val client: OkHttpClient, interceptor: KitsuInterceptor) 
         }
     }
 
-    suspend fun searchAnime(query: String): List<AnimeTrackSearch> {
+    suspend fun searchAnime(query: String): List<TrackSearch> {
         return withIOContext {
             with(json) {
                 authClient.newCall(GET(ALGOLIA_KEY_URL))
@@ -138,7 +138,7 @@ class KitsuApi(private val client: OkHttpClient, interceptor: KitsuInterceptor) 
         }
     }
 
-    private suspend fun algoliaSearchAnime(key: String, query: String): List<AnimeTrackSearch> {
+    private suspend fun algoliaSearchAnime(key: String, query: String): List<TrackSearch> {
         return withIOContext {
             val jsonObject = buildJsonObject {
                 put(
@@ -169,7 +169,7 @@ class KitsuApi(private val client: OkHttpClient, interceptor: KitsuInterceptor) 
         }
     }
 
-    suspend fun findLibAnime(track: AnimeTrack, userId: String): AnimeTrack? {
+    suspend fun findLibAnime(track: Track, userId: String): Track? {
         return withIOContext {
             val url = "${BASE_URL}library-entries".toUri().buildUpon()
                 .encodedQuery("filter[anime_id]=${track.remote_id}&filter[user_id]=$userId")
@@ -190,7 +190,7 @@ class KitsuApi(private val client: OkHttpClient, interceptor: KitsuInterceptor) 
         }
     }
 
-    suspend fun getLibAnime(track: AnimeTrack): AnimeTrack {
+    suspend fun getLibAnime(track: Track): Track {
         return withIOContext {
             val url = "${BASE_URL}library-entries".toUri().buildUpon()
                 .encodedQuery("filter[id]=${track.remote_id}")

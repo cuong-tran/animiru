@@ -4,7 +4,7 @@ import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
-import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
+import eu.kanade.tachiyomi.data.track.model.TrackSearch
 import java.time.Instant
 import java.time.temporal.ChronoUnit
 import kotlin.random.Random
@@ -50,13 +50,13 @@ internal class TrackerSearchPreviewProvider : PreviewParameterProvider<@Composab
         loading,
     )
 
-    private fun someTrackSearches(): Sequence<AnimeTrackSearch> = sequence {
+    private fun someTrackSearches(): Sequence<TrackSearch> = sequence {
         while (true) {
             yield(randTrackSearch())
         }
     }
 
-    private fun randTrackSearch() = AnimeTrackSearch().let {
+    private fun randTrackSearch() = TrackSearch().let {
         it.id = Random.nextLong()
         it.anime_id = Random.nextLong()
         it.tracker_id = Random.nextLong()

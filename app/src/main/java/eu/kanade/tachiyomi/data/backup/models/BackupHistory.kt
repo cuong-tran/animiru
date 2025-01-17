@@ -6,7 +6,7 @@ import tachiyomi.domain.history.model.AnimeHistory
 import java.util.Date
 
 @Serializable
-data class BackupAnimeHistory(
+data class BackupHistory(
     @ProtoNumber(1) var url: String,
     @ProtoNumber(2) var lastRead: Long,
     @ProtoNumber(3) var readDuration: Long = 0,

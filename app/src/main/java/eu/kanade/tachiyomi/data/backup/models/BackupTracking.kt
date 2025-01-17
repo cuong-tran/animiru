@@ -5,7 +5,7 @@ import kotlinx.serialization.protobuf.ProtoNumber
 import tachiyomi.domain.track.model.AnimeTrack
 
 @Serializable
-data class BackupAnimeTracking(
+data class BackupTracking(
     // in 1.x some of these values have different types or names
     @ProtoNumber(1) var syncId: Int,
     // LibraryId is not null in 1.x
@@ -33,27 +33,27 @@ data class BackupAnimeTracking(
         return AnimeTrack(
             id = -1,
             animeId = -1,
-            trackerId = this@BackupAnimeTracking.syncId.toLong(),
-            remoteId = if (this@BackupAnimeTracking.mediaIdInt != 0) {
-                this@BackupAnimeTracking.mediaIdInt.toLong()
+            trackerId = this@BackupTracking.syncId.toLong(),
+            remoteId = if (this@BackupTracking.mediaIdInt != 0) {
+                this@BackupTracking.mediaIdInt.toLong()
             } else {
-                this@BackupAnimeTracking.mediaId
+                this@BackupTracking.mediaId
             },
-            libraryId = this@BackupAnimeTracking.libraryId,
-            title = this@BackupAnimeTracking.title,
-            lastEpisodeSeen = this@BackupAnimeTracking.lastEpisodeSeen.toDouble(),
-            totalEpisodes = this@BackupAnimeTracking.totalEpisodes.toLong(),
-            score = this@BackupAnimeTracking.score.toDouble(),
-            status = this@BackupAnimeTracking.status.toLong(),
-            startDate = this@BackupAnimeTracking.startedWatchingDate,
-            finishDate = this@BackupAnimeTracking.finishedWatchingDate,
-            remoteUrl = this@BackupAnimeTracking.trackingUrl,
+            libraryId = this@BackupTracking.libraryId,
+            title = this@BackupTracking.title,
+            lastEpisodeSeen = this@BackupTracking.lastEpisodeSeen.toDouble(),
+            totalEpisodes = this@BackupTracking.totalEpisodes.toLong(),
+            score = this@BackupTracking.score.toDouble(),
+            status = this@BackupTracking.status.toLong(),
+            startDate = this@BackupTracking.startedWatchingDate,
+            finishDate = this@BackupTracking.finishedWatchingDate,
+            remoteUrl = this@BackupTracking.trackingUrl,
         )
     }
 
     companion object {
-        fun copyFrom(track: AnimeTrack): BackupAnimeTracking {
-            return BackupAnimeTracking(
+        fun copyFrom(track: AnimeTrack): BackupTracking {
+            return BackupTracking(
                 syncId = track.trackerId.toInt(),
                 mediaId = track.remoteId,
                 // forced not null so its compatible with 1.x backup system
@@ -87,7 +87,7 @@ val backupAnimeTrackMapper = {
         startDate: Long,
         finishDate: Long,
     ->
-    BackupAnimeTracking(
+    BackupTracking(
         syncId = syncId.toInt(),
         mediaId = mediaId,
         // forced not null so its compatible with 1.x backup system

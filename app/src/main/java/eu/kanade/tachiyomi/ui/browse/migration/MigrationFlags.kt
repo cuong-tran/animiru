@@ -2,8 +2,8 @@ package eu.kanade.tachiyomi.ui.browse.migration
 
 import dev.icerock.moko.resources.StringResource
 import eu.kanade.domain.anime.model.hasCustomCover
-import eu.kanade.tachiyomi.data.cache.AnimeCoverCache
-import eu.kanade.tachiyomi.data.download.AnimeDownloadCache
+import eu.kanade.tachiyomi.data.cache.CoverCache
+import eu.kanade.tachiyomi.data.download.DownloadCache
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.i18n.MR
 import uy.kohesive.injekt.injectLazy
@@ -31,8 +31,8 @@ object MigrationFlags {
     private const val CUSTOM_COVER = 0b01000
     private const val DELETE_DOWNLOADED = 0b10000
 
-    private val coverCache: AnimeCoverCache by injectLazy()
-    private val downloadCache: AnimeDownloadCache by injectLazy()
+    private val coverCache: CoverCache by injectLazy()
+    private val downloadCache: DownloadCache by injectLazy()
 
     fun hasEpisodes(value: Int): Boolean {
         return value and EPISODES != 0

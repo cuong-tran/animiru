@@ -11,7 +11,7 @@ import eu.kanade.tachiyomi.data.backup.models.IntPreferenceValue
 import eu.kanade.tachiyomi.data.backup.models.LongPreferenceValue
 import eu.kanade.tachiyomi.data.backup.models.StringPreferenceValue
 import eu.kanade.tachiyomi.data.backup.models.StringSetPreferenceValue
-import eu.kanade.tachiyomi.data.library.AnimeLibraryUpdateJob
+import eu.kanade.tachiyomi.data.library.LibraryUpdateJob
 import tachiyomi.core.common.preference.AndroidPreferenceStore
 import tachiyomi.core.common.preference.PreferenceStore
 import uy.kohesive.injekt.Injekt
@@ -25,7 +25,7 @@ class PreferenceRestorer(
     fun restoreApp(preferences: List<BackupPreference>) {
         restorePreferences(preferences, preferenceStore)
 
-        AnimeLibraryUpdateJob.setupTask(context)
+        LibraryUpdateJob.setupTask(context)
         BackupCreateJob.setupTask(context)
     }
 

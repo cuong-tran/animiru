@@ -4,12 +4,12 @@ import android.graphics.Color
 import dev.icerock.moko.resources.StringResource
 import eu.kanade.domain.track.model.toDbTrack
 import eu.kanade.tachiyomi.R
-import eu.kanade.tachiyomi.data.database.models.AnimeTrack
+import eu.kanade.tachiyomi.data.database.models.Track
 import eu.kanade.tachiyomi.data.track.AnimeTracker
 import eu.kanade.tachiyomi.data.track.BaseTracker
-import eu.kanade.tachiyomi.data.track.DeletableAnimeTracker
+import eu.kanade.tachiyomi.data.track.DeletableTracker
 import eu.kanade.tachiyomi.data.track.anilist.dto.ALOAuth
-import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
+import eu.kanade.tachiyomi.data.track.model.TrackSearch
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
@@ -25,7 +25,7 @@ class Anilist(id: Long) :
         "AniList",
     ),
     AnimeTracker,
-    DeletableAnimeTracker {
+    DeletableTracker {
 
     companion object {
         const val READING = 1L
@@ -150,11 +150,11 @@ class Anilist(id: Long) :
         }
     }
 
-    private suspend fun add(track: AnimeTrack): AnimeTrack {
+    private suspend fun add(track: Track): Track {
         return api.addLibAnime(track)
     }
 
-    override suspend fun update(track: AnimeTrack, didWatchEpisode: Boolean): AnimeTrack {
+    override suspend fun update(track: Track, didWatchEpisode: Boolean): Track {
         // If user was using API v1 fetch library_id
         if (track.library_id == null || track.library_id!! == 0L) {
             val libManga = api.findLibAnime(track, getUsername().toInt())
@@ -188,7 +188,7 @@ class Anilist(id: Long) :
         api.deleteLibAnime(track)
     }
 
-    override suspend fun bind(track: AnimeTrack, hasSeenEpisodes: Boolean): AnimeTrack {
+    override suspend fun bind(track: Track, hasSeenEpisodes: Boolean): Track {
         val remoteTrack = api.findLibAnime(track, getUsername().toInt())
         return if (remoteTrack != null) {
             track.copyPersonalFrom(remoteTrack)
@@ -208,11 +208,11 @@ class Anilist(id: Long) :
         }
     }
 
-    override suspend fun searchAnime(query: String): List<AnimeTrackSearch> {
+    override suspend fun searchAnime(query: String): List<TrackSearch> {
         return api.searchAnime(query)
     }
 
-    override suspend fun refresh(track: AnimeTrack): AnimeTrack {
+    override suspend fun refresh(track: Track): Track {
         val remoteTrack = api.getLibAnime(track, getUsername().toInt())
         track.copyPersonalFrom(remoteTrack)
         track.title = remoteTrack.title

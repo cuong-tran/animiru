@@ -24,7 +24,7 @@ import uy.kohesive.injekt.api.get
  *
  * @param context the application context.
  */
-class AnimeDownloadProvider(
+class DownloadProvider(
     private val context: Context,
     private val storageManager: StorageManager = Injekt.get(),
     // AM (FILE_SIZE) -->

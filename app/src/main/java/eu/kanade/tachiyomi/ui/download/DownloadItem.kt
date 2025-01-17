@@ -6,10 +6,10 @@ import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.AbstractSectionableItem
 import eu.davidea.flexibleadapter.items.IFlexible
 import eu.kanade.tachiyomi.R
-import eu.kanade.tachiyomi.data.download.model.AnimeDownload
+import eu.kanade.tachiyomi.data.download.model.Download
 
 class DownloadItem(
-    val download: AnimeDownload,
+    val download: Download,
     header: DownloadHeaderItem,
 ) : AbstractSectionableItem<DownloadHolder, DownloadHeaderItem>(header) {
 

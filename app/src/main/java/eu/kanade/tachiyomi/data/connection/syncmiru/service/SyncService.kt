@@ -5,7 +5,7 @@ import android.content.Context
 import eu.kanade.domain.connection.SyncPreferences
 import eu.kanade.tachiyomi.data.backup.models.Backup
 import eu.kanade.tachiyomi.data.backup.models.BackupAnime
-import eu.kanade.tachiyomi.data.backup.models.BackupAnimeSource
+import eu.kanade.tachiyomi.data.backup.models.BackupSource
 import eu.kanade.tachiyomi.data.backup.models.BackupCategory
 import eu.kanade.tachiyomi.data.backup.models.BackupEpisode
 import eu.kanade.tachiyomi.data.backup.models.BackupPreference
@@ -51,7 +51,7 @@ abstract class SyncService(
         )
 
         val mergedAnimeSourcesList =
-            mergeAnimeSourcesLists(localSyncData.backup?.backupAnimeSources, remoteSyncData.backup?.backupAnimeSources)
+            mergeAnimeSourcesLists(localSyncData.backup?.backupSources, remoteSyncData.backup?.backupSources)
         val mergedPreferencesList =
             mergePreferencesLists(localSyncData.backup?.backupPreferences, remoteSyncData.backup?.backupPreferences)
         val mergedSourcePreferencesList = mergeSourcePreferencesLists(
@@ -63,7 +63,7 @@ abstract class SyncService(
         val mergedBackup = Backup(
             backupAnime = mergedAnimeList,
             backupAnimeCategories = mergedAnimeCategoriesList,
-            backupAnimeSources = mergedAnimeSourcesList,
+            backupSources = mergedAnimeSourcesList,
             backupPreferences = mergedPreferencesList,
             backupSourcePreferences = mergedSourcePreferencesList,
         )
@@ -268,9 +268,9 @@ abstract class SyncService(
     }
 
     private fun mergeAnimeSourcesLists(
-        localSources: List<BackupAnimeSource>?,
-        remoteSources: List<BackupAnimeSource>?,
-    ): List<BackupAnimeSource> {
+        localSources: List<BackupSource>?,
+        remoteSources: List<BackupSource>?,
+    ): List<BackupSource> {
         val logTag = "MergeSources"
 
         // Create maps using sourceId as key

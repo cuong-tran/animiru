@@ -26,10 +26,10 @@ import eu.kanade.presentation.anime.components.EpisodeDownloadAction
 import eu.kanade.presentation.util.formattedMessage
 import eu.kanade.tachiyomi.animesource.AnimeSource
 import eu.kanade.tachiyomi.animesource.model.Video
-import eu.kanade.tachiyomi.data.download.AnimeDownloadCache
-import eu.kanade.tachiyomi.data.download.AnimeDownloadManager
-import eu.kanade.tachiyomi.data.download.model.AnimeDownload
-import eu.kanade.tachiyomi.data.track.EnhancedAnimeTracker
+import eu.kanade.tachiyomi.data.download.DownloadCache
+import eu.kanade.tachiyomi.data.download.DownloadManager
+import eu.kanade.tachiyomi.data.download.model.Download
+import eu.kanade.tachiyomi.data.track.EnhancedTracker
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.network.HttpException
 import eu.kanade.tachiyomi.ui.anime.track.TrackItem
@@ -106,8 +106,8 @@ class AnimeScreenModel(
     internal val playerPreferences: PlayerPreferences = Injekt.get(),
     private val trackerManager: TrackerManager = Injekt.get(),
     private val trackEpisode: TrackEpisode = Injekt.get(),
-    private val downloadManager: AnimeDownloadManager = Injekt.get(),
-    private val downloadCache: AnimeDownloadCache = Injekt.get(),
+    private val downloadManager: DownloadManager = Injekt.get(),
+    private val downloadCache: DownloadCache = Injekt.get(),
     private val getAnimeAndEpisodes: GetAnimeWithEpisodes = Injekt.get(),
     private val getDuplicateLibraryAnime: GetDuplicateLibraryAnime = Injekt.get(),
     private val setAnimeEpisodeFlags: SetAnimeEpisodeFlags = Injekt.get(),
@@ -569,7 +569,7 @@ class AnimeScreenModel(
         }
     }
 
-    private fun updateDownloadState(download: AnimeDownload) {
+    private fun updateDownloadState(download: Download) {
         updateSuccessState { successState ->
             val modifiedIndex = successState.episodes.indexOfFirst { it.id == download.episode.id }
             if (modifiedIndex < 0) return@updateSuccessState successState
@@ -605,8 +605,8 @@ class AnimeScreenModel(
             }
             val downloadState = when {
                 activeDownload != null -> activeDownload.status
-                downloaded -> AnimeDownload.State.DOWNLOADED
-                else -> AnimeDownload.State.NOT_DOWNLOADED
+                downloaded -> Download.State.DOWNLOADED
+                else -> Download.State.NOT_DOWNLOADED
             }
 
             EpisodeList.Item(
@@ -685,13 +685,13 @@ class AnimeScreenModel(
             // <-- AM (FILLERMARK)
             LibraryPreferences.EpisodeSwipeAction.Download -> {
                 val downloadAction: EpisodeDownloadAction = when (episodeItem.downloadState) {
-                    AnimeDownload.State.ERROR,
-                    AnimeDownload.State.NOT_DOWNLOADED,
+                    Download.State.ERROR,
+                    Download.State.NOT_DOWNLOADED,
                     -> EpisodeDownloadAction.START_NOW
-                    AnimeDownload.State.QUEUE,
-                    AnimeDownload.State.DOWNLOADING,
+                    Download.State.QUEUE,
+                    Download.State.DOWNLOADING,
                     -> EpisodeDownloadAction.CANCEL
-                    AnimeDownload.State.DOWNLOADED -> EpisodeDownloadAction.DELETE
+                    Download.State.DOWNLOADED -> EpisodeDownloadAction.DELETE
                 }
                 runEpisodeDownloadActions(
                     items = listOf(episodeItem),
@@ -712,7 +712,7 @@ class AnimeScreenModel(
 
     private fun getUnseenEpisodes(): List<Episode> {
         return successState?.processedEpisodes
-            ?.filter { (episode, dlStatus) -> !episode.seen && dlStatus == AnimeDownload.State.NOT_DOWNLOADED }
+            ?.filter { (episode, dlStatus) -> !episode.seen && dlStatus == Download.State.NOT_DOWNLOADED }
             ?.map { it.episode }
             ?.toList()
             ?: emptyList()
@@ -761,7 +761,7 @@ class AnimeScreenModel(
         when (action) {
             EpisodeDownloadAction.START -> {
                 startDownload(items.map { it.episode }, false)
-                if (items.any { it.downloadState == AnimeDownload.State.ERROR }) {
+                if (items.any { it.downloadState == Download.State.ERROR }) {
                     downloadManager.startDownloads()
                 }
             }
@@ -800,7 +800,7 @@ class AnimeScreenModel(
     private fun cancelDownload(episodeId: Long) {
         val activeDownload = downloadManager.getQueuedDownloadOrNull(episodeId) ?: return
         downloadManager.cancelQueuedDownloads(listOf(activeDownload))
-        updateDownloadState(activeDownload.apply { status = AnimeDownload.State.NOT_DOWNLOADED })
+        updateDownloadState(activeDownload.apply { status = Download.State.NOT_DOWNLOADED })
     }
 
     fun markPreviousEpisodeSeen(pointer: Episode) {
@@ -1145,7 +1145,7 @@ class AnimeScreenModel(
             ) { animeTracks, loggedInTrackers ->
                 // Show only if the service supports this manga's source
                 val supportedTrackers = loggedInTrackers.filter {
-                    (it as? EnhancedAnimeTracker)?.accept(source!!) ?: true
+                    (it as? EnhancedTracker)?.accept(source!!) ?: true
                 }
                 val supportedTrackerIds = supportedTrackers.map { it.id }.toHashSet()
                 val supportedTrackerTracks = animeTracks.filter { it.trackerId in supportedTrackerIds }
@@ -1355,7 +1355,7 @@ sealed class EpisodeList {
     @Immutable
     data class Item(
         val episode: Episode,
-        val downloadState: AnimeDownload.State,
+        val downloadState: Download.State,
         val downloadProgress: Int,
         // AM (FILE_SIZE) -->
         var fileSize: Long? = null,
@@ -1363,6 +1363,6 @@ sealed class EpisodeList {
         val selected: Boolean = false,
     ) : EpisodeList() {
         val id = episode.id
-        val isDownloaded = downloadState == AnimeDownload.State.DOWNLOADED
+        val isDownloaded = downloadState == Download.State.DOWNLOADED
     }
 }

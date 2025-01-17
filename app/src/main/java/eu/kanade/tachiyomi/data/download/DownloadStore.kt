@@ -3,7 +3,7 @@ package eu.kanade.tachiyomi.data.download
 import android.content.Context
 import androidx.core.content.edit
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
-import eu.kanade.tachiyomi.data.download.model.AnimeDownload
+import eu.kanade.tachiyomi.data.download.model.Download
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
@@ -18,7 +18,7 @@ import uy.kohesive.injekt.api.get
 /**
  * This class is used to persist active downloads across application restarts.
  */
-class AnimeDownloadStore(
+class DownloadStore(
     context: Context,
     private val sourceManager: AnimeSourceManager = Injekt.get(),
     private val json: Json = Injekt.get(),
@@ -41,7 +41,7 @@ class AnimeDownloadStore(
      *
      * @param downloads the list of downloads to add.
      */
-    fun addAll(downloads: List<AnimeDownload>) {
+    fun addAll(downloads: List<Download>) {
         preferences.edit {
             downloads.forEach { putString(getKey(it), serialize(it)) }
         }
@@ -52,7 +52,7 @@ class AnimeDownloadStore(
      *
      * @param download the download to remove.
      */
-    fun remove(download: AnimeDownload) {
+    fun remove(download: Download) {
         preferences.edit {
             remove(getKey(download))
         }
@@ -63,7 +63,7 @@ class AnimeDownloadStore(
      *
      * @param downloads the download to remove.
      */
-    fun removeAll(downloads: List<AnimeDownload>) {
+    fun removeAll(downloads: List<Download>) {
         preferences.edit {
             downloads.forEach { remove(getKey(it)) }
         }
@@ -83,20 +83,20 @@ class AnimeDownloadStore(
      *
      * @param download the download.
      */
-    private fun getKey(download: AnimeDownload): String {
+    private fun getKey(download: Download): String {
         return download.episode.id.toString()
     }
 
     /**
      * Returns the list of downloads to restore. It should be called in a background thread.
      */
-    fun restore(): List<AnimeDownload> {
+    fun restore(): List<Download> {
         val objs = preferences.all
             .mapNotNull { it.value as? String }
             .mapNotNull { deserialize(it) }
             .sortedBy { it.order }
 
-        val downloads = mutableListOf<AnimeDownload>()
+        val downloads = mutableListOf<Download>()
         if (objs.isNotEmpty()) {
             val cachedAnime = mutableMapOf<Long, Anime?>()
             for ((animeId, episodeId) in objs) {
@@ -105,7 +105,7 @@ class AnimeDownloadStore(
                 } ?: continue
                 val source = sourceManager.get(anime.source) as? AnimeHttpSource ?: continue
                 val episode = runBlocking { getEpisode.await(episodeId) } ?: continue
-                downloads.add(AnimeDownload(source, anime, episode))
+                downloads.add(Download(source, anime, episode))
             }
         }
 
@@ -119,7 +119,7 @@ class AnimeDownloadStore(
      *
      * @param download the download to serialize.
      */
-    private fun serialize(download: AnimeDownload): String {
+    private fun serialize(download: Download): String {
         val obj = AnimeDownloadObject(download.anime.id, download.episode.id!!, counter++)
         return json.encodeToString(obj)
     }

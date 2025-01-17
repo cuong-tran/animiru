@@ -2,7 +2,7 @@ package eu.kanade.domain.anime.interactor
 
 import eu.kanade.domain.anime.model.hasCustomCover
 import eu.kanade.tachiyomi.animesource.model.SAnime
-import eu.kanade.tachiyomi.data.cache.AnimeCoverCache
+import eu.kanade.tachiyomi.data.cache.CoverCache
 import tachiyomi.domain.anime.interactor.AnimeFetchInterval
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.anime.model.AnimeUpdate
@@ -30,7 +30,7 @@ class UpdateAnime(
         localAnime: Anime,
         remoteAnime: SAnime,
         manualFetch: Boolean,
-        coverCache: AnimeCoverCache = Injekt.get(),
+        coverCache: CoverCache = Injekt.get(),
     ): Boolean {
         val remoteTitle = try {
             remoteAnime.title

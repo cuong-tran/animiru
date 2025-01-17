@@ -4,7 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import eu.davidea.viewholders.FlexibleViewHolder
 import eu.kanade.tachiyomi.R
-import eu.kanade.tachiyomi.data.download.model.AnimeDownload
+import eu.kanade.tachiyomi.data.download.model.Download
 import eu.kanade.tachiyomi.databinding.DownloadItemBinding
 import eu.kanade.tachiyomi.util.view.popupMenu
 import tachiyomi.core.common.i18n.stringResource
@@ -27,14 +27,14 @@ class DownloadHolder(private val view: View, val adapter: DownloadAdapter) :
         binding.menu.setOnClickListener { it.post { showPopupMenu(it) } }
     }
 
-    private lateinit var download: AnimeDownload
+    private lateinit var download: Download
 
     /**
      * Binds this holder with the given category.
      *
      * @param download the download to bind.
      */
-    fun bind(download: AnimeDownload) {
+    fun bind(download: Download) {
         this.download = download
         // Update the chapter name.
         binding.chapterTitle.text = download.episode.name

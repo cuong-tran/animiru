@@ -13,7 +13,7 @@ import androidx.work.WorkerParameters
 import eu.kanade.domain.anime.interactor.UpdateAnime
 import eu.kanade.domain.anime.model.copyFrom
 import eu.kanade.domain.anime.model.toSAnime
-import eu.kanade.tachiyomi.data.cache.AnimeCoverCache
+import eu.kanade.tachiyomi.data.cache.CoverCache
 import eu.kanade.tachiyomi.data.notification.Notifications
 import eu.kanade.tachiyomi.util.prepUpdateCover
 import eu.kanade.tachiyomi.util.system.isRunning
@@ -38,15 +38,15 @@ import uy.kohesive.injekt.api.get
 import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.atomic.AtomicInteger
 
-class AnimeMetadataUpdateJob(private val context: Context, workerParams: WorkerParameters) :
+class MetadataUpdateJob(private val context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {
 
     private val sourceManager: AnimeSourceManager = Injekt.get()
-    private val coverCache: AnimeCoverCache = Injekt.get()
+    private val coverCache: CoverCache = Injekt.get()
     private val getLibraryAnime: GetLibraryAnime = Injekt.get()
     private val updateAnime: UpdateAnime = Injekt.get()
 
-    private val notifier = AnimeLibraryUpdateNotifier(context)
+    private val notifier = LibraryUpdateNotifier(context)
 
     private var animeToUpdate: List<LibraryAnime> = mutableListOf()
 
@@ -78,7 +78,7 @@ class AnimeMetadataUpdateJob(private val context: Context, workerParams: WorkerP
     }
 
     override suspend fun getForegroundInfo(): ForegroundInfo {
-        val notifier = AnimeLibraryUpdateNotifier(context)
+        val notifier = LibraryUpdateNotifier(context)
         return ForegroundInfo(
             Notifications.ID_LIBRARY_PROGRESS,
             notifier.progressNotificationBuilder.build(),
@@ -184,7 +184,7 @@ class AnimeMetadataUpdateJob(private val context: Context, workerParams: WorkerP
                 // Already running either as a scheduled or manual job
                 return false
             }
-            val request = OneTimeWorkRequestBuilder<AnimeMetadataUpdateJob>()
+            val request = OneTimeWorkRequestBuilder<MetadataUpdateJob>()
                 .addTag(TAG)
                 .addTag(WORK_NAME_MANUAL)
                 .build()

@@ -22,7 +22,7 @@ import eu.kanade.domain.track.interactor.AddTracks
 import eu.kanade.presentation.util.ioCoroutineScope
 import eu.kanade.tachiyomi.animesource.AnimeCatalogueSource
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
-import eu.kanade.tachiyomi.data.cache.AnimeCoverCache
+import eu.kanade.tachiyomi.data.cache.CoverCache
 import eu.kanade.tachiyomi.util.removeCovers
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
@@ -62,7 +62,7 @@ class BrowseSourceScreenModel(
     sourcePreferences: SourcePreferences = Injekt.get(),
     basePreferences: BasePreferences = Injekt.get(),
     private val libraryPreferences: LibraryPreferences = Injekt.get(),
-    private val coverCache: AnimeCoverCache = Injekt.get(),
+    private val coverCache: CoverCache = Injekt.get(),
     private val getRemoteAnime: GetRemoteAnime = Injekt.get(),
     private val getDuplicateAnimelibAnime: GetDuplicateLibraryAnime = Injekt.get(),
     private val getCategories: GetAnimeCategories = Injekt.get(),

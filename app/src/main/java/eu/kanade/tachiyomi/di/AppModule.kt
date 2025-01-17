@@ -8,12 +8,12 @@ import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import eu.kanade.domain.track.store.DelayedTrackingStore
 import eu.kanade.tachiyomi.BuildConfig
-import eu.kanade.tachiyomi.data.cache.AnimeCoverCache
+import eu.kanade.tachiyomi.data.cache.CoverCache
 import eu.kanade.tachiyomi.data.connection.ConnectionManager
 import eu.kanade.tachiyomi.data.connection.syncmiru.service.GoogleDriveService
-import eu.kanade.tachiyomi.data.download.AnimeDownloadCache
-import eu.kanade.tachiyomi.data.download.AnimeDownloadManager
-import eu.kanade.tachiyomi.data.download.AnimeDownloadProvider
+import eu.kanade.tachiyomi.data.download.DownloadCache
+import eu.kanade.tachiyomi.data.download.DownloadManager
+import eu.kanade.tachiyomi.data.download.DownloadProvider
 import eu.kanade.tachiyomi.data.saver.ImageSaver
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.extension.ExtensionManager
@@ -118,7 +118,7 @@ class AppModule(val app: Application) : InjektModule {
             ProtoBuf
         }
 
-        addSingletonFactory { AnimeCoverCache(app) }
+        addSingletonFactory { CoverCache(app) }
 
         addSingletonFactory { NetworkHelper(app, get()) }
         addSingletonFactory { JavaScriptEngine(app) }
@@ -127,9 +127,9 @@ class AppModule(val app: Application) : InjektModule {
 
         addSingletonFactory { ExtensionManager(app) }
 
-        addSingletonFactory { AnimeDownloadProvider(app) }
-        addSingletonFactory { AnimeDownloadManager(app) }
-        addSingletonFactory { AnimeDownloadCache(app) }
+        addSingletonFactory { DownloadProvider(app) }
+        addSingletonFactory { DownloadManager(app) }
+        addSingletonFactory { DownloadCache(app) }
 
         addSingletonFactory { TrackerManager(app) }
         addSingletonFactory { DelayedTrackingStore(app) }
@@ -161,7 +161,7 @@ class AppModule(val app: Application) : InjektModule {
 
             get<Database>()
 
-            get<AnimeDownloadManager>()
+            get<DownloadManager>()
 
             // AM (CUSTOM_INFORMATION) -->
             get<GetCustomAnimeInfo>()

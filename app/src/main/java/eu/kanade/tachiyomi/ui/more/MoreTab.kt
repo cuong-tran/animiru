@@ -24,7 +24,7 @@ import eu.kanade.presentation.util.Tab
 import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.data.connection.discord.DiscordRPCService
 import eu.kanade.tachiyomi.data.connection.discord.DiscordScreen
-import eu.kanade.tachiyomi.data.download.AnimeDownloadManager
+import eu.kanade.tachiyomi.data.download.DownloadManager
 import eu.kanade.tachiyomi.ui.category.CategoryScreen
 import eu.kanade.tachiyomi.ui.download.DownloadQueueScreen
 import eu.kanade.tachiyomi.ui.setting.SettingsScreen
@@ -103,7 +103,7 @@ data object MoreTab : Tab {
 }
 
 private class MoreScreenModel(
-    private val animeDownloadManager: AnimeDownloadManager = Injekt.get(),
+    private val downloadManager: DownloadManager = Injekt.get(),
     preferences: BasePreferences = Injekt.get(),
 ) : ScreenModel {
 
@@ -119,8 +119,8 @@ private class MoreScreenModel(
         // Handle running/paused status change and queue progress updating
         screenModelScope.launchIO {
             combine(
-                animeDownloadManager.isDownloaderRunning,
-                animeDownloadManager.queueState,
+                downloadManager.isDownloaderRunning,
+                downloadManager.queueState,
             ) { isRunningAnime, animeDownloadQueue ->
                 Pair(isRunningAnime, animeDownloadQueue.size)
             }.collectLatest { (isDownloadingAnime, animeDownloadQueueSize) ->

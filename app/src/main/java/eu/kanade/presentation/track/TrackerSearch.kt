@@ -71,7 +71,7 @@ import androidx.compose.ui.unit.dp
 import eu.kanade.presentation.anime.components.AnimeCover
 import eu.kanade.presentation.components.DropdownMenu
 import eu.kanade.presentation.theme.TachiyomiPreviewTheme
-import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
+import eu.kanade.tachiyomi.data.track.model.TrackSearch
 import eu.kanade.tachiyomi.util.system.openInBrowser
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.ScrollbarLazyColumn
@@ -88,9 +88,9 @@ import tachiyomi.presentation.core.util.secondaryItemAlpha
 fun TrackerSearch(
     state: TextFieldState,
     onDispatchQuery: () -> Unit,
-    queryResult: Result<List<AnimeTrackSearch>>?,
-    selected: AnimeTrackSearch?,
-    onSelectedChange: (AnimeTrackSearch) -> Unit,
+    queryResult: Result<List<TrackSearch>>?,
+    selected: TrackSearch?,
+    onSelectedChange: (TrackSearch) -> Unit,
     onConfirmSelection: () -> Unit,
     onDismissRequest: () -> Unit,
 ) {
@@ -218,7 +218,7 @@ fun TrackerSearch(
 
 @Composable
 private fun SearchResultItem(
-    trackSearch: AnimeTrackSearch,
+    trackSearch: TrackSearch,
     selected: Boolean,
     onClick: () -> Unit,
 ) {

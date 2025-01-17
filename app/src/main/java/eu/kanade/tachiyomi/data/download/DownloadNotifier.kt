@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
 import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.core.security.SecurityPreferences
-import eu.kanade.tachiyomi.data.download.model.AnimeDownload
+import eu.kanade.tachiyomi.data.download.model.Download
 import eu.kanade.tachiyomi.data.notification.NotificationHandler
 import eu.kanade.tachiyomi.data.notification.NotificationReceiver
 import eu.kanade.tachiyomi.data.notification.Notifications
@@ -24,7 +24,7 @@ import java.util.regex.Pattern
  *
  * @param context context of application
  */
-internal class AnimeDownloadNotifier(private val context: Context) {
+internal class DownloadNotifier(private val context: Context) {
 
     private val preferences: SecurityPreferences by injectLazy()
 
@@ -69,7 +69,7 @@ internal class AnimeDownloadNotifier(private val context: Context) {
      *
      * @param download download object containing download information.
      */
-    fun onProgressChange(download: AnimeDownload) {
+    fun onProgressChange(download: Download) {
         with(progressNotificationBuilder) {
             if (!isDownloading) {
                 setSmallIcon(android.R.drawable.stat_sys_download)

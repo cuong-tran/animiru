@@ -1,6 +1,6 @@
 package eu.kanade.domain.download.interactor
 
-import eu.kanade.tachiyomi.data.download.AnimeDownloadManager
+import eu.kanade.tachiyomi.data.download.DownloadManager
 import tachiyomi.core.common.util.lang.withNonCancellableContext
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.episode.model.Episode
@@ -8,7 +8,7 @@ import tachiyomi.domain.source.service.AnimeSourceManager
 
 class DeleteDownload(
     private val sourceManager: AnimeSourceManager,
-    private val downloadManager: AnimeDownloadManager,
+    private val downloadManager: DownloadManager,
 ) {
 
     suspend fun awaitAll(anime: Anime, vararg episodes: Episode) = withNonCancellableContext {

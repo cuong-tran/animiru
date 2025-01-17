@@ -7,7 +7,7 @@ import tachiyomi.domain.category.model.Category
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
-class AnimeCategoriesBackupCreator(
+class CategoriesBackupCreator(
     private val getAnimeCategories: GetAnimeCategories = Injekt.get(),
 ) {
 

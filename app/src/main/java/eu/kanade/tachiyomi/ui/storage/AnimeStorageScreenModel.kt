@@ -1,8 +1,8 @@
 package eu.kanade.tachiyomi.ui.storage
 
 import cafe.adriel.voyager.core.model.screenModelScope
-import eu.kanade.tachiyomi.data.download.AnimeDownloadCache
-import eu.kanade.tachiyomi.data.download.AnimeDownloadManager
+import eu.kanade.tachiyomi.data.download.DownloadCache
+import eu.kanade.tachiyomi.data.download.DownloadManager
 import tachiyomi.core.common.util.lang.launchNonCancellable
 import tachiyomi.domain.anime.interactor.GetLibraryAnime
 import tachiyomi.domain.category.interactor.GetAnimeCategories
@@ -13,11 +13,11 @@ import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
 class AnimeStorageScreenModel(
-    downloadCache: AnimeDownloadCache = Injekt.get(),
+    downloadCache: DownloadCache = Injekt.get(),
     private val getLibraries: GetLibraryAnime = Injekt.get(),
     getCategories: GetAnimeCategories = Injekt.get(),
     getVisibleCategories: GetVisibleAnimeCategories = Injekt.get(),
-    private val downloadManager: AnimeDownloadManager = Injekt.get(),
+    private val downloadManager: DownloadManager = Injekt.get(),
     private val sourceManager: AnimeSourceManager = Injekt.get(),
 ) : CommonStorageScreenModel<LibraryAnime>(
     downloadCacheChanges = downloadCache.changes,

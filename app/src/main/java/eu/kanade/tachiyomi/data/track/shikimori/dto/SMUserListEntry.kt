@@ -1,6 +1,6 @@
 package eu.kanade.tachiyomi.data.track.shikimori.dto
 
-import eu.kanade.tachiyomi.data.database.models.AnimeTrack
+import eu.kanade.tachiyomi.data.database.models.Track
 import eu.kanade.tachiyomi.data.track.shikimori.ShikimoriApi
 import eu.kanade.tachiyomi.data.track.shikimori.toTrackStatus
 import kotlinx.serialization.Serializable
@@ -14,8 +14,8 @@ data class SMUserListEntry(
     val status: String,
 ) {
 
-    fun toAnimeTrack(trackId: Long, anime: SMEntry): AnimeTrack {
-        return AnimeTrack.create(trackId).apply {
+    fun toAnimeTrack(trackId: Long, anime: SMAnime): Track {
+        return Track.create(trackId).apply {
             title = anime.name
             remote_id = this@SMUserListEntry.id
             total_episodes = anime.chapters!!

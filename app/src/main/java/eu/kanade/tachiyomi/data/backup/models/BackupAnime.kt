@@ -28,13 +28,13 @@ data class BackupAnime(
     // @ProtoNumber(15) val flags: Int = 0, 1.x value, not used in 0.x
     @ProtoNumber(16) var episodes: List<BackupEpisode> = emptyList(),
     @ProtoNumber(17) var categories: List<Long> = emptyList(),
-    @ProtoNumber(18) var tracking: List<BackupAnimeTracking> = emptyList(),
+    @ProtoNumber(18) var tracking: List<BackupTracking> = emptyList(),
     // Bump by 100 for values that are not saved/implemented in 1.x but are used in 0.x
     @ProtoNumber(100) var favorite: Boolean = true,
     @ProtoNumber(101) var episodeFlags: Int = 0,
     // @ProtoNumber(102) var brokenHistory, legacy history model with non-compliant proto number
     @ProtoNumber(103) var viewer_flags: Int = 0,
-    @ProtoNumber(104) var history: List<BackupAnimeHistory> = emptyList(),
+    @ProtoNumber(104) var history: List<BackupHistory> = emptyList(),
     @ProtoNumber(105) var updateStrategy: AnimeUpdateStrategy = AnimeUpdateStrategy.ALWAYS_UPDATE,
     @ProtoNumber(106) var lastModifiedAt: Long = 0,
     @ProtoNumber(107) var favoriteModifiedAt: Long? = null,

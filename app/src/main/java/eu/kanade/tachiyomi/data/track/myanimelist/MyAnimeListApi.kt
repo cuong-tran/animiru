@@ -2,8 +2,8 @@ package eu.kanade.tachiyomi.data.track.myanimelist
 
 import android.net.Uri
 import androidx.core.net.toUri
-import eu.kanade.tachiyomi.data.database.models.AnimeTrack
-import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
+import eu.kanade.tachiyomi.data.database.models.Track
+import eu.kanade.tachiyomi.data.track.model.TrackSearch
 import eu.kanade.tachiyomi.data.track.myanimelist.dto.MALAnime
 import eu.kanade.tachiyomi.data.track.myanimelist.dto.MALListAnimeItem
 import eu.kanade.tachiyomi.data.track.myanimelist.dto.MALListAnimeItemStatus
@@ -72,7 +72,7 @@ class MyAnimeListApi(
         }
     }
 
-    suspend fun searchAnime(query: String): List<AnimeTrackSearch> {
+    suspend fun searchAnime(query: String): List<TrackSearch> {
         return withIOContext {
             val url = "$BASE_API_URL/anime".toUri().buildUpon()
                 // MAL API throws a 400 when the query is over 64 characters...
@@ -91,7 +91,7 @@ class MyAnimeListApi(
         }
     }
 
-    suspend fun getAnimeDetails(id: Int): AnimeTrackSearch {
+    suspend fun getAnimeDetails(id: Int): TrackSearch {
         return withIOContext {
             val url = "$BASE_API_URL/anime".toUri().buildUpon()
                 .appendPath(id.toString())
@@ -105,7 +105,7 @@ class MyAnimeListApi(
                     .awaitSuccess()
                     .parseAs<MALAnime>()
                     .let {
-                        AnimeTrackSearch.create(trackId).apply {
+                        TrackSearch.create(trackId).apply {
                             remote_id = it.id
                             title = it.title
                             summary = it.synopsis
@@ -122,7 +122,7 @@ class MyAnimeListApi(
         }
     }
 
-    suspend fun updateItem(track: AnimeTrack): AnimeTrack {
+    suspend fun updateItem(track: Track): Track {
         return withIOContext {
             val formBodyBuilder = FormBody.Builder()
                 .add("status", track.toMyAnimeListStatus() ?: "watching")
@@ -157,7 +157,7 @@ class MyAnimeListApi(
         }
     }
 
-    suspend fun findListItem(track: AnimeTrack): AnimeTrack? {
+    suspend fun findListItem(track: Track): Track? {
         return withIOContext {
             val uri = "$BASE_API_URL/anime".toUri().buildUpon()
                 .appendPath(track.remote_id.toString())
@@ -175,7 +175,7 @@ class MyAnimeListApi(
         }
     }
 
-    suspend fun findListItemsAnime(query: String, offset: Int = 0): List<AnimeTrackSearch> {
+    suspend fun findListItemsAnime(query: String, offset: Int = 0): List<TrackSearch> {
         return withIOContext {
             val myListSearchResult = getListPage(offset)
 
@@ -214,7 +214,7 @@ class MyAnimeListApi(
         }
     }
 
-    private fun parseAnimeItem(listStatus: MALListAnimeItemStatus, track: AnimeTrack): AnimeTrack {
+    private fun parseAnimeItem(listStatus: MALListAnimeItemStatus, track: Track): Track {
         return track.apply {
             val isRewatching = listStatus.isRewatching
             status = if (isRewatching) MyAnimeList.REWATCHING else getStatus(listStatus.status)

@@ -4,7 +4,7 @@ import eu.kanade.domain.episode.model.toSEpisode
 import eu.kanade.tachiyomi.animesource.AnimeSource
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
-import eu.kanade.tachiyomi.data.download.AnimeDownloadManager
+import eu.kanade.tachiyomi.data.download.DownloadManager
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.episode.model.Episode
 import tachiyomi.source.local.LocalAnimeSource
@@ -45,7 +45,7 @@ class EpisodeLoader {
          * @param anime the anime of the episode.
          */
         fun isDownload(episode: Episode, anime: Anime): Boolean {
-            val downloadManager: AnimeDownloadManager = Injekt.get()
+            val downloadManager: DownloadManager = Injekt.get()
             return downloadManager.isEpisodeDownloaded(
                 episode.name,
                 episode.scanlator,
@@ -92,7 +92,7 @@ class EpisodeLoader {
             anime: Anime,
             source: AnimeSource,
         ): List<Video> {
-            val downloadManager: AnimeDownloadManager = Injekt.get()
+            val downloadManager: DownloadManager = Injekt.get()
             return try {
                 val video = downloadManager.buildVideo(source, anime, episode)
                 listOf(video)

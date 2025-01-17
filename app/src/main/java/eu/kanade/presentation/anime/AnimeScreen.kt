@@ -69,8 +69,8 @@ import eu.kanade.presentation.util.formatEpisodeNumber
 import eu.kanade.tachiyomi.animesource.AnimeSource
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.model.SAnime
-import eu.kanade.tachiyomi.data.download.AnimeDownloadProvider
-import eu.kanade.tachiyomi.data.download.model.AnimeDownload
+import eu.kanade.tachiyomi.data.download.DownloadProvider
+import eu.kanade.tachiyomi.data.download.model.Download
 import eu.kanade.tachiyomi.source.getNameForAnimeInfo
 import eu.kanade.tachiyomi.ui.anime.AnimeScreenModel
 import eu.kanade.tachiyomi.ui.anime.EpisodeList
@@ -921,12 +921,12 @@ private fun SharedAnimeBottomActionMenu(
         onDownloadClicked = {
             onDownloadEpisode!!(selected.toList(), EpisodeDownloadAction.START)
         }.takeIf {
-            onDownloadEpisode != null && selected.fastAny { it.downloadState != AnimeDownload.State.DOWNLOADED }
+            onDownloadEpisode != null && selected.fastAny { it.downloadState != Download.State.DOWNLOADED }
         },
         onDeleteClicked = {
             onMultiDeleteClicked(selected.fastMap { it.episode })
         }.takeIf {
-            onDownloadEpisode != null && selected.fastAny { it.downloadState == AnimeDownload.State.DOWNLOADED }
+            onDownloadEpisode != null && selected.fastAny { it.downloadState == Download.State.DOWNLOADED }
         },
         onExternalClicked = {
             onEpisodeClicked(selected.fastMap { it.episode }.first(), true)
@@ -972,11 +972,11 @@ private fun LazyListScope.sharedEpisodeItems(
             is EpisodeList.Item -> {
                 // AM (FILE_SIZE) -->
                 var fileSizeAsync: Long? by remember { mutableStateOf(episodeItem.fileSize) }
-                val isEpisodeDownloaded = episodeItem.downloadState == AnimeDownload.State.DOWNLOADED
+                val isEpisodeDownloaded = episodeItem.downloadState == Download.State.DOWNLOADED
                 if (isEpisodeDownloaded && showFileSize && fileSizeAsync == null) {
                     LaunchedEffect(episodeItem, Unit) {
                         fileSizeAsync = withIOContext {
-                            animeDownloadProvider.getEpisodeFileSize(
+                            downloadProvider.getEpisodeFileSize(
                                 episodeItem.episode.name,
                                 episodeItem.episode.url,
                                 episodeItem.episode.scanlator,
@@ -1095,5 +1095,5 @@ private fun formatTime(milliseconds: Long, useDayFormat: Boolean = false): Strin
 }
 
 // AM (FILE_SIZE) -->
-private val animeDownloadProvider: AnimeDownloadProvider by injectLazy()
+private val downloadProvider: DownloadProvider by injectLazy()
 // <-- AM (FILE_SIZE)

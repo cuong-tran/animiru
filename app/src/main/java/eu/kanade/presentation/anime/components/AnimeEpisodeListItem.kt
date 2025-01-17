@@ -42,7 +42,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import eu.kanade.tachiyomi.R
-import eu.kanade.tachiyomi.data.download.model.AnimeDownload
+import eu.kanade.tachiyomi.data.download.model.Download
 import me.saket.swipe.SwipeableActionsBox
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.i18n.MR
@@ -64,7 +64,7 @@ fun AnimeEpisodeListItem(
     // <-- AM (FILLERMARK)
     selected: Boolean,
     downloadIndicatorEnabled: Boolean,
-    downloadStateProvider: () -> AnimeDownload.State,
+    downloadStateProvider: () -> Download.State,
     downloadProgressProvider: () -> Int,
     episodeSwipeStartAction: LibraryPreferences.EpisodeSwipeAction,
     episodeSwipeEndAction: LibraryPreferences.EpisodeSwipeAction,
@@ -225,7 +225,7 @@ private fun getSwipeAction(
     // AM (FILLERMARK) -->
     fillermark: Boolean,
     // <-- AM (FILLERMARK)
-    downloadState: AnimeDownload.State,
+    downloadState: Download.State,
     background: Color,
     onSwipe: () -> Unit,
 ): me.saket.swipe.SwipeAction? {
@@ -259,9 +259,9 @@ private fun getSwipeAction(
         // <-- AM (FILLERMARK)
         LibraryPreferences.EpisodeSwipeAction.Download -> swipeAction(
             icon = when (downloadState) {
-                AnimeDownload.State.NOT_DOWNLOADED, AnimeDownload.State.ERROR -> Icons.Outlined.Download
-                AnimeDownload.State.QUEUE, AnimeDownload.State.DOWNLOADING -> Icons.Outlined.FileDownloadOff
-                AnimeDownload.State.DOWNLOADED -> Icons.Outlined.Delete
+                Download.State.NOT_DOWNLOADED, Download.State.ERROR -> Icons.Outlined.Download
+                Download.State.QUEUE, Download.State.DOWNLOADING -> Icons.Outlined.FileDownloadOff
+                Download.State.DOWNLOADED -> Icons.Outlined.Delete
             },
             background = background,
             onSwipe = onSwipe,

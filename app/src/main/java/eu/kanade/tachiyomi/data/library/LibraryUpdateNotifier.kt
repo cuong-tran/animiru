@@ -18,7 +18,7 @@ import eu.kanade.presentation.util.formatEpisodeNumber
 import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.animesource.UnmeteredSource
 import eu.kanade.tachiyomi.core.security.SecurityPreferences
-import eu.kanade.tachiyomi.data.download.AnimeDownloader
+import eu.kanade.tachiyomi.data.download.Downloader
 import eu.kanade.tachiyomi.data.notification.NotificationHandler
 import eu.kanade.tachiyomi.data.notification.NotificationReceiver
 import eu.kanade.tachiyomi.data.notification.Notifications
@@ -41,7 +41,7 @@ import uy.kohesive.injekt.api.get
 import java.math.RoundingMode
 import java.text.NumberFormat
 
-class AnimeLibraryUpdateNotifier(
+class LibraryUpdateNotifier(
     private val context: Context,
 
     private val securityPreferences: SecurityPreferences = Injekt.get(),
@@ -126,7 +126,7 @@ class AnimeLibraryUpdateNotifier(
                 ),
             )
             setSmallIcon(R.drawable.ic_warning_white_24dp)
-            setTimeoutAfter(AnimeDownloader.WARNING_NOTIF_TIMEOUT_MS)
+            setTimeoutAfter(Downloader.WARNING_NOTIF_TIMEOUT_MS)
             setContentIntent(NotificationHandler.openUrl(context, HELP_WARNING_URL))
         }
     }
@@ -154,7 +154,7 @@ class AnimeLibraryUpdateNotifier(
                     .bigText(context.stringResource(MR.strings.notification_size_warning)),
             )
             setSmallIcon(R.drawable.ic_warning_white_24dp)
-            setTimeoutAfter(AnimeDownloader.WARNING_NOTIF_TIMEOUT_MS)
+            setTimeoutAfter(Downloader.WARNING_NOTIF_TIMEOUT_MS)
             setContentIntent(NotificationHandler.openUrl(context, HELP_WARNING_URL))
         }
     }
@@ -291,7 +291,7 @@ class AnimeLibraryUpdateNotifier(
             )
             // Download chapters action
             // Only add the action when chapters is within threshold
-            if (episodes.size <= AnimeDownloader.EPISODES_PER_SOURCE_QUEUE_WARNING_THRESHOLD) {
+            if (episodes.size <= Downloader.EPISODES_PER_SOURCE_QUEUE_WARNING_THRESHOLD) {
                 addAction(
                     android.R.drawable.stat_sys_download_done,
                     context.stringResource(MR.strings.action_download),

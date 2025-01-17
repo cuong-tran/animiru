@@ -2,7 +2,7 @@
 
 package eu.kanade.tachiyomi.data.database.models
 
-class AnimeTrackImpl : AnimeTrack {
+class TrackImpl : Track {
 
     override var id: Long? = null
 

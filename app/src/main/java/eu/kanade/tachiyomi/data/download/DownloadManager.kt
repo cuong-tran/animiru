@@ -3,7 +3,7 @@ package eu.kanade.tachiyomi.data.download
 import android.content.Context
 import eu.kanade.tachiyomi.animesource.AnimeSource
 import eu.kanade.tachiyomi.animesource.model.Video
-import eu.kanade.tachiyomi.data.download.model.AnimeDownload
+import eu.kanade.tachiyomi.data.download.model.Download
 import eu.kanade.tachiyomi.util.size
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
@@ -36,11 +36,11 @@ import uy.kohesive.injekt.api.get
  * and retrieved through dependency injection. You can use this class to queue new episodes or query
  * downloaded episodes.
  */
-class AnimeDownloadManager(
+class DownloadManager(
     private val context: Context,
     private val storageManager: StorageManager = Injekt.get(),
-    private val provider: AnimeDownloadProvider = Injekt.get(),
-    private val cache: AnimeDownloadCache = Injekt.get(),
+    private val provider: DownloadProvider = Injekt.get(),
+    private val cache: DownloadCache = Injekt.get(),
     private val getCategories: GetAnimeCategories = Injekt.get(),
     private val sourceManager: AnimeSourceManager = Injekt.get(),
     private val downloadPreferences: DownloadPreferences = Injekt.get(),
@@ -49,7 +49,7 @@ class AnimeDownloadManager(
     /**
      * Downloader whose only task is to download episodes.
      */
-    private val downloader = AnimeDownloader(context, provider, cache, sourceManager)
+    private val downloader = Downloader(context, provider, cache, sourceManager)
 
     val isRunning: Boolean
         get() = downloader.isRunning
@@ -57,7 +57,7 @@ class AnimeDownloadManager(
     /**
      * Queue to delay the deletion of a list of episodes until triggered.
      */
-    private val pendingDeleter = AnimeDownloadPendingDeleter(context)
+    private val pendingDeleter = DownloadPendingDeleter(context)
 
     val queueState
         get() = downloader.queueState
@@ -67,7 +67,7 @@ class AnimeDownloadManager(
     fun downloaderStop(reason: String? = null) = downloader.stop(reason)
 
     val isDownloaderRunning
-        get() = AnimeDownloadJob.isRunningFlow(context)
+        get() = DownloadJob.isRunningFlow(context)
 
     /**
      * Tells the downloader to begin downloads.
@@ -75,10 +75,10 @@ class AnimeDownloadManager(
     fun startDownloads() {
         if (downloader.isRunning) return
 
-        if (AnimeDownloadJob.isRunning(context)) {
+        if (DownloadJob.isRunning(context)) {
             downloader.start()
         } else {
-            AnimeDownloadJob.start(context)
+            DownloadJob.start(context)
         }
     }
 
@@ -103,14 +103,14 @@ class AnimeDownloadManager(
      *
      * @param episodeId the episode to check.
      */
-    fun getQueuedDownloadOrNull(episodeId: Long): AnimeDownload? {
+    fun getQueuedDownloadOrNull(episodeId: Long): Download? {
         return queueState.value.find { it.episode.id == episodeId }
     }
 
     fun startDownloadNow(episodeId: Long) {
         val existingDownload = getQueuedDownloadOrNull(episodeId)
         // If not in queue try to start a new download
-        val toAdd = existingDownload ?: runBlocking { AnimeDownload.fromEpisodeId(episodeId) } ?: return
+        val toAdd = existingDownload ?: runBlocking { Download.fromEpisodeId(episodeId) } ?: return
         queueState.value.toMutableList().apply {
             existingDownload?.let { remove(it) }
             add(0, toAdd)
@@ -124,7 +124,7 @@ class AnimeDownloadManager(
      *
      * @param downloads value to set the download queue to
      */
-    fun reorderQueue(downloads: List<AnimeDownload>) {
+    fun reorderQueue(downloads: List<Download>) {
         downloader.updateQueue(downloads)
     }
 
@@ -154,13 +154,13 @@ class AnimeDownloadManager(
      *
      * @param downloads the list of downloads to enqueue.
      */
-    fun addDownloadsToStartOfQueue(downloads: List<AnimeDownload>) {
+    fun addDownloadsToStartOfQueue(downloads: List<Download>) {
         if (downloads.isEmpty()) return
         queueState.value.toMutableList().apply {
             addAll(0, downloads)
             reorderQueue(this)
         }
-        if (!AnimeDownloadJob.isRunning(context)) startDownloads()
+        if (!DownloadJob.isRunning(context)) startDownloads()
     }
 
     /**
@@ -260,7 +260,7 @@ class AnimeDownloadManager(
         }
     }
 
-    fun cancelQueuedDownloads(downloads: List<AnimeDownload>) {
+    fun cancelQueuedDownloads(downloads: List<Download>) {
         removeFromDownloadQueue(downloads.map { it.episode })
     }
 
@@ -371,7 +371,7 @@ class AnimeDownloadManager(
 
         val capitalizationChanged = oldFolder.name.equals(newName, ignoreCase = true)
         if (capitalizationChanged) {
-            val tempName = newName + AnimeDownloader.TMP_DIR_SUFFIX
+            val tempName = newName + Downloader.TMP_DIR_SUFFIX
             if (!oldFolder.renameTo(tempName)) {
                 logcat(LogPriority.ERROR) { "Failed to rename source download folder: ${oldFolder.name}" }
                 return
@@ -445,7 +445,7 @@ class AnimeDownloadManager(
     }
     // <-- AM (FILLERMARK)
 
-    fun statusFlow(): Flow<AnimeDownload> = queueState
+    fun statusFlow(): Flow<Download> = queueState
         .flatMapLatest { downloads ->
             downloads
                 .map { download ->
@@ -455,12 +455,12 @@ class AnimeDownloadManager(
         }
         .onStart {
             emitAll(
-                queueState.value.filter { download -> download.status == AnimeDownload.State.DOWNLOADING }
+                queueState.value.filter { download -> download.status == Download.State.DOWNLOADING }
                     .asFlow(),
             )
         }
 
-    fun progressFlow(): Flow<AnimeDownload> = queueState
+    fun progressFlow(): Flow<Download> = queueState
         .flatMapLatest { downloads ->
             downloads
                 .map { download ->
@@ -470,7 +470,7 @@ class AnimeDownloadManager(
         }
         .onStart {
             emitAll(
-                queueState.value.filter { download -> download.status == AnimeDownload.State.DOWNLOADING }
+                queueState.value.filter { download -> download.status == Download.State.DOWNLOADING }
                     .asFlow(),
             )
         }

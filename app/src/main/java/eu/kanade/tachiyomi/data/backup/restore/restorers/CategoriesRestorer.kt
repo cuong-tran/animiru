@@ -7,7 +7,7 @@ import tachiyomi.domain.library.service.LibraryPreferences
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
-class AnimeCategoriesRestorer(
+class CategoriesRestorer(
     private val animeHandler: AnimeDatabaseHandler = Injekt.get(),
     private val getAnimeCategories: GetAnimeCategories = Injekt.get(),
     private val libraryPreferences: LibraryPreferences = Injekt.get(),

@@ -1,7 +1,7 @@
 package eu.kanade.tachiyomi.data.track
 
 import eu.kanade.tachiyomi.animesource.AnimeSource
-import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
+import eu.kanade.tachiyomi.data.track.model.TrackSearch
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.track.model.AnimeTrack
 
@@ -9,7 +9,7 @@ import tachiyomi.domain.track.model.AnimeTrack
  * An Enhanced Track Service will never prompt the user to match a manga with the remote.
  * It is expected that such Track Service can only work with specific sources and unique IDs.
  */
-interface EnhancedAnimeTracker {
+interface EnhancedTracker {
     /**
      * This Tracker will only work with the sources that are accepted by this filter function.
      */
@@ -27,7 +27,7 @@ interface EnhancedAnimeTracker {
     /**
      * match is similar to Tracker.search, but only return zero or one match.
      */
-    suspend fun match(anime: Anime): AnimeTrackSearch?
+    suspend fun match(anime: Anime): TrackSearch?
 
     /**
      * Checks whether the provided source/track/anime triplet is from this AnimeTracker

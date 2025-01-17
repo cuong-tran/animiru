@@ -7,8 +7,8 @@ import eu.kanade.domain.episode.model.toSEpisode
 import eu.kanade.tachiyomi.animesource.AnimeSource
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
-import eu.kanade.tachiyomi.data.download.AnimeDownloadManager
-import eu.kanade.tachiyomi.data.download.AnimeDownloadProvider
+import eu.kanade.tachiyomi.data.download.DownloadManager
+import eu.kanade.tachiyomi.data.download.DownloadProvider
 import tachiyomi.data.episode.EpisodeSanitizer
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.episode.interactor.GetEpisodesByAnimeId
@@ -25,8 +25,8 @@ import java.time.ZonedDateTime
 import java.util.TreeSet
 
 class SyncEpisodesWithSource(
-    private val downloadManager: AnimeDownloadManager,
-    private val downloadProvider: AnimeDownloadProvider,
+    private val downloadManager: DownloadManager,
+    private val downloadProvider: DownloadProvider,
     private val episodeRepository: EpisodeRepository,
     private val shouldUpdateDbEpisode: ShouldUpdateDbEpisode,
     private val updateAnime: UpdateAnime,

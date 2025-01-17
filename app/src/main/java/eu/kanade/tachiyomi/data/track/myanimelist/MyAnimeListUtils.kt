@@ -1,6 +1,6 @@
 package eu.kanade.tachiyomi.data.track.myanimelist
 
-import eu.kanade.tachiyomi.data.database.models.AnimeTrack
+import eu.kanade.tachiyomi.data.database.models.Track
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -14,7 +14,7 @@ data class OAuth(
 
 fun OAuth.isExpired() = System.currentTimeMillis() > created_at + (expires_in * 1000)
 
-fun AnimeTrack.toMyAnimeListStatus() = when (status) {
+fun Track.toMyAnimeListStatus() = when (status) {
     MyAnimeList.WATCHING -> "watching"
     MyAnimeList.READING -> "watching"
     MyAnimeList.COMPLETED -> "completed"

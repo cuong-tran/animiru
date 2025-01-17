@@ -16,7 +16,7 @@ import androidx.compose.ui.util.fastAll
 import androidx.compose.ui.util.fastAny
 import eu.kanade.presentation.anime.components.AnimeBottomActionMenu
 import eu.kanade.presentation.anime.components.EpisodeDownloadAction
-import eu.kanade.tachiyomi.data.download.model.AnimeDownload
+import eu.kanade.tachiyomi.data.download.model.Download
 import eu.kanade.tachiyomi.ui.player.settings.PlayerPreferences
 import eu.kanade.tachiyomi.ui.updates.UpdatesItem
 import eu.kanade.tachiyomi.ui.updates.UpdatesScreenModel
@@ -154,11 +154,11 @@ private fun AnimeUpdatesBottomBar(
         onDownloadClicked = {
             onDownloadEpisode(selected, EpisodeDownloadAction.START)
         }.takeIf {
-            selected.fastAny { it.downloadStateProvider() != AnimeDownload.State.DOWNLOADED }
+            selected.fastAny { it.downloadStateProvider() != Download.State.DOWNLOADED }
         },
         onDeleteClicked = {
             onMultiDeleteClicked(selected)
-        }.takeIf { selected.fastAny { it.downloadStateProvider() == AnimeDownload.State.DOWNLOADED } },
+        }.takeIf { selected.fastAny { it.downloadStateProvider() == Download.State.DOWNLOADED } },
         onExternalClicked = {
             onOpenEpisode(selected[0], true)
         }.takeIf { !playerPreferences.alwaysUseExternalPlayer().get() && selected.size == 1 },

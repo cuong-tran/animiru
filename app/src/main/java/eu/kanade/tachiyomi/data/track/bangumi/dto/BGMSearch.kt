@@ -1,6 +1,6 @@
 package eu.kanade.tachiyomi.data.track.bangumi.dto
 
-import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
+import eu.kanade.tachiyomi.data.track.model.TrackSearch
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -24,7 +24,7 @@ data class BGMSearchItem(
     val rating: BGMSearchItemRating?,
     val url: String,
 ) {
-    fun toAnimeTrackSearch(trackId: Long): AnimeTrackSearch = AnimeTrackSearch.create(trackId).apply {
+    fun toAnimeTrackSearch(trackId: Long): TrackSearch = TrackSearch.create(trackId).apply {
         remote_id = this@BGMSearchItem.id
         title = nameCn.ifBlank { name }
         cover_url = images?.common.orEmpty()

@@ -8,8 +8,8 @@ import android.net.Uri
 import androidx.core.net.toUri
 import eu.kanade.tachiyomi.data.backup.restore.BackupRestoreJob
 import eu.kanade.tachiyomi.data.connection.syncmiru.SyncDataJob
-import eu.kanade.tachiyomi.data.download.AnimeDownloadManager
-import eu.kanade.tachiyomi.data.library.AnimeLibraryUpdateJob
+import eu.kanade.tachiyomi.data.download.DownloadManager
+import eu.kanade.tachiyomi.data.library.LibraryUpdateJob
 import eu.kanade.tachiyomi.data.updater.AppUpdateDownloadJob
 import eu.kanade.tachiyomi.ui.main.MainActivity
 import eu.kanade.tachiyomi.ui.player.PlayerActivity
@@ -46,7 +46,7 @@ class NotificationReceiver : BroadcastReceiver() {
     private val getAnime: GetAnime by injectLazy()
     private val getEpisode: GetEpisode by injectLazy()
     private val updateEpisode: UpdateEpisode by injectLazy()
-    private val animeDownloadManager: AnimeDownloadManager by injectLazy()
+    private val downloadManager: DownloadManager by injectLazy()
 
     override fun onReceive(context: Context, intent: Intent) {
         when (intent.action) {
@@ -55,11 +55,11 @@ class NotificationReceiver : BroadcastReceiver() {
                 context,
                 intent.getIntExtra(EXTRA_NOTIFICATION_ID, -1),
             )
-            ACTION_RESUME_ANIME_DOWNLOADS -> animeDownloadManager.startDownloads()
+            ACTION_RESUME_ANIME_DOWNLOADS -> downloadManager.startDownloads()
             // Pause the download service
-            ACTION_PAUSE_ANIME_DOWNLOADS -> animeDownloadManager.pauseDownloads()
+            ACTION_PAUSE_ANIME_DOWNLOADS -> downloadManager.pauseDownloads()
             // Clear the download queue
-            ACTION_CLEAR_ANIME_DOWNLOADS -> animeDownloadManager.clearQueue()
+            ACTION_CLEAR_ANIME_DOWNLOADS -> downloadManager.clearQueue()
             // Launch share activity and dismiss notification
             ACTION_SHARE_IMAGE ->
                 shareImage(
@@ -197,7 +197,7 @@ class NotificationReceiver : BroadcastReceiver() {
      * @param context context of application
      */
     private fun cancelAnimelibUpdate(context: Context) {
-        AnimeLibraryUpdateJob.stop(context)
+        LibraryUpdateJob.stop(context)
     }
 
     private fun startDownloadAppUpdate(context: Context, intent: Intent) {
@@ -228,7 +228,7 @@ class NotificationReceiver : BroadcastReceiver() {
                         if (anime != null) {
                             val source = sourceManager.get(anime.source)
                             if (source != null) {
-                                animeDownloadManager.deleteEpisodes(listOf(it), anime, source)
+                                downloadManager.deleteEpisodes(listOf(it), anime, source)
                             }
                         }
                     }
@@ -248,7 +248,7 @@ class NotificationReceiver : BroadcastReceiver() {
         launchIO {
             val anime = getAnime.await(animeId) ?: return@launchIO
             val episodes = episodeUrls.mapNotNull { getEpisode.await(it, animeId) }
-            animeDownloadManager.downloadEpisodes(anime, episodes)
+            downloadManager.downloadEpisodes(anime, episodes)
         }
     }
 

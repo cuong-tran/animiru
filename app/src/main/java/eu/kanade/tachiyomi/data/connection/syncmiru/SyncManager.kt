@@ -88,7 +88,7 @@ class SyncManager(
         val backup = Backup(
             backupAnime = backupAnime,
             backupAnimeCategories = backupCreator.backupAnimeCategories(backupOptions),
-            backupAnimeSources = backupCreator.backupAnimeSources(backupAnime),
+            backupSources = backupCreator.backupAnimeSources(backupAnime),
             backupPreferences = backupCreator.backupAppPreferences(backupOptions),
             backupSourcePreferences = backupCreator.backupSourcePreferences(backupOptions),
         )
@@ -154,7 +154,7 @@ class SyncManager(
         val newSyncData = backup.copy(
             backupAnime = animeFilteredFavorites,
             backupAnimeCategories = remoteBackup.backupAnimeCategories,
-            backupAnimeSources = remoteBackup.backupAnimeSources,
+            backupSources = remoteBackup.backupSources,
             backupPreferences = remoteBackup.backupPreferences,
             backupSourcePreferences = remoteBackup.backupSourcePreferences,
         )

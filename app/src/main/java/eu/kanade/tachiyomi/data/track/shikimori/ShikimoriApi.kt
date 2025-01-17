@@ -2,10 +2,10 @@ package eu.kanade.tachiyomi.data.track.shikimori
 
 import android.net.Uri
 import androidx.core.net.toUri
-import eu.kanade.tachiyomi.data.database.models.AnimeTrack
-import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
-import eu.kanade.tachiyomi.data.track.shikimori.dto.SMAddEntryResponse
-import eu.kanade.tachiyomi.data.track.shikimori.dto.SMEntry
+import eu.kanade.tachiyomi.data.database.models.Track
+import eu.kanade.tachiyomi.data.track.model.TrackSearch
+import eu.kanade.tachiyomi.data.track.shikimori.dto.SMAddAnimeResponse
+import eu.kanade.tachiyomi.data.track.shikimori.dto.SMAnime
 import eu.kanade.tachiyomi.data.track.shikimori.dto.SMOAuth
 import eu.kanade.tachiyomi.data.track.shikimori.dto.SMUser
 import eu.kanade.tachiyomi.data.track.shikimori.dto.SMUserListEntry
@@ -36,7 +36,7 @@ class ShikimoriApi(
 
     private val authClient = client.newBuilder().addInterceptor(interceptor).build()
 
-    suspend fun addLibAnime(track: AnimeTrack, userId: String): AnimeTrack {
+    suspend fun addLibAnime(track: Track, userId: String): Track {
         return withIOContext {
             with(json) {
                 val payload = buildJsonObject {
@@ -55,7 +55,7 @@ class ShikimoriApi(
                         body = payload.toString().toRequestBody(jsonMime),
                     ),
                 ).awaitSuccess()
-                    .parseAs<SMAddEntryResponse>()
+                    .parseAs<SMAddAnimeResponse>()
                     .let {
                         track.library_id = it.id
                     }
@@ -64,7 +64,7 @@ class ShikimoriApi(
         }
     }
 
-    suspend fun updateLibAnime(track: AnimeTrack, userId: String): AnimeTrack = addLibAnime(
+    suspend fun updateLibAnime(track: Track, userId: String): Track = addLibAnime(
         track,
         userId,
     )
@@ -77,7 +77,7 @@ class ShikimoriApi(
         }
     }
 
-    suspend fun searchAnime(search: String): List<AnimeTrackSearch> {
+    suspend fun searchAnime(search: String): List<TrackSearch> {
         return withIOContext {
             val url = "$API_URL/animes".toUri().buildUpon()
                 .appendQueryParameter("order", "popularity")
@@ -87,13 +87,13 @@ class ShikimoriApi(
             with(json) {
                 authClient.newCall(GET(url.toString()))
                     .awaitSuccess()
-                    .parseAs<List<SMEntry>>()
+                    .parseAs<List<SMAnime>>()
                     .map { it.toAnimeTrack(trackId) }
             }
         }
     }
 
-    suspend fun findLibAnime(track: AnimeTrack, user_id: String): AnimeTrack? {
+    suspend fun findLibAnime(track: Track, user_id: String): Track? {
         return withIOContext {
             val urlAnimes = "$API_URL/animes".toUri().buildUpon()
                 .appendPath(track.remote_id.toString())
@@ -101,7 +101,7 @@ class ShikimoriApi(
             val anime = with(json) {
                 authClient.newCall(GET(urlAnimes.toString()))
                     .awaitSuccess()
-                    .parseAs<SMEntry>()
+                    .parseAs<SMAnime>()
             }
 
             val url = "$API_URL/v2/user_rates".toUri().buildUpon()

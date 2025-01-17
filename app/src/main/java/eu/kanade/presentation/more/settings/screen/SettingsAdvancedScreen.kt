@@ -27,9 +27,9 @@ import eu.kanade.domain.extension.interactor.TrustExtension
 import eu.kanade.presentation.more.settings.Preference
 import eu.kanade.presentation.more.settings.screen.advanced.ClearDatabaseScreen
 import eu.kanade.presentation.more.settings.screen.debug.DebugInfoScreen
-import eu.kanade.tachiyomi.data.download.AnimeDownloadCache
-import eu.kanade.tachiyomi.data.library.AnimeLibraryUpdateJob
-import eu.kanade.tachiyomi.data.library.AnimeMetadataUpdateJob
+import eu.kanade.tachiyomi.data.download.DownloadCache
+import eu.kanade.tachiyomi.data.library.LibraryUpdateJob
+import eu.kanade.tachiyomi.data.library.MetadataUpdateJob
 import eu.kanade.tachiyomi.network.NetworkHelper
 import eu.kanade.tachiyomi.network.NetworkPreferences
 import eu.kanade.tachiyomi.network.PREF_DOH_360
@@ -178,7 +178,7 @@ object SettingsAdvancedScreen : SearchableSettings {
                     title = stringResource(MR.strings.pref_invalidate_download_cache),
                     subtitle = stringResource(MR.strings.pref_invalidate_episode_download_cache_summary),
                     onClick = {
-                        Injekt.get<AnimeDownloadCache>().invalidateCache()
+                        Injekt.get<DownloadCache>().invalidateCache()
                         context.toast(MR.strings.download_cache_invalidated)
                     },
                 ),
@@ -293,8 +293,8 @@ object SettingsAdvancedScreen : SearchableSettings {
                 Preference.PreferenceItem.TextPreference(
                     title = stringResource(MR.strings.pref_refresh_library_covers),
                     onClick = {
-                        AnimeLibraryUpdateJob.startNow(context)
-                        AnimeMetadataUpdateJob.startNow(context)
+                        LibraryUpdateJob.startNow(context)
+                        MetadataUpdateJob.startNow(context)
                     },
                 ),
                 Preference.PreferenceItem.TextPreference(

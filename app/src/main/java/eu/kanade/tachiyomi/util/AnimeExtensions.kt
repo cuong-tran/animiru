@@ -4,7 +4,7 @@ import eu.kanade.domain.anime.interactor.UpdateAnime
 import eu.kanade.domain.anime.model.hasCustomCover
 import eu.kanade.domain.anime.model.toSAnime
 import eu.kanade.tachiyomi.animesource.model.SAnime
-import eu.kanade.tachiyomi.data.cache.AnimeCoverCache
+import eu.kanade.tachiyomi.data.cache.CoverCache
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.source.local.image.LocalAnimeCoverManager
 import tachiyomi.source.local.isLocal
@@ -16,7 +16,7 @@ import java.time.Instant
 /**
  * Call before updating [Anime.thumbnail_url] to ensure old cover can be cleared from cache
  */
-fun Anime.prepUpdateCover(coverCache: AnimeCoverCache, remoteAnime: SAnime, refreshSameUrl: Boolean): Anime {
+fun Anime.prepUpdateCover(coverCache: CoverCache, remoteAnime: SAnime, refreshSameUrl: Boolean): Anime {
     // Never refresh covers if the new url is null, as the current url has possibly become invalid
     val newUrl = remoteAnime.thumbnail_url ?: return this
 
@@ -40,7 +40,7 @@ fun Anime.prepUpdateCover(coverCache: AnimeCoverCache, remoteAnime: SAnime, refr
     }
 }
 
-fun Anime.removeCovers(coverCache: AnimeCoverCache = Injekt.get()): Anime {
+fun Anime.removeCovers(coverCache: CoverCache = Injekt.get()): Anime {
     if (isLocal()) return this
     return if (coverCache.deleteFromCache(this, true) > 0) {
         return copy(coverLastModified = Instant.now().toEpochMilli())
@@ -53,7 +53,7 @@ suspend fun Anime.editCover(
     coverManager: LocalAnimeCoverManager,
     stream: InputStream,
     updateAnime: UpdateAnime = Injekt.get(),
-    coverCache: AnimeCoverCache = Injekt.get(),
+    coverCache: CoverCache = Injekt.get(),
 ) {
     if (isLocal()) {
         coverManager.update(toSAnime(), stream)

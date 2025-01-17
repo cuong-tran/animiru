@@ -20,7 +20,7 @@ import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
 import eu.kanade.tachiyomi.data.connection.discord.DiscordRPCService
 import eu.kanade.tachiyomi.data.connection.discord.PlayerData
-import eu.kanade.tachiyomi.data.download.AnimeDownloadManager
+import eu.kanade.tachiyomi.data.download.DownloadManager
 import eu.kanade.tachiyomi.data.track.AnimeTracker
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.source.isNsfw
@@ -425,7 +425,7 @@ class ExternalIntents {
     private val getEpisodesByAnimeId: GetEpisodesByAnimeId = Injekt.get()
     private val getTracks: GetAnimeTracks = Injekt.get()
     private val insertTrack: InsertAnimeTrack = Injekt.get()
-    private val downloadManager: AnimeDownloadManager by injectLazy()
+    private val downloadManager: DownloadManager by injectLazy()
     private val delayedTrackingStore: DelayedTrackingStore = Injekt.get()
     private val playerPreferences: PlayerPreferences = Injekt.get()
     private val downloadPreferences: DownloadPreferences = Injekt.get()

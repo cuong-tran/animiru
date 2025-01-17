@@ -7,7 +7,7 @@ import okhttp3.Request
 /**
  * This class contains all data needed to manage the download of a http range download part
  */
-class AnimeDownloadPart(
+class DownloadPart(
     placingDir: UniFile,
     range: Pair<Long, Long>,
 ) {

@@ -12,10 +12,10 @@ import eu.kanade.core.util.insertSeparators
 import eu.kanade.domain.episode.interactor.SetSeenStatus
 import eu.kanade.presentation.anime.components.EpisodeDownloadAction
 import eu.kanade.presentation.updates.UpdatesUiModel
-import eu.kanade.tachiyomi.data.download.AnimeDownloadCache
-import eu.kanade.tachiyomi.data.download.AnimeDownloadManager
-import eu.kanade.tachiyomi.data.download.model.AnimeDownload
-import eu.kanade.tachiyomi.data.library.AnimeLibraryUpdateJob
+import eu.kanade.tachiyomi.data.download.DownloadCache
+import eu.kanade.tachiyomi.data.download.DownloadManager
+import eu.kanade.tachiyomi.data.download.model.Download
+import eu.kanade.tachiyomi.data.library.LibraryUpdateJob
 import eu.kanade.tachiyomi.util.lang.toLocalDate
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.mutate
@@ -50,8 +50,8 @@ import java.time.ZonedDateTime
 
 class UpdatesScreenModel(
     private val sourceManager: AnimeSourceManager = Injekt.get(),
-    private val downloadManager: AnimeDownloadManager = Injekt.get(),
-    private val downloadCache: AnimeDownloadCache = Injekt.get(),
+    private val downloadManager: DownloadManager = Injekt.get(),
+    private val downloadCache: DownloadCache = Injekt.get(),
     private val updateEpisode: UpdateEpisode = Injekt.get(),
     private val setSeenStatus: SetSeenStatus = Injekt.get(),
     private val getUpdates: GetAnimeUpdates = Injekt.get(),
@@ -118,8 +118,8 @@ class UpdatesScreenModel(
                 )
                 val downloadState = when {
                     activeDownload != null -> activeDownload.status
-                    downloaded -> AnimeDownload.State.DOWNLOADED
-                    else -> AnimeDownload.State.NOT_DOWNLOADED
+                    downloaded -> Download.State.DOWNLOADED
+                    else -> Download.State.NOT_DOWNLOADED
                 }
                 UpdatesItem(
                     update = update,
@@ -135,7 +135,7 @@ class UpdatesScreenModel(
     }
 
     fun updateLibrary(): Boolean {
-        val started = AnimeLibraryUpdateJob.startNow(Injekt.get<Application>())
+        val started = LibraryUpdateJob.startNow(Injekt.get<Application>())
         screenModelScope.launch {
             _events.send(Event.LibraryUpdateTriggered(started))
         }
@@ -147,7 +147,7 @@ class UpdatesScreenModel(
      *
      * @param download download object containing progress.
      */
-    private fun updateDownloadState(download: AnimeDownload) {
+    private fun updateDownloadState(download: Download) {
         mutableState.update { state ->
             val newItems = state.items.mutate { list ->
                 val modifiedIndex = list.indexOfFirst { it.update.episodeId == download.episode.id }
@@ -169,7 +169,7 @@ class UpdatesScreenModel(
             when (action) {
                 EpisodeDownloadAction.START -> {
                     downloadEpisodes(items)
-                    if (items.any { it.downloadStateProvider() == AnimeDownload.State.ERROR }) {
+                    if (items.any { it.downloadStateProvider() == Download.State.ERROR }) {
                         downloadManager.startDownloads()
                     }
                 }
@@ -200,7 +200,7 @@ class UpdatesScreenModel(
     private fun cancelDownload(episodeId: Long) {
         val activeDownload = downloadManager.getQueuedDownloadOrNull(episodeId) ?: return
         downloadManager.cancelQueuedDownloads(listOf(activeDownload))
-        updateDownloadState(activeDownload.apply { status = AnimeDownload.State.NOT_DOWNLOADED })
+        updateDownloadState(activeDownload.apply { status = Download.State.NOT_DOWNLOADED })
     }
 
     /**
@@ -443,7 +443,7 @@ class UpdatesScreenModel(
 @Immutable
 data class UpdatesItem(
     val update: AnimeUpdatesWithRelations,
-    val downloadStateProvider: () -> AnimeDownload.State,
+    val downloadStateProvider: () -> Download.State,
     val downloadProgressProvider: () -> Int,
     val selected: Boolean = false,
     // AM (FILE_SIZE) -->
