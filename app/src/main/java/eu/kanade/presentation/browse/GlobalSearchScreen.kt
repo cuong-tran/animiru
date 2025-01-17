@@ -11,20 +11,20 @@ import eu.kanade.presentation.browse.components.GlobalSearchLoadingResultItem
 import eu.kanade.presentation.browse.components.GlobalSearchResultItem
 import eu.kanade.presentation.browse.components.GlobalSearchToolbar
 import eu.kanade.tachiyomi.animesource.AnimeCatalogueSource
-import eu.kanade.tachiyomi.ui.browse.source.globalsearch.AnimeSearchItemResult
-import eu.kanade.tachiyomi.ui.browse.source.globalsearch.AnimeSearchScreenModel
-import eu.kanade.tachiyomi.ui.browse.source.globalsearch.AnimeSourceFilter
+import eu.kanade.tachiyomi.ui.browse.source.globalsearch.SearchItemResult
+import eu.kanade.tachiyomi.ui.browse.source.globalsearch.SearchScreenModel
+import eu.kanade.tachiyomi.ui.browse.source.globalsearch.SourceFilter
 import eu.kanade.tachiyomi.util.system.LocaleHelper
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.presentation.core.components.material.Scaffold
 
 @Composable
 fun GlobalSearchScreen(
-    state: AnimeSearchScreenModel.State,
+    state: SearchScreenModel.State,
     navigateUp: () -> Unit,
     onChangeSearchQuery: (String?) -> Unit,
     onSearch: (String) -> Unit,
-    onChangeSearchFilter: (AnimeSourceFilter) -> Unit,
+    onChangeSearchFilter: (SourceFilter) -> Unit,
     onToggleResults: () -> Unit,
     getAnime: @Composable (Anime) -> State<Anime>,
     onClickSource: (AnimeCatalogueSource) -> Unit,
@@ -61,7 +61,7 @@ fun GlobalSearchScreen(
 
 @Composable
 internal fun GlobalSearchContent(
-    items: Map<AnimeCatalogueSource, AnimeSearchItemResult>,
+    items: Map<AnimeCatalogueSource, SearchItemResult>,
     contentPadding: PaddingValues,
     getAnime: @Composable (Anime) -> State<Anime>,
     onClickSource: (AnimeCatalogueSource) -> Unit,
@@ -83,10 +83,10 @@ internal fun GlobalSearchContent(
                     modifier = Modifier.animateItem(),
                 ) {
                     when (result) {
-                        AnimeSearchItemResult.Loading -> {
+                        SearchItemResult.Loading -> {
                             GlobalSearchLoadingResultItem()
                         }
-                        is AnimeSearchItemResult.Success -> {
+                        is SearchItemResult.Success -> {
                             GlobalSearchCardRow(
                                 titles = result.result,
                                 getAnime = getAnime,
@@ -94,7 +94,7 @@ internal fun GlobalSearchContent(
                                 onLongClick = onLongClickItem,
                             )
                         }
-                        is AnimeSearchItemResult.Error -> {
+                        is SearchItemResult.Error -> {
                             GlobalSearchErrorResultItem(message = result.throwable.message)
                         }
                     }

@@ -13,7 +13,7 @@ import eu.kanade.presentation.components.relativeDateText
 import eu.kanade.presentation.history.components.HistoryItem
 import eu.kanade.presentation.theme.TachiyomiPreviewTheme
 import eu.kanade.presentation.util.animateItemFastScroll
-import eu.kanade.tachiyomi.ui.history.AnimeHistoryScreenModel
+import eu.kanade.tachiyomi.ui.history.HistoryScreenModel
 import tachiyomi.domain.history.model.AnimeHistoryWithRelations
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.FastScrollLazyColumn
@@ -25,11 +25,11 @@ import java.time.LocalDate
 
 @Composable
 fun HistoryScreen(
-    state: AnimeHistoryScreenModel.State,
+    state: HistoryScreenModel.State,
     snackbarHostState: SnackbarHostState,
     onClickCover: (animeId: Long) -> Unit,
     onClickResume: (animeId: Long, episodeId: Long) -> Unit,
-    onDialogChange: (AnimeHistoryScreenModel.Dialog?) -> Unit,
+    onDialogChange: (HistoryScreenModel.Dialog?) -> Unit,
     searchQuery: String? = null,
 ) {
     Scaffold(
@@ -54,7 +54,7 @@ fun HistoryScreen(
                     contentPadding = contentPadding,
                     onClickCover = { history -> onClickCover(history.animeId) },
                     onClickResume = { history -> onClickResume(history.animeId, history.episodeId) },
-                    onClickDelete = { item -> onDialogChange(AnimeHistoryScreenModel.Dialog.Delete(item)) },
+                    onClickDelete = { item -> onDialogChange(HistoryScreenModel.Dialog.Delete(item)) },
                 )
             }
         }
@@ -113,7 +113,7 @@ sealed interface AnimeHistoryUiModel {
 @Composable
 internal fun HistoryScreenPreviews(
     @PreviewParameter(HistoryScreenModelStateProvider::class)
-    historyState: AnimeHistoryScreenModel.State,
+    historyState: HistoryScreenModel.State,
 ) {
     TachiyomiPreviewTheme {
         HistoryScreen(

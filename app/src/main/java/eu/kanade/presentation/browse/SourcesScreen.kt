@@ -35,12 +35,12 @@ import eu.kanade.domain.source.model.installedExtension
 import eu.kanade.presentation.browse.components.BaseSourceItem
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.components.AppBarTitle
-import eu.kanade.tachiyomi.ui.browse.extension.details.AnimeExtensionDetailsScreen
-import eu.kanade.tachiyomi.ui.browse.migration.sources.MigrateAnimeSourceScreen
-import eu.kanade.tachiyomi.ui.browse.source.AnimeSourcesFilterScreen
-import eu.kanade.tachiyomi.ui.browse.source.AnimeSourcesScreenModel
-import eu.kanade.tachiyomi.ui.browse.source.browse.BrowseAnimeSourceScreenModel.Listing
-import eu.kanade.tachiyomi.ui.browse.source.globalsearch.GlobalAnimeSearchScreen
+import eu.kanade.tachiyomi.ui.browse.extension.details.ExtensionDetailsScreen
+import eu.kanade.tachiyomi.ui.browse.migration.sources.MigrateSourceScreen
+import eu.kanade.tachiyomi.ui.browse.source.SourcesFilterScreen
+import eu.kanade.tachiyomi.ui.browse.source.SourcesScreenModel
+import eu.kanade.tachiyomi.ui.browse.source.browse.BrowseSourceScreenModel.Listing
+import eu.kanade.tachiyomi.ui.browse.source.globalsearch.GlobalSearchScreen
 import eu.kanade.tachiyomi.util.system.LocaleHelper
 import tachiyomi.domain.source.model.AnimeSource
 import tachiyomi.domain.source.model.Pin
@@ -61,7 +61,7 @@ import tachiyomi.source.local.LocalAnimeSource
 
 @Composable
 fun SourcesScreen(
-    state: AnimeSourcesScreenModel.State,
+    state: SourcesScreenModel.State,
     onClickItem: (AnimeSource, Listing) -> Unit,
     onClickPin: (AnimeSource) -> Unit,
     onLongClickItem: (AnimeSource) -> Unit,
@@ -77,19 +77,19 @@ fun SourcesScreen(
             AppBar(
                 titleContent = { AppBarTitle(stringResource(MR.strings.browse)) },
                 actions = {
-                    IconButton(onClick = { navigator.push(GlobalAnimeSearchScreen()) }) {
+                    IconButton(onClick = { navigator.push(GlobalSearchScreen()) }) {
                         Icon(
                             Icons.Outlined.TravelExplore,
                             contentDescription = stringResource(MR.strings.action_global_search),
                         )
                     }
-                    IconButton(onClick = { navigator.push(AnimeSourcesFilterScreen()) }) {
+                    IconButton(onClick = { navigator.push(SourcesFilterScreen()) }) {
                         Icon(
                             Icons.Outlined.FilterList,
                             contentDescription = stringResource(MR.strings.action_filter),
                         )
                     }
-                    IconButton(onClick = { navigator.push(MigrateAnimeSourceScreen()) }) {
+                    IconButton(onClick = { navigator.push(MigrateSourceScreen()) }) {
                         Icon(
                             Icons.Outlined.SwapCalls,
                             contentDescription = stringResource(MR.strings.action_migrate),
@@ -271,7 +271,7 @@ private fun AnimeSourceSettingsButton(
     source: AnimeSource,
 ) {
     val extension = source.installedExtension ?: return
-    IconButton(onClick = { navigator.push(AnimeExtensionDetailsScreen(extension.pkgName)) }) {
+    IconButton(onClick = { navigator.push(ExtensionDetailsScreen(extension.pkgName)) }) {
         Icon(
             imageVector = Icons.Outlined.Settings,
             tint = MaterialTheme.colorScheme.primary,

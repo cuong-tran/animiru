@@ -1,7 +1,7 @@
 package eu.kanade.presentation.history
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import eu.kanade.tachiyomi.ui.history.AnimeHistoryScreenModel
+import eu.kanade.tachiyomi.ui.history.HistoryScreenModel
 import tachiyomi.domain.anime.model.AnimeCover
 import tachiyomi.domain.history.model.AnimeHistoryWithRelations
 import java.time.Instant
@@ -10,9 +10,9 @@ import java.time.temporal.ChronoUnit
 import java.util.Date
 import kotlin.random.Random
 
-class HistoryScreenModelStateProvider : PreviewParameterProvider<AnimeHistoryScreenModel.State> {
+class HistoryScreenModelStateProvider : PreviewParameterProvider<HistoryScreenModel.State> {
 
-    private val multiPage = AnimeHistoryScreenModel.State(
+    private val multiPage = HistoryScreenModel.State(
         searchQuery = null,
         list =
         listOf(HistoryUiModelExamples.headerToday)
@@ -26,7 +26,7 @@ class HistoryScreenModelStateProvider : PreviewParameterProvider<AnimeHistoryScr
         dialog = null,
     )
 
-    private val shortRecent = AnimeHistoryScreenModel.State(
+    private val shortRecent = HistoryScreenModel.State(
         searchQuery = null,
         list = listOf(
             HistoryUiModelExamples.headerToday,
@@ -35,7 +35,7 @@ class HistoryScreenModelStateProvider : PreviewParameterProvider<AnimeHistoryScr
         dialog = null,
     )
 
-    private val shortFuture = AnimeHistoryScreenModel.State(
+    private val shortFuture = HistoryScreenModel.State(
         searchQuery = null,
         list = listOf(
             HistoryUiModelExamples.headerTomorrow,
@@ -44,23 +44,23 @@ class HistoryScreenModelStateProvider : PreviewParameterProvider<AnimeHistoryScr
         dialog = null,
     )
 
-    private val empty = AnimeHistoryScreenModel.State(
+    private val empty = HistoryScreenModel.State(
         searchQuery = null,
         list = listOf(),
         dialog = null,
     )
 
-    private val loadingWithSearchQuery = AnimeHistoryScreenModel.State(
+    private val loadingWithSearchQuery = HistoryScreenModel.State(
         searchQuery = "Example Search Query",
     )
 
-    private val loading = AnimeHistoryScreenModel.State(
+    private val loading = HistoryScreenModel.State(
         searchQuery = null,
         list = null,
         dialog = null,
     )
 
-    override val values: Sequence<AnimeHistoryScreenModel.State> = sequenceOf(
+    override val values: Sequence<HistoryScreenModel.State> = sequenceOf(
         multiPage,
         shortRecent,
         shortFuture,

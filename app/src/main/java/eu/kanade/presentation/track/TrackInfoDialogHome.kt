@@ -50,7 +50,7 @@ import eu.kanade.presentation.theme.TachiyomiPreviewTheme
 import eu.kanade.presentation.track.components.TrackLogoIcon
 import eu.kanade.tachiyomi.data.track.AnimeTracker
 import eu.kanade.tachiyomi.data.track.Tracker
-import eu.kanade.tachiyomi.ui.anime.track.AnimeTrackItem
+import eu.kanade.tachiyomi.ui.anime.track.TrackItem
 import eu.kanade.tachiyomi.util.lang.toLocalDate
 import eu.kanade.tachiyomi.util.system.copyToClipboard
 import tachiyomi.i18n.MR
@@ -59,17 +59,17 @@ import java.time.format.DateTimeFormatter
 
 @Composable
 fun TrackInfoDialogHome(
-    trackItems: List<AnimeTrackItem>,
+    trackItems: List<TrackItem>,
     dateFormat: DateTimeFormatter,
-    onStatusClick: (AnimeTrackItem) -> Unit,
-    onEpisodeClick: (AnimeTrackItem) -> Unit,
-    onScoreClick: (AnimeTrackItem) -> Unit,
-    onStartDateEdit: (AnimeTrackItem) -> Unit,
-    onEndDateEdit: (AnimeTrackItem) -> Unit,
-    onNewSearch: (AnimeTrackItem) -> Unit,
-    onOpenInBrowser: (AnimeTrackItem) -> Unit,
-    onRemoved: (AnimeTrackItem) -> Unit,
-    onCopyLink: (AnimeTrackItem) -> Unit,
+    onStatusClick: (TrackItem) -> Unit,
+    onEpisodeClick: (TrackItem) -> Unit,
+    onScoreClick: (TrackItem) -> Unit,
+    onStartDateEdit: (TrackItem) -> Unit,
+    onEndDateEdit: (TrackItem) -> Unit,
+    onNewSearch: (TrackItem) -> Unit,
+    onOpenInBrowser: (TrackItem) -> Unit,
+    onRemoved: (TrackItem) -> Unit,
+    onCopyLink: (TrackItem) -> Unit,
 ) {
     Column(
         modifier = Modifier

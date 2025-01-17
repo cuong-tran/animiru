@@ -43,7 +43,7 @@ import eu.kanade.presentation.util.animateItemFastScroll
 import eu.kanade.presentation.util.relativeTimeSpanString
 import eu.kanade.tachiyomi.data.download.AnimeDownloadProvider
 import eu.kanade.tachiyomi.data.download.model.AnimeDownload
-import eu.kanade.tachiyomi.ui.updates.AnimeUpdatesItem
+import eu.kanade.tachiyomi.ui.updates.UpdatesItem
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.domain.source.service.AnimeSourceManager
 import tachiyomi.domain.storage.service.StoragePreferences
@@ -80,10 +80,10 @@ internal fun LazyListScope.updatesLastUpdatedItem(
 internal fun LazyListScope.updatesUiItems(
     uiModels: List<UpdatesUiModel>,
     selectionMode: Boolean,
-    onUpdateSelected: (AnimeUpdatesItem, Boolean, Boolean, Boolean) -> Unit,
-    onClickCover: (AnimeUpdatesItem) -> Unit,
-    onClickUpdate: (AnimeUpdatesItem, altPlayer: Boolean) -> Unit,
-    onDownloadEpisode: (List<AnimeUpdatesItem>, EpisodeDownloadAction) -> Unit,
+    onUpdateSelected: (UpdatesItem, Boolean, Boolean, Boolean) -> Unit,
+    onClickCover: (UpdatesItem) -> Unit,
+    onClickUpdate: (UpdatesItem, altPlayer: Boolean) -> Unit,
+    onDownloadEpisode: (List<UpdatesItem>, EpisodeDownloadAction) -> Unit,
 ) {
     items(
         items = uiModels,
@@ -164,7 +164,7 @@ private fun UpdatesUiItem(
     downloadStateProvider: () -> AnimeDownload.State,
     downloadProgressProvider: () -> Int,
     // AM (FILE_SIZE) -->
-    updatesItem: AnimeUpdatesItem,
+    updatesItem: UpdatesItem,
     // <-- AM (FILE_SIZE)
     modifier: Modifier = Modifier,
 ) {

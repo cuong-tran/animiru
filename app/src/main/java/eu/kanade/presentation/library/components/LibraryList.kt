@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastAny
-import eu.kanade.tachiyomi.ui.library.AnimeLibraryItem
+import eu.kanade.tachiyomi.ui.library.LibraryItem
 import tachiyomi.domain.anime.model.AnimeCover
 import tachiyomi.domain.library.LibraryAnime
 import tachiyomi.presentation.core.components.FastScrollLazyColumn
@@ -16,7 +16,7 @@ import tachiyomi.presentation.core.util.plus
 
 @Composable
 internal fun LibraryList(
-    items: List<AnimeLibraryItem>,
+    items: List<LibraryItem>,
     contentPadding: PaddingValues,
     selection: List<LibraryAnime>,
     onClick: (LibraryAnime) -> Unit,

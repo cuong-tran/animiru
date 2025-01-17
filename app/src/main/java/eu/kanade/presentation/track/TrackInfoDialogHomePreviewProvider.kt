@@ -2,7 +2,7 @@ package eu.kanade.presentation.track
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import eu.kanade.tachiyomi.ui.anime.track.AnimeTrackItem
+import eu.kanade.tachiyomi.ui.anime.track.TrackItem
 import eu.kanade.test.DummyTracker
 import tachiyomi.domain.track.model.AnimeTrack
 import java.time.format.DateTimeFormatter
@@ -26,14 +26,14 @@ internal class TrackInfoDialogHomePreviewProvider :
         startDate = 0L,
         finishDate = 0L,
     )
-    private val trackItemWithoutTrack = AnimeTrackItem(
+    private val trackItemWithoutTrack = TrackItem(
         track = null,
         tracker = DummyTracker(
             id = 1L,
             name = "Example Tracker",
         ),
     )
-    private val trackItemWithTrack = AnimeTrackItem(
+    private val trackItemWithTrack = TrackItem(
         track = aTrack,
         tracker = DummyTracker(
             id = 2L,

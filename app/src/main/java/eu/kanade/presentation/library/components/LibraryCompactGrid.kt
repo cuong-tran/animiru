@@ -6,13 +6,13 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastAny
-import eu.kanade.tachiyomi.ui.library.AnimeLibraryItem
+import eu.kanade.tachiyomi.ui.library.LibraryItem
 import tachiyomi.domain.anime.model.AnimeCover
 import tachiyomi.domain.library.LibraryAnime
 
 @Composable
 fun LibraryCompactGrid(
-    items: List<AnimeLibraryItem>,
+    items: List<LibraryItem>,
     showTitle: Boolean,
     columns: Int,
     contentPadding: PaddingValues,

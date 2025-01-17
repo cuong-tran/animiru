@@ -55,7 +55,7 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import eu.kanade.domain.source.service.SourcePreferences
 import eu.kanade.presentation.util.Tab
 import eu.kanade.tachiyomi.ui.browse.BrowseTab
-import eu.kanade.tachiyomi.ui.library.AnimeLibraryTab
+import eu.kanade.tachiyomi.ui.library.LibraryTab
 import eu.kanade.tachiyomi.ui.recents.RecentsTab
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -98,7 +98,7 @@ fun NavigationPill(
     )
 
     BackHandler(
-        enabled = tabNavigator.current != AnimeLibraryTab,
+        enabled = tabNavigator.current != LibraryTab,
         onBack = { updateTab(0) },
     )
 

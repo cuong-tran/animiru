@@ -3,23 +3,23 @@ package eu.kanade.domain.source.model
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.core.graphics.drawable.toBitmap
-import eu.kanade.tachiyomi.extension.AnimeExtensionManager
-import eu.kanade.tachiyomi.extension.model.AnimeExtension
+import eu.kanade.tachiyomi.extension.ExtensionManager
+import eu.kanade.tachiyomi.extension.model.Extension
 import tachiyomi.domain.source.model.AnimeSource
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
 val AnimeSource.icon: ImageBitmap?
     get() {
-        return Injekt.get<AnimeExtensionManager>().getAppIconForSource(id)
+        return Injekt.get<ExtensionManager>().getAppIconForSource(id)
             ?.toBitmap()
             ?.asImageBitmap()
     }
 
 // AM (BROWSE) -->
-private val sourceIdToExtensionMap: MutableMap<Long, AnimeExtension.Installed> by lazy {
-    val map = mutableMapOf<Long, AnimeExtension.Installed>()
-    Injekt.get<AnimeExtensionManager>()
+private val sourceIdToExtensionMap: MutableMap<Long, Extension.Installed> by lazy {
+    val map = mutableMapOf<Long, Extension.Installed>()
+    Injekt.get<ExtensionManager>()
         .installedExtensionsFlow
         .value
         .forEach { ext ->
@@ -32,7 +32,7 @@ private val sourceIdToExtensionMap: MutableMap<Long, AnimeExtension.Installed> b
 
 fun updateSourceIdToExtensionMap() {
     sourceIdToExtensionMap.clear()
-    Injekt.get<AnimeExtensionManager>()
+    Injekt.get<ExtensionManager>()
         .installedExtensionsFlow
         .value
         .forEach { ext ->
@@ -42,7 +42,7 @@ fun updateSourceIdToExtensionMap() {
         }
 }
 
-val AnimeSource.installedExtension: AnimeExtension.Installed?
+val AnimeSource.installedExtension: Extension.Installed?
     get() {
         return sourceIdToExtensionMap[id]
     }

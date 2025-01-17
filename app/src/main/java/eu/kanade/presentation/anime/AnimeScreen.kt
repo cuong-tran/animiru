@@ -74,7 +74,7 @@ import eu.kanade.tachiyomi.data.download.model.AnimeDownload
 import eu.kanade.tachiyomi.source.getNameForAnimeInfo
 import eu.kanade.tachiyomi.ui.anime.AnimeScreenModel
 import eu.kanade.tachiyomi.ui.anime.EpisodeList
-import eu.kanade.tachiyomi.ui.browse.extension.details.AnimeSourcePreferencesScreen
+import eu.kanade.tachiyomi.ui.browse.extension.details.SourcePreferencesScreen
 import eu.kanade.tachiyomi.util.system.copyToClipboard
 import kotlinx.coroutines.delay
 import tachiyomi.core.common.util.lang.withIOContext
@@ -165,7 +165,7 @@ fun AnimeScreen(
 
     val navigator = LocalNavigator.currentOrThrow
     val onSettingsClicked: (() -> Unit)? = {
-        navigator.push(AnimeSourcePreferencesScreen(state.source.id))
+        navigator.push(SourcePreferencesScreen(state.source.id))
     }.takeIf { state.source is ConfigurableAnimeSource }
 
     if (!isTabletUi) {

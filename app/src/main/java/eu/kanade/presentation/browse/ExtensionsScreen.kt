@@ -54,11 +54,11 @@ import eu.kanade.presentation.components.WarningBanner
 import eu.kanade.presentation.more.settings.screen.browse.ExtensionReposScreen
 import eu.kanade.presentation.util.animateItemFastScroll
 import eu.kanade.presentation.util.rememberRequestPackageInstallsPermissionState
-import eu.kanade.tachiyomi.extension.InstallStep
-import eu.kanade.tachiyomi.extension.model.AnimeExtension
-import eu.kanade.tachiyomi.ui.browse.extension.AnimeExtensionFilterScreen
-import eu.kanade.tachiyomi.ui.browse.extension.AnimeExtensionUiModel
-import eu.kanade.tachiyomi.ui.browse.extension.AnimeExtensionsScreenModel
+import eu.kanade.tachiyomi.extension.model.InstallStep
+import eu.kanade.tachiyomi.extension.model.Extension
+import eu.kanade.tachiyomi.ui.browse.extension.ExtensionFilterScreen
+import eu.kanade.tachiyomi.ui.browse.extension.ExtensionUiModel
+import eu.kanade.tachiyomi.ui.browse.extension.ExtensionsScreenModel
 import eu.kanade.tachiyomi.util.system.LocaleHelper
 import eu.kanade.tachiyomi.util.system.launchRequestPackageInstallsPermission
 import kotlinx.collections.immutable.persistentListOf
@@ -78,16 +78,16 @@ import tachiyomi.presentation.core.util.secondaryItemAlpha
 
 @Composable
 fun ExtensionScreen(
-    state: AnimeExtensionsScreenModel.State,
+    state: ExtensionsScreenModel.State,
     searchQuery: String?,
-    onLongClickItem: (AnimeExtension) -> Unit,
-    onClickItemCancel: (AnimeExtension) -> Unit,
-    onOpenWebView: (AnimeExtension.Available) -> Unit,
-    onInstallExtension: (AnimeExtension.Available) -> Unit,
-    onUninstallExtension: (AnimeExtension) -> Unit,
-    onUpdateExtension: (AnimeExtension.Installed) -> Unit,
-    onTrustExtension: (AnimeExtension.Untrusted) -> Unit,
-    onOpenExtension: (AnimeExtension.Installed) -> Unit,
+    onLongClickItem: (Extension) -> Unit,
+    onClickItemCancel: (Extension) -> Unit,
+    onOpenWebView: (Extension.Available) -> Unit,
+    onInstallExtension: (Extension.Available) -> Unit,
+    onUninstallExtension: (Extension) -> Unit,
+    onUpdateExtension: (Extension.Installed) -> Unit,
+    onTrustExtension: (Extension.Untrusted) -> Unit,
+    onOpenExtension: (Extension.Installed) -> Unit,
     onClickUpdateAll: () -> Unit,
     onRefresh: () -> Unit,
     // AM (BROWSE) -->
@@ -104,7 +104,7 @@ fun ExtensionScreen(
                 searchQuery = searchQuery,
                 onChangeSearchQuery = onChangeSearchQuery,
                 actions = {
-                    IconButton(onClick = { navigator.push(AnimeExtensionFilterScreen()) }) {
+                    IconButton(onClick = { navigator.push(ExtensionFilterScreen()) }) {
                         Icon(
                             Icons.Outlined.Translate,
                             contentDescription = stringResource(MR.strings.action_filter),
@@ -172,20 +172,20 @@ fun ExtensionScreen(
 
 @Composable
 private fun ExtensionContent(
-    state: AnimeExtensionsScreenModel.State,
+    state: ExtensionsScreenModel.State,
     contentPadding: PaddingValues,
-    onLongClickItem: (AnimeExtension) -> Unit,
-    onOpenWebView: (AnimeExtension.Available) -> Unit,
-    onClickItemCancel: (AnimeExtension) -> Unit,
-    onInstallExtension: (AnimeExtension.Available) -> Unit,
-    onUninstallExtension: (AnimeExtension) -> Unit,
-    onUpdateExtension: (AnimeExtension.Installed) -> Unit,
-    onTrustExtension: (AnimeExtension.Untrusted) -> Unit,
-    onOpenExtension: (AnimeExtension.Installed) -> Unit,
+    onLongClickItem: (Extension) -> Unit,
+    onOpenWebView: (Extension.Available) -> Unit,
+    onClickItemCancel: (Extension) -> Unit,
+    onInstallExtension: (Extension.Available) -> Unit,
+    onUninstallExtension: (Extension) -> Unit,
+    onUpdateExtension: (Extension.Installed) -> Unit,
+    onTrustExtension: (Extension.Untrusted) -> Unit,
+    onOpenExtension: (Extension.Installed) -> Unit,
     onClickUpdateAll: () -> Unit,
 ) {
     val context = LocalContext.current
-    var trustState by remember { mutableStateOf<AnimeExtension.Untrusted?>(null) }
+    var trustState by remember { mutableStateOf<Extension.Untrusted?>(null) }
     val installGranted = rememberRequestPackageInstallsPermissionState(initialValue = true)
 
     FastScrollLazyColumn(
@@ -208,7 +208,7 @@ private fun ExtensionContent(
                 key = "extensionHeader-${header.hashCode()}",
             ) {
                 when (header) {
-                    is AnimeExtensionUiModel.Header.Resource -> {
+                    is ExtensionUiModel.Header.Resource -> {
                         val action: @Composable RowScope.() -> Unit =
                             if (header.textRes == MR.strings.ext_updates_pending) {
                                 {
@@ -230,7 +230,7 @@ private fun ExtensionContent(
                             action = action,
                         )
                     }
-                    is AnimeExtensionUiModel.Header.Text -> {
+                    is ExtensionUiModel.Header.Text -> {
                         ExtensionHeader(
                             text = header.text,
                             modifier = Modifier.animateItemFastScroll(),
@@ -244,9 +244,9 @@ private fun ExtensionContent(
                 contentType = { "item" },
                 key = { item ->
                     when (item.extension) {
-                        is AnimeExtension.Untrusted -> "extension-untrusted-${item.hashCode()}"
-                        is AnimeExtension.Installed -> "extension-installed-${item.hashCode()}"
-                        is AnimeExtension.Available -> "extension-available-${item.hashCode()}"
+                        is Extension.Untrusted -> "extension-untrusted-${item.hashCode()}"
+                        is Extension.Installed -> "extension-installed-${item.hashCode()}"
+                        is Extension.Available -> "extension-available-${item.hashCode()}"
                     }
                 },
             ) { item ->
@@ -255,9 +255,9 @@ private fun ExtensionContent(
                     modifier = Modifier.animateItemFastScroll(),
                     onClickItem = {
                         when (it) {
-                            is AnimeExtension.Available -> onInstallExtension(it)
-                            is AnimeExtension.Installed -> onOpenExtension(it)
-                            is AnimeExtension.Untrusted -> {
+                            is Extension.Available -> onInstallExtension(it)
+                            is Extension.Installed -> onOpenExtension(it)
+                            is Extension.Untrusted -> {
                                 trustState = it
                             }
                         }
@@ -265,16 +265,16 @@ private fun ExtensionContent(
                     onLongClickItem = onLongClickItem,
                     onClickItemSecondaryAction = {
                         when (it) {
-                            is AnimeExtension.Available -> onOpenWebView(it)
-                            is AnimeExtension.Installed -> onOpenExtension(it)
+                            is Extension.Available -> onOpenWebView(it)
+                            is Extension.Installed -> onOpenExtension(it)
                             else -> {}
                         }
                     },
                     onClickItemCancel = onClickItemCancel,
                     onClickItemAction = {
                         when (it) {
-                            is AnimeExtension.Available -> onInstallExtension(it)
-                            is AnimeExtension.Installed -> {
+                            is Extension.Available -> onInstallExtension(it)
+                            is Extension.Installed -> {
                                 if (it.hasUpdate) {
                                     onUpdateExtension(it)
                                 } else {
@@ -282,7 +282,7 @@ private fun ExtensionContent(
                                 }
                             }
 
-                            is AnimeExtension.Untrusted -> {
+                            is Extension.Untrusted -> {
                                 trustState = it
                             }
                         }
@@ -310,17 +310,17 @@ private fun ExtensionContent(
 
 @Composable
 private fun ExtensionItem(
-    item: AnimeExtensionUiModel.Item,
-    onClickItem: (AnimeExtension) -> Unit,
-    onLongClickItem: (AnimeExtension) -> Unit,
-    onClickItemCancel: (AnimeExtension) -> Unit,
-    onClickItemAction: (AnimeExtension) -> Unit,
+    item: ExtensionUiModel.Item,
+    onClickItem: (Extension) -> Unit,
+    onLongClickItem: (Extension) -> Unit,
+    onClickItemCancel: (Extension) -> Unit,
+    onClickItemAction: (Extension) -> Unit,
     modifier: Modifier = Modifier,
-    onClickItemSecondaryAction: (AnimeExtension) -> Unit,
+    onClickItemSecondaryAction: (Extension) -> Unit,
 ) {
     val (extension, installStep) = item
     // AM (BROWSE) -->
-    if (extension is AnimeExtension.Installed && !extension.hasUpdate) return
+    if (extension is Extension.Installed && !extension.hasUpdate) return
     // <-- AM (BROWSE)
     BaseBrowseItem(
         modifier = modifier
@@ -376,7 +376,7 @@ private fun ExtensionItem(
 
 @Composable
 private fun ExtensionItemContent(
-    extension: AnimeExtension,
+    extension: Extension,
     installStep: InstallStep,
     modifier: Modifier = Modifier,
 ) {
@@ -395,7 +395,7 @@ private fun ExtensionItemContent(
             horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.extraSmall),
         ) {
             ProvideTextStyle(value = MaterialTheme.typography.bodySmall) {
-                if (extension is AnimeExtension.Installed && extension.lang.isNotEmpty()) {
+                if (extension is Extension.Installed && extension.lang.isNotEmpty()) {
                     Text(
                         text = LocaleHelper.getSourceDisplayName(
                             extension.lang,
@@ -411,8 +411,8 @@ private fun ExtensionItemContent(
                 }
 
                 val warning = when {
-                    extension is AnimeExtension.Untrusted -> MR.strings.ext_untrusted
-                    extension is AnimeExtension.Installed && extension.isObsolete -> MR.strings.ext_obsolete
+                    extension is Extension.Untrusted -> MR.strings.ext_untrusted
+                    extension is Extension.Installed && extension.isObsolete -> MR.strings.ext_obsolete
                     extension.isNsfw -> MR.strings.ext_nsfw_short
                     else -> null
                 }
@@ -443,12 +443,12 @@ private fun ExtensionItemContent(
 
 @Composable
 private fun ExtensionItemActions(
-    extension: AnimeExtension,
+    extension: Extension,
     installStep: InstallStep,
     modifier: Modifier = Modifier,
-    onClickItemCancel: (AnimeExtension) -> Unit = {},
-    onClickItemAction: (AnimeExtension) -> Unit = {},
-    onClickItemSecondaryAction: (AnimeExtension) -> Unit = {},
+    onClickItemCancel: (Extension) -> Unit = {},
+    onClickItemAction: (Extension) -> Unit = {},
+    onClickItemSecondaryAction: (Extension) -> Unit = {},
 ) {
     val isIdle = installStep.isCompleted()
 
@@ -475,7 +475,7 @@ private fun ExtensionItemActions(
             }
             installStep == InstallStep.Idle -> {
                 when (extension) {
-                    is AnimeExtension.Installed -> {
+                    is Extension.Installed -> {
                         IconButton(onClick = { onClickItemSecondaryAction(extension) }) {
                             Icon(
                                 imageVector = Icons.Outlined.Settings,
@@ -492,7 +492,7 @@ private fun ExtensionItemActions(
                             }
                         }
                     }
-                    is AnimeExtension.Untrusted -> {
+                    is Extension.Untrusted -> {
                         IconButton(onClick = { onClickItemAction(extension) }) {
                             Icon(
                                 imageVector = Icons.Outlined.VerifiedUser,
@@ -500,7 +500,7 @@ private fun ExtensionItemActions(
                             )
                         }
                     }
-                    is AnimeExtension.Available -> {
+                    is Extension.Available -> {
                         if (extension.sources.isNotEmpty()) {
                             IconButton(
                                 onClick = { onClickItemSecondaryAction(extension) },

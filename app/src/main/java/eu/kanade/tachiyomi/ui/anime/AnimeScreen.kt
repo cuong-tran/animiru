@@ -42,15 +42,15 @@ import eu.kanade.presentation.util.isTabletUi
 import eu.kanade.tachiyomi.animesource.AnimeSource
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
 import eu.kanade.tachiyomi.source.isLocalOrStub
-import eu.kanade.tachiyomi.ui.anime.track.AnimeTrackInfoDialogHomeScreen
-import eu.kanade.tachiyomi.ui.browse.migration.search.MigrateAnimeDialog
+import eu.kanade.tachiyomi.ui.anime.track.TrackInfoDialogHomeScreen
+import eu.kanade.tachiyomi.ui.browse.migration.search.MigrateDialog
 import eu.kanade.tachiyomi.ui.browse.migration.search.MigrateAnimeDialogScreenModel
-import eu.kanade.tachiyomi.ui.browse.migration.search.MigrateAnimeSearchScreen
-import eu.kanade.tachiyomi.ui.browse.source.browse.BrowseAnimeSourceScreen
-import eu.kanade.tachiyomi.ui.browse.source.globalsearch.GlobalAnimeSearchScreen
+import eu.kanade.tachiyomi.ui.browse.migration.search.MigrateSearchScreen
+import eu.kanade.tachiyomi.ui.browse.source.browse.BrowseSourceScreen
+import eu.kanade.tachiyomi.ui.browse.source.globalsearch.GlobalSearchScreen
 import eu.kanade.tachiyomi.ui.category.CategoryScreen
 import eu.kanade.tachiyomi.ui.home.HomeScreen
-import eu.kanade.tachiyomi.ui.library.AnimeLibraryTab
+import eu.kanade.tachiyomi.ui.library.LibraryTab
 import eu.kanade.tachiyomi.ui.main.MainActivity
 import eu.kanade.tachiyomi.ui.player.settings.dialogs.SkipIntroLengthDialog
 import eu.kanade.tachiyomi.ui.setting.SettingsScreen
@@ -185,7 +185,7 @@ class AnimeScreen(
                 successState.anime.favorite
             },
             onMigrateClicked = {
-                navigator.push(MigrateAnimeSearchScreen(successState.anime.id))
+                navigator.push(MigrateSearchScreen(successState.anime.id))
             }.takeIf { successState.anime.favorite },
             changeAnimeSkipIntro = screenModel::showAnimeSkipIntroDialog.takeIf { successState.anime.favorite },
             // AM (CUSTOM_INFORMATION) -->
@@ -248,7 +248,7 @@ class AnimeScreen(
             }
 
             is AnimeScreenModel.Dialog.Migrate -> {
-                MigrateAnimeDialog(
+                MigrateDialog(
                     oldAnime = dialog.oldAnime,
                     newAnime = dialog.newAnime,
                     screenModel = MigrateAnimeDialogScreenModel(),
@@ -272,12 +272,12 @@ class AnimeScreen(
             )
             AnimeScreenModel.Dialog.TrackSheet -> {
                 NavigatorAdaptiveSheet(
-                    screen = AnimeTrackInfoDialogHomeScreen(
+                    screen = TrackInfoDialogHomeScreen(
                         animeId = successState.anime.id,
                         animeTitle = successState.anime.title,
                         sourceId = successState.source.id,
                     ),
-                    enableSwipeDismiss = { it.lastItem is AnimeTrackInfoDialogHomeScreen },
+                    enableSwipeDismiss = { it.lastItem is TrackInfoDialogHomeScreen },
                     onDismissRequest = onDismissRequest,
                 )
             }
@@ -431,7 +431,7 @@ class AnimeScreen(
      */
     private suspend fun performSearch(navigator: Navigator, query: String, global: Boolean) {
         if (global) {
-            navigator.push(GlobalAnimeSearchScreen(query))
+            navigator.push(GlobalSearchScreen(query))
             return
         }
 
@@ -442,9 +442,9 @@ class AnimeScreen(
         when (val previousController = navigator.items[navigator.size - 2]) {
             is HomeScreen -> {
                 navigator.pop()
-                AnimeLibraryTab.search(query)
+                LibraryTab.search(query)
             }
-            is BrowseAnimeSourceScreen -> {
+            is BrowseSourceScreen -> {
                 navigator.pop()
                 previousController.search(query)
             }
@@ -466,7 +466,7 @@ class AnimeScreen(
         }
 
         val previousController = navigator.items[navigator.size - 2]
-        if (previousController is BrowseAnimeSourceScreen && source is AnimeHttpSource) {
+        if (previousController is BrowseSourceScreen && source is AnimeHttpSource) {
             navigator.pop()
             previousController.searchGenre(genreName)
         } else {

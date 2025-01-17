@@ -16,7 +16,7 @@ import eu.kanade.presentation.category.components.CategoryFloatingActionButton
 import eu.kanade.presentation.category.components.CategoryListItem
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.components.AppBarActions
-import eu.kanade.tachiyomi.ui.category.AnimeCategoryScreenState
+import eu.kanade.tachiyomi.ui.category.CategoryScreenState
 import kotlinx.collections.immutable.persistentListOf
 import tachiyomi.domain.category.model.Category
 import tachiyomi.i18n.MR
@@ -29,7 +29,7 @@ import tachiyomi.presentation.core.util.plus
 
 @Composable
 fun CategoryScreen(
-    state: AnimeCategoryScreenState.Success,
+    state: CategoryScreenState.Success,
     onClickCreate: () -> Unit,
     onClickRename: (Category) -> Unit,
     onClickHide: (Category) -> Unit,

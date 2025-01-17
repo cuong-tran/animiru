@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import eu.kanade.core.preference.PreferenceMutableState
-import eu.kanade.tachiyomi.ui.library.AnimeLibraryItem
+import eu.kanade.tachiyomi.ui.library.LibraryItem
 import tachiyomi.domain.library.LibraryAnime
 import tachiyomi.domain.library.model.LibraryDisplayMode
 import tachiyomi.i18n.MR
@@ -36,7 +36,7 @@ fun LibraryPager(
     onGlobalSearchClicked: () -> Unit,
     getDisplayMode: (Int) -> PreferenceMutableState<LibraryDisplayMode>,
     getColumnsForOrientation: (Boolean) -> PreferenceMutableState<Int>,
-    getLibraryForPage: (Int) -> List<AnimeLibraryItem>,
+    getLibraryForPage: (Int) -> List<LibraryItem>,
     onClickAnime: (LibraryAnime) -> Unit,
     onLongClickAnime: (LibraryAnime) -> Unit,
     onClickContinueWatching: ((LibraryAnime) -> Unit)?,

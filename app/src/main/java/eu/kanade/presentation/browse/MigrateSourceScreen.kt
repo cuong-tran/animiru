@@ -27,7 +27,7 @@ import eu.kanade.domain.source.interactor.SetMigrateSorting
 import eu.kanade.presentation.browse.components.SourceIcon
 import eu.kanade.presentation.browse.components.BaseSourceItem
 import eu.kanade.presentation.components.AppBar
-import eu.kanade.tachiyomi.ui.browse.migration.sources.MigrateAnimeSourceScreenModel
+import eu.kanade.tachiyomi.ui.browse.migration.sources.MigrateSourceScreenModel
 import eu.kanade.tachiyomi.util.system.copyToClipboard
 import kotlinx.collections.immutable.ImmutableList
 import tachiyomi.domain.source.model.AnimeSource
@@ -48,7 +48,7 @@ import tachiyomi.presentation.core.util.secondaryItemAlpha
 
 @Composable
 fun MigrateSourceScreen(
-    state: MigrateAnimeSourceScreenModel.State,
+    state: MigrateSourceScreenModel.State,
     // AM (BROWSE) -->
     navigateUp: () -> Unit,
     // <-- AM (BROWSE)

@@ -49,8 +49,8 @@ import eu.kanade.presentation.components.WarningBanner
 import eu.kanade.presentation.more.settings.widget.TextPreferenceWidget
 import eu.kanade.presentation.more.settings.widget.TrailingWidgetBuffer
 import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
-import eu.kanade.tachiyomi.extension.model.AnimeExtension
-import eu.kanade.tachiyomi.ui.browse.extension.details.AnimeExtensionDetailsScreenModel
+import eu.kanade.tachiyomi.extension.model.Extension
+import eu.kanade.tachiyomi.ui.browse.extension.details.ExtensionDetailsScreenModel
 import eu.kanade.tachiyomi.util.system.LocaleHelper
 import eu.kanade.tachiyomi.util.system.copyToClipboard
 import kotlinx.collections.immutable.ImmutableList
@@ -65,7 +65,7 @@ import tachiyomi.presentation.core.screens.EmptyScreen
 @Composable
 fun ExtensionDetailsScreen(
     navigateUp: () -> Unit,
-    state: AnimeExtensionDetailsScreenModel.State,
+    state: ExtensionDetailsScreenModel.State,
     onClickSourcePreferences: (sourceId: Long) -> Unit,
     onClickEnableAll: () -> Unit,
     onClickDisableAll: () -> Unit,
@@ -150,7 +150,7 @@ fun ExtensionDetailsScreen(
 @Composable
 private fun AnimeExtensionDetails(
     contentPadding: PaddingValues,
-    extension: AnimeExtension.Installed,
+    extension: Extension.Installed,
     sources: ImmutableList<ExtensionSourceItem>,
     onClickSourcePreferences: (sourceId: Long) -> Unit,
     onClickUninstall: () -> Unit,
@@ -208,7 +208,7 @@ private fun AnimeExtensionDetails(
 
 @Composable
 private fun DetailsHeader(
-    extension: AnimeExtension,
+    extension: Extension,
     onClickAgeRating: () -> Unit,
     onClickUninstall: () -> Unit,
     onClickAppInfo: (() -> Unit)?,
@@ -235,7 +235,7 @@ private fun DetailsHeader(
                             """.trimIndent(),
                         )
 
-                        if (extension is AnimeExtension.Installed) {
+                        if (extension is Extension.Installed) {
                             append("\n\n")
                             append(
                                 """

@@ -3,12 +3,12 @@ package eu.kanade.domain.ui.model
 import dev.icerock.moko.resources.StringResource
 import eu.kanade.presentation.util.Tab
 import eu.kanade.tachiyomi.ui.browse.BrowseTab
-import eu.kanade.tachiyomi.ui.library.AnimeLibraryTab
+import eu.kanade.tachiyomi.ui.library.LibraryTab
 import eu.kanade.tachiyomi.ui.recents.RecentsTab
 import tachiyomi.i18n.MR
 
 enum class StartScreen(val titleRes: StringResource, val tab: Tab) {
-    ANIME(MR.strings.label_library, AnimeLibraryTab),
+    ANIME(MR.strings.label_library, LibraryTab),
 
     // AM (RECENTS) -->
     UPDATES(MR.strings.label_recent_updates, RecentsTab),

@@ -16,7 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import eu.kanade.core.preference.PreferenceMutableState
-import eu.kanade.tachiyomi.ui.library.AnimeLibraryItem
+import eu.kanade.tachiyomi.ui.library.LibraryItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import tachiyomi.domain.category.model.Category
@@ -44,7 +44,7 @@ fun LibraryContent(
     getNumberOfAnimeForCategory: (Category) -> Int?,
     getDisplayMode: (Int) -> PreferenceMutableState<LibraryDisplayMode>,
     getColumnsForOrientation: (Boolean) -> PreferenceMutableState<Int>,
-    getAnimeLibraryForPage: (Int) -> List<AnimeLibraryItem>,
+    getAnimeLibraryForPage: (Int) -> List<LibraryItem>,
 ) {
     Column(
         modifier = Modifier.padding(

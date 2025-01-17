@@ -68,7 +68,7 @@ object DownloadQueueScreen : Screen() {
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         val scope = rememberCoroutineScope()
-        val animeScreenModel = rememberScreenModel { AnimeDownloadQueueScreenModel() }
+        val animeScreenModel = rememberScreenModel { DownloadQueueScreenModel() }
         val animeDownloadList by animeScreenModel.state.collectAsState()
         val animeDownloadCount by remember {
             derivedStateOf { animeDownloadList.sumOf { it.subItems.size } }
@@ -184,7 +184,7 @@ object DownloadQueueScreen : Screen() {
                         animeScreenModel.controllerBinding = DownloadListBinding.inflate(
                             LayoutInflater.from(context),
                         )
-                        animeScreenModel.adapter = AnimeDownloadAdapter(animeScreenModel.listener)
+                        animeScreenModel.adapter = DownloadAdapter(animeScreenModel.listener)
                         animeScreenModel.controllerBinding.root.adapter = animeScreenModel.adapter
                         animeScreenModel.adapter?.isHandleDragEnabled = true
                         animeScreenModel.controllerBinding.root.layoutManager = LinearLayoutManager(
@@ -222,8 +222,8 @@ object DownloadQueueScreen : Screen() {
 
     @Composable
     private fun AnimeActions(
-        animeScreenModel: AnimeDownloadQueueScreenModel,
-        animeDownloadList: List<AnimeDownloadHeaderItem>,
+        animeScreenModel: DownloadQueueScreenModel,
+        animeDownloadList: List<DownloadHeaderItem>,
     ) {
         if (animeDownloadList.isNotEmpty()) {
             var sortExpanded by remember { mutableStateOf(false) }

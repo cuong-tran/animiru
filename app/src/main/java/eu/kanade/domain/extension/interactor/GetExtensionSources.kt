@@ -2,7 +2,7 @@ package eu.kanade.domain.extension.interactor
 
 import eu.kanade.domain.source.service.SourcePreferences
 import eu.kanade.tachiyomi.animesource.AnimeSource
-import eu.kanade.tachiyomi.extension.model.AnimeExtension
+import eu.kanade.tachiyomi.extension.model.Extension
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -10,7 +10,7 @@ class GetExtensionSources(
     private val preferences: SourcePreferences,
 ) {
 
-    fun subscribe(extension: AnimeExtension.Installed): Flow<List<ExtensionSourceItem>> {
+    fun subscribe(extension: Extension.Installed): Flow<List<ExtensionSourceItem>> {
         val isMultiSource = extension.sources.size > 1
         val isMultiLangSingleSource =
             isMultiSource && extension.sources.map { it.name }.distinct().size == 1

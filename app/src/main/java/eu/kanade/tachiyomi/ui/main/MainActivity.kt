@@ -75,13 +75,12 @@ import eu.kanade.tachiyomi.data.download.AnimeDownloadCache
 import eu.kanade.tachiyomi.data.notification.NotificationReceiver
 import eu.kanade.tachiyomi.data.updater.AppUpdateChecker
 import eu.kanade.tachiyomi.data.updater.RELEASE_URL
-import eu.kanade.tachiyomi.extension.api.AnimeExtensionApi
+import eu.kanade.tachiyomi.extension.api.ExtensionApi
 import eu.kanade.tachiyomi.ui.anime.AnimeScreen
 import eu.kanade.tachiyomi.ui.base.activity.BaseActivity
-import eu.kanade.tachiyomi.ui.browse.source.browse.BrowseAnimeSourceScreen
-import eu.kanade.tachiyomi.ui.browse.source.globalsearch.GlobalAnimeSearchScreen
-import eu.kanade.tachiyomi.ui.deeplink.DeepLinkAnimeScreen
-import eu.kanade.tachiyomi.ui.deeplink.DeepLinkScreenType
+import eu.kanade.tachiyomi.ui.browse.source.browse.BrowseSourceScreen
+import eu.kanade.tachiyomi.ui.browse.source.globalsearch.GlobalSearchScreen
+import eu.kanade.tachiyomi.ui.deeplink.DeepLinkScreen
 import eu.kanade.tachiyomi.ui.home.HomeScreen
 import eu.kanade.tachiyomi.ui.more.NewUpdateScreen
 import eu.kanade.tachiyomi.ui.more.OnboardingScreen
@@ -237,7 +236,7 @@ class MainActivity : BaseActivity() {
                         .filter { !it }
                         .onEach {
                             val currentScreen = navigator.lastItem
-                            if (currentScreen is BrowseAnimeSourceScreen ||
+                            if (currentScreen is BrowseSourceScreen ||
                                 (currentScreen is AnimeScreen && currentScreen.fromSource)
                             ) {
                                 navigator.popUntilRoot()
@@ -357,7 +356,7 @@ class MainActivity : BaseActivity() {
         // Extensions updates
         LaunchedEffect(Unit) {
             try {
-                AnimeExtensionApi().checkForUpdates(context)
+                ExtensionApi().checkForUpdates(context)
             } catch (e: Exception) {
                 logcat(LogPriority.ERROR, e)
             }
@@ -456,16 +455,8 @@ class MainActivity : BaseActivity() {
                 if (!query.isNullOrEmpty()) {
                     navigator.popUntilRoot()
 
-                    val screenType = intent.getStringExtra(INTENT_SEARCH_TYPE).orEmpty()
-                        .ifBlank { "ANIME" }
-                        .let(DeepLinkScreenType::valueOf)
-
-                    when (screenType) {
-                        DeepLinkScreenType.ANIME -> {
-                            navigator.push(GlobalAnimeSearchScreen(query))
-                            navigator.push(DeepLinkAnimeScreen(query))
-                        }
-                    }
+                    navigator.push(GlobalSearchScreen(query))
+                    navigator.push(DeepLinkScreen(query))
                 }
                 null
             }
@@ -474,7 +465,7 @@ class MainActivity : BaseActivity() {
                 if (!query.isNullOrEmpty()) {
                     val filter = intent.getStringExtra(INTENT_SEARCH_FILTER)
                     navigator.popUntilRoot()
-                    navigator.push(GlobalAnimeSearchScreen(query, filter))
+                    navigator.push(GlobalSearchScreen(query, filter))
                 }
                 null
             }
@@ -508,7 +499,6 @@ class MainActivity : BaseActivity() {
         const val INTENT_ANIMESEARCH = "eu.kanade.tachiyomi.ANIMESEARCH"
         const val INTENT_SEARCH_QUERY = "query"
         const val INTENT_SEARCH_FILTER = "filter"
-        const val INTENT_SEARCH_TYPE = "type"
 
         private var externalPlayerResult: ActivityResultLauncher<Intent>? = null
 

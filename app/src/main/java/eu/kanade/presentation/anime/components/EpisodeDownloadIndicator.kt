@@ -1,6 +1,7 @@
 package eu.kanade.presentation.anime.components
 
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -14,6 +15,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,22 +25,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.hapticfeedback.HapticFeedback
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import eu.kanade.presentation.components.ArrowModifier
 import eu.kanade.presentation.components.DropdownMenu
-import eu.kanade.presentation.components.IndicatorModifier
-import eu.kanade.presentation.components.IndicatorSize
-import eu.kanade.presentation.components.IndicatorStrokeWidth
-import eu.kanade.presentation.components.commonClickable
 import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.data.download.model.AnimeDownload
+import tachiyomi.domain.download.service.DownloadPreferences
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.IconButtonTokens
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.secondaryItemAlpha
+import uy.kohesive.injekt.injectLazy
 import java.math.BigDecimal
 import java.math.RoundingMode
 
@@ -286,3 +288,35 @@ private fun ErrorIndicator(
         )
     }
 }
+
+internal fun Modifier.commonClickable(
+    enabled: Boolean,
+    hapticFeedback: HapticFeedback,
+    onLongClick: () -> Unit,
+    onClick: () -> Unit,
+) = this.combinedClickable(
+    enabled = enabled,
+    onLongClick = {
+        onLongClick()
+        hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+    },
+    onClick = onClick,
+    role = Role.Button,
+    interactionSource = null,
+    indication = ripple(
+        bounded = false,
+        radius = IconButtonTokens.StateLayerSize / 2,
+    ),
+)
+
+internal val IndicatorSize = 26.dp
+internal val IndicatorPadding = 2.dp
+
+// To match composable parameter name when used later
+internal val IndicatorStrokeWidth = IndicatorPadding
+internal val IndicatorModifier = Modifier
+    .size(IndicatorSize)
+    .padding(IndicatorPadding)
+internal val ArrowModifier = Modifier
+    .size(IndicatorSize - 7.dp)
+internal val preferences: DownloadPreferences by injectLazy()

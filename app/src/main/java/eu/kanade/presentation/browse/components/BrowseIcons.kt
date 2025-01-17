@@ -29,8 +29,8 @@ import coil3.compose.AsyncImage
 import eu.kanade.domain.source.model.icon
 import eu.kanade.presentation.util.rememberResourceBitmapPainter
 import eu.kanade.tachiyomi.R
-import eu.kanade.tachiyomi.extension.model.AnimeExtension
-import eu.kanade.tachiyomi.extension.util.AnimeExtensionLoader
+import eu.kanade.tachiyomi.extension.model.Extension
+import eu.kanade.tachiyomi.extension.util.ExtensionLoader
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.domain.source.model.AnimeSource
 import tachiyomi.source.local.LocalAnimeSource
@@ -81,12 +81,12 @@ fun SourceIcon(
 
 @Composable
 fun ExtensionIcon(
-    extension: AnimeExtension,
+    extension: Extension,
     modifier: Modifier = Modifier,
     density: Int = DisplayMetrics.DENSITY_DEFAULT,
 ) {
     when (extension) {
-        is AnimeExtension.Available -> {
+        is Extension.Available -> {
             AsyncImage(
                 model = extension.iconUrl,
                 contentDescription = null,
@@ -96,7 +96,7 @@ fun ExtensionIcon(
                     .clip(MaterialTheme.shapes.extraSmall),
             )
         }
-        is AnimeExtension.Installed -> {
+        is Extension.Installed -> {
             val icon by extension.getIcon(density)
             when (icon) {
                 is Result.Loading -> Box(modifier = modifier)
@@ -112,7 +112,7 @@ fun ExtensionIcon(
                 )
             }
         }
-        is AnimeExtension.Untrusted -> Image(
+        is Extension.Untrusted -> Image(
             imageVector = Icons.Filled.Dangerous,
             contentDescription = null,
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.error),
@@ -122,12 +122,12 @@ fun ExtensionIcon(
 }
 
 @Composable
-private fun AnimeExtension.getIcon(density: Int = DisplayMetrics.DENSITY_DEFAULT): State<Result<ImageBitmap>> {
+private fun Extension.getIcon(density: Int = DisplayMetrics.DENSITY_DEFAULT): State<Result<ImageBitmap>> {
     val context = LocalContext.current
     return produceState<Result<ImageBitmap>>(initialValue = Result.Loading, this) {
         withIOContext {
             value = try {
-                val appInfo = AnimeExtensionLoader.getAnimeExtensionPackageInfoFromPkgName(
+                val appInfo = ExtensionLoader.getExtensionPackageInfoFromPkgName(
                     context,
                     pkgName,
                 )!!.applicationInfo!!

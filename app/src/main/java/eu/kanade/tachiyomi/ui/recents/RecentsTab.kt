@@ -21,13 +21,13 @@ import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.data.connection.discord.DiscordRPCService
 import eu.kanade.tachiyomi.data.connection.discord.DiscordScreen
 import eu.kanade.tachiyomi.ui.download.DownloadQueueScreen
-import eu.kanade.tachiyomi.ui.history.AnimeHistoryScreenModel
-import eu.kanade.tachiyomi.ui.history.animeHistoryTab
+import eu.kanade.tachiyomi.ui.history.HistoryScreenModel
+import eu.kanade.tachiyomi.ui.history.historyTab
 import eu.kanade.tachiyomi.ui.history.resumeLastEpisodeSeenEvent
 import eu.kanade.tachiyomi.ui.history.snackbarHostState
 import eu.kanade.tachiyomi.ui.main.MainActivity
 import eu.kanade.tachiyomi.ui.player.settings.PlayerPreferences
-import eu.kanade.tachiyomi.ui.updates.animeUpdatesTab
+import eu.kanade.tachiyomi.ui.updates.updatesTab
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
@@ -72,10 +72,10 @@ data object RecentsTab : Tab {
     override fun Content() {
         val context = LocalContext.current
 
-        val animeHistoryScreenModel = rememberScreenModel { AnimeHistoryScreenModel() }
-        val animeSearchQuery by animeHistoryScreenModel.query.collectAsState()
+        val historyScreenModel = rememberScreenModel { HistoryScreenModel() }
+        val animeSearchQuery by historyScreenModel.query.collectAsState()
 
-        val tabs = persistentListOf(animeUpdatesTab(context), animeHistoryTab(context))
+        val tabs = persistentListOf(updatesTab(context), historyTab(context))
         val state = rememberPagerState { tabs.size }
 
         TabbedScreen(
@@ -84,7 +84,7 @@ data object RecentsTab : Tab {
             state = state,
             // Compatibility with hardcoded aniyomi code
             mangaSearchQuery = animeSearchQuery,
-            onChangeMangaSearchQuery = animeHistoryScreenModel::search,
+            onChangeMangaSearchQuery = historyScreenModel::search,
         )
 
         LaunchedEffect(Unit) {
@@ -101,7 +101,7 @@ data object RecentsTab : Tab {
             (context as? MainActivity)?.ready = true
             // AM (TAB_HOLD) -->
             resumeLastEpisodeSeenEvent.receiveAsFlow().collectLatest {
-                openEpisode(context, animeHistoryScreenModel.getNextEpisode())
+                openEpisode(context, historyScreenModel.getNextEpisode())
             }
         }
     }

@@ -38,14 +38,14 @@ import eu.kanade.presentation.util.Tab
 import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.data.connection.discord.DiscordRPCService
 import eu.kanade.tachiyomi.data.connection.discord.DiscordScreen
-import eu.kanade.tachiyomi.extension.AnimeExtensionManager
-import eu.kanade.tachiyomi.extension.model.AnimeExtension
-import eu.kanade.tachiyomi.ui.browse.extension.AnimeExtensionsScreenModel
-import eu.kanade.tachiyomi.ui.browse.extension.details.AnimeExtensionDetailsScreen
-import eu.kanade.tachiyomi.ui.browse.migration.sources.MigrateAnimeSourceScreen
-import eu.kanade.tachiyomi.ui.browse.source.AnimeSourcesScreenModel
-import eu.kanade.tachiyomi.ui.browse.source.browse.BrowseAnimeSourceScreen
-import eu.kanade.tachiyomi.ui.browse.source.globalsearch.GlobalAnimeSearchScreen
+import eu.kanade.tachiyomi.extension.ExtensionManager
+import eu.kanade.tachiyomi.extension.model.Extension
+import eu.kanade.tachiyomi.ui.browse.extension.ExtensionsScreenModel
+import eu.kanade.tachiyomi.ui.browse.extension.details.ExtensionDetailsScreen
+import eu.kanade.tachiyomi.ui.browse.migration.sources.MigrateSourceScreen
+import eu.kanade.tachiyomi.ui.browse.source.SourcesScreenModel
+import eu.kanade.tachiyomi.ui.browse.source.browse.BrowseSourceScreen
+import eu.kanade.tachiyomi.ui.browse.source.globalsearch.GlobalSearchScreen
 import eu.kanade.tachiyomi.ui.home.HomeScreen
 import eu.kanade.tachiyomi.ui.main.MainActivity
 import eu.kanade.tachiyomi.ui.webview.WebViewScreen
@@ -76,12 +76,12 @@ class BrowseTab : Tab {
         }
 
     override suspend fun onReselect(navigator: Navigator) {
-        navigator.push(GlobalAnimeSearchScreen())
+        navigator.push(GlobalSearchScreen())
     }
 
     // AM (TAB_HOLD) -->
     override suspend fun onReselectHold(navigator: Navigator) {
-        navigator.push(MigrateAnimeSourceScreen())
+        navigator.push(MigrateSourceScreen())
     }
     // <-- AM (TAB_HOLD)
 
@@ -91,11 +91,11 @@ class BrowseTab : Tab {
         // AM (BROWSE) -->
         val snackbarHostState = SnackbarHostState()
         val navigator = LocalNavigator.currentOrThrow
-        val sourcesScreenModel = rememberScreenModel { AnimeSourcesScreenModel() }
+        val sourcesScreenModel = rememberScreenModel { SourcesScreenModel() }
         val sourcesState by sourcesScreenModel.state.collectAsState()
         val updateCount by sourcesScreenModel.sourcePreferences.animeExtensionUpdatesCount().collectAsState()
 
-        val extensionScreenModel = rememberScreenModel { AnimeExtensionsScreenModel() }
+        val extensionScreenModel = rememberScreenModel { ExtensionsScreenModel() }
         val extensionsState by extensionScreenModel.state.collectAsState()
 
         var inExtensionsScreen by remember { mutableStateOf(goToExtensions) }
@@ -126,7 +126,7 @@ class BrowseTab : Tab {
                 SourcesScreen(
                     state = sourcesState,
                     onClickItem = { source, listing ->
-                        navigator.push(BrowseAnimeSourceScreen(source.id, listing.query))
+                        navigator.push(BrowseSourceScreen(source.id, listing.query))
                     },
                     onClickPin = sourcesScreenModel::togglePin,
                     onLongClickItem = sourcesScreenModel::showSourceDialog,
@@ -155,7 +155,7 @@ class BrowseTab : Tab {
 
                     onLongClickItem = { extension ->
                         when (extension) {
-                            is AnimeExtension.Available -> extensionScreenModel.installExtension(extension)
+                            is Extension.Available -> extensionScreenModel.installExtension(extension)
                             else -> extensionScreenModel.uninstallExtension(extension)
                         }
                     },
@@ -167,7 +167,7 @@ class BrowseTab : Tab {
                         }
                     },
                     onInstallExtension = extensionScreenModel::installExtension,
-                    onOpenExtension = { navigator.push(AnimeExtensionDetailsScreen(it.pkgName)) },
+                    onOpenExtension = { navigator.push(ExtensionDetailsScreen(it.pkgName)) },
                     onTrustExtension = extensionScreenModel::trustExtension,
                     onUninstallExtension = extensionScreenModel::uninstallExtension,
                     onUpdateExtension = extensionScreenModel::updateExtension,
@@ -209,11 +209,11 @@ class BrowseTab : Tab {
             // <-- AM (DISCORD_RPC)
             (context as? MainActivity)?.ready = true
             launchIO {
-                Injekt.get<AnimeExtensionManager>().findAvailableExtensions()
+                Injekt.get<ExtensionManager>().findAvailableExtensions()
                 updateSourceIdToExtensionMap()
                 sourcesScreenModel.events.collectLatest { event ->
                     when (event) {
-                        AnimeSourcesScreenModel.Event.FailedFetchingSources -> {
+                        SourcesScreenModel.Event.FailedFetchingSources -> {
                             launch { snackbarHostState.showSnackbar(internalErrString) }
                         }
                     }

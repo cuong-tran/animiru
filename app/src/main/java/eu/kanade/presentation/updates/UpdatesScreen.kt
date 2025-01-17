@@ -18,8 +18,8 @@ import eu.kanade.presentation.anime.components.AnimeBottomActionMenu
 import eu.kanade.presentation.anime.components.EpisodeDownloadAction
 import eu.kanade.tachiyomi.data.download.model.AnimeDownload
 import eu.kanade.tachiyomi.ui.player.settings.PlayerPreferences
-import eu.kanade.tachiyomi.ui.updates.AnimeUpdatesItem
-import eu.kanade.tachiyomi.ui.updates.AnimeUpdatesScreenModel
+import eu.kanade.tachiyomi.ui.updates.UpdatesItem
+import eu.kanade.tachiyomi.ui.updates.UpdatesScreenModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import tachiyomi.i18n.MR
@@ -35,22 +35,22 @@ import kotlin.time.Duration.Companion.seconds
 
 @Composable
 fun UpdateScreen(
-    state: AnimeUpdatesScreenModel.State,
+    state: UpdatesScreenModel.State,
     snackbarHostState: SnackbarHostState,
     lastUpdated: Long,
-    onClickCover: (AnimeUpdatesItem) -> Unit,
+    onClickCover: (UpdatesItem) -> Unit,
     onSelectAll: (Boolean) -> Unit,
     onInvertSelection: () -> Unit,
     onUpdateLibrary: () -> Boolean,
-    onDownloadEpisode: (List<AnimeUpdatesItem>, EpisodeDownloadAction) -> Unit,
-    onMultiBookmarkClicked: (List<AnimeUpdatesItem>, bookmark: Boolean) -> Unit,
+    onDownloadEpisode: (List<UpdatesItem>, EpisodeDownloadAction) -> Unit,
+    onMultiBookmarkClicked: (List<UpdatesItem>, bookmark: Boolean) -> Unit,
     // AM (FILLERMARK) -->
-    onMultiFillermarkClicked: (List<AnimeUpdatesItem>, fillermark: Boolean) -> Unit,
+    onMultiFillermarkClicked: (List<UpdatesItem>, fillermark: Boolean) -> Unit,
     // <-- AM (FILLERMARK)
-    onMultiMarkAsSeenClicked: (List<AnimeUpdatesItem>, seen: Boolean) -> Unit,
-    onMultiDeleteClicked: (List<AnimeUpdatesItem>) -> Unit,
-    onUpdateSelected: (AnimeUpdatesItem, Boolean, Boolean, Boolean) -> Unit,
-    onOpenEpisode: (AnimeUpdatesItem, altPlayer: Boolean) -> Unit,
+    onMultiMarkAsSeenClicked: (List<UpdatesItem>, seen: Boolean) -> Unit,
+    onMultiDeleteClicked: (List<UpdatesItem>) -> Unit,
+    onUpdateSelected: (UpdatesItem, Boolean, Boolean, Boolean) -> Unit,
+    onOpenEpisode: (UpdatesItem, altPlayer: Boolean) -> Unit,
 ) {
     BackHandler(enabled = state.selectionMode, onBack = { onSelectAll(false) })
 
@@ -117,15 +117,15 @@ fun UpdateScreen(
 
 @Composable
 private fun AnimeUpdatesBottomBar(
-    selected: List<AnimeUpdatesItem>,
-    onDownloadEpisode: (List<AnimeUpdatesItem>, EpisodeDownloadAction) -> Unit,
-    onMultiBookmarkClicked: (List<AnimeUpdatesItem>, bookmark: Boolean) -> Unit,
+    selected: List<UpdatesItem>,
+    onDownloadEpisode: (List<UpdatesItem>, EpisodeDownloadAction) -> Unit,
+    onMultiBookmarkClicked: (List<UpdatesItem>, bookmark: Boolean) -> Unit,
     // AM (FILLERMARK) -->
-    onMultiFillermarkClicked: (List<AnimeUpdatesItem>, fillermark: Boolean) -> Unit,
+    onMultiFillermarkClicked: (List<UpdatesItem>, fillermark: Boolean) -> Unit,
     // <-- AM (FILLERMARK)
-    onMultiMarkAsSeenClicked: (List<AnimeUpdatesItem>, seen: Boolean) -> Unit,
-    onMultiDeleteClicked: (List<AnimeUpdatesItem>) -> Unit,
-    onOpenEpisode: (AnimeUpdatesItem, altPlayer: Boolean) -> Unit,
+    onMultiMarkAsSeenClicked: (List<UpdatesItem>, seen: Boolean) -> Unit,
+    onMultiDeleteClicked: (List<UpdatesItem>) -> Unit,
+    onOpenEpisode: (UpdatesItem, altPlayer: Boolean) -> Unit,
 ) {
     val playerPreferences: PlayerPreferences = Injekt.get()
     AnimeBottomActionMenu(
@@ -171,5 +171,5 @@ private fun AnimeUpdatesBottomBar(
 
 sealed interface UpdatesUiModel {
     data class Header(val date: LocalDate) : UpdatesUiModel
-    data class Item(val item: AnimeUpdatesItem) : UpdatesUiModel
+    data class Item(val item: UpdatesItem) : UpdatesUiModel
 }

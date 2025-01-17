@@ -27,7 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import eu.kanade.presentation.components.SearchToolbar
-import eu.kanade.tachiyomi.ui.browse.source.globalsearch.AnimeSourceFilter
+import eu.kanade.tachiyomi.ui.browse.source.globalsearch.SourceFilter
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
@@ -40,8 +40,8 @@ fun GlobalSearchToolbar(
     navigateUp: () -> Unit,
     onChangeSearchQuery: (String?) -> Unit,
     onSearch: (String) -> Unit,
-    sourceFilter: AnimeSourceFilter,
-    onChangeSearchFilter: (AnimeSourceFilter) -> Unit,
+    sourceFilter: SourceFilter,
+    onChangeSearchFilter: (SourceFilter) -> Unit,
     onlyShowHasResults: Boolean,
     onToggleResults: () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior,
@@ -74,8 +74,8 @@ fun GlobalSearchToolbar(
         ) {
             // TODO: make this UX better; it only applies when triggering a new search
             FilterChip(
-                selected = sourceFilter == AnimeSourceFilter.PinnedOnly,
-                onClick = { onChangeSearchFilter(AnimeSourceFilter.PinnedOnly) },
+                selected = sourceFilter == SourceFilter.PinnedOnly,
+                onClick = { onChangeSearchFilter(SourceFilter.PinnedOnly) },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.PushPin,
@@ -89,8 +89,8 @@ fun GlobalSearchToolbar(
                 },
             )
             FilterChip(
-                selected = sourceFilter == AnimeSourceFilter.All,
-                onClick = { onChangeSearchFilter(AnimeSourceFilter.All) },
+                selected = sourceFilter == SourceFilter.All,
+                onClick = { onChangeSearchFilter(SourceFilter.All) },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Outlined.DoneAll,

@@ -25,7 +25,7 @@ import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.ui.anime.AnimeScreen
 import eu.kanade.tachiyomi.ui.browse.BrowseTab
 import eu.kanade.tachiyomi.ui.download.DownloadQueueScreen
-import eu.kanade.tachiyomi.ui.library.AnimeLibraryTab
+import eu.kanade.tachiyomi.ui.library.LibraryTab
 import eu.kanade.tachiyomi.ui.more.MoreTab
 import eu.kanade.tachiyomi.ui.recents.RecentsTab
 import kotlinx.coroutines.channels.Channel
@@ -49,7 +49,7 @@ object HomeScreen : Screen() {
     private val defaultTab = uiPreferences.startScreen().get().tab
 
     private val tabs = listOf(
-        AnimeLibraryTab,
+        LibraryTab,
         // AM (RECENTS) -->
         RecentsTab,
         // <-- AM (RECENTS)
@@ -125,7 +125,7 @@ object HomeScreen : Screen() {
                     LaunchedEffect(tabNavigator.current) {
                         launch {
                             currentTabIndex = when (tabNavigator.current) {
-                                is AnimeLibraryTab -> 0
+                                is LibraryTab -> 0
                                 // AM (RECENTS) -->
                                 is RecentsTab -> 1
                                 // <-- AM (RECENTS)
@@ -143,14 +143,14 @@ object HomeScreen : Screen() {
                 launch {
                     librarySearchEvent.receiveAsFlow().collectLatest {
                         when (defaultTab) {
-                            AnimeLibraryTab -> AnimeLibraryTab.search(it)
+                            LibraryTab -> LibraryTab.search(it)
                         }
                     }
                 }
                 launch {
                     openTabEvent.receiveAsFlow().collectLatest {
                         tabNavigator.current = when (it) {
-                            is Tab.AnimeLib -> AnimeLibraryTab
+                            is Tab.AnimeLib -> LibraryTab
                             // AM (RECENTS) -->
                             is Tab.Recents -> {
                                 if (it.toHistory) {

@@ -5,7 +5,7 @@ import android.content.Context
 import android.net.Uri
 import com.hippo.unifile.UniFile
 import eu.kanade.tachiyomi.animesource.AnimeSource
-import eu.kanade.tachiyomi.extension.AnimeExtensionManager
+import eu.kanade.tachiyomi.extension.ExtensionManager
 import eu.kanade.tachiyomi.util.size
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -66,7 +66,7 @@ class AnimeDownloadCache(
     private val context: Context,
     private val provider: AnimeDownloadProvider = Injekt.get(),
     private val sourceManager: AnimeSourceManager = Injekt.get(),
-    private val extensionManager: AnimeExtensionManager = Injekt.get(),
+    private val extensionManager: ExtensionManager = Injekt.get(),
     private val storageManager: StorageManager = Injekt.get(),
 ) {
 
