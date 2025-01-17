@@ -94,10 +94,10 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
     private val fetchInterval: FetchInterval = Injekt.get()
     private val filterEpisodesForDownload: FilterEpisodesForDownload = Injekt.get()
 
-    // AM (GROUPING) -->
+    // SY -->
     private val getTracks: GetTracks = Injekt.get()
     private val trackerManager: TrackerManager = Injekt.get()
-    // <-- AM (GROUPING)
+    // SY <--
 
     private val notifier = LibraryUpdateNotifier(context)
 
@@ -126,11 +126,11 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
         libraryPreferences.lastUpdatedTimestamp().set(Instant.now().toEpochMilli())
 
         val categoryId = inputData.getLong(KEY_CATEGORY, -1L)
-        // AM (GROUPING) -->
+        // SY -->
         val group = inputData.getInt(KEY_GROUP, LibraryGroup.BY_DEFAULT)
         val groupExtra = inputData.getString(KEY_GROUP_EXTRA)
         addAnimeToQueue(categoryId, group, groupExtra)
-        // <-- AM (GROUPING)
+        // SY <--
 
         return withIOContext {
             try {
@@ -171,14 +171,14 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
      */
     private suspend fun addAnimeToQueue(
         categoryId: Long,
-        // AM (GROUPING) -->
+        // SY -->
         group: Int,
         groupExtra: String?,
-        // <-- AM (GROUPING)
+        // SY <--
     ) {
         val libraryAnime = getLibraryAnime.await()
 
-        // AM (GROUPING) -->
+        // SY -->
         val groupLibraryUpdateType = libraryPreferences.groupLibraryUpdateType().get()
 
         val listToUpdate = if (categoryId != -1L) {
@@ -237,7 +237,7 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
                 else -> libraryAnime
             }
         }
-        // <-- AM (GROUPING)
+        // SY <--
 
         val restrictions = libraryPreferences.autoUpdateItemRestrictions().get()
         val skippedUpdates = mutableListOf<Pair<Anime, String?>>()
@@ -492,13 +492,13 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
          */
         private const val KEY_CATEGORY = "animeCategory"
 
-        // AM (GROUPING) -->
+        // SY -->
         /**
          * Key for group to update.
          */
         const val KEY_GROUP = "group"
         const val KEY_GROUP_EXTRA = "group_extra"
-        // <-- AM (GROUPING)
+        // SY <--
 
         fun cancelAllWorks(context: Context) {
             context.workManager.cancelAllWorkByTag(TAG)
@@ -551,10 +551,10 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
         fun startNow(
             context: Context,
             category: Category? = null,
-            // AM (GROUPING) -->
+            // SY -->
             group: Int = LibraryGroup.BY_DEFAULT,
             groupExtra: String? = null,
-            // <-- AM (GROUPING)
+            // SY <--
         ): Boolean {
             val wm = context.workManager
             if (wm.isRunning(TAG)) {
@@ -564,10 +564,10 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
 
             val inputData = workDataOf(
                 KEY_CATEGORY to category?.id,
-                // AM (GROUPING) -->
+                // SY -->
                 KEY_GROUP to group,
                 KEY_GROUP_EXTRA to groupExtra,
-                // <-- AM (GROUPING)
+                // SY <--
             )
 
             // AM (SYNC) -->

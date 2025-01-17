@@ -102,9 +102,9 @@ class LibraryScreenModel(
     private val downloadManager: DownloadManager = Injekt.get(),
     private val downloadCache: DownloadCache = Injekt.get(),
     private val trackerManager: TrackerManager = Injekt.get(),
-    // AM (GROUPING) -->
+    // SY -->
     private val getTracks: GetTracks = Injekt.get(),
-    // <-- AM (GROUPING)
+    // SY <--
 ) : StateScreenModel<LibraryScreenModel.State>(State()) {
 
     var activeCategoryIndex: Int by libraryPreferences.lastUsedAnimeCategory().asState(
@@ -117,7 +117,7 @@ class LibraryScreenModel(
                 state.map { it.searchQuery }.debounce(SEARCH_DEBOUNCE_MILLIS),
                 getLibraryFlow(),
                 getTracksPerAnime.subscribe(),
-                // AM (GROUPING) -->
+                // SY -->
                 combine(
                     getTrackingFilterFlow(),
                     downloadCache.changes,
@@ -132,7 +132,7 @@ class LibraryScreenModel(
                 library
                     .applyGrouping(groupType)
                     .applySort(tracks, trackingFilter.keys, sort.takeIf { groupType != LibraryGroup.BY_DEFAULT })
-                    // <-- AM (GROUPING)
+                    // SY <--
                     .applyFilters(tracks, trackingFilter)
                     .mapValues { (_, value) ->
                         if (searchQuery != null) {
@@ -194,7 +194,7 @@ class LibraryScreenModel(
             }
             .launchIn(screenModelScope)
 
-        // AM (GROUPING) -->
+        // SY -->
         libraryPreferences.groupLibraryBy().changes()
             .onEach {
                 mutableState.update { state ->
@@ -202,7 +202,7 @@ class LibraryScreenModel(
                 }
             }
             .launchIn(screenModelScope)
-        // <-- AM (GROUPING)
+        // SY <--
     }
 
     private suspend fun AnimeLibraryMap.applyFilters(
@@ -299,9 +299,9 @@ class LibraryScreenModel(
         // Map<AnimeId, List<Track>>
         trackMap: Map<Long, List<Track>>,
         loggedInTrackerIds: Set<Long>,
-        // AM (GROUPING) -->
+        // SY -->
         groupSort: LibrarySort? = null,
-        // <-- AM (GROUPING)
+        // SY <--
     ): AnimeLibraryMap {
         val sortAlphabetically: (LibraryItem, LibraryItem) -> Int = { i1, i2 ->
             i1.libraryAnime.anime.title.lowercase().compareToWithCollator(i2.libraryAnime.anime.title.lowercase())
@@ -322,9 +322,9 @@ class LibraryScreenModel(
         }
 
         fun LibrarySort.comparator(): Comparator<LibraryItem> = Comparator { i1, i2 ->
-            // AM (GROUPING) -->
+            // SY -->
             val sort = groupSort ?: this
-            // <-- AM (GROUPING)
+            // SY <--
             when (sort.type) {
                 LibrarySort.Type.Alphabetical -> {
                     sortAlphabetically(i1, i2)
@@ -468,7 +468,7 @@ class LibraryScreenModel(
         }
     }
 
-    // AM (GROUPING) -->
+    // SY -->
     private fun AnimeLibraryMap.applyGrouping(groupType: Int): AnimeLibraryMap {
         val items = when (groupType) {
             LibraryGroup.BY_DEFAULT -> this
@@ -494,7 +494,7 @@ class LibraryScreenModel(
 
         return items
     }
-    // <-- AM (GROUPING)
+    // SY <--
 
     /**
      * Flow of tracking filter preferences
@@ -817,7 +817,7 @@ class LibraryScreenModel(
         data class DeleteAnime(val anime: List<Anime>) : Dialog
     }
 
-    // AM (GROUPING) -->
+    // SY -->
     private fun getGroupedAnimeItems(
         groupType: Int,
         libraryAnime: List<LibraryItem>,
@@ -905,7 +905,7 @@ class LibraryScreenModel(
             }
         }.toSortedMap(compareBy { it.order })
     }
-    // <-- AM (GROUPING)
+    // SY <--
 
     @Immutable
     private data class ItemPreferences(
@@ -937,9 +937,9 @@ class LibraryScreenModel(
         val showAnimeCount: Boolean = false,
         val showAnimeContinueButton: Boolean = false,
         val dialog: Dialog? = null,
-        // AM (GROUPING) -->
+        // SY -->
         val groupType: Int = LibraryGroup.BY_DEFAULT,
-        // <-- AM (GROUPING)
+        // SY <--
     ) {
         private val libraryCount by lazy {
             library.values

@@ -10,9 +10,23 @@ class TrackRepositoryImpl(
     private val handler: DatabaseHandler,
 ) : TrackRepository {
 
-    override suspend fun getTrackByAnimeId(id: Long): Track? {
+    override suspend fun getTrackById(id: Long): Track? {
         return handler.awaitOneOrNull { anime_syncQueries.getTrackById(id, TrackMapper::mapTrack) }
     }
+
+    // SY -->
+    override suspend fun getTracks(): List<Track> {
+        return handler.awaitList {
+            anime_syncQueries.getTracks(::mapTrack)
+        }
+    }
+
+    override suspend fun getTracksByAnimeIds(animeIds: List<Long>): List<Track> {
+        return handler.awaitList {
+            anime_syncQueries.getTracksByAnimeIds(animeIds, ::mapTrack)
+        }
+    }
+    // SY <--
 
     override suspend fun getTracksByAnimeId(animeId: Long): List<Track> {
         return handler.awaitList {
@@ -69,12 +83,4 @@ class TrackRepositoryImpl(
             }
         }
     }
-
-    // AM (GROUPING) -->
-    override suspend fun getTracks(): List<Track> {
-        return handler.awaitList {
-            anime_syncQueries.getTracks(::mapTrack)
-        }
-    }
-    // <-- AM (GROUPING)
 }

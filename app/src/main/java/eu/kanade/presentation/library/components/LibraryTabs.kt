@@ -21,9 +21,9 @@ internal fun LibraryTabs(
     getNumberOfItemsForCategory: (Category) -> Int?,
     onTabItemClick: (Int) -> Unit,
 ) {
-    // AM (GROUPING) -->
+    // SY -->
     val currentPageIndex = pagerState.currentPage.coerceAtMost(categories.lastIndex)
-    // <-- AM (GROUPING)
+    // SY <--
     Column(
         modifier = Modifier.zIndex(1f),
     ) {
@@ -36,9 +36,9 @@ internal fun LibraryTabs(
         ) {
             categories.forEachIndexed { index, category ->
                 Tab(
-                    // AM (GROUPING) -->
+                    // SY -->
                     selected = currentPageIndex == index,
-                    // <-- AM (GROUPING)
+                    // SY <--
                     onClick = { onTabItemClick(index) },
                     text = {
                         TabText(

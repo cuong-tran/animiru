@@ -1,4 +1,4 @@
-// AM (GROUPING) -->
+// SY -->
 package tachiyomi.domain.library.model
 
 enum class GroupLibraryMode {
@@ -6,4 +6,4 @@ enum class GroupLibraryMode {
     ALL_BUT_UNGROUPED,
     ALL,
 }
-// <-- AM (GROUPING)
+// SY <--

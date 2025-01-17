@@ -115,7 +115,7 @@ data object LibraryTab : Tab {
 
         val snackbarHostState = remember { SnackbarHostState() }
 
-        // AM (GROUPING) -->
+        // SY -->
         val getCategories = remember { Injekt.get<GetCategories>() }
         val allAnimeCategories by getCategories.subscribe().collectAsState(
             initial = runBlocking { getCategories.await() },
@@ -144,7 +144,7 @@ data object LibraryTab : Tab {
             }
             started
         }
-        // <-- AM (GROUPING)
+        // SY <--
 
         suspend fun openEpisode(episode: Episode) {
             val playerPreferences: PlayerPreferences by injectLazy()
@@ -287,9 +287,9 @@ data object LibraryTab : Tab {
                     onDismissRequest = onDismissRequest,
                     screenModel = settingsScreenModel,
                     category = category,
-                    // AM (GROUPING) -->
+                    // SY -->
                     hasCategories = allAnimeCategories.fastAny { !it.isSystemCategory },
-                    // <-- AM (GROUPING)
+                    // SY <--
                 )
             }
 

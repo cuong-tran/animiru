@@ -37,9 +37,9 @@ class LibrarySettingsScreenModel(
             initialValue = trackerManager.loggedInTrackers(),
         )
 
-    // AM (GROUPING) -->
+    // SY -->
     val grouping by libraryPreferences.groupLibraryBy().asState(screenModelScope)
-    // <-- AM (GROUPING)
+    // SY <--
 
     fun toggleFilter(preference: (LibraryPreferences) -> Preference<TriState>) {
         preference(libraryPreferences).getAndSet {
@@ -65,9 +65,9 @@ class LibrarySettingsScreenModel(
         }
     }
 
-    // AM (GROUPING) -->
+    // SY -->
     fun setGrouping(grouping: Int) {
         screenModelScope.launchIO { libraryPreferences.groupLibraryBy().set(grouping) }
     }
-    // <-- AM (GROUPING)
+    // SY <--
 }

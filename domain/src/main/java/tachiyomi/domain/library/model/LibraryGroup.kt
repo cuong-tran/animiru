@@ -1,4 +1,4 @@
-// AM (GROUPING) -->
+// SY -->
 package tachiyomi.domain.library.model
 
 import tachiyomi.domain.R
@@ -21,4 +21,4 @@ object LibraryGroup {
         }
     }
 }
-// <-- AM (GROUPING)
+// SY <--

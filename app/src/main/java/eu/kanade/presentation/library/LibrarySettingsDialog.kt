@@ -53,9 +53,9 @@ fun LibrarySettingsDialog(
     onDismissRequest: () -> Unit,
     screenModel: LibrarySettingsScreenModel,
     category: Category?,
-    // AM (GROUPING) -->
+    // SY -->
     hasCategories: Boolean,
-    // <-- AM (GROUPING)
+    // SY <--
 ) {
     TabbedDialog(
         onDismissRequest = onDismissRequest,
@@ -63,9 +63,9 @@ fun LibrarySettingsDialog(
             stringResource(MR.strings.action_filter),
             stringResource(MR.strings.action_sort),
             stringResource(MR.strings.action_display),
-            // AM (GROUPING) -->
+            // SY -->
             stringResource(MR.strings.group),
-            // <-- AM (GROUPING)
+            // SY <--
         ),
     ) { page ->
         Column(
@@ -84,12 +84,12 @@ fun LibrarySettingsDialog(
                 2 -> DisplayPage(
                     screenModel = screenModel,
                 )
-                // AM (GROUPING) -->
+                // SY -->
                 3 -> GroupPage(
                     screenModel = screenModel,
                     hasCategories = hasCategories,
                 )
-                // <-- AM (GROUPING)
+                // SY <--
             }
         }
     }
@@ -188,7 +188,7 @@ private fun ColumnScope.SortPage(
     screenModel: LibrarySettingsScreenModel,
 ) {
     val trackers by screenModel.trackersFlow.collectAsState()
-    // AM (GROUPING) -->
+    // SY -->
     val globalSortMode by screenModel.libraryPreferences.animeSortingMode().collectAsState()
     val sortingMode = if (screenModel.grouping == LibraryGroup.BY_DEFAULT) {
         category.sort.type
@@ -200,7 +200,7 @@ private fun ColumnScope.SortPage(
     } else {
         globalSortMode.isAscending
     }.not()
-    // <-- AM (GROUPING)
+    // SY <--
 
     val options = remember(trackers.isEmpty()) {
         val trackerMeanPair = if (trackers.isNotEmpty()) {
@@ -333,7 +333,7 @@ private fun ColumnScope.DisplayPage(
     )
 }
 
-// AM (GROUPING) -->
+// SY -->
 data class GroupMode(
     val int: Int,
     val nameRes: Int,
@@ -387,4 +387,4 @@ private fun ColumnScope.GroupPage(
         )
     }
 }
-// <-- AM (GROUPING)
+// SY <--

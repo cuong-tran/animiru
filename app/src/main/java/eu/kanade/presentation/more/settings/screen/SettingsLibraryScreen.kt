@@ -204,7 +204,7 @@ object SettingsLibraryScreen : SearchableSettings {
                     ),
                     onClick = { showAnimeCategoriesDialog = true },
                 ),
-                // AM (GROUPING) -->
+                // SY -->
                 Preference.PreferenceItem.ListPreference(
                     pref = libraryPreferences.groupLibraryUpdateType(),
                     title = stringResource(MR.strings.library_group_updates),
@@ -216,7 +216,7 @@ object SettingsLibraryScreen : SearchableSettings {
                         GroupLibraryMode.ALL to stringResource(MR.strings.library_group_updates_all),
                     ),
                 ),
-                // <-- AM (GROUPING)
+                // SY <--
                 Preference.PreferenceItem.SwitchPreference(
                     pref = libraryPreferences.autoUpdateMetadata(),
                     title = stringResource(MR.strings.pref_library_update_refresh_metadata),

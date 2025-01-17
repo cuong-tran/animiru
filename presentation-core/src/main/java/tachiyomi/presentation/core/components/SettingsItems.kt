@@ -573,7 +573,7 @@ private fun BaseSettingsItem(
     }
 }
 
-// AM (GROUPING) -->
+// SY -->
 @Composable
 fun IconItem(
     label: String,
@@ -598,4 +598,4 @@ fun IconItem(
         onClick = onClick,
     )
 }
-// <-- AM (GROUPING)
+// SY <--

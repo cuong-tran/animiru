@@ -17,7 +17,7 @@ android {
             create("Database") {
                 packageName.set("tachiyomi.data")
                 dialect(libs.sqldelight.dialects.sql)
-                schemaOutputDirectory.set(project.file("./src/main/sqldelightanime"))
+                schemaOutputDirectory.set(project.file("./src/main/sqldelight"))
             }
         }
     }

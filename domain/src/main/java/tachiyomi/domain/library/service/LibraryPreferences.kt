@@ -203,11 +203,11 @@ class LibraryPreferences(
         Disabled,
     }
 
-    // AM (GROUPING) -->
+    // SY -->
     fun groupLibraryUpdateType() = preferenceStore.getEnum("group_library_update_type", GroupLibraryMode.GLOBAL)
 
     fun groupLibraryBy() = preferenceStore.getInt("group_library_by", LibraryGroup.BY_DEFAULT)
-    // <-- AM (GROUPING)
+    // SY <--
 
     companion object {
         const val DEVICE_ONLY_ON_WIFI = "wifi"
