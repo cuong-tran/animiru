@@ -9,29 +9,29 @@ import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.domain.episode.model.NoEpisodesException
 import tachiyomi.domain.source.repository.AnimeSourcePagingSourceType
 
-class AnimeSourceSearchPagingSource(
+class SourceSearchPagingSource(
     source: AnimeCatalogueSource,
     val query: String,
     val filters: AnimeFilterList,
-) : AnimeSourcePagingSource(source) {
+) : SourcePagingSource(source) {
     override suspend fun requestNextPage(currentPage: Int): AnimesPage {
         return source.getSearchAnime(currentPage, query, filters)
     }
 }
 
-class AnimeSourcePopularPagingSource(source: AnimeCatalogueSource) : AnimeSourcePagingSource(source) {
+class SourcePopularPagingSource(source: AnimeCatalogueSource) : SourcePagingSource(source) {
     override suspend fun requestNextPage(currentPage: Int): AnimesPage {
         return source.getPopularAnime(currentPage)
     }
 }
 
-class AnimeSourceLatestPagingSource(source: AnimeCatalogueSource) : AnimeSourcePagingSource(source) {
+class SourceLatestPagingSource(source: AnimeCatalogueSource) : SourcePagingSource(source) {
     override suspend fun requestNextPage(currentPage: Int): AnimesPage {
         return source.getLatestUpdates(currentPage)
     }
 }
 
-abstract class AnimeSourcePagingSource(
+abstract class SourcePagingSource(
     protected val source: AnimeCatalogueSource,
 ) : AnimeSourcePagingSourceType() {
 

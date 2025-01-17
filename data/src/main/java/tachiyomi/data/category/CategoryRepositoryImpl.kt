@@ -1,14 +1,14 @@
 package tachiyomi.data.category
 
 import kotlinx.coroutines.flow.Flow
-import tachiyomi.data.AnimeDatabaseHandler
+import tachiyomi.data.DatabaseHandler
 import tachiyomi.data.Database
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.category.model.CategoryUpdate
 import tachiyomi.domain.category.repository.CategoryRepository
 
 class CategoryRepositoryImpl(
-    private val handler: AnimeDatabaseHandler,
+    private val handler: DatabaseHandler,
 ) : CategoryRepository {
 
     override suspend fun getAnimeCategory(id: Long): Category? {

@@ -19,7 +19,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
 import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.data.AnimeDatabaseHandler
+import tachiyomi.data.DatabaseHandler
 import tachiyomi.data.Episodes
 import tachiyomi.data.anime.AnimeMapper.mapAnime
 import tachiyomi.domain.anime.model.Anime
@@ -40,7 +40,7 @@ import logcat.logcat as log
  */
 class SyncManager(
     private val context: Context,
-    private val animeHandler: AnimeDatabaseHandler = Injekt.get(),
+    private val animeHandler: DatabaseHandler = Injekt.get(),
     private val syncPreferences: SyncPreferences = Injekt.get(),
     private var json: Json = Json {
         encodeDefaults = true

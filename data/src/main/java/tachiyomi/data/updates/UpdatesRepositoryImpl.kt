@@ -1,13 +1,13 @@
 package tachiyomi.data.updates
 
 import kotlinx.coroutines.flow.Flow
-import tachiyomi.data.AnimeDatabaseHandler
+import tachiyomi.data.DatabaseHandler
 import tachiyomi.domain.anime.model.AnimeCover
 import tachiyomi.domain.updates.model.UpdatesWithRelations
 import tachiyomi.domain.updates.repository.UpdatesRepository
 
 class UpdatesRepositoryImpl(
-    private val databaseHandler: AnimeDatabaseHandler,
+    private val databaseHandler: DatabaseHandler,
 ) : UpdatesRepository {
 
     override suspend fun awaitWithSeen(seen: Boolean, after: Long, limit: Long): List<UpdatesWithRelations> {

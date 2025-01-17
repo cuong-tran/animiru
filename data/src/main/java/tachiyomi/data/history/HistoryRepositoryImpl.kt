@@ -3,25 +3,25 @@ package tachiyomi.data.history
 import kotlinx.coroutines.flow.Flow
 import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.data.AnimeDatabaseHandler
+import tachiyomi.data.DatabaseHandler
 import tachiyomi.domain.history.model.History
 import tachiyomi.domain.history.model.HistoryUpdate
 import tachiyomi.domain.history.model.HistoryWithRelations
 import tachiyomi.domain.history.repository.HistoryRepository
 
 class HistoryRepositoryImpl(
-    private val handler: AnimeDatabaseHandler,
+    private val handler: DatabaseHandler,
 ) : HistoryRepository {
 
     override fun getAnimeHistory(query: String): Flow<List<HistoryWithRelations>> {
         return handler.subscribeToList {
-            animehistoryViewQueries.animehistory(query, AnimeHistoryMapper::mapAnimeHistoryWithRelations)
+            animehistoryViewQueries.animehistory(query, HistoryMapper::mapHistoryWithRelations)
         }
     }
 
     override suspend fun getLastAnimeHistory(): HistoryWithRelations? {
         return handler.awaitOneOrNull {
-            animehistoryViewQueries.getLatestAnimeHistory(AnimeHistoryMapper::mapAnimeHistoryWithRelations)
+            animehistoryViewQueries.getLatestAnimeHistory(HistoryMapper::mapHistoryWithRelations)
         }
     }
 
@@ -29,7 +29,7 @@ class HistoryRepositoryImpl(
         return handler.awaitList {
             animehistoryQueries.getHistoryByAnimeId(
                 animeId,
-                AnimeHistoryMapper::mapAnimeHistory,
+                HistoryMapper::mapHistory,
             )
         }
     }

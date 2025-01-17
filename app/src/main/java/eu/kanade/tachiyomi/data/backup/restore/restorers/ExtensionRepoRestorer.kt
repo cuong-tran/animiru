@@ -2,12 +2,12 @@ package eu.kanade.tachiyomi.data.backup.restore.restorers
 
 import eu.kanade.tachiyomi.data.backup.models.BackupExtensionRepos
 import mihon.domain.extensionrepo.interactor.GetExtensionRepo
-import tachiyomi.data.AnimeDatabaseHandler
+import tachiyomi.data.DatabaseHandler
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
 class ExtensionRepoRestorer(
-    private val animeHandler: AnimeDatabaseHandler = Injekt.get(),
+    private val animeHandler: DatabaseHandler = Injekt.get(),
     private val getExtensionRepos: GetExtensionRepo = Injekt.get(),
 ) {
 

@@ -28,8 +28,8 @@ import nl.adaptivity.xmlutil.XmlDeclMode.Charset
 import nl.adaptivity.xmlutil.core.XmlVersion
 import nl.adaptivity.xmlutil.serialization.XML
 import tachiyomi.core.common.storage.AndroidStorageFolderProvider
-import tachiyomi.data.AndroidAnimeDatabaseHandler
-import tachiyomi.data.AnimeDatabaseHandler
+import tachiyomi.data.AndroidDatabaseHandler
+import tachiyomi.data.DatabaseHandler
 import tachiyomi.data.AnimeUpdateStrategyColumnAdapter
 import tachiyomi.data.Animehistory
 import tachiyomi.data.Animes
@@ -90,8 +90,8 @@ class AppModule(val app: Application) : InjektModule {
             )
         }
 
-        addSingletonFactory<AnimeDatabaseHandler> {
-            AndroidAnimeDatabaseHandler(
+        addSingletonFactory<DatabaseHandler> {
+            AndroidDatabaseHandler(
                 get(),
                 sqlDriverAnime,
             )

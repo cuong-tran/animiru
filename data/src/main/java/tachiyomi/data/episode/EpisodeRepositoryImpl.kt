@@ -3,13 +3,13 @@ package tachiyomi.data.episode
 import kotlinx.coroutines.flow.Flow
 import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.data.AnimeDatabaseHandler
+import tachiyomi.data.DatabaseHandler
 import tachiyomi.domain.episode.model.Episode
 import tachiyomi.domain.episode.model.EpisodeUpdate
 import tachiyomi.domain.episode.repository.EpisodeRepository
 
 class EpisodeRepositoryImpl(
-    private val handler: AnimeDatabaseHandler,
+    private val handler: DatabaseHandler,
 ) : EpisodeRepository {
 
     override suspend fun addAllEpisodes(episodes: List<Episode>): List<Episode> {

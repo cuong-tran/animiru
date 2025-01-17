@@ -17,7 +17,7 @@ import kotlin.coroutines.resume
 /**
  * Returns the transaction dispatcher if we are on a transaction, or the database dispatchers.
  */
-internal suspend fun AndroidAnimeDatabaseHandler.getCurrentAnimeDatabaseContext(): CoroutineContext {
+internal suspend fun AndroidDatabaseHandler.getCurrentAnimeDatabaseContext(): CoroutineContext {
     return coroutineContext[AnimeTransactionElement]?.transactionDispatcher ?: queryDispatcher
 }
 
@@ -35,7 +35,7 @@ internal suspend fun AndroidAnimeDatabaseHandler.getCurrentAnimeDatabaseContext(
  *
  * The dispatcher used to execute the given [block] will utilize threads from SQLDelight's query executor.
  */
-internal suspend fun <T> AndroidAnimeDatabaseHandler.withAnimeTransaction(block: suspend () -> T): T {
+internal suspend fun <T> AndroidDatabaseHandler.withAnimeTransaction(block: suspend () -> T): T {
     // Use inherited transaction context if available, this allows nested suspending transactions.
     val transactionContext =
         coroutineContext[AnimeTransactionElement]?.transactionDispatcher ?: createTransactionContext()
@@ -73,7 +73,7 @@ internal suspend fun <T> AndroidAnimeDatabaseHandler.withAnimeTransaction(block:
  * this value, for now all we care is if its present or not.
  */
 
-private suspend fun AndroidAnimeDatabaseHandler.createTransactionContext(): CoroutineContext {
+private suspend fun AndroidDatabaseHandler.createTransactionContext(): CoroutineContext {
     val controlJob = Job()
     // make sure to tie the control job to this context to avoid blocking the transaction if
     // context get cancelled before we can even start using this job. Otherwise, the acquired

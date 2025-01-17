@@ -1,12 +1,12 @@
 package tachiyomi.data.source
 
 import kotlinx.coroutines.flow.Flow
-import tachiyomi.data.AnimeDatabaseHandler
+import tachiyomi.data.DatabaseHandler
 import tachiyomi.domain.source.model.StubSource
 import tachiyomi.domain.source.repository.StubSourceRepository
 
 class StubSourceRepositoryImpl(
-    private val handler: AnimeDatabaseHandler,
+    private val handler: DatabaseHandler,
 ) : StubSourceRepository {
 
     override fun subscribeAllAnime(): Flow<List<StubSource>> {

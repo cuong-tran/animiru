@@ -4,9 +4,8 @@ import androidx.paging.PagingSource
 import app.cash.sqldelight.ExecutableQuery
 import app.cash.sqldelight.Query
 import kotlinx.coroutines.flow.Flow
-import tachiyomi.data.Database
 
-interface AnimeDatabaseHandler {
+interface DatabaseHandler {
 
     suspend fun <T> await(inTransaction: Boolean = false, block: suspend Database.() -> T): T
 

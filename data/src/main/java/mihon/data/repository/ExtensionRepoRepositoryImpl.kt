@@ -6,10 +6,10 @@ import kotlinx.coroutines.flow.map
 import mihon.domain.extensionrepo.exception.SaveExtensionRepoException
 import mihon.domain.extensionrepo.model.ExtensionRepo
 import mihon.domain.extensionrepo.repository.ExtensionRepoRepository
-import tachiyomi.data.AnimeDatabaseHandler
+import tachiyomi.data.DatabaseHandler
 
 class ExtensionRepoRepositoryImpl(
-    private val handler: AnimeDatabaseHandler,
+    private val handler: DatabaseHandler,
 ) : ExtensionRepoRepository {
     override fun subscribeAll(): Flow<List<ExtensionRepo>> {
         return handler.subscribeToList { extension_reposQueries.findAll(::mapExtensionRepo) }

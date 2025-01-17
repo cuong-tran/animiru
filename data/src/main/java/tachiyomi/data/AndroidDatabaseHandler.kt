@@ -12,14 +12,13 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
-import tachiyomi.data.Database
 
-class AndroidAnimeDatabaseHandler(
+class AndroidDatabaseHandler(
     val db: Database,
     private val driver: SqlDriver,
     val queryDispatcher: CoroutineDispatcher = Dispatchers.IO,
     val transactionDispatcher: CoroutineDispatcher = queryDispatcher,
-) : AnimeDatabaseHandler {
+) : DatabaseHandler {
 
     val suspendingTransactionId = ThreadLocal<Int>()
 
@@ -78,7 +77,7 @@ class AndroidAnimeDatabaseHandler(
         countQuery: Database.() -> Query<Long>,
         queryProvider: Database.(Long, Long) -> Query<T>,
     ): PagingSource<Long, T> {
-        return QueryPagingAnimeSource(
+        return QueryPagingSource(
             handler = this,
             countQuery = countQuery,
             queryProvider = { limit, offset ->

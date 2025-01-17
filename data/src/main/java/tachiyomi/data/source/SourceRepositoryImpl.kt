@@ -7,7 +7,7 @@ import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
-import tachiyomi.data.AnimeDatabaseHandler
+import tachiyomi.data.DatabaseHandler
 import tachiyomi.domain.source.model.SourceWithCount
 import tachiyomi.domain.source.model.StubSource
 import tachiyomi.domain.source.repository.AnimeSourcePagingSourceType
@@ -17,7 +17,7 @@ import tachiyomi.domain.source.model.Source as DomainSource
 
 class SourceRepositoryImpl(
     private val sourceManager: SourceManager,
-    private val handler: AnimeDatabaseHandler,
+    private val handler: DatabaseHandler,
 ) : SourceRepository {
 
     override fun getAnimeSources(): Flow<List<DomainSource>> {
@@ -74,17 +74,17 @@ class SourceRepositoryImpl(
         filterList: AnimeFilterList,
     ): AnimeSourcePagingSourceType {
         val source = sourceManager.get(sourceId) as AnimeCatalogueSource
-        return AnimeSourceSearchPagingSource(source, query, filterList)
+        return SourceSearchPagingSource(source, query, filterList)
     }
 
     override fun getPopularAnime(sourceId: Long): AnimeSourcePagingSourceType {
         val source = sourceManager.get(sourceId) as AnimeCatalogueSource
-        return AnimeSourcePopularPagingSource(source)
+        return SourcePopularPagingSource(source)
     }
 
     override fun getLatestAnime(sourceId: Long): AnimeSourcePagingSourceType {
         val source = sourceManager.get(sourceId) as AnimeCatalogueSource
-        return AnimeSourceLatestPagingSource(source)
+        return SourceLatestPagingSource(source)
     }
 
     private fun mapSourceToDomainSource(source: AnimeSource): DomainSource = DomainSource(

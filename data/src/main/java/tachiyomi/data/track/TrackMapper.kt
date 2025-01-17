@@ -2,7 +2,7 @@ package tachiyomi.data.track
 
 import tachiyomi.domain.track.model.Track
 
-object AnimeTrackMapper {
+object TrackMapper {
     fun mapTrack(
         id: Long,
         animeId: Long,

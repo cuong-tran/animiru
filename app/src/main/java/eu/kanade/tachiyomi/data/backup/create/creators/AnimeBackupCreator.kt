@@ -6,7 +6,7 @@ import eu.kanade.tachiyomi.data.backup.models.BackupHistory
 import eu.kanade.tachiyomi.data.backup.models.BackupEpisode
 import eu.kanade.tachiyomi.data.backup.models.backupAnimeTrackMapper
 import eu.kanade.tachiyomi.data.backup.models.backupEpisodeMapper
-import tachiyomi.data.AnimeDatabaseHandler
+import tachiyomi.data.DatabaseHandler
 import tachiyomi.domain.anime.interactor.GetCustomAnimeInfo
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.anime.model.CustomAnimeInfo
@@ -16,7 +16,7 @@ import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
 class AnimeBackupCreator(
-    private val handler: AnimeDatabaseHandler = Injekt.get(),
+    private val handler: DatabaseHandler = Injekt.get(),
     private val getCategories: GetCategories = Injekt.get(),
     private val getHistory: GetHistory = Injekt.get(),
     // AM (CUSTOM_INFORMATION) -->

@@ -1,14 +1,14 @@
 package eu.kanade.tachiyomi.data.backup.restore.restorers
 
 import eu.kanade.tachiyomi.data.backup.models.BackupCategory
-import tachiyomi.data.AnimeDatabaseHandler
+import tachiyomi.data.DatabaseHandler
 import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.library.service.LibraryPreferences
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
 class CategoriesRestorer(
-    private val animeHandler: AnimeDatabaseHandler = Injekt.get(),
+    private val animeHandler: DatabaseHandler = Injekt.get(),
     private val getCategories: GetCategories = Injekt.get(),
     private val libraryPreferences: LibraryPreferences = Injekt.get(),
 ) {
