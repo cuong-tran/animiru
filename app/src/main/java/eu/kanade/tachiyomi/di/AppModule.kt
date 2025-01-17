@@ -31,7 +31,7 @@ import tachiyomi.core.common.storage.AndroidStorageFolderProvider
 import tachiyomi.data.AndroidDatabaseHandler
 import tachiyomi.data.DatabaseHandler
 import tachiyomi.data.AnimeUpdateStrategyColumnAdapter
-import tachiyomi.data.Animehistory
+import tachiyomi.data.History
 import tachiyomi.data.Animes
 import tachiyomi.data.Database
 import tachiyomi.data.DateColumnAdapter
@@ -80,7 +80,7 @@ class AppModule(val app: Application) : InjektModule {
         addSingletonFactory {
             Database(
                 driver = sqlDriverAnime,
-                animehistoryAdapter = Animehistory.Adapter(
+                historyAdapter = History.Adapter(
                     last_seenAdapter = DateColumnAdapter,
                 ),
                 animesAdapter = Animes.Adapter(

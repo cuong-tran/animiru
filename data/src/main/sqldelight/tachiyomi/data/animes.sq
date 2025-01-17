@@ -77,7 +77,7 @@ SELECT *
 FROM animes
 WHERE favorite = 1;
 
-getWatchedAnimeNotInLibrary:
+getSeenAnimeNotInLibrary:
 SELECT *
 FROM animes
 WHERE favorite = 0 AND _id IN (
@@ -99,7 +99,7 @@ SELECT *
 FROM animes
 WHERE favorite_modified_at IS NOT NULL;
 
-getAnimeSourceIdWithFavoriteCount:
+getSourceIdWithFavoriteCount:
 SELECT
 source,
 count(*)

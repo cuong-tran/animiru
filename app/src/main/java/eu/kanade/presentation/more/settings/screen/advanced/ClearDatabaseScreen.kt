@@ -234,7 +234,7 @@ private class ClearAnimeDatabaseScreenModel : StateScreenModel<ClearAnimeDatabas
     suspend fun removeAnimeBySourceId() = withNonCancellableContext {
         val state = state.value as? State.Ready ?: return@withNonCancellableContext
         database.animesQueries.deleteAnimesNotInLibraryBySourceIds(state.selection)
-        database.animehistoryQueries.removeResettedHistory()
+        database.historyQueries.removeResettedHistory()
     }
 
     fun toggleSelection(source: Source) = mutableState.update { state ->

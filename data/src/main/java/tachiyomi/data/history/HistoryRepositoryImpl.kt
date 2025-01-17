@@ -15,19 +15,19 @@ class HistoryRepositoryImpl(
 
     override fun getAnimeHistory(query: String): Flow<List<HistoryWithRelations>> {
         return handler.subscribeToList {
-            animehistoryViewQueries.animehistory(query, HistoryMapper::mapHistoryWithRelations)
+            historyViewQueries.history(query, HistoryMapper::mapHistoryWithRelations)
         }
     }
 
     override suspend fun getLastAnimeHistory(): HistoryWithRelations? {
         return handler.awaitOneOrNull {
-            animehistoryViewQueries.getLatestAnimeHistory(HistoryMapper::mapHistoryWithRelations)
+            historyViewQueries.getLatestHistory(HistoryMapper::mapHistoryWithRelations)
         }
     }
 
     override suspend fun getHistoryByAnimeId(animeId: Long): List<History> {
         return handler.awaitList {
-            animehistoryQueries.getHistoryByAnimeId(
+            historyQueries.getHistoryByAnimeId(
                 animeId,
                 HistoryMapper::mapHistory,
             )
@@ -36,7 +36,7 @@ class HistoryRepositoryImpl(
 
     override suspend fun resetAnimeHistory(historyId: Long) {
         try {
-            handler.await { animehistoryQueries.resetAnimeHistoryById(historyId) }
+            handler.await { historyQueries.resetHistoryById(historyId) }
         } catch (e: Exception) {
             logcat(LogPriority.ERROR, throwable = e)
         }
@@ -44,7 +44,7 @@ class HistoryRepositoryImpl(
 
     override suspend fun resetHistoryByAnimeId(animeId: Long) {
         try {
-            handler.await { animehistoryQueries.resetHistoryByAnimeId(animeId) }
+            handler.await { historyQueries.resetHistoryByAnimeId(animeId) }
         } catch (e: Exception) {
             logcat(LogPriority.ERROR, throwable = e)
         }
@@ -52,7 +52,7 @@ class HistoryRepositoryImpl(
 
     override suspend fun deleteAllAnimeHistory(): Boolean {
         return try {
-            handler.await { animehistoryQueries.removeAllHistory() }
+            handler.await { historyQueries.removeAllHistory() }
             true
         } catch (e: Exception) {
             logcat(LogPriority.ERROR, throwable = e)
@@ -63,7 +63,7 @@ class HistoryRepositoryImpl(
     override suspend fun upsertAnimeHistory(historyUpdate: HistoryUpdate) {
         try {
             handler.await {
-                animehistoryQueries.upsert(
+                historyQueries.upsert(
                     historyUpdate.episodeId,
                     historyUpdate.seenAt,
                 )
