@@ -1,7 +1,5 @@
 package tachiyomi.domain.anime.model
 
-import tachiyomi.domain.anime.EntryCover
-
 /**
  * Contains the required data for AnimeCoverFetcher
  */
@@ -11,7 +9,7 @@ data class AnimeCover(
     val isAnimeFavorite: Boolean,
     val url: String?,
     val lastModified: Long,
-) : EntryCover
+)
 
 fun Anime.asAnimeCover(): AnimeCover {
     return AnimeCover(

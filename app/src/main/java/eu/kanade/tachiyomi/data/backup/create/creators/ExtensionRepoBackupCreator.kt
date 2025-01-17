@@ -2,16 +2,16 @@ package eu.kanade.tachiyomi.data.backup.create.creators
 
 import eu.kanade.tachiyomi.data.backup.models.BackupExtensionRepos
 import eu.kanade.tachiyomi.data.backup.models.backupExtensionReposMapper
-import mihon.domain.extensionrepo.interactor.GetAnimeExtensionRepo
+import mihon.domain.extensionrepo.interactor.GetExtensionRepo
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
 class ExtensionRepoBackupCreator(
-    private val getAnimeExtensionRepos: GetAnimeExtensionRepo = Injekt.get(),
+    private val getExtensionRepos: GetExtensionRepo = Injekt.get(),
 ) {
 
     suspend operator fun invoke(): List<BackupExtensionRepos> {
-        return getAnimeExtensionRepos.getAll()
+        return getExtensionRepos.getAll()
             .map(backupExtensionReposMapper)
     }
 }

@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable
 import eu.kanade.domain.source.service.SourcePreferences
 import eu.kanade.tachiyomi.animesource.AnimeSource
 import eu.kanade.tachiyomi.extension.ExtensionManager
-import tachiyomi.domain.source.model.StubAnimeSource
+import tachiyomi.domain.source.model.StubSource
 import tachiyomi.source.local.isLocal
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
@@ -13,7 +13,7 @@ fun AnimeSource.icon(): Drawable? = Injekt.get<ExtensionManager>().getAppIconFor
 
 fun AnimeSource.getPreferenceKey(): String = "source_$id"
 
-fun AnimeSource.toStubSource(): StubAnimeSource = StubAnimeSource(id = id, lang = lang, name = name)
+fun AnimeSource.toStubSource(): StubSource = StubSource(id = id, lang = lang, name = name)
 
 fun AnimeSource.getNameForAnimeInfo(): String {
     val preferences = Injekt.get<SourcePreferences>()
@@ -30,7 +30,7 @@ fun AnimeSource.getNameForAnimeInfo(): String {
     }
 }
 
-fun AnimeSource.isLocalOrStub(): Boolean = isLocal() || this is StubAnimeSource
+fun AnimeSource.isLocalOrStub(): Boolean = isLocal() || this is StubSource
 
 // AM (DISCORD_RPC) -->
 fun AnimeSource?.isNsfw(): Boolean {

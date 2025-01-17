@@ -14,7 +14,7 @@ import eu.kanade.presentation.more.settings.Preference
 import eu.kanade.presentation.more.settings.screen.browse.ExtensionReposScreen
 import eu.kanade.tachiyomi.util.system.AuthenticatorUtil.authenticate
 import kotlinx.collections.immutable.persistentListOf
-import mihon.domain.extensionrepo.interactor.GetAnimeExtensionRepoCount
+import mihon.domain.extensionrepo.interactor.GetExtensionRepoCount
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.i18n.pluralStringResource
@@ -34,9 +34,9 @@ object SettingsBrowseScreen : SearchableSettings {
         val navigator = LocalNavigator.currentOrThrow
 
         val sourcePreferences = remember { Injekt.get<SourcePreferences>() }
-        val getAnimeExtensionRepoCount = remember { Injekt.get<GetAnimeExtensionRepoCount>() }
+        val getExtensionRepoCount = remember { Injekt.get<GetExtensionRepoCount>() }
 
-        val animeReposCount by getAnimeExtensionRepoCount.subscribe().collectAsState(0)
+        val animeReposCount by getExtensionRepoCount.subscribe().collectAsState(0)
 
         return listOf(
             Preference.PreferenceGroup(

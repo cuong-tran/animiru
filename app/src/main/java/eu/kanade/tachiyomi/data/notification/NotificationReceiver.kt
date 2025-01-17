@@ -29,7 +29,7 @@ import tachiyomi.domain.episode.interactor.GetEpisode
 import tachiyomi.domain.episode.interactor.UpdateEpisode
 import tachiyomi.domain.episode.model.Episode
 import tachiyomi.domain.episode.model.toEpisodeUpdate
-import tachiyomi.domain.source.service.AnimeSourceManager
+import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.i18n.MR
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
@@ -217,7 +217,7 @@ class NotificationReceiver : BroadcastReceiver() {
      */
     private fun markAsSeen(episodeUrls: Array<String>, animeId: Long) {
         val downloadPreferences: DownloadPreferences = Injekt.get()
-        val sourceManager: AnimeSourceManager = Injekt.get()
+        val sourceManager: SourceManager = Injekt.get()
 
         launchIO {
             val toUpdate = episodeUrls.mapNotNull { getEpisode.await(it, animeId) }

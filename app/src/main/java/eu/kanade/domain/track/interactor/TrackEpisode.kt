@@ -12,13 +12,13 @@ import kotlinx.coroutines.awaitAll
 import logcat.LogPriority
 import tachiyomi.core.common.util.lang.withNonCancellableContext
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.track.interactor.GetAnimeTracks
-import tachiyomi.domain.track.interactor.InsertAnimeTrack
+import tachiyomi.domain.track.interactor.GetTracks
+import tachiyomi.domain.track.interactor.InsertTrack
 
 class TrackEpisode(
-    private val getTracks: GetAnimeTracks,
+    private val getTracks: GetTracks,
     private val trackerManager: TrackerManager,
-    private val insertTrack: InsertAnimeTrack,
+    private val insertTrack: InsertTrack,
     private val delayedTrackingStore: DelayedTrackingStore,
 ) {
 

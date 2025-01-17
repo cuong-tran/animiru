@@ -3,7 +3,7 @@ package eu.kanade.presentation.history
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import eu.kanade.tachiyomi.ui.history.HistoryScreenModel
 import tachiyomi.domain.anime.model.AnimeCover
-import tachiyomi.domain.history.model.AnimeHistoryWithRelations
+import tachiyomi.domain.history.model.HistoryWithRelations
 import java.time.Instant
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
@@ -87,10 +87,10 @@ class HistoryScreenModelStateProvider : PreviewParameterProvider<HistoryScreenMo
             }
         }
 
-        fun randItem(historyBuilder: (AnimeHistoryWithRelations) -> AnimeHistoryWithRelations = { it }) =
+        fun randItem(historyBuilder: (HistoryWithRelations) -> HistoryWithRelations = { it }) =
             AnimeHistoryUiModel.Item(
                 historyBuilder(
-                    AnimeHistoryWithRelations(
+                    HistoryWithRelations(
                         id = Random.nextLong(),
                         episodeId = Random.nextLong(),
                         animeId = Random.nextLong(),

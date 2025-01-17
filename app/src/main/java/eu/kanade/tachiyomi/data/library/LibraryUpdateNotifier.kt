@@ -33,8 +33,8 @@ import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.lang.launchUI
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.episode.model.Episode
-import tachiyomi.domain.library.LibraryAnime
-import tachiyomi.domain.source.service.AnimeSourceManager
+import tachiyomi.domain.library.model.LibraryAnime
+import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.i18n.MR
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
@@ -45,7 +45,7 @@ class LibraryUpdateNotifier(
     private val context: Context,
 
     private val securityPreferences: SecurityPreferences = Injekt.get(),
-    private val sourceManager: AnimeSourceManager = Injekt.get(),
+    private val sourceManager: SourceManager = Injekt.get(),
 ) {
 
     private val percentFormatter = NumberFormat.getPercentInstance().apply {

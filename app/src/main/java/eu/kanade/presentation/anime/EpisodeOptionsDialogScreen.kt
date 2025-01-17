@@ -66,7 +66,7 @@ import tachiyomi.domain.anime.interactor.GetAnime
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.episode.interactor.GetEpisode
 import tachiyomi.domain.episode.model.Episode
-import tachiyomi.domain.source.service.AnimeSourceManager
+import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
@@ -112,7 +112,7 @@ class EpisodeOptionsDialogScreenModel(
     animeId: Long,
     sourceId: Long,
 ) : StateScreenModel<State>(State()) {
-    private val sourceManager: AnimeSourceManager = Injekt.get()
+    private val sourceManager: SourceManager = Injekt.get()
 
     init {
         screenModelScope.launch {

@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastAny
 import eu.kanade.tachiyomi.ui.library.LibraryItem
 import tachiyomi.domain.anime.model.AnimeCover
-import tachiyomi.domain.library.LibraryAnime
+import tachiyomi.domain.library.model.LibraryAnime
 
 @Composable
 fun LibraryCompactGrid(

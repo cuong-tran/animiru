@@ -44,11 +44,11 @@ import tachiyomi.domain.episode.interactor.GetEpisodesByAnimeId
 import tachiyomi.domain.episode.interactor.UpdateEpisode
 import tachiyomi.domain.episode.model.Episode
 import tachiyomi.domain.episode.model.EpisodeUpdate
-import tachiyomi.domain.history.interactor.UpsertAnimeHistory
-import tachiyomi.domain.history.model.AnimeHistoryUpdate
-import tachiyomi.domain.source.service.AnimeSourceManager
-import tachiyomi.domain.track.interactor.GetAnimeTracks
-import tachiyomi.domain.track.interactor.InsertAnimeTrack
+import tachiyomi.domain.history.interactor.UpsertHistory
+import tachiyomi.domain.history.model.HistoryUpdate
+import tachiyomi.domain.source.service.SourceManager
+import tachiyomi.domain.track.interactor.GetTracks
+import tachiyomi.domain.track.interactor.InsertTrack
 import tachiyomi.source.local.LocalAnimeSource
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
@@ -418,13 +418,13 @@ class ExternalIntents {
     }
 
     // List of all the required Injectable classes
-    private val upsertHistory: UpsertAnimeHistory = Injekt.get()
+    private val upsertHistory: UpsertHistory = Injekt.get()
     private val updateEpisode: UpdateEpisode = Injekt.get()
     private val getAnime: GetAnime = Injekt.get()
-    private val sourceManager: AnimeSourceManager = Injekt.get()
+    private val sourceManager: SourceManager = Injekt.get()
     private val getEpisodesByAnimeId: GetEpisodesByAnimeId = Injekt.get()
-    private val getTracks: GetAnimeTracks = Injekt.get()
-    private val insertTrack: InsertAnimeTrack = Injekt.get()
+    private val getTracks: GetTracks = Injekt.get()
+    private val insertTrack: InsertTrack = Injekt.get()
     private val downloadManager: DownloadManager by injectLazy()
     private val delayedTrackingStore: DelayedTrackingStore = Injekt.get()
     private val playerPreferences: PlayerPreferences = Injekt.get()
@@ -440,7 +440,7 @@ class ExternalIntents {
     private suspend fun saveEpisodeHistory(currentEpisode: Episode) {
         if (basePreferences.incognitoMode().get()) return
         upsertHistory.await(
-            AnimeHistoryUpdate(currentEpisode.id, Date()),
+            HistoryUpdate(currentEpisode.id, Date()),
         )
     }
 

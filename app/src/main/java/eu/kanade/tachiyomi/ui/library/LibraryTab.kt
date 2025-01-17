@@ -57,11 +57,11 @@ import kotlinx.coroutines.runBlocking
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.domain.anime.model.Anime
-import tachiyomi.domain.category.interactor.GetAnimeCategories
+import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.episode.model.Episode
-import tachiyomi.domain.library.LibraryAnime
-import tachiyomi.domain.library.model.AnimeLibraryGroup
+import tachiyomi.domain.library.model.LibraryAnime
+import tachiyomi.domain.library.model.LibraryGroup
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
@@ -116,20 +116,20 @@ data object LibraryTab : Tab {
         val snackbarHostState = remember { SnackbarHostState() }
 
         // AM (GROUPING) -->
-        val getAnimeCategories = remember { Injekt.get<GetAnimeCategories>() }
-        val allAnimeCategories by getAnimeCategories.subscribe().collectAsState(
-            initial = runBlocking { getAnimeCategories.await() },
+        val getCategories = remember { Injekt.get<GetCategories>() }
+        val allAnimeCategories by getCategories.subscribe().collectAsState(
+            initial = runBlocking { getCategories.await() },
         )
 
         val onClickRefresh: (Category?) -> Boolean = { category ->
             val started = LibraryUpdateJob.startNow(
                 context = context,
-                category = if (state.groupType == AnimeLibraryGroup.BY_DEFAULT) category else null,
+                category = if (state.groupType == LibraryGroup.BY_DEFAULT) category else null,
                 group = state.groupType,
                 groupExtra = when (state.groupType) {
-                    AnimeLibraryGroup.BY_DEFAULT -> null
-                    AnimeLibraryGroup.BY_SOURCE, AnimeLibraryGroup.BY_TRACK_STATUS -> category?.id?.toString()
-                    AnimeLibraryGroup.BY_STATUS -> category?.id?.minus(1)?.toString()
+                    LibraryGroup.BY_DEFAULT -> null
+                    LibraryGroup.BY_SOURCE, LibraryGroup.BY_TRACK_STATUS -> category?.id?.toString()
+                    LibraryGroup.BY_STATUS -> category?.id?.minus(1)?.toString()
                     else -> null
                 },
             )

@@ -28,7 +28,7 @@ import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.coroutines.runBlocking
-import tachiyomi.domain.category.interactor.GetAnimeCategories
+import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.collectAsState
@@ -119,10 +119,10 @@ object SettingsDiscordScreen : SearchableSettings {
         connectionPreferences: ConnectionPreferences,
         enabled: Boolean,
     ): Preference.PreferenceGroup {
-        val getAnimeCategories = remember { Injekt.get<GetAnimeCategories>() }
-        val allAnimeCategories by getAnimeCategories.subscribe().collectAsState(
+        val getCategories = remember { Injekt.get<GetCategories>() }
+        val allAnimeCategories by getCategories.subscribe().collectAsState(
             initial = runBlocking {
-                getAnimeCategories.await()
+                getCategories.await()
             },
         )
 

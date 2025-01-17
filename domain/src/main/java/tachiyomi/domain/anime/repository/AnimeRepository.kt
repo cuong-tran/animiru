@@ -3,7 +3,7 @@ package tachiyomi.domain.anime.repository
 import kotlinx.coroutines.flow.Flow
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.anime.model.AnimeUpdate
-import tachiyomi.domain.library.LibraryAnime
+import tachiyomi.domain.library.model.LibraryAnime
 
 interface AnimeRepository {
 

@@ -26,7 +26,7 @@ import kotlinx.coroutines.SupervisorJob
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.withIOContext
-import tachiyomi.domain.category.interactor.GetAnimeCategories
+import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.category.model.Category.Companion.UNCATEGORIZED_ID
 import tachiyomi.i18n.MR
 import uy.kohesive.injekt.Injekt
@@ -163,7 +163,7 @@ class DiscordRPCService : Service() {
         internal suspend fun setPlayerActivity(context: Context, playerData: PlayerData = PlayerData()) {
             if (rpc == null || playerData.thumbnailUrl == null || playerData.animeId == null) return
 
-            val animeCategoryIds = Injekt.get<GetAnimeCategories>()
+            val animeCategoryIds = Injekt.get<GetCategories>()
                 .await(playerData.animeId)
                 .map { it.id.toString() }
                 .run { ifEmpty { plus(UNCATEGORIZED_ID.toString()) } }

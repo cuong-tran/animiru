@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.update
 import logcat.LogPriority
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.source.model.AnimeSource
+import tachiyomi.domain.source.model.Source
 import tachiyomi.domain.source.model.Pin
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
@@ -53,9 +53,9 @@ class SourcesScreenModel(
         }
     }
 
-    private fun collectLatestAnimeSources(sources: List<AnimeSource>) {
+    private fun collectLatestAnimeSources(sources: List<Source>) {
         mutableState.update { state ->
-            val map = TreeMap<String, MutableList<AnimeSource>> { d1, d2 ->
+            val map = TreeMap<String, MutableList<Source>> { d1, d2 ->
                 // Sources without a lang defined will be placed at the end
                 when {
                     d1 == LAST_USED_KEY && d2 != LAST_USED_KEY -> -1
@@ -91,15 +91,15 @@ class SourcesScreenModel(
         }
     }
 
-    fun toggleSource(source: AnimeSource) {
+    fun toggleSource(source: Source) {
         toggleSource.await(source)
     }
 
-    fun togglePin(source: AnimeSource) {
+    fun togglePin(source: Source) {
         toggleSourcePin.await(source)
     }
 
-    fun showSourceDialog(source: AnimeSource) {
+    fun showSourceDialog(source: Source) {
         mutableState.update { it.copy(dialog = Dialog(source)) }
     }
 
@@ -119,7 +119,7 @@ class SourcesScreenModel(
         data object FailedFetchingSources : Event
     }
 
-    data class Dialog(val source: AnimeSource)
+    data class Dialog(val source: Source)
 
     @Immutable
     data class State(

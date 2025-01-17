@@ -8,17 +8,17 @@ import eu.kanade.tachiyomi.data.backup.models.BackupCategory
 import eu.kanade.tachiyomi.data.backup.models.BackupEpisode
 import tachiyomi.data.AnimeDatabaseHandler
 import tachiyomi.data.AnimeUpdateStrategyColumnAdapter
-import tachiyomi.domain.anime.interactor.AnimeFetchInterval
+import tachiyomi.domain.anime.interactor.FetchInterval
 import tachiyomi.domain.anime.interactor.GetAnimeByUrlAndSourceId
 import tachiyomi.domain.anime.interactor.SetCustomAnimeInfo
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.anime.model.CustomAnimeInfo
-import tachiyomi.domain.category.interactor.GetAnimeCategories
+import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.episode.interactor.GetEpisodesByAnimeId
 import tachiyomi.domain.episode.model.Episode
-import tachiyomi.domain.track.interactor.GetAnimeTracks
-import tachiyomi.domain.track.interactor.InsertAnimeTrack
-import tachiyomi.domain.track.model.AnimeTrack
+import tachiyomi.domain.track.interactor.GetTracks
+import tachiyomi.domain.track.interactor.InsertTrack
+import tachiyomi.domain.track.model.Track
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.time.ZonedDateTime
@@ -27,16 +27,16 @@ import kotlin.math.max
 
 class AnimeRestorer(
     private val handler: AnimeDatabaseHandler = Injekt.get(),
-    private val getCategories: GetAnimeCategories = Injekt.get(),
+    private val getCategories: GetCategories = Injekt.get(),
     private val getAnimeByUrlAndSourceId: GetAnimeByUrlAndSourceId = Injekt.get(),
     private val getEpisodesByAnimeId: GetEpisodesByAnimeId = Injekt.get(),
     private val updateAnime: UpdateAnime = Injekt.get(),
-    private val getTracks: GetAnimeTracks = Injekt.get(),
-    private val insertTrack: InsertAnimeTrack = Injekt.get(),
+    private val getTracks: GetTracks = Injekt.get(),
+    private val insertTrack: InsertTrack = Injekt.get(),
     // AM (CUSTOM_INFORMATION) -->
     private val setCustomAnimeInfo: SetCustomAnimeInfo = Injekt.get(),
     // <-- AM (CUSTOM_INFORMATION)
-    fetchInterval: AnimeFetchInterval = Injekt.get(),
+    fetchInterval: FetchInterval = Injekt.get(),
 ) {
 
     private var now = ZonedDateTime.now()
@@ -443,5 +443,5 @@ class AnimeRestorer(
     }
     // <-- AM (CUSTOM_INFORMATION)
 
-    private fun AnimeTrack.forComparison() = this.copy(id = 0L, animeId = 0L)
+    private fun Track.forComparison() = this.copy(id = 0L, animeId = 0L)
 }

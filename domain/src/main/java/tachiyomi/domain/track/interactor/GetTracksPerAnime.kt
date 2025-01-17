@@ -2,14 +2,14 @@ package tachiyomi.domain.track.interactor
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import tachiyomi.domain.track.model.AnimeTrack
-import tachiyomi.domain.track.repository.AnimeTrackRepository
+import tachiyomi.domain.track.model.Track
+import tachiyomi.domain.track.repository.TrackRepository
 
 class GetTracksPerAnime(
-    private val trackRepository: AnimeTrackRepository,
+    private val trackRepository: TrackRepository,
 ) {
 
-    fun subscribe(): Flow<Map<Long, List<AnimeTrack>>> {
+    fun subscribe(): Flow<Map<Long, List<Track>>> {
         return trackRepository.getAnimeTracksAsFlow().map { tracks -> tracks.groupBy { it.animeId } }
     }
 }

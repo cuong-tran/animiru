@@ -2,7 +2,7 @@ package eu.kanade.tachiyomi.extension.model
 
 import android.graphics.drawable.Drawable
 import eu.kanade.tachiyomi.animesource.AnimeSource
-import tachiyomi.domain.source.model.StubAnimeSource
+import tachiyomi.domain.source.model.StubSource
 
 sealed class Extension {
 
@@ -51,8 +51,8 @@ sealed class Extension {
             val name: String,
             val baseUrl: String,
         ) {
-            fun toStubSource(): StubAnimeSource {
-                return StubAnimeSource(
+            fun toStubSource(): StubSource {
+                return StubSource(
                     id = this.id,
                     lang = this.lang,
                     name = this.name,

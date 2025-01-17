@@ -17,9 +17,9 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import tachiyomi.domain.source.model.StubAnimeSource
-import tachiyomi.domain.source.repository.AnimeStubSourceRepository
-import tachiyomi.domain.source.service.AnimeSourceManager
+import tachiyomi.domain.source.model.StubSource
+import tachiyomi.domain.source.repository.StubSourceRepository
+import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.source.local.LocalAnimeSource
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
@@ -29,8 +29,8 @@ import java.util.concurrent.ConcurrentHashMap
 class AndroidSourceManager(
     private val context: Context,
     private val extensionManager: ExtensionManager,
-    private val sourceRepository: AnimeStubSourceRepository,
-) : AnimeSourceManager {
+    private val sourceRepository: StubSourceRepository,
+) : SourceManager {
 
     private val _isInitialized = MutableStateFlow(false)
     override val isInitialized: StateFlow<Boolean> = _isInitialized.asStateFlow()
@@ -41,7 +41,7 @@ class AndroidSourceManager(
 
     private val sourcesMapFlow = MutableStateFlow(ConcurrentHashMap<Long, AnimeSource>())
 
-    private val stubSourcesMap = ConcurrentHashMap<Long, StubAnimeSource>()
+    private val stubSourcesMap = ConcurrentHashMap<Long, StubSource>()
 
     override val catalogueSources: Flow<List<AnimeCatalogueSource>> = sourcesMapFlow.map {
         it.values.filterIsInstance<AnimeCatalogueSource>()
@@ -63,7 +63,7 @@ class AndroidSourceManager(
                     extensions.forEach { extension ->
                         extension.sources.forEach {
                             mutableMap[it.id] = it
-                            registerStubSource(StubAnimeSource.from(it))
+                            registerStubSource(StubSource.from(it))
                         }
                     }
                     sourcesMapFlow.value = mutableMap
@@ -96,12 +96,12 @@ class AndroidSourceManager(
 
     override fun getCatalogueSources() = sourcesMapFlow.value.values.filterIsInstance<AnimeCatalogueSource>()
 
-    override fun getStubSources(): List<StubAnimeSource> {
+    override fun getStubSources(): List<StubSource> {
         val onlineSourceIds = getOnlineSources().map { it.id }
         return stubSourcesMap.values.filterNot { it.id in onlineSourceIds }
     }
 
-    private fun registerStubSource(source: StubAnimeSource) {
+    private fun registerStubSource(source: StubSource) {
         scope.launch {
             val dbSource = sourceRepository.getStubAnimeSource(source.id)
             if (dbSource == source) return@launch
@@ -112,7 +112,7 @@ class AndroidSourceManager(
         }
     }
 
-    private suspend fun createStubSource(id: Long): StubAnimeSource {
+    private suspend fun createStubSource(id: Long): StubSource {
         sourceRepository.getStubAnimeSource(id)?.let {
             return it
         }
@@ -120,6 +120,6 @@ class AndroidSourceManager(
             registerStubSource(it)
             return it
         }
-        return StubAnimeSource(id = id, lang = "", name = "")
+        return StubSource(id = id, lang = "", name = "")
     }
 }

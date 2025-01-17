@@ -5,9 +5,9 @@ import tachiyomi.core.common.preference.PreferenceStore
 import tachiyomi.core.common.preference.TriState
 import tachiyomi.core.common.preference.getEnum
 import tachiyomi.domain.anime.model.Anime
-import tachiyomi.domain.library.model.AnimeLibraryGroup
-import tachiyomi.domain.library.model.AnimeLibrarySort
-import tachiyomi.domain.library.model.GroupAnimeLibraryMode
+import tachiyomi.domain.library.model.LibraryGroup
+import tachiyomi.domain.library.model.LibrarySort
+import tachiyomi.domain.library.model.GroupLibraryMode
 import tachiyomi.domain.library.model.LibraryDisplayMode
 
 class LibraryPreferences(
@@ -23,9 +23,9 @@ class LibraryPreferences(
 
     fun animeSortingMode() = preferenceStore.getObject(
         "animelib_sorting_mode",
-        AnimeLibrarySort.default,
-        AnimeLibrarySort.Serializer::serialize,
-        AnimeLibrarySort.Serializer::deserialize,
+        LibrarySort.default,
+        LibrarySort.Serializer::serialize,
+        LibrarySort.Serializer::deserialize,
     )
 
     fun lastUpdatedTimestamp() = preferenceStore.getLong(Preference.appStateKey("library_update_last_timestamp"), 0L)
@@ -204,9 +204,9 @@ class LibraryPreferences(
     }
 
     // AM (GROUPING) -->
-    fun groupLibraryUpdateType() = preferenceStore.getEnum("group_library_update_type", GroupAnimeLibraryMode.GLOBAL)
+    fun groupLibraryUpdateType() = preferenceStore.getEnum("group_library_update_type", GroupLibraryMode.GLOBAL)
 
-    fun groupLibraryBy() = preferenceStore.getInt("group_library_by", AnimeLibraryGroup.BY_DEFAULT)
+    fun groupLibraryBy() = preferenceStore.getInt("group_library_by", LibraryGroup.BY_DEFAULT)
     // <-- AM (GROUPING)
 
     companion object {

@@ -1,6 +1,6 @@
 package tachiyomi.data.track
 
-import tachiyomi.domain.track.model.AnimeTrack
+import tachiyomi.domain.track.model.Track
 
 object AnimeTrackMapper {
     fun mapTrack(
@@ -17,7 +17,7 @@ object AnimeTrackMapper {
         remoteUrl: String,
         startDate: Long,
         finishDate: Long,
-    ): AnimeTrack = AnimeTrack(
+    ): Track = Track(
         id = id,
         animeId = animeId,
         trackerId = syncId,

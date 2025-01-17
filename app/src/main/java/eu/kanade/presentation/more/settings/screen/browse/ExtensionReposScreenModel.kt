@@ -10,11 +10,11 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
-import mihon.domain.extensionrepo.interactor.CreateAnimeExtensionRepo
-import mihon.domain.extensionrepo.interactor.DeleteAnimeExtensionRepo
-import mihon.domain.extensionrepo.interactor.GetAnimeExtensionRepo
-import mihon.domain.extensionrepo.interactor.ReplaceAnimeExtensionRepo
-import mihon.domain.extensionrepo.interactor.UpdateAnimeExtensionRepo
+import mihon.domain.extensionrepo.interactor.CreateExtensionRepo
+import mihon.domain.extensionrepo.interactor.DeleteExtensionRepo
+import mihon.domain.extensionrepo.interactor.GetExtensionRepo
+import mihon.domain.extensionrepo.interactor.ReplaceExtensionRepo
+import mihon.domain.extensionrepo.interactor.UpdateExtensionRepo
 import mihon.domain.extensionrepo.model.ExtensionRepo
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.i18n.MR
@@ -22,11 +22,11 @@ import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
 class ExtensionReposScreenModel(
-    private val getExtensionRepo: GetAnimeExtensionRepo = Injekt.get(),
-    private val createExtensionRepo: CreateAnimeExtensionRepo = Injekt.get(),
-    private val deleteExtensionRepo: DeleteAnimeExtensionRepo = Injekt.get(),
-    private val replaceExtensionRepo: ReplaceAnimeExtensionRepo = Injekt.get(),
-    private val updateExtensionRepo: UpdateAnimeExtensionRepo = Injekt.get(),
+    private val getExtensionRepo: GetExtensionRepo = Injekt.get(),
+    private val createExtensionRepo: CreateExtensionRepo = Injekt.get(),
+    private val deleteExtensionRepo: DeleteExtensionRepo = Injekt.get(),
+    private val replaceExtensionRepo: ReplaceExtensionRepo = Injekt.get(),
+    private val updateExtensionRepo: UpdateExtensionRepo = Injekt.get(),
 ) : StateScreenModel<RepoScreenState>(RepoScreenState.Loading) {
 
     private val _events: Channel<RepoEvent> = Channel(Int.MAX_VALUE)
@@ -53,9 +53,9 @@ class ExtensionReposScreenModel(
     fun createRepo(baseUrl: String) {
         screenModelScope.launchIO {
             when (val result = createExtensionRepo.await(baseUrl)) {
-                CreateAnimeExtensionRepo.Result.InvalidUrl -> _events.send(RepoEvent.InvalidUrl)
-                CreateAnimeExtensionRepo.Result.RepoAlreadyExists -> _events.send(RepoEvent.RepoAlreadyExists)
-                is CreateAnimeExtensionRepo.Result.DuplicateFingerprint -> {
+                CreateExtensionRepo.Result.InvalidUrl -> _events.send(RepoEvent.InvalidUrl)
+                CreateExtensionRepo.Result.RepoAlreadyExists -> _events.send(RepoEvent.RepoAlreadyExists)
+                is CreateExtensionRepo.Result.DuplicateFingerprint -> {
                     showDialog(RepoDialog.Conflict(result.oldRepo, result.newRepo))
                 }
                 else -> {}

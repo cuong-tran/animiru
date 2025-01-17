@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.update
 import logcat.LogPriority
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.source.model.AnimeSource
+import tachiyomi.domain.source.model.Source
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
@@ -83,7 +83,7 @@ class MigrateSourceScreenModel(
     @Immutable
     data class State(
         val isLoading: Boolean = true,
-        val items: ImmutableList<Pair<AnimeSource, Long>> = persistentListOf(),
+        val items: ImmutableList<Pair<Source, Long>> = persistentListOf(),
         val sortingMode: SetMigrateSorting.Mode = SetMigrateSorting.Mode.ALPHABETICAL,
         val sortingDirection: SetMigrateSorting.Direction = SetMigrateSorting.Direction.ASCENDING,
     ) {

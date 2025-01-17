@@ -13,7 +13,7 @@ import eu.kanade.presentation.more.settings.widget.SwitchPreferenceWidget
 import eu.kanade.presentation.util.animateItemFastScroll
 import eu.kanade.tachiyomi.ui.browse.source.SourcesFilterScreenModel
 import eu.kanade.tachiyomi.util.system.LocaleHelper
-import tachiyomi.domain.source.model.AnimeSource
+import tachiyomi.domain.source.model.Source
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.FastScrollLazyColumn
 import tachiyomi.presentation.core.components.material.Scaffold
@@ -25,7 +25,7 @@ fun SourcesFilterScreen(
     navigateUp: () -> Unit,
     state: SourcesFilterScreenModel.State.Success,
     onClickLanguage: (String) -> Unit,
-    onClickSource: (AnimeSource) -> Unit,
+    onClickSource: (Source) -> Unit,
 ) {
     Scaffold(
         topBar = { scrollBehavior ->
@@ -57,7 +57,7 @@ private fun SourcesFilterContent(
     contentPadding: PaddingValues,
     state: SourcesFilterScreenModel.State.Success,
     onClickLanguage: (String) -> Unit,
-    onClickSource: (AnimeSource) -> Unit,
+    onClickSource: (Source) -> Unit,
 ) {
     FastScrollLazyColumn(
         contentPadding = contentPadding,
@@ -110,9 +110,9 @@ fun SourcesFilterHeader(
 
 @Composable
 private fun SourcesFilterItem(
-    source: AnimeSource,
+    source: Source,
     isEnabled: Boolean,
-    onClickItem: (AnimeSource) -> Unit,
+    onClickItem: (Source) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     BaseSourceItem(

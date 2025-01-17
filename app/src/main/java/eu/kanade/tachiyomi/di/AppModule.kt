@@ -37,7 +37,7 @@ import tachiyomi.data.Database
 import tachiyomi.data.DateColumnAdapter
 import tachiyomi.data.StringListColumnAdapter
 import tachiyomi.domain.anime.interactor.GetCustomAnimeInfo
-import tachiyomi.domain.source.service.AnimeSourceManager
+import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.domain.storage.service.StorageManager
 import tachiyomi.source.local.image.LocalAnimeCoverManager
 import tachiyomi.source.local.io.LocalAnimeSourceFileSystem
@@ -123,7 +123,7 @@ class AppModule(val app: Application) : InjektModule {
         addSingletonFactory { NetworkHelper(app, get()) }
         addSingletonFactory { JavaScriptEngine(app) }
 
-        addSingletonFactory<AnimeSourceManager> { AndroidSourceManager(app, get(), get()) }
+        addSingletonFactory<SourceManager> { AndroidSourceManager(app, get(), get()) }
 
         addSingletonFactory { ExtensionManager(app) }
 
@@ -157,7 +157,7 @@ class AppModule(val app: Application) : InjektModule {
         ContextCompat.getMainExecutor(app).execute {
             get<NetworkHelper>()
 
-            get<AnimeSourceManager>()
+            get<SourceManager>()
 
             get<Database>()
 

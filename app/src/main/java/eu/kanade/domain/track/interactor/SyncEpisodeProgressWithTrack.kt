@@ -8,19 +8,19 @@ import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.episode.interactor.GetEpisodesByAnimeId
 import tachiyomi.domain.episode.interactor.UpdateEpisode
 import tachiyomi.domain.episode.model.toEpisodeUpdate
-import tachiyomi.domain.track.interactor.InsertAnimeTrack
-import tachiyomi.domain.track.model.AnimeTrack
+import tachiyomi.domain.track.interactor.InsertTrack
+import tachiyomi.domain.track.model.Track
 import kotlin.math.max
 
 class SyncEpisodeProgressWithTrack(
     private val updateEpisode: UpdateEpisode,
-    private val insertTrack: InsertAnimeTrack,
+    private val insertTrack: InsertTrack,
     private val getEpisodesByAnimeId: GetEpisodesByAnimeId,
 ) {
 
     suspend fun await(
         animeId: Long,
-        remoteTrack: AnimeTrack,
+        remoteTrack: Track,
         service: AnimeTracker,
     ) {
         if (service !is EnhancedTracker) {

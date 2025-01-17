@@ -2,10 +2,10 @@ package tachiyomi.domain.source.interactor
 
 import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
 import tachiyomi.domain.source.repository.AnimeSourcePagingSourceType
-import tachiyomi.domain.source.repository.AnimeSourceRepository
+import tachiyomi.domain.source.repository.SourceRepository
 
 class GetRemoteAnime(
-    private val repository: AnimeSourceRepository,
+    private val repository: SourceRepository,
 ) {
 
     fun subscribe(sourceId: Long, query: String, filterList: AnimeFilterList): AnimeSourcePagingSourceType {

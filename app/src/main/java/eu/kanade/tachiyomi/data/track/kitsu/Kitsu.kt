@@ -16,7 +16,7 @@ import kotlinx.serialization.json.Json
 import tachiyomi.i18n.MR
 import uy.kohesive.injekt.injectLazy
 import java.text.DecimalFormat
-import tachiyomi.domain.track.model.AnimeTrack as DomainAnimeTrack
+import tachiyomi.domain.track.model.Track as DomainAnimeTrack
 
 class Kitsu(id: Long) :
     BaseTracker(

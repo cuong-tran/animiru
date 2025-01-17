@@ -63,7 +63,7 @@ import tachiyomi.core.common.util.lang.launchNonCancellable
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.lang.withUIContext
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.anime.applyFilter
+import tachiyomi.domain.anime.model.applyFilter
 import tachiyomi.domain.anime.interactor.GetAnimeWithEpisodes
 import tachiyomi.domain.anime.interactor.GetDuplicateLibraryAnime
 import tachiyomi.domain.anime.interactor.SetAnimeEpisodeFlags
@@ -72,7 +72,7 @@ import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.anime.model.AnimeUpdate
 import tachiyomi.domain.anime.model.CustomAnimeInfo
 import tachiyomi.domain.anime.repository.AnimeRepository
-import tachiyomi.domain.category.interactor.GetAnimeCategories
+import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.category.interactor.SetAnimeCategories
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.download.service.DownloadPreferences
@@ -84,9 +84,9 @@ import tachiyomi.domain.episode.model.NoEpisodesException
 import tachiyomi.domain.episode.service.calculateEpisodeGap
 import tachiyomi.domain.episode.service.getEpisodeSort
 import tachiyomi.domain.library.service.LibraryPreferences
-import tachiyomi.domain.source.service.AnimeSourceManager
+import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.domain.storage.service.StoragePreferences
-import tachiyomi.domain.track.interactor.GetAnimeTracks
+import tachiyomi.domain.track.interactor.GetTracks
 import tachiyomi.i18n.MR
 import tachiyomi.source.local.LocalAnimeSource
 import tachiyomi.source.local.isLocal
@@ -116,8 +116,8 @@ class AnimeScreenModel(
     private val updateEpisode: UpdateEpisode = Injekt.get(),
     private val updateAnime: UpdateAnime = Injekt.get(),
     private val syncEpisodesWithSource: SyncEpisodesWithSource = Injekt.get(),
-    private val getCategories: GetAnimeCategories = Injekt.get(),
-    private val getTracks: GetAnimeTracks = Injekt.get(),
+    private val getCategories: GetCategories = Injekt.get(),
+    private val getTracks: GetTracks = Injekt.get(),
     private val addTracks: AddTracks = Injekt.get(),
     private val setAnimeCategories: SetAnimeCategories = Injekt.get(),
     private val animeRepository: AnimeRepository = Injekt.get(),
@@ -128,7 +128,7 @@ class AnimeScreenModel(
     private val storagePreferences: StoragePreferences = Injekt.get(),
     // <-- AM (FILE_SIZE)
     // AM (CUSTOM_INFORMATION) -->
-    private val sourceManager: AnimeSourceManager = Injekt.get(),
+    private val sourceManager: SourceManager = Injekt.get(),
     private val setCustomAnimeInfo: SetCustomAnimeInfo = Injekt.get(),
     // <-- AM (CUSTOM_INFORMATION)
 ) : StateScreenModel<AnimeScreenModel.State>(State.Loading) {
@@ -219,7 +219,7 @@ class AnimeScreenModel(
             mutableState.update {
                 State.Success(
                     anime = anime,
-                    source = Injekt.get<AnimeSourceManager>().getOrStub(anime.source),
+                    source = Injekt.get<SourceManager>().getOrStub(anime.source),
                     isFromSource = isFromSource,
                     episodes = episodes,
                     isRefreshingData = needRefreshInfo || needRefreshEpisode,

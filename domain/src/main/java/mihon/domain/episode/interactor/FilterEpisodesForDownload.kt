@@ -1,7 +1,7 @@
 package mihon.domain.episode.interactor
 
 import tachiyomi.domain.anime.model.Anime
-import tachiyomi.domain.category.interactor.GetAnimeCategories
+import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.download.service.DownloadPreferences
 import tachiyomi.domain.episode.interactor.GetEpisodesByAnimeId
 import tachiyomi.domain.episode.model.Episode
@@ -16,7 +16,7 @@ import tachiyomi.domain.episode.model.Episode
 class FilterEpisodesForDownload(
     private val getEpisodesByAnimeId: GetEpisodesByAnimeId,
     private val downloadPreferences: DownloadPreferences,
-    private val getCategories: GetAnimeCategories,
+    private val getCategories: GetCategories,
 ) {
 
     /**

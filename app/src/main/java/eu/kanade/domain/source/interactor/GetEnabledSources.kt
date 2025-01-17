@@ -4,18 +4,18 @@ import eu.kanade.domain.source.service.SourcePreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
-import tachiyomi.domain.source.model.AnimeSource
+import tachiyomi.domain.source.model.Source
 import tachiyomi.domain.source.model.Pin
 import tachiyomi.domain.source.model.Pins
-import tachiyomi.domain.source.repository.AnimeSourceRepository
+import tachiyomi.domain.source.repository.SourceRepository
 import tachiyomi.source.local.LocalAnimeSource
 
 class GetEnabledSources(
-    private val repository: AnimeSourceRepository,
+    private val repository: SourceRepository,
     private val preferences: SourcePreferences,
 ) {
 
-    fun subscribe(): Flow<List<AnimeSource>> {
+    fun subscribe(): Flow<List<Source>> {
         return combine(
             preferences.pinnedAnimeSources().changes(),
             preferences.enabledLanguages().changes(),

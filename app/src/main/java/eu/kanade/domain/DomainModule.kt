@@ -21,54 +21,54 @@ import eu.kanade.domain.track.interactor.AddTracks
 import eu.kanade.domain.track.interactor.RefreshTracks
 import eu.kanade.domain.track.interactor.SyncEpisodeProgressWithTrack
 import eu.kanade.domain.track.interactor.TrackEpisode
-import mihon.data.repository.AnimeExtensionRepoRepositoryImpl
+import mihon.data.repository.ExtensionRepoRepositoryImpl
 import mihon.domain.episode.interactor.FilterEpisodesForDownload
-import mihon.domain.extensionrepo.interactor.CreateAnimeExtensionRepo
-import mihon.domain.extensionrepo.interactor.DeleteAnimeExtensionRepo
-import mihon.domain.extensionrepo.interactor.GetAnimeExtensionRepo
-import mihon.domain.extensionrepo.interactor.GetAnimeExtensionRepoCount
-import mihon.domain.extensionrepo.interactor.ReplaceAnimeExtensionRepo
-import mihon.domain.extensionrepo.interactor.UpdateAnimeExtensionRepo
-import mihon.domain.extensionrepo.repository.AnimeExtensionRepoRepository
+import mihon.domain.extensionrepo.interactor.CreateExtensionRepo
+import mihon.domain.extensionrepo.interactor.DeleteExtensionRepo
+import mihon.domain.extensionrepo.interactor.GetExtensionRepo
+import mihon.domain.extensionrepo.interactor.GetExtensionRepoCount
+import mihon.domain.extensionrepo.interactor.ReplaceExtensionRepo
+import mihon.domain.extensionrepo.interactor.UpdateExtensionRepo
+import mihon.domain.extensionrepo.repository.ExtensionRepoRepository
 import mihon.domain.extensionrepo.service.ExtensionRepoService
 import mihon.domain.upcoming.interactor.GetUpcomingAnime
 import tachiyomi.data.anime.AnimeRepositoryImpl
 import tachiyomi.data.anime.CustomAnimeRepositoryImpl
-import tachiyomi.data.category.AnimeCategoryRepositoryImpl
+import tachiyomi.data.category.CategoryRepositoryImpl
 import tachiyomi.data.episode.EpisodeRepositoryImpl
-import tachiyomi.data.history.AnimeHistoryRepositoryImpl
+import tachiyomi.data.history.HistoryRepositoryImpl
 import tachiyomi.data.release.ReleaseServiceImpl
-import tachiyomi.data.source.AnimeSourceRepositoryImpl
-import tachiyomi.data.source.AnimeStubSourceRepositoryImpl
-import tachiyomi.data.track.AnimeTrackRepositoryImpl
-import tachiyomi.data.updates.AnimeUpdatesRepositoryImpl
-import tachiyomi.domain.anime.interactor.AnimeFetchInterval
+import tachiyomi.data.source.SourceRepositoryImpl
+import tachiyomi.data.source.StubSourceRepositoryImpl
+import tachiyomi.data.track.TrackRepositoryImpl
+import tachiyomi.data.updates.UpdatesRepositoryImpl
+import tachiyomi.domain.anime.interactor.FetchInterval
 import tachiyomi.domain.anime.interactor.GetAnime
 import tachiyomi.domain.anime.interactor.GetAnimeByUrlAndSourceId
-import tachiyomi.domain.anime.interactor.GetAnimeFavorites
+import tachiyomi.domain.anime.interactor.GetFavorites
 import tachiyomi.domain.anime.interactor.GetAnimeWithEpisodes
 import tachiyomi.domain.anime.interactor.GetCustomAnimeInfo
 import tachiyomi.domain.anime.interactor.GetDuplicateLibraryAnime
 import tachiyomi.domain.anime.interactor.GetLibraryAnime
 import tachiyomi.domain.anime.interactor.NetworkToLocalAnime
-import tachiyomi.domain.anime.interactor.ResetAnimeViewerFlags
+import tachiyomi.domain.anime.interactor.ResetViewerFlags
 import tachiyomi.domain.anime.interactor.SetAnimeEpisodeFlags
 import tachiyomi.domain.anime.interactor.SetCustomAnimeInfo
 import tachiyomi.domain.anime.repository.AnimeRepository
 import tachiyomi.domain.anime.repository.CustomAnimeRepository
-import tachiyomi.domain.category.interactor.CreateAnimeCategoryWithName
-import tachiyomi.domain.category.interactor.DeleteAnimeCategory
-import tachiyomi.domain.category.interactor.GetAnimeCategories
-import tachiyomi.domain.category.interactor.GetVisibleAnimeCategories
-import tachiyomi.domain.category.interactor.HideAnimeCategory
-import tachiyomi.domain.category.interactor.RenameAnimeCategory
-import tachiyomi.domain.category.interactor.ReorderAnimeCategory
-import tachiyomi.domain.category.interactor.ResetAnimeCategoryFlags
+import tachiyomi.domain.category.interactor.CreateCategoryWithName
+import tachiyomi.domain.category.interactor.DeleteCategory
+import tachiyomi.domain.category.interactor.GetCategories
+import tachiyomi.domain.category.interactor.GetVisibleCategories
+import tachiyomi.domain.category.interactor.HideCategory
+import tachiyomi.domain.category.interactor.RenameCategory
+import tachiyomi.domain.category.interactor.ReorderCategory
+import tachiyomi.domain.category.interactor.ResetCategoryFlags
 import tachiyomi.domain.category.interactor.SetAnimeCategories
-import tachiyomi.domain.category.interactor.SetAnimeDisplayMode
-import tachiyomi.domain.category.interactor.SetSortModeForAnimeCategory
-import tachiyomi.domain.category.interactor.UpdateAnimeCategory
-import tachiyomi.domain.category.repository.AnimeCategoryRepository
+import tachiyomi.domain.category.interactor.SetDisplayMode
+import tachiyomi.domain.category.interactor.SetSortModeForCategory
+import tachiyomi.domain.category.interactor.UpdateCategory
+import tachiyomi.domain.category.repository.CategoryRepository
 import tachiyomi.domain.episode.interactor.GetEpisode
 import tachiyomi.domain.episode.interactor.GetEpisodeByUrlAndAnimeId
 import tachiyomi.domain.episode.interactor.GetEpisodesByAnimeId
@@ -76,24 +76,24 @@ import tachiyomi.domain.episode.interactor.SetAnimeDefaultEpisodeFlags
 import tachiyomi.domain.episode.interactor.ShouldUpdateDbEpisode
 import tachiyomi.domain.episode.interactor.UpdateEpisode
 import tachiyomi.domain.episode.repository.EpisodeRepository
-import tachiyomi.domain.history.interactor.GetAnimeHistory
+import tachiyomi.domain.history.interactor.GetHistory
 import tachiyomi.domain.history.interactor.GetNextEpisodes
-import tachiyomi.domain.history.interactor.RemoveAnimeHistory
-import tachiyomi.domain.history.interactor.UpsertAnimeHistory
-import tachiyomi.domain.history.repository.AnimeHistoryRepository
+import tachiyomi.domain.history.interactor.RemoveHistory
+import tachiyomi.domain.history.interactor.UpsertHistory
+import tachiyomi.domain.history.repository.HistoryRepository
 import tachiyomi.domain.release.interactor.GetApplicationRelease
 import tachiyomi.domain.release.service.ReleaseService
-import tachiyomi.domain.source.interactor.GetAnimeSourcesWithNonLibraryAnime
+import tachiyomi.domain.source.interactor.GetSourcesWithNonLibraryAnime
 import tachiyomi.domain.source.interactor.GetRemoteAnime
-import tachiyomi.domain.source.repository.AnimeSourceRepository
-import tachiyomi.domain.source.repository.AnimeStubSourceRepository
-import tachiyomi.domain.track.interactor.DeleteAnimeTrack
-import tachiyomi.domain.track.interactor.GetAnimeTracks
+import tachiyomi.domain.source.repository.SourceRepository
+import tachiyomi.domain.source.repository.StubSourceRepository
+import tachiyomi.domain.track.interactor.DeleteTrack
+import tachiyomi.domain.track.interactor.GetTracks
 import tachiyomi.domain.track.interactor.GetTracksPerAnime
-import tachiyomi.domain.track.interactor.InsertAnimeTrack
-import tachiyomi.domain.track.repository.AnimeTrackRepository
-import tachiyomi.domain.updates.interactor.GetAnimeUpdates
-import tachiyomi.domain.updates.repository.AnimeUpdatesRepository
+import tachiyomi.domain.track.interactor.InsertTrack
+import tachiyomi.domain.track.repository.TrackRepository
+import tachiyomi.domain.updates.interactor.GetUpdates
+import tachiyomi.domain.updates.repository.UpdatesRepository
 import uy.kohesive.injekt.api.InjektModule
 import uy.kohesive.injekt.api.InjektRegistrar
 import uy.kohesive.injekt.api.addFactory
@@ -103,31 +103,31 @@ import uy.kohesive.injekt.api.get
 class DomainModule : InjektModule {
 
     override fun InjektRegistrar.registerInjectables() {
-        addSingletonFactory<AnimeCategoryRepository> { AnimeCategoryRepositoryImpl(get()) }
-        addFactory { GetAnimeCategories(get()) }
-        addFactory { GetVisibleAnimeCategories(get()) }
-        addFactory { ResetAnimeCategoryFlags(get(), get()) }
-        addFactory { SetAnimeDisplayMode(get()) }
-        addFactory { SetSortModeForAnimeCategory(get(), get()) }
-        addFactory { CreateAnimeCategoryWithName(get(), get()) }
-        addFactory { RenameAnimeCategory(get()) }
-        addFactory { ReorderAnimeCategory(get()) }
-        addFactory { UpdateAnimeCategory(get()) }
-        addFactory { HideAnimeCategory(get()) }
-        addFactory { DeleteAnimeCategory(get()) }
+        addSingletonFactory<CategoryRepository> { CategoryRepositoryImpl(get()) }
+        addFactory { GetCategories(get()) }
+        addFactory { GetVisibleCategories(get()) }
+        addFactory { ResetCategoryFlags(get(), get()) }
+        addFactory { SetDisplayMode(get()) }
+        addFactory { SetSortModeForCategory(get(), get()) }
+        addFactory { CreateCategoryWithName(get(), get()) }
+        addFactory { RenameCategory(get()) }
+        addFactory { ReorderCategory(get()) }
+        addFactory { UpdateCategory(get()) }
+        addFactory { HideCategory(get()) }
+        addFactory { DeleteCategory(get()) }
 
         addSingletonFactory<AnimeRepository> { AnimeRepositoryImpl(get()) }
         addFactory { GetDuplicateLibraryAnime(get()) }
-        addFactory { GetAnimeFavorites(get()) }
+        addFactory { GetFavorites(get()) }
         addFactory { GetLibraryAnime(get()) }
         addFactory { GetAnimeWithEpisodes(get(), get()) }
         addFactory { GetAnimeByUrlAndSourceId(get()) }
         addFactory { GetAnime(get()) }
         addFactory { GetNextEpisodes(get(), get(), get()) }
         addFactory { GetUpcomingAnime(get()) }
-        addFactory { ResetAnimeViewerFlags(get()) }
+        addFactory { ResetViewerFlags(get()) }
         addFactory { SetAnimeEpisodeFlags(get()) }
-        addFactory { AnimeFetchInterval(get()) }
+        addFactory { FetchInterval(get()) }
         addFactory { SetAnimeDefaultEpisodeFlags(get(), get(), get()) }
         addFactory { SetAnimeViewerFlags(get()) }
         addFactory { NetworkToLocalAnime(get()) }
@@ -137,14 +137,14 @@ class DomainModule : InjektModule {
         addSingletonFactory<ReleaseService> { ReleaseServiceImpl(get(), get()) }
         addFactory { GetApplicationRelease(get(), get()) }
 
-        addSingletonFactory<AnimeTrackRepository> { AnimeTrackRepositoryImpl(get()) }
+        addSingletonFactory<TrackRepository> { TrackRepositoryImpl(get()) }
         addFactory { TrackEpisode(get(), get(), get(), get()) }
         addFactory { AddTracks(get(), get(), get(), get()) }
         addFactory { RefreshTracks(get(), get(), get(), get()) }
-        addFactory { DeleteAnimeTrack(get()) }
+        addFactory { DeleteTrack(get()) }
         addFactory { GetTracksPerAnime(get()) }
-        addFactory { GetAnimeTracks(get()) }
-        addFactory { InsertAnimeTrack(get()) }
+        addFactory { GetTracks(get()) }
+        addFactory { InsertTrack(get()) }
         addFactory { SyncEpisodeProgressWithTrack(get(), get(), get()) }
 
         addSingletonFactory<EpisodeRepository> { EpisodeRepositoryImpl(get()) }
@@ -157,10 +157,10 @@ class DomainModule : InjektModule {
         addFactory { SyncEpisodesWithSource(get(), get(), get(), get(), get(), get(), get()) }
         addFactory { FilterEpisodesForDownload(get(), get(), get()) }
 
-        addSingletonFactory<AnimeHistoryRepository> { AnimeHistoryRepositoryImpl(get()) }
-        addFactory { GetAnimeHistory(get()) }
-        addFactory { UpsertAnimeHistory(get()) }
-        addFactory { RemoveAnimeHistory(get()) }
+        addSingletonFactory<HistoryRepository> { HistoryRepositoryImpl(get()) }
+        addFactory { GetHistory(get()) }
+        addFactory { UpsertHistory(get()) }
+        addFactory { RemoveHistory(get()) }
 
         addFactory { DeleteDownload(get(), get()) }
 
@@ -168,16 +168,16 @@ class DomainModule : InjektModule {
         addFactory { GetExtensionSources(get()) }
         addFactory { GetExtensionLanguages(get(), get()) }
 
-        addSingletonFactory<AnimeUpdatesRepository> { AnimeUpdatesRepositoryImpl(get()) }
-        addFactory { GetAnimeUpdates(get()) }
+        addSingletonFactory<UpdatesRepository> { UpdatesRepositoryImpl(get()) }
+        addFactory { GetUpdates(get()) }
 
-        addSingletonFactory<AnimeSourceRepository> { AnimeSourceRepositoryImpl(get(), get()) }
-        addSingletonFactory<AnimeStubSourceRepository> { AnimeStubSourceRepositoryImpl(get()) }
+        addSingletonFactory<SourceRepository> { SourceRepositoryImpl(get(), get()) }
+        addSingletonFactory<StubSourceRepository> { StubSourceRepositoryImpl(get()) }
         addFactory { GetEnabledSources(get(), get()) }
         addFactory { GetLanguagesWithSources(get(), get()) }
         addFactory { GetRemoteAnime(get()) }
         addFactory { GetSourcesWithFavoriteCount(get(), get()) }
-        addFactory { GetAnimeSourcesWithNonLibraryAnime(get()) }
+        addFactory { GetSourcesWithNonLibraryAnime(get()) }
         addFactory { ToggleSource(get()) }
         addFactory { ToggleSourcePin(get()) }
 
@@ -187,13 +187,13 @@ class DomainModule : InjektModule {
 
         addFactory { ExtensionRepoService(get(), get()) }
 
-        addSingletonFactory<AnimeExtensionRepoRepository> { AnimeExtensionRepoRepositoryImpl(get()) }
-        addFactory { GetAnimeExtensionRepo(get()) }
-        addFactory { GetAnimeExtensionRepoCount(get()) }
-        addFactory { CreateAnimeExtensionRepo(get(), get()) }
-        addFactory { DeleteAnimeExtensionRepo(get()) }
-        addFactory { ReplaceAnimeExtensionRepo(get()) }
-        addFactory { UpdateAnimeExtensionRepo(get(), get()) }
+        addSingletonFactory<ExtensionRepoRepository> { ExtensionRepoRepositoryImpl(get()) }
+        addFactory { GetExtensionRepo(get()) }
+        addFactory { GetExtensionRepoCount(get()) }
+        addFactory { CreateExtensionRepo(get(), get()) }
+        addFactory { DeleteExtensionRepo(get()) }
+        addFactory { ReplaceExtensionRepo(get()) }
+        addFactory { UpdateExtensionRepo(get(), get()) }
 
         // AM (CUSTOM_INFORMATION) -->
         addSingletonFactory<CustomAnimeRepository> { CustomAnimeRepositoryImpl(get<Application>()) }

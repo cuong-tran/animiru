@@ -14,7 +14,7 @@ import kotlinx.collections.immutable.persistentListOf
 import okhttp3.Dns
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.i18n.MR
-import tachiyomi.domain.track.model.AnimeTrack as DomainTrack
+import tachiyomi.domain.track.model.Track as DomainTrack
 
 class Jellyfin(id: Long) : BaseTracker(id, "Jellyfin"), EnhancedTracker, AnimeTracker {
 

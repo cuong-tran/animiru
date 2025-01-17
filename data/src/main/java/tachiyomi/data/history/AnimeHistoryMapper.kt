@@ -1,8 +1,8 @@
 package tachiyomi.data.history
 
 import tachiyomi.domain.anime.model.AnimeCover
-import tachiyomi.domain.history.model.AnimeHistory
-import tachiyomi.domain.history.model.AnimeHistoryWithRelations
+import tachiyomi.domain.history.model.History
+import tachiyomi.domain.history.model.HistoryWithRelations
 import java.util.Date
 
 object AnimeHistoryMapper {
@@ -10,7 +10,7 @@ object AnimeHistoryMapper {
         id: Long,
         episodeId: Long,
         seenAt: Date?,
-    ): AnimeHistory = AnimeHistory(
+    ): History = History(
         id = id,
         episodeId = episodeId,
         seenAt = seenAt,
@@ -27,7 +27,7 @@ object AnimeHistoryMapper {
         coverLastModified: Long,
         episodeNumber: Double,
         seenAt: Date?,
-    ): AnimeHistoryWithRelations = AnimeHistoryWithRelations(
+    ): HistoryWithRelations = HistoryWithRelations(
         id = historyId,
         episodeId = episodeId,
         animeId = animeId,

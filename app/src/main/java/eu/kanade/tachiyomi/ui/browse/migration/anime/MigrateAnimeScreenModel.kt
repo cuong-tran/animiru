@@ -17,16 +17,16 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import logcat.LogPriority
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.anime.interactor.GetAnimeFavorites
+import tachiyomi.domain.anime.interactor.GetFavorites
 import tachiyomi.domain.anime.model.Anime
-import tachiyomi.domain.source.service.AnimeSourceManager
+import tachiyomi.domain.source.service.SourceManager
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
 class MigrateAnimeScreenModel(
     private val sourceId: Long,
-    private val sourceManager: AnimeSourceManager = Injekt.get(),
-    private val getFavorites: GetAnimeFavorites = Injekt.get(),
+    private val sourceManager: SourceManager = Injekt.get(),
+    private val getFavorites: GetFavorites = Injekt.get(),
 ) : StateScreenModel<MigrateAnimeScreenModel.State>(State()) {
 
     private val _events: Channel<MigrationAnimeEvent> = Channel()

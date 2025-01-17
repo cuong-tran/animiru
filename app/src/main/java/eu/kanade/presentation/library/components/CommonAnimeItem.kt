@@ -43,7 +43,7 @@ import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.BadgeGroup
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.selectedBackground
-import tachiyomi.domain.anime.EntryCover as EntryCoverModel
+import tachiyomi.domain.anime.model.AnimeCover as AnimeCoverModel
 
 object CommonAnimeItemDefaults {
     val GridHorizontalSpacer = 4.dp
@@ -70,7 +70,7 @@ private const val GRID_SELECTED_COVER_ALPHA = 0.76f
  */
 @Composable
 fun AnimeCompactGridItem(
-    coverData: EntryCoverModel,
+    coverData: AnimeCoverModel,
     onClick: () -> Unit,
     onLongClick: () -> Unit,
     isSelected: Boolean = false,
@@ -180,7 +180,7 @@ fun AnimeComfortableGridItem(
     onClick: () -> Unit,
     onLongClick: () -> Unit,
     titleMaxLines: Int = 2,
-    coverData: EntryCoverModel,
+    coverData: AnimeCoverModel,
     coverAlpha: Float = 1f,
     coverBadgeStart: (@Composable RowScope.() -> Unit)? = null,
     coverBadgeEnd: (@Composable RowScope.() -> Unit)? = null,
@@ -332,7 +332,7 @@ private fun Modifier.selectedOutline(
 fun AnimeListItem(
     isSelected: Boolean = false,
     title: String,
-    coverData: EntryCoverModel,
+    coverData: AnimeCoverModel,
     coverAlpha: Float = 1f,
     onLongClick: () -> Unit,
     onClick: () -> Unit,

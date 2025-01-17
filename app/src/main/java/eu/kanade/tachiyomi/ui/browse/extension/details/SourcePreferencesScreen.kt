@@ -39,7 +39,7 @@ import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
 import eu.kanade.tachiyomi.animesource.sourcePreferences
 import eu.kanade.tachiyomi.data.preference.SharedPreferencesDataStore
 import eu.kanade.tachiyomi.widget.TachiyomiTextInputEditText.Companion.setIncognito
-import tachiyomi.domain.source.service.AnimeSourceManager
+import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.screens.LoadingScreen
 import uy.kohesive.injekt.Injekt
@@ -60,7 +60,7 @@ class SourcePreferencesScreen(val sourceId: Long) : Screen() {
         Scaffold(
             topBar = {
                 AppBar(
-                    title = Injekt.get<AnimeSourceManager>().getOrStub(sourceId).toString(),
+                    title = Injekt.get<SourceManager>().getOrStub(sourceId).toString(),
                     navigateUp = navigator::pop,
                     scrollBehavior = it,
                 )
@@ -133,7 +133,7 @@ class SourcePreferencesFragment : PreferenceFragmentCompat() {
 
     private fun populateScreen(): PreferenceScreen {
         val sourceId = requireArguments().getLong(SOURCE_ID)
-        val source = Injekt.get<AnimeSourceManager>().getOrStub(sourceId)
+        val source = Injekt.get<SourceManager>().getOrStub(sourceId)
         val sourceScreen = preferenceManager.createPreferenceScreen(requireContext())
 
         if (source is ConfigurableAnimeSource) {

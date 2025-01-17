@@ -45,9 +45,9 @@ import eu.kanade.tachiyomi.data.download.DownloadProvider
 import eu.kanade.tachiyomi.data.download.model.Download
 import eu.kanade.tachiyomi.ui.updates.UpdatesItem
 import tachiyomi.core.common.util.lang.withIOContext
-import tachiyomi.domain.source.service.AnimeSourceManager
+import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.domain.storage.service.StoragePreferences
-import tachiyomi.domain.updates.model.AnimeUpdatesWithRelations
+import tachiyomi.domain.updates.model.UpdatesWithRelations
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.ListGroupHeader
 import tachiyomi.presentation.core.components.material.DISABLED_ALPHA
@@ -153,7 +153,7 @@ internal fun LazyListScope.updatesUiItems(
 
 @Composable
 private fun UpdatesUiItem(
-    update: AnimeUpdatesWithRelations,
+    update: UpdatesWithRelations,
     selected: Boolean,
     watchProgress: String?,
     onClick: () -> Unit,
@@ -266,7 +266,7 @@ private fun UpdatesUiItem(
                         // AM (CUSTOM_INFORMATION) -->
                         update.ogAnimeTitle,
                         // <-- AM (CUSTOM_INFORMATION)
-                        animeSourceManager.getOrStub(update.sourceId),
+                        sourceManager.getOrStub(update.sourceId),
                     )
                 }
                 updatesItem.fileSize = fileSizeAsync
@@ -310,5 +310,5 @@ private fun formatProgress(milliseconds: Long): String {
 // AM (FILE_SIZE) -->
 private val storagePreferences: StoragePreferences by injectLazy()
 private val downloadProvider: DownloadProvider by injectLazy()
-private val animeSourceManager: AnimeSourceManager by injectLazy()
+private val sourceManager: SourceManager by injectLazy()
 // <-- AM (FILE_SIZE)

@@ -25,17 +25,17 @@ import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.episode.model.Episode
-import tachiyomi.domain.history.interactor.GetAnimeHistory
+import tachiyomi.domain.history.interactor.GetHistory
 import tachiyomi.domain.history.interactor.GetNextEpisodes
-import tachiyomi.domain.history.interactor.RemoveAnimeHistory
-import tachiyomi.domain.history.model.AnimeHistoryWithRelations
+import tachiyomi.domain.history.interactor.RemoveHistory
+import tachiyomi.domain.history.model.HistoryWithRelations
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
 class HistoryScreenModel(
-    private val getHistory: GetAnimeHistory = Injekt.get(),
+    private val getHistory: GetHistory = Injekt.get(),
     private val getNextEpisodes: GetNextEpisodes = Injekt.get(),
-    private val removeHistory: RemoveAnimeHistory = Injekt.get(),
+    private val removeHistory: RemoveHistory = Injekt.get(),
 ) : StateScreenModel<HistoryScreenModel.State>(State()) {
 
     private val _events: Channel<Event> = Channel(Channel.UNLIMITED)
@@ -66,7 +66,7 @@ class HistoryScreenModel(
         }
     }
 
-    private fun List<AnimeHistoryWithRelations>.toAnimeHistoryUiModels(): List<AnimeHistoryUiModel> {
+    private fun List<HistoryWithRelations>.toAnimeHistoryUiModels(): List<AnimeHistoryUiModel> {
         return map { AnimeHistoryUiModel.Item(it) }
             .insertSeparators { before, after ->
                 val beforeDate = before?.item?.seenAt?.time?.toLocalDate()
@@ -94,7 +94,7 @@ class HistoryScreenModel(
         _events.send(Event.OpenEpisode(episode))
     }
 
-    fun removeFromHistory(history: AnimeHistoryWithRelations) {
+    fun removeFromHistory(history: HistoryWithRelations) {
         screenModelScope.launchIO {
             removeHistory.await(history)
         }
@@ -127,7 +127,7 @@ class HistoryScreenModel(
 
     sealed interface Dialog {
         data object DeleteAll : Dialog
-        data class Delete(val history: AnimeHistoryWithRelations) : Dialog
+        data class Delete(val history: HistoryWithRelations) : Dialog
     }
 
     sealed interface Event {

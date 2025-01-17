@@ -4,14 +4,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import eu.kanade.tachiyomi.ui.anime.track.TrackItem
 import eu.kanade.test.DummyTracker
-import tachiyomi.domain.track.model.AnimeTrack
+import tachiyomi.domain.track.model.Track
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
 internal class TrackInfoDialogHomePreviewProvider :
     PreviewParameterProvider<@Composable () -> Unit> {
 
-    private val aTrack = AnimeTrack(
+    private val aTrack = Track(
         id = 1L,
         animeId = 2L,
         trackerId = 3L,

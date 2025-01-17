@@ -38,8 +38,8 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.map
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.domain.anime.model.AnimeCover
-import tachiyomi.domain.updates.interactor.GetAnimeUpdates
-import tachiyomi.domain.updates.model.AnimeUpdatesWithRelations
+import tachiyomi.domain.updates.interactor.GetUpdates
+import tachiyomi.domain.updates.model.UpdatesWithRelations
 import tachiyomi.presentation.widget.components.CoverHeight
 import tachiyomi.presentation.widget.components.CoverWidth
 import tachiyomi.presentation.widget.components.LockedWidget
@@ -53,7 +53,7 @@ import java.time.ZonedDateTime
 
 abstract class BaseUpdatesGridGlanceWidget(
     private val context: Context = Injekt.get<Application>(),
-    private val getUpdates: GetAnimeUpdates = Injekt.get(),
+    private val getUpdates: GetUpdates = Injekt.get(),
     private val preferences: SecurityPreferences = Injekt.get(),
 ) : GlanceAppWidget() {
 
@@ -109,7 +109,7 @@ abstract class BaseUpdatesGridGlanceWidget(
     }
 
     @OptIn(ExperimentalCoilApi::class)
-    private suspend fun List<AnimeUpdatesWithRelations>.prepareData(
+    private suspend fun List<UpdatesWithRelations>.prepareData(
         rowCount: Int,
         columnCount: Int,
     ): ImmutableList<Pair<Long, Bitmap?>> {

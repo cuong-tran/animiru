@@ -31,8 +31,8 @@ import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.anime.interactor.GetLibraryAnime
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.anime.model.toAnimeUpdate
-import tachiyomi.domain.library.LibraryAnime
-import tachiyomi.domain.source.service.AnimeSourceManager
+import tachiyomi.domain.library.model.LibraryAnime
+import tachiyomi.domain.source.service.SourceManager
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.util.concurrent.CopyOnWriteArrayList
@@ -41,7 +41,7 @@ import java.util.concurrent.atomic.AtomicInteger
 class MetadataUpdateJob(private val context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {
 
-    private val sourceManager: AnimeSourceManager = Injekt.get()
+    private val sourceManager: SourceManager = Injekt.get()
     private val coverCache: CoverCache = Injekt.get()
     private val getLibraryAnime: GetLibraryAnime = Injekt.get()
     private val updateAnime: UpdateAnime = Injekt.get()

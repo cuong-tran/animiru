@@ -2,7 +2,7 @@ package tachiyomi.domain.anime.interactor
 
 import kotlinx.coroutines.flow.Flow
 import tachiyomi.domain.anime.repository.AnimeRepository
-import tachiyomi.domain.library.LibraryAnime
+import tachiyomi.domain.library.model.LibraryAnime
 
 class GetLibraryAnime(
     private val animeRepository: AnimeRepository,

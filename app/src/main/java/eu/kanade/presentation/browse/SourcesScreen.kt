@@ -42,7 +42,7 @@ import eu.kanade.tachiyomi.ui.browse.source.SourcesScreenModel
 import eu.kanade.tachiyomi.ui.browse.source.browse.BrowseSourceScreenModel.Listing
 import eu.kanade.tachiyomi.ui.browse.source.globalsearch.GlobalSearchScreen
 import eu.kanade.tachiyomi.util.system.LocaleHelper
-import tachiyomi.domain.source.model.AnimeSource
+import tachiyomi.domain.source.model.Source
 import tachiyomi.domain.source.model.Pin
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.ScrollbarLazyColumn
@@ -62,9 +62,9 @@ import tachiyomi.source.local.LocalAnimeSource
 @Composable
 fun SourcesScreen(
     state: SourcesScreenModel.State,
-    onClickItem: (AnimeSource, Listing) -> Unit,
-    onClickPin: (AnimeSource) -> Unit,
-    onLongClickItem: (AnimeSource) -> Unit,
+    onClickItem: (Source, Listing) -> Unit,
+    onClickPin: (Source) -> Unit,
+    onLongClickItem: (Source) -> Unit,
     // AM (BROWSE) -->
     toExtensionsScreen: () -> Unit,
     updateCount: Int,
@@ -188,13 +188,13 @@ private fun SourceHeader(
 
 @Composable
 private fun SourceItem(
-    source: AnimeSource,
+    source: Source,
     // AM (BROWSE) -->
     navigator: Navigator,
     // <-- AM (BROWSE)
-    onClickItem: (AnimeSource, Listing) -> Unit,
-    onLongClickItem: (AnimeSource) -> Unit,
-    onClickPin: (AnimeSource) -> Unit,
+    onClickItem: (Source, Listing) -> Unit,
+    onLongClickItem: (Source) -> Unit,
+    onClickPin: (Source) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     BaseSourceItem(
@@ -268,7 +268,7 @@ private fun SourcePinButton(
 @Composable
 private fun AnimeSourceSettingsButton(
     navigator: Navigator,
-    source: AnimeSource,
+    source: Source,
 ) {
     val extension = source.installedExtension ?: return
     IconButton(onClick = { navigator.push(ExtensionDetailsScreen(extension.pkgName)) }) {
@@ -283,7 +283,7 @@ private fun AnimeSourceSettingsButton(
 
 @Composable
 fun SourceOptionsDialog(
-    source: AnimeSource,
+    source: Source,
     onClickPin: () -> Unit,
     onClickDisable: () -> Unit,
     // AM (BROWSE) -->
@@ -331,6 +331,6 @@ fun SourceOptionsDialog(
 }
 
 sealed interface AnimeSourceUiModel {
-    data class Item(val source: AnimeSource) : AnimeSourceUiModel
+    data class Item(val source: Source) : AnimeSourceUiModel
     data class Header(val language: String) : AnimeSourceUiModel
 }

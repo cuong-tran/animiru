@@ -26,7 +26,7 @@ import eu.kanade.presentation.anime.components.AnimeCover
 import eu.kanade.presentation.theme.TachiyomiPreviewTheme
 import eu.kanade.presentation.util.formatEpisodeNumber
 import eu.kanade.tachiyomi.util.lang.toTimestampString
-import tachiyomi.domain.history.model.AnimeHistoryWithRelations
+import tachiyomi.domain.history.model.HistoryWithRelations
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
@@ -35,7 +35,7 @@ private val HistoryItemHeight = 96.dp
 
 @Composable
 fun HistoryItem(
-    history: AnimeHistoryWithRelations,
+    history: HistoryWithRelations,
     onClickCover: () -> Unit,
     onClickResume: () -> Unit,
     onClickDelete: () -> Unit,
@@ -99,7 +99,7 @@ fun HistoryItem(
 @Composable
 private fun HistoryItemPreviews(
     @PreviewParameter(HistoryWithRelationsProvider::class)
-    historyWithRelations: AnimeHistoryWithRelations,
+    historyWithRelations: HistoryWithRelations,
 ) {
     TachiyomiPreviewTheme {
         Surface {

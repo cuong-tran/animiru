@@ -24,10 +24,10 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.launch
-import tachiyomi.domain.category.interactor.GetAnimeCategories
-import tachiyomi.domain.category.interactor.ResetAnimeCategoryFlags
+import tachiyomi.domain.category.interactor.GetCategories
+import tachiyomi.domain.category.interactor.ResetCategoryFlags
 import tachiyomi.domain.category.model.Category
-import tachiyomi.domain.library.model.GroupAnimeLibraryMode
+import tachiyomi.domain.library.model.GroupLibraryMode
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.domain.library.service.LibraryPreferences.Companion.DEVICE_CHARGING
 import tachiyomi.domain.library.service.LibraryPreferences.Companion.DEVICE_NETWORK_NOT_METERED
@@ -51,8 +51,8 @@ object SettingsLibraryScreen : SearchableSettings {
 
     @Composable
     override fun getPreferences(): List<Preference> {
-        val getAnimeCategories = remember { Injekt.get<GetAnimeCategories>() }
-        val allAnimeCategories by getAnimeCategories.subscribe().collectAsState(initial = emptyList())
+        val getCategories = remember { Injekt.get<GetCategories>() }
+        val allAnimeCategories by getCategories.subscribe().collectAsState(initial = emptyList())
         val libraryPreferences = remember { Injekt.get<LibraryPreferences>() }
 
         return listOf(
@@ -107,7 +107,7 @@ object SettingsLibraryScreen : SearchableSettings {
                     onValueChanged = {
                         if (!it) {
                             scope.launch {
-                                Injekt.get<ResetAnimeCategoryFlags>().await()
+                                Injekt.get<ResetCategoryFlags>().await()
                             }
                         }
                         true
@@ -209,11 +209,11 @@ object SettingsLibraryScreen : SearchableSettings {
                     pref = libraryPreferences.groupLibraryUpdateType(),
                     title = stringResource(MR.strings.library_group_updates),
                     entries = persistentMapOf(
-                        GroupAnimeLibraryMode.GLOBAL to stringResource(MR.strings.library_group_updates_global),
-                        GroupAnimeLibraryMode.ALL_BUT_UNGROUPED to stringResource(
+                        GroupLibraryMode.GLOBAL to stringResource(MR.strings.library_group_updates_global),
+                        GroupLibraryMode.ALL_BUT_UNGROUPED to stringResource(
                             MR.strings.library_group_updates_all_but_ungrouped,
                         ),
-                        GroupAnimeLibraryMode.ALL to stringResource(MR.strings.library_group_updates_all),
+                        GroupLibraryMode.ALL to stringResource(MR.strings.library_group_updates_all),
                     ),
                 ),
                 // <-- AM (GROUPING)

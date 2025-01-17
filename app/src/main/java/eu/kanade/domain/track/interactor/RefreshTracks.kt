@@ -7,13 +7,13 @@ import eu.kanade.tachiyomi.data.track.TrackerManager
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.supervisorScope
-import tachiyomi.domain.track.interactor.GetAnimeTracks
-import tachiyomi.domain.track.interactor.InsertAnimeTrack
+import tachiyomi.domain.track.interactor.GetTracks
+import tachiyomi.domain.track.interactor.InsertTrack
 
 class RefreshTracks(
-    private val getTracks: GetAnimeTracks,
+    private val getTracks: GetTracks,
     private val trackerManager: TrackerManager,
-    private val insertTrack: InsertAnimeTrack,
+    private val insertTrack: InsertTrack,
     private val syncEpisodeProgressWithTrack: SyncEpisodeProgressWithTrack,
 ) {
 

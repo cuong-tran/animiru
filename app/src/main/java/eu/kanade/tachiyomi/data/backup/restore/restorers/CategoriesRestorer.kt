@@ -2,20 +2,20 @@ package eu.kanade.tachiyomi.data.backup.restore.restorers
 
 import eu.kanade.tachiyomi.data.backup.models.BackupCategory
 import tachiyomi.data.AnimeDatabaseHandler
-import tachiyomi.domain.category.interactor.GetAnimeCategories
+import tachiyomi.domain.category.interactor.GetCategories
 import tachiyomi.domain.library.service.LibraryPreferences
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
 class CategoriesRestorer(
     private val animeHandler: AnimeDatabaseHandler = Injekt.get(),
-    private val getAnimeCategories: GetAnimeCategories = Injekt.get(),
+    private val getCategories: GetCategories = Injekt.get(),
     private val libraryPreferences: LibraryPreferences = Injekt.get(),
 ) {
 
     suspend operator fun invoke(backupCategories: List<BackupCategory>) {
         if (backupCategories.isNotEmpty()) {
-            val dbCategories = getAnimeCategories.await()
+            val dbCategories = getCategories.await()
             val dbCategoriesByName = dbCategories.associateBy { it.name }
             var nextOrder = dbCategories.maxOfOrNull { it.order }?.plus(1) ?: 0
 

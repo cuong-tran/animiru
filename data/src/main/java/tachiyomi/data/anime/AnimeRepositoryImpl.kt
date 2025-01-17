@@ -9,7 +9,7 @@ import tachiyomi.data.StringListColumnAdapter
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.anime.model.AnimeUpdate
 import tachiyomi.domain.anime.repository.AnimeRepository
-import tachiyomi.domain.library.LibraryAnime
+import tachiyomi.domain.library.model.LibraryAnime
 import java.time.LocalDate
 import java.time.ZoneId
 

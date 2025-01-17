@@ -9,7 +9,7 @@ import tachiyomi.domain.anime.interactor.GetAnime
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.episode.interactor.GetEpisode
 import tachiyomi.domain.episode.model.Episode
-import tachiyomi.domain.source.service.AnimeSourceManager
+import tachiyomi.domain.source.service.SourceManager
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
@@ -93,7 +93,7 @@ data class Download(
             episodeId: Long,
             getEpisode: GetEpisode = Injekt.get(),
             getAnimeById: GetAnime = Injekt.get(),
-            sourceManager: AnimeSourceManager = Injekt.get(),
+            sourceManager: SourceManager = Injekt.get(),
         ): Download? {
             val episode = getEpisode.await(episodeId) ?: return null
             val anime = getAnimeById.await(episode.animeId) ?: return null

@@ -72,10 +72,10 @@ import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.lang.withUIContext
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.anime.interactor.GetAnime
-import tachiyomi.domain.source.service.AnimeSourceManager
-import tachiyomi.domain.track.interactor.DeleteAnimeTrack
-import tachiyomi.domain.track.interactor.GetAnimeTracks
-import tachiyomi.domain.track.model.AnimeTrack
+import tachiyomi.domain.source.service.SourceManager
+import tachiyomi.domain.track.interactor.DeleteTrack
+import tachiyomi.domain.track.interactor.GetTracks
+import tachiyomi.domain.track.model.Track
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.LabeledCheckbox
 import tachiyomi.presentation.core.components.material.AlertDialogContent
@@ -87,7 +87,7 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.ZoneOffset
-import tachiyomi.domain.track.model.AnimeTrack as DbAnimeTrack
+import tachiyomi.domain.track.model.Track as DbAnimeTrack
 
 data class TrackInfoDialogHomeScreen(
     private val animeId: Long,
@@ -200,7 +200,7 @@ data class TrackInfoDialogHomeScreen(
     private class Model(
         private val animeId: Long,
         private val sourceId: Long,
-        private val getTracks: GetAnimeTracks = Injekt.get(),
+        private val getTracks: GetTracks = Injekt.get(),
     ) : StateScreenModel<Model.State>(State()) {
 
         init {
@@ -258,11 +258,11 @@ data class TrackInfoDialogHomeScreen(
                 }
         }
 
-        private fun List<AnimeTrack>.mapToTrackItem(): List<TrackItem> {
+        private fun List<Track>.mapToTrackItem(): List<TrackItem> {
             val loggedInTrackers = Injekt.get<TrackerManager>().loggedInTrackers().filter {
                 it is AnimeTracker
             }
-            val source = Injekt.get<AnimeSourceManager>().getOrStub(sourceId)
+            val source = Injekt.get<SourceManager>().getOrStub(sourceId)
             return loggedInTrackers
                 // Map to TrackItem
                 .map { service -> TrackItem(find { it.trackerId == service.id }, service) }
@@ -759,7 +759,7 @@ data class TrackServiceSearchScreen(
 
 private data class TrackerRemoveScreen(
     private val animeId: Long,
-    private val track: AnimeTrack,
+    private val track: Track,
     private val serviceId: Long,
 ) : Screen() {
 
@@ -836,9 +836,9 @@ private data class TrackerRemoveScreen(
 
     private class Model(
         private val animeId: Long,
-        private val track: AnimeTrack,
+        private val track: Track,
         private val tracker: Tracker,
-        private val deleteTrack: DeleteAnimeTrack = Injekt.get(),
+        private val deleteTrack: DeleteTrack = Injekt.get(),
     ) : ScreenModel {
 
         fun getName() = tracker.name

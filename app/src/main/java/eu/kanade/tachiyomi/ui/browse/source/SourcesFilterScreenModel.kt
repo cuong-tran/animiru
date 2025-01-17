@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import tachiyomi.domain.source.model.AnimeSource
+import tachiyomi.domain.source.model.Source
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.util.SortedMap
@@ -50,7 +50,7 @@ class SourcesFilterScreenModel(
         }
     }
 
-    fun toggleSource(source: AnimeSource) {
+    fun toggleSource(source: Source) {
         toggleSource.await(source)
     }
 
@@ -70,7 +70,7 @@ class SourcesFilterScreenModel(
 
         @Immutable
         data class Success(
-            val items: SortedMap<String, List<AnimeSource>>,
+            val items: SortedMap<String, List<Source>>,
             val enabledLanguages: Set<String>,
             val disabledSources: Set<String>,
         ) : State {

@@ -26,7 +26,7 @@ import okio.gzip
 import okio.sink
 import tachiyomi.core.common.i18n.stringResource
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.anime.interactor.GetAnimeFavorites
+import tachiyomi.domain.anime.interactor.GetFavorites
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.anime.repository.AnimeRepository
 import tachiyomi.domain.backup.service.BackupPreferences
@@ -44,7 +44,7 @@ class BackupCreator(
     private val isAutoBackup: Boolean,
 
     private val parser: ProtoBuf = Injekt.get(),
-    private val getAnimeFavorites: GetAnimeFavorites = Injekt.get(),
+    private val getFavorites: GetFavorites = Injekt.get(),
     private val backupPreferences: BackupPreferences = Injekt.get(),
     private val animeRepository: AnimeRepository = Injekt.get(),
 
@@ -83,7 +83,7 @@ class BackupCreator(
             } else {
                 emptyList()
             }
-            val backupAnime = backupAnimes(getAnimeFavorites.await() + nonFavoriteAnime, options)
+            val backupAnime = backupAnimes(getFavorites.await() + nonFavoriteAnime, options)
 
             val backup = Backup(
                 backupAnime = backupAnime,

@@ -30,7 +30,7 @@ import tachiyomi.core.common.util.lang.withIOContext
 import uy.kohesive.injekt.injectLazy
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
-import tachiyomi.domain.track.model.AnimeTrack as DomainAnimeTrack
+import tachiyomi.domain.track.model.Track as DomainAnimeTrack
 
 class KitsuApi(private val client: OkHttpClient, interceptor: KitsuInterceptor) {
 

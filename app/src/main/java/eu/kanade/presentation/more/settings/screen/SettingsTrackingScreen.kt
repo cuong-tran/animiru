@@ -58,7 +58,7 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toPersistentMap
 import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.withUIContext
-import tachiyomi.domain.source.service.AnimeSourceManager
+import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.padding
 import tachiyomi.presentation.core.i18n.stringResource
@@ -87,7 +87,7 @@ object SettingsTrackingScreen : SearchableSettings {
         val context = LocalContext.current
         val trackPreferences = remember { Injekt.get<TrackPreferences>() }
         val trackerManager = remember { Injekt.get<TrackerManager>() }
-        val animeSourceManager = remember { Injekt.get<AnimeSourceManager>() }
+        val sourceManager = remember { Injekt.get<SourceManager>() }
         val autoTrackStatePref = trackPreferences.autoUpdateTrackOnMarkRead()
 
         var dialog by remember { mutableStateOf<Any?>(null) }
@@ -113,7 +113,7 @@ object SettingsTrackingScreen : SearchableSettings {
             .filter { it is EnhancedTracker }
             .partition { service ->
                 val acceptedAnimeSources = (service as EnhancedTracker).getAcceptedSources()
-                animeSourceManager.getCatalogueSources().any { it::class.qualifiedName in acceptedAnimeSources }
+                sourceManager.getCatalogueSources().any { it::class.qualifiedName in acceptedAnimeSources }
             }
 
         var enhancedTrackerInfo = stringResource(MR.strings.enhanced_tracking_info)

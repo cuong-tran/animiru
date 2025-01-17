@@ -1,9 +1,9 @@
 package eu.kanade.domain.track.model
 
-import tachiyomi.domain.track.model.AnimeTrack
+import tachiyomi.domain.track.model.Track
 import eu.kanade.tachiyomi.data.database.models.Track as DbAnimeTrack
 
-fun AnimeTrack.copyPersonalFrom(other: AnimeTrack): AnimeTrack {
+fun Track.copyPersonalFrom(other: Track): Track {
     return this.copy(
         lastEpisodeSeen = other.lastEpisodeSeen,
         score = other.score,
@@ -13,7 +13,7 @@ fun AnimeTrack.copyPersonalFrom(other: AnimeTrack): AnimeTrack {
     )
 }
 
-fun AnimeTrack.toDbTrack(): DbAnimeTrack = DbAnimeTrack.create(trackerId).also {
+fun Track.toDbTrack(): DbAnimeTrack = DbAnimeTrack.create(trackerId).also {
     it.id = id
     it.anime_id = animeId
     it.remote_id = remoteId
@@ -28,9 +28,9 @@ fun AnimeTrack.toDbTrack(): DbAnimeTrack = DbAnimeTrack.create(trackerId).also {
     it.finished_watching_date = finishDate
 }
 
-fun DbAnimeTrack.toDomainTrack(idRequired: Boolean = true): AnimeTrack? {
+fun DbAnimeTrack.toDomainTrack(idRequired: Boolean = true): Track? {
     val trackId = id ?: if (!idRequired) -1 else return null
-    return AnimeTrack(
+    return Track(
         id = trackId,
         animeId = anime_id,
         trackerId = tracker_id.toLong(),

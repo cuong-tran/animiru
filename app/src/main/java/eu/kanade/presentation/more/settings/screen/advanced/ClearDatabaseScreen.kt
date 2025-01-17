@@ -46,9 +46,9 @@ import tachiyomi.core.common.util.lang.launchIO
 import tachiyomi.core.common.util.lang.launchUI
 import tachiyomi.core.common.util.lang.withNonCancellableContext
 import tachiyomi.data.Database
-import tachiyomi.domain.source.interactor.GetAnimeSourcesWithNonLibraryAnime
-import tachiyomi.domain.source.model.AnimeSource
-import tachiyomi.domain.source.model.AnimeSourceWithCount
+import tachiyomi.domain.source.interactor.GetSourcesWithNonLibraryAnime
+import tachiyomi.domain.source.model.Source
+import tachiyomi.domain.source.model.SourceWithCount
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
@@ -177,7 +177,7 @@ class ClearDatabaseScreen : Screen() {
 
     @Composable
     private fun ClearDatabaseItem(
-        source: AnimeSource,
+        source: Source,
         count: Long,
         isSelected: Boolean,
         onClickSelect: () -> Unit,
@@ -213,7 +213,7 @@ class ClearDatabaseScreen : Screen() {
 private class ClearAnimeDatabaseScreenModel : StateScreenModel<ClearAnimeDatabaseScreenModel.State>(
     State.Loading,
 ) {
-    private val getSourcesWithNonLibraryAnime: GetAnimeSourcesWithNonLibraryAnime = Injekt.get()
+    private val getSourcesWithNonLibraryAnime: GetSourcesWithNonLibraryAnime = Injekt.get()
     private val database: Database = Injekt.get()
 
     init {
@@ -237,7 +237,7 @@ private class ClearAnimeDatabaseScreenModel : StateScreenModel<ClearAnimeDatabas
         database.animehistoryQueries.removeResettedHistory()
     }
 
-    fun toggleSelection(source: AnimeSource) = mutableState.update { state ->
+    fun toggleSelection(source: Source) = mutableState.update { state ->
         if (state !is State.Ready) return@update state
         val mutableList = state.selection.toMutableList()
         if (mutableList.contains(source.id)) {
@@ -283,7 +283,7 @@ private class ClearAnimeDatabaseScreenModel : StateScreenModel<ClearAnimeDatabas
 
         @Immutable
         data class Ready(
-            val items: List<AnimeSourceWithCount>,
+            val items: List<SourceWithCount>,
             val selection: List<Long> = emptyList(),
             val showConfirmation: Boolean = false,
         ) : State

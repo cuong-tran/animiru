@@ -58,7 +58,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import tachiyomi.core.common.Constants
 import tachiyomi.core.common.util.lang.launchIO
-import tachiyomi.domain.source.model.StubAnimeSource
+import tachiyomi.domain.source.model.StubSource
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.components.material.padding
@@ -95,7 +95,7 @@ data class BrowseSourceScreen(
             }
         }
 
-        if (screenModel.source is StubAnimeSource) {
+        if (screenModel.source is StubSource) {
             MissingSourceScreen(
                 source = screenModel.source,
                 navigateUp = navigateUp,

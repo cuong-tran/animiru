@@ -32,7 +32,7 @@ import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.extension.model.Extension
 import eu.kanade.tachiyomi.extension.util.ExtensionLoader
 import tachiyomi.core.common.util.lang.withIOContext
-import tachiyomi.domain.source.model.AnimeSource
+import tachiyomi.domain.source.model.Source
 import tachiyomi.source.local.LocalAnimeSource
 
 private val defaultModifier = Modifier
@@ -41,7 +41,7 @@ private val defaultModifier = Modifier
 
 @Composable
 fun SourceIcon(
-    source: AnimeSource,
+    source: Source,
     modifier: Modifier = Modifier,
 ) {
     val icon = source.icon

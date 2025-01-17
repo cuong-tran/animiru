@@ -31,8 +31,8 @@ import eu.kanade.tachiyomi.util.system.isPreviewBuildType
 import kotlinx.collections.immutable.persistentListOf
 import tachiyomi.core.common.preference.TriState
 import tachiyomi.domain.category.model.Category
-import tachiyomi.domain.library.model.AnimeLibraryGroup
-import tachiyomi.domain.library.model.AnimeLibrarySort
+import tachiyomi.domain.library.model.LibraryGroup
+import tachiyomi.domain.library.model.LibrarySort
 import tachiyomi.domain.library.model.LibraryDisplayMode
 import tachiyomi.domain.library.model.sort
 import tachiyomi.domain.library.service.LibraryPreferences
@@ -190,12 +190,12 @@ private fun ColumnScope.SortPage(
     val trackers by screenModel.trackersFlow.collectAsState()
     // AM (GROUPING) -->
     val globalSortMode by screenModel.libraryPreferences.animeSortingMode().collectAsState()
-    val sortingMode = if (screenModel.grouping == AnimeLibraryGroup.BY_DEFAULT) {
+    val sortingMode = if (screenModel.grouping == LibraryGroup.BY_DEFAULT) {
         category.sort.type
     } else {
         globalSortMode.type
     }
-    val sortDescending = if (screenModel.grouping == AnimeLibraryGroup.BY_DEFAULT) {
+    val sortDescending = if (screenModel.grouping == LibraryGroup.BY_DEFAULT) {
         category.sort.isAscending
     } else {
         globalSortMode.isAscending
@@ -204,33 +204,33 @@ private fun ColumnScope.SortPage(
 
     val options = remember(trackers.isEmpty()) {
         val trackerMeanPair = if (trackers.isNotEmpty()) {
-            MR.strings.action_sort_tracker_score to AnimeLibrarySort.Type.TrackerMean
+            MR.strings.action_sort_tracker_score to LibrarySort.Type.TrackerMean
         } else {
             null
         }
         listOfNotNull(
-            MR.strings.action_sort_alpha to AnimeLibrarySort.Type.Alphabetical,
-            MR.strings.action_sort_total to AnimeLibrarySort.Type.TotalEpisodes,
-            MR.strings.action_sort_last_read to AnimeLibrarySort.Type.LastSeen,
-            MR.strings.action_sort_last_anime_update to AnimeLibrarySort.Type.LastUpdate,
-            MR.strings.action_sort_unread_count to AnimeLibrarySort.Type.UnseenCount,
-            MR.strings.action_sort_latest_chapter to AnimeLibrarySort.Type.LatestEpisode,
-            MR.strings.action_sort_episode_fetch_date to AnimeLibrarySort.Type.EpisodeFetchDate,
-            MR.strings.action_sort_date_added to AnimeLibrarySort.Type.DateAdded,
+            MR.strings.action_sort_alpha to LibrarySort.Type.Alphabetical,
+            MR.strings.action_sort_total to LibrarySort.Type.TotalEpisodes,
+            MR.strings.action_sort_last_read to LibrarySort.Type.LastSeen,
+            MR.strings.action_sort_last_anime_update to LibrarySort.Type.LastUpdate,
+            MR.strings.action_sort_unread_count to LibrarySort.Type.UnseenCount,
+            MR.strings.action_sort_latest_chapter to LibrarySort.Type.LatestEpisode,
+            MR.strings.action_sort_episode_fetch_date to LibrarySort.Type.EpisodeFetchDate,
+            MR.strings.action_sort_date_added to LibrarySort.Type.DateAdded,
             trackerMeanPair,
-            MR.strings.action_sort_airing_time to AnimeLibrarySort.Type.AiringTime,
-            MR.strings.action_sort_random to AnimeLibrarySort.Type.Random,
+            MR.strings.action_sort_airing_time to LibrarySort.Type.AiringTime,
+            MR.strings.action_sort_random to LibrarySort.Type.Random,
         )
     }
 
     options.map { (titleRes, mode) ->
-        if (mode == AnimeLibrarySort.Type.Random) {
+        if (mode == LibrarySort.Type.Random) {
             BaseSortItem(
                 label = stringResource(titleRes),
                 icon = Icons.Default.Refresh
-                    .takeIf { sortingMode == AnimeLibrarySort.Type.Random },
+                    .takeIf { sortingMode == LibrarySort.Type.Random },
                 onClick = {
-                    screenModel.setSort(category, mode, AnimeLibrarySort.Direction.Ascending)
+                    screenModel.setSort(category, mode, LibrarySort.Direction.Ascending)
                 },
             )
             return@map
@@ -242,14 +242,14 @@ private fun ColumnScope.SortPage(
                 val isTogglingDirection = sortingMode == mode
                 val direction = when {
                     isTogglingDirection -> if (sortDescending) {
-                        AnimeLibrarySort.Direction.Ascending
+                        LibrarySort.Direction.Ascending
                     } else {
-                        AnimeLibrarySort.Direction.Descending
+                        LibrarySort.Direction.Descending
                     }
                     else -> if (sortDescending) {
-                        AnimeLibrarySort.Direction.Descending
+                        LibrarySort.Direction.Descending
                     } else {
-                        AnimeLibrarySort.Direction.Ascending
+                        LibrarySort.Direction.Ascending
                     }
                 }
                 screenModel.setSort(category, mode, direction)
@@ -342,10 +342,10 @@ data class GroupMode(
 
 private fun groupTypeDrawableRes(type: Int): ImageVector {
     return when (type) {
-        AnimeLibraryGroup.BY_STATUS -> Icons.Default.AvTimer
-        AnimeLibraryGroup.BY_TRACK_STATUS -> Icons.Default.Sync
-        AnimeLibraryGroup.BY_SOURCE -> Icons.Default.Explore
-        AnimeLibraryGroup.UNGROUPED -> Icons.Default.Layers
+        LibraryGroup.BY_STATUS -> Icons.Default.AvTimer
+        LibraryGroup.BY_TRACK_STATUS -> Icons.Default.Sync
+        LibraryGroup.BY_SOURCE -> Icons.Default.Explore
+        LibraryGroup.UNGROUPED -> Icons.Default.Layers
         else -> Icons.AutoMirrored.Filled.Label
     }
 }
@@ -359,18 +359,18 @@ private fun ColumnScope.GroupPage(
     val groups = remember(hasCategories, trackers) {
         buildList {
             if (hasCategories) {
-                add(AnimeLibraryGroup.BY_DEFAULT)
+                add(LibraryGroup.BY_DEFAULT)
             }
-            add(AnimeLibraryGroup.BY_SOURCE)
-            add(AnimeLibraryGroup.BY_STATUS)
+            add(LibraryGroup.BY_SOURCE)
+            add(LibraryGroup.BY_STATUS)
             if (trackers.isNotEmpty()) {
-                add(AnimeLibraryGroup.BY_TRACK_STATUS)
+                add(LibraryGroup.BY_TRACK_STATUS)
             }
-            add(AnimeLibraryGroup.UNGROUPED)
+            add(LibraryGroup.UNGROUPED)
         }.map {
             GroupMode(
                 it,
-                AnimeLibraryGroup.groupTypeStringRes(it, hasCategories),
+                LibraryGroup.groupTypeStringRes(it, hasCategories),
                 groupTypeDrawableRes(it),
             )
         }

@@ -12,14 +12,14 @@ import logcat.LogPriority
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.lang.withUIContext
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.track.interactor.InsertAnimeTrack
+import tachiyomi.domain.track.interactor.InsertTrack
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import uy.kohesive.injekt.injectLazy
-import tachiyomi.domain.track.model.AnimeTrack as DomainAnimeTrack
+import tachiyomi.domain.track.model.Track as DomainAnimeTrack
 
 private val addTracks: AddTracks by injectLazy()
-private val insertTrack: InsertAnimeTrack by injectLazy()
+private val insertTrack: InsertTrack by injectLazy()
 
 interface AnimeTracker {
 

@@ -4,10 +4,10 @@ import eu.kanade.tachiyomi.data.download.DownloadManager
 import tachiyomi.core.common.util.lang.withNonCancellableContext
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.episode.model.Episode
-import tachiyomi.domain.source.service.AnimeSourceManager
+import tachiyomi.domain.source.service.SourceManager
 
 class DeleteDownload(
-    private val sourceManager: AnimeSourceManager,
+    private val sourceManager: SourceManager,
     private val downloadManager: DownloadManager,
 ) {
 

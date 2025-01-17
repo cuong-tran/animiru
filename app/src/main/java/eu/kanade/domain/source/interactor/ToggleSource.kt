@@ -2,13 +2,13 @@ package eu.kanade.domain.source.interactor
 
 import eu.kanade.domain.source.service.SourcePreferences
 import tachiyomi.core.common.preference.getAndSet
-import tachiyomi.domain.source.model.AnimeSource
+import tachiyomi.domain.source.model.Source
 
 class ToggleSource(
     private val preferences: SourcePreferences,
 ) {
 
-    fun await(source: AnimeSource, enable: Boolean = isEnabled(source.id)) {
+    fun await(source: Source, enable: Boolean = isEnabled(source.id)) {
         await(source.id, enable)
     }
 

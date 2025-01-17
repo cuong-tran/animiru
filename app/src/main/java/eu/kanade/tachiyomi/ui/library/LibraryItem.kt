@@ -1,8 +1,8 @@
 package eu.kanade.tachiyomi.ui.library
 
 import eu.kanade.tachiyomi.source.getNameForAnimeInfo
-import tachiyomi.domain.library.LibraryAnime
-import tachiyomi.domain.source.service.AnimeSourceManager
+import tachiyomi.domain.library.model.LibraryAnime
+import tachiyomi.domain.source.service.SourceManager
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
@@ -12,7 +12,7 @@ data class LibraryItem(
     var unseenCount: Long = -1,
     var isLocal: Boolean = false,
     var sourceLanguage: String = "",
-    private val sourceManager: AnimeSourceManager = Injekt.get(),
+    private val sourceManager: SourceManager = Injekt.get(),
 ) {
     /**
      * Checks if a query matches the anime

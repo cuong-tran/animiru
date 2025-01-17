@@ -4,17 +4,17 @@ import eu.kanade.domain.source.service.SourcePreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import tachiyomi.core.common.util.lang.compareToWithCollator
-import tachiyomi.domain.source.model.AnimeSource
-import tachiyomi.domain.source.repository.AnimeSourceRepository
+import tachiyomi.domain.source.model.Source
+import tachiyomi.domain.source.repository.SourceRepository
 import tachiyomi.source.local.LocalAnimeSource
 import java.util.Collections
 
 class GetSourcesWithFavoriteCount(
-    private val repository: AnimeSourceRepository,
+    private val repository: SourceRepository,
     private val preferences: SourcePreferences,
 ) {
 
-    fun subscribe(): Flow<List<Pair<AnimeSource, Long>>> {
+    fun subscribe(): Flow<List<Pair<Source, Long>>> {
         return combine(
             preferences.migrationSortingDirection().changes(),
             preferences.migrationSortingMode().changes(),
@@ -29,8 +29,8 @@ class GetSourcesWithFavoriteCount(
     private fun sortFn(
         direction: SetMigrateSorting.Direction,
         sorting: SetMigrateSorting.Mode,
-    ): java.util.Comparator<Pair<AnimeSource, Long>> {
-        val sortFn: (Pair<AnimeSource, Long>, Pair<AnimeSource, Long>) -> Int = { a, b ->
+    ): java.util.Comparator<Pair<Source, Long>> {
+        val sortFn: (Pair<Source, Long>, Pair<Source, Long>) -> Int = { a, b ->
             when (sorting) {
                 SetMigrateSorting.Mode.ALPHABETICAL -> {
                     when {

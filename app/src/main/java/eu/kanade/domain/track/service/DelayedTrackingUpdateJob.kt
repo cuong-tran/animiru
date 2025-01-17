@@ -14,7 +14,7 @@ import eu.kanade.tachiyomi.util.system.workManager
 import logcat.LogPriority
 import tachiyomi.core.common.util.lang.withIOContext
 import tachiyomi.core.common.util.system.logcat
-import tachiyomi.domain.track.interactor.GetAnimeTracks
+import tachiyomi.domain.track.interactor.GetTracks
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import kotlin.time.Duration.Companion.minutes
@@ -28,7 +28,7 @@ class DelayedTrackingUpdateJob(private val context: Context, workerParams: Worke
             return Result.failure()
         }
 
-        val getTracks = Injekt.get<GetAnimeTracks>()
+        val getTracks = Injekt.get<GetTracks>()
         val trackEpisode = Injekt.get<TrackEpisode>()
 
         val delayedTrackingStore = Injekt.get<DelayedTrackingStore>()

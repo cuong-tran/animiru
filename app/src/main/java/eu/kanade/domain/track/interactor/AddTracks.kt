@@ -15,14 +15,14 @@ import tachiyomi.core.common.util.lang.withNonCancellableContext
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.episode.interactor.GetEpisodesByAnimeId
-import tachiyomi.domain.history.interactor.GetAnimeHistory
-import tachiyomi.domain.track.interactor.InsertAnimeTrack
+import tachiyomi.domain.history.interactor.GetHistory
+import tachiyomi.domain.track.interactor.InsertTrack
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import java.time.ZoneOffset
 
 class AddTracks(
-    private val insertTrack: InsertAnimeTrack,
+    private val insertTrack: InsertTrack,
     private val syncEpisodeProgressWithTrack: SyncEpisodeProgressWithTrack,
     private val getEpisodesByAnimeId: GetEpisodesByAnimeId,
     private val trackerManager: TrackerManager,
@@ -56,7 +56,7 @@ class AddTracks(
                 }
 
                 if (track.startDate <= 0) {
-                    val firstSeenEpisodeDate = Injekt.get<GetAnimeHistory>().await(animeId)
+                    val firstSeenEpisodeDate = Injekt.get<GetHistory>().await(animeId)
                         .sortedBy { it.seenAt }
                         .firstOrNull()
                         ?.seenAt

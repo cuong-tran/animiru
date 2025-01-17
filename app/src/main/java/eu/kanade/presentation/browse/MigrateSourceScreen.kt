@@ -30,7 +30,7 @@ import eu.kanade.presentation.components.AppBar
 import eu.kanade.tachiyomi.ui.browse.migration.sources.MigrateSourceScreenModel
 import eu.kanade.tachiyomi.util.system.copyToClipboard
 import kotlinx.collections.immutable.ImmutableList
-import tachiyomi.domain.source.model.AnimeSource
+import tachiyomi.domain.source.model.Source
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.Badge
 import tachiyomi.presentation.core.components.BadgeGroup
@@ -52,7 +52,7 @@ fun MigrateSourceScreen(
     // AM (BROWSE) -->
     navigateUp: () -> Unit,
     // <-- AM (BROWSE)
-    onClickItem: (AnimeSource) -> Unit,
+    onClickItem: (Source) -> Unit,
     onToggleSortingDirection: () -> Unit,
     onToggleSortingMode: () -> Unit,
 ) {
@@ -104,10 +104,10 @@ fun MigrateSourceScreen(
 
 @Composable
 private fun MigrateSourceList(
-    list: ImmutableList<Pair<AnimeSource, Long>>,
+    list: ImmutableList<Pair<Source, Long>>,
     contentPadding: PaddingValues,
-    onClickItem: (AnimeSource) -> Unit,
-    onLongClickItem: (AnimeSource) -> Unit,
+    onClickItem: (Source) -> Unit,
+    onLongClickItem: (Source) -> Unit,
     sortingMode: SetMigrateSorting.Mode,
     onToggleSortingMode: () -> Unit,
     sortingDirection: SetMigrateSorting.Direction,
@@ -173,7 +173,7 @@ private fun MigrateSourceList(
 
 @Composable
 private fun MigrateSourceItem(
-    source: AnimeSource,
+    source: Source,
     count: Long,
     onClickItem: () -> Unit,
     onLongClickItem: () -> Unit,

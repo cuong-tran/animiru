@@ -2,7 +2,7 @@ package eu.kanade.tachiyomi.data.backup.models
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.protobuf.ProtoNumber
-import tachiyomi.domain.track.model.AnimeTrack
+import tachiyomi.domain.track.model.Track
 
 @Serializable
 data class BackupTracking(
@@ -29,8 +29,8 @@ data class BackupTracking(
 ) {
 
     @Suppress("DEPRECATION")
-    fun getTrackImpl(): AnimeTrack {
-        return AnimeTrack(
+    fun getTrackImpl(): Track {
+        return Track(
             id = -1,
             animeId = -1,
             trackerId = this@BackupTracking.syncId.toLong(),
@@ -52,7 +52,7 @@ data class BackupTracking(
     }
 
     companion object {
-        fun copyFrom(track: AnimeTrack): BackupTracking {
+        fun copyFrom(track: Track): BackupTracking {
             return BackupTracking(
                 syncId = track.trackerId.toInt(),
                 mediaId = track.remoteId,

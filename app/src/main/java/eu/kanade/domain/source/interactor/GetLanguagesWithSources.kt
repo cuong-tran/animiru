@@ -4,23 +4,23 @@ import eu.kanade.domain.source.service.SourcePreferences
 import eu.kanade.tachiyomi.util.system.LocaleHelper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import tachiyomi.domain.source.model.AnimeSource
-import tachiyomi.domain.source.repository.AnimeSourceRepository
+import tachiyomi.domain.source.model.Source
+import tachiyomi.domain.source.repository.SourceRepository
 import java.util.SortedMap
 
 class GetLanguagesWithSources(
-    private val repository: AnimeSourceRepository,
+    private val repository: SourceRepository,
     private val preferences: SourcePreferences,
 ) {
 
-    fun subscribe(): Flow<SortedMap<String, List<AnimeSource>>> {
+    fun subscribe(): Flow<SortedMap<String, List<Source>>> {
         return combine(
             preferences.enabledLanguages().changes(),
             preferences.disabledAnimeSources().changes(),
             repository.getOnlineAnimeSources(),
         ) { enabledLanguage, disabledSource, onlineSources ->
             val sortedSources = onlineSources.sortedWith(
-                compareBy<AnimeSource> { it.id.toString() in disabledSource }
+                compareBy<Source> { it.id.toString() in disabledSource }
                     .thenBy(String.CASE_INSENSITIVE_ORDER) { it.name },
             )
 

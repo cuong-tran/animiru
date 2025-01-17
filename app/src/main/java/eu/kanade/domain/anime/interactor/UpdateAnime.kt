@@ -3,7 +3,7 @@ package eu.kanade.domain.anime.interactor
 import eu.kanade.domain.anime.model.hasCustomCover
 import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.data.cache.CoverCache
-import tachiyomi.domain.anime.interactor.AnimeFetchInterval
+import tachiyomi.domain.anime.interactor.FetchInterval
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.anime.model.AnimeUpdate
 import tachiyomi.domain.anime.repository.AnimeRepository
@@ -15,7 +15,7 @@ import java.time.ZonedDateTime
 
 class UpdateAnime(
     private val animeRepository: AnimeRepository,
-    private val animeFetchInterval: AnimeFetchInterval,
+    private val fetchInterval: FetchInterval,
 ) {
 
     suspend fun await(animeUpdate: AnimeUpdate): Boolean {
@@ -85,10 +85,10 @@ class UpdateAnime(
     suspend fun awaitUpdateFetchInterval(
         anime: Anime,
         dateTime: ZonedDateTime = ZonedDateTime.now(),
-        window: Pair<Long, Long> = animeFetchInterval.getWindow(dateTime),
+        window: Pair<Long, Long> = fetchInterval.getWindow(dateTime),
     ): Boolean {
         return animeRepository.updateAnime(
-            animeFetchInterval.toAnimeUpdate(anime, dateTime, window),
+            fetchInterval.toAnimeUpdate(anime, dateTime, window),
         )
     }
 

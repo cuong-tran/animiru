@@ -30,7 +30,7 @@ import okio.source
 import tachiyomi.core.common.util.system.logcat
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.anime.model.AnimeCover
-import tachiyomi.domain.source.service.AnimeSourceManager
+import tachiyomi.domain.source.service.SourceManager
 import uy.kohesive.injekt.injectLazy
 import java.io.File
 import java.io.IOException
@@ -300,7 +300,7 @@ class AnimeCoverFetcher(
     ) : Fetcher.Factory<Anime> {
 
         private val coverCache: CoverCache by injectLazy()
-        private val sourceManager: AnimeSourceManager by injectLazy()
+        private val sourceManager: SourceManager by injectLazy()
 
         override fun create(data: Anime, options: Options, imageLoader: ImageLoader): Fetcher {
             return AnimeCoverFetcher(
@@ -322,7 +322,7 @@ class AnimeCoverFetcher(
     ) : Fetcher.Factory<AnimeCover> {
 
         private val coverCache: CoverCache by injectLazy()
-        private val sourceManager: AnimeSourceManager by injectLazy()
+        private val sourceManager: SourceManager by injectLazy()
 
         override fun create(data: AnimeCover, options: Options, imageLoader: ImageLoader): Fetcher {
             return AnimeCoverFetcher(

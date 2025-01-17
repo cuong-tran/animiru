@@ -10,15 +10,15 @@ import tachiyomi.data.AnimeDatabaseHandler
 import tachiyomi.domain.anime.interactor.GetCustomAnimeInfo
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.anime.model.CustomAnimeInfo
-import tachiyomi.domain.category.interactor.GetAnimeCategories
-import tachiyomi.domain.history.interactor.GetAnimeHistory
+import tachiyomi.domain.category.interactor.GetCategories
+import tachiyomi.domain.history.interactor.GetHistory
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
 class AnimeBackupCreator(
     private val handler: AnimeDatabaseHandler = Injekt.get(),
-    private val getCategories: GetAnimeCategories = Injekt.get(),
-    private val getHistory: GetAnimeHistory = Injekt.get(),
+    private val getCategories: GetCategories = Injekt.get(),
+    private val getHistory: GetHistory = Injekt.get(),
     // AM (CUSTOM_INFORMATION) -->
     private val getCustomAnimeInfo: GetCustomAnimeInfo = Injekt.get(),
     // <-- AM (CUSTOM_INFORMATION)
