@@ -3,8 +3,8 @@ package eu.kanade.domain.episode.model
 import eu.kanade.domain.anime.model.downloadedFilter
 import eu.kanade.tachiyomi.data.download.DownloadManager
 import eu.kanade.tachiyomi.ui.anime.EpisodeList
-import tachiyomi.domain.anime.model.applyFilter
 import tachiyomi.domain.anime.model.Anime
+import tachiyomi.domain.anime.model.applyFilter
 import tachiyomi.domain.episode.model.Episode
 import tachiyomi.domain.episode.service.getEpisodeSort
 import tachiyomi.source.local.isLocal

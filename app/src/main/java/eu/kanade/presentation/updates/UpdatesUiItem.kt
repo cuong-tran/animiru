@@ -34,10 +34,10 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import eu.kanade.presentation.anime.components.AnimeCover
 import eu.kanade.presentation.anime.components.DotSeparatorText
 import eu.kanade.presentation.anime.components.EpisodeDownloadAction
 import eu.kanade.presentation.anime.components.EpisodeDownloadIndicator
-import eu.kanade.presentation.anime.components.AnimeCover
 import eu.kanade.presentation.components.relativeDateText
 import eu.kanade.presentation.util.animateItemFastScroll
 import eu.kanade.presentation.util.relativeTimeSpanString

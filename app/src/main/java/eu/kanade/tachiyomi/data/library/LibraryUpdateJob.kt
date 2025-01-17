@@ -55,9 +55,9 @@ import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.episode.model.Episode
 import tachiyomi.domain.episode.model.NoEpisodesException
+import tachiyomi.domain.library.model.GroupLibraryMode
 import tachiyomi.domain.library.model.LibraryAnime
 import tachiyomi.domain.library.model.LibraryGroup
-import tachiyomi.domain.library.model.GroupLibraryMode
 import tachiyomi.domain.library.service.LibraryPreferences
 import tachiyomi.domain.library.service.LibraryPreferences.Companion.DEVICE_CHARGING
 import tachiyomi.domain.library.service.LibraryPreferences.Companion.DEVICE_NETWORK_NOT_METERED

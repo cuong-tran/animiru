@@ -1,8 +1,8 @@
 package tachiyomi.data.category
 
 import kotlinx.coroutines.flow.Flow
-import tachiyomi.data.DatabaseHandler
 import tachiyomi.data.Database
+import tachiyomi.data.DatabaseHandler
 import tachiyomi.domain.category.model.Category
 import tachiyomi.domain.category.model.CategoryUpdate
 import tachiyomi.domain.category.repository.CategoryRepository
