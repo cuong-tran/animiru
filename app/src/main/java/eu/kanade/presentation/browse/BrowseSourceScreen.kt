@@ -34,7 +34,7 @@ import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.EmptyScreen
 import tachiyomi.presentation.core.screens.EmptyScreenAction
 import tachiyomi.presentation.core.screens.LoadingScreen
-import tachiyomi.source.local.LocalAnimeSource
+import tachiyomi.source.local.LocalSource
 
 @Composable
 fun BrowseSourceContent(
@@ -77,7 +77,7 @@ fun BrowseSourceContent(
         EmptyScreen(
             modifier = Modifier.padding(contentPadding),
             message = getErrorMessage(errorState),
-            actions = if (source is LocalAnimeSource) {
+            actions = if (source is LocalSource) {
                 persistentListOf(
                     EmptyScreenAction(
                         stringRes = MR.strings.local_source_help_guide,

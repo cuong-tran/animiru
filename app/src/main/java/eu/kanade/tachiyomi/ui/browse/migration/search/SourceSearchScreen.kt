@@ -36,7 +36,7 @@ import tachiyomi.presentation.core.components.material.ExtendedFloatingActionBut
 import tachiyomi.presentation.core.components.material.Scaffold
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.screens.LoadingScreen
-import tachiyomi.source.local.LocalAnimeSource
+import tachiyomi.source.local.LocalSource
 
 data class SourceSearchScreen(
     private val oldAnime: Anime,
@@ -103,7 +103,7 @@ data class SourceSearchScreen(
                     )
                 },
                 onHelpClick = { uriHandler.openUri(Constants.URL_HELP) },
-                onLocalAnimeSourceHelpClick = { uriHandler.openUri(LocalAnimeSource.HELP_URL) },
+                onLocalAnimeSourceHelpClick = { uriHandler.openUri(LocalSource.HELP_URL) },
                 onAnimeClick = openMigrateDialog,
                 onAnimeLongClick = { navigator.push(AnimeScreen(it.id, true)) },
             )

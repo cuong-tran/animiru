@@ -4,7 +4,7 @@ import com.hippo.unifile.UniFile
 import eu.kanade.tachiyomi.animesource.model.SAnime
 import java.io.InputStream
 
-expect class LocalAnimeCoverManager {
+expect class LocalCoverManager {
 
     fun find(animeUrl: String): UniFile?
 

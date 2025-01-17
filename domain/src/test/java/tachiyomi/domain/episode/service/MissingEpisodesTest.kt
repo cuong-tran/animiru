@@ -7,7 +7,7 @@ import org.junit.jupiter.api.parallel.ExecutionMode
 import tachiyomi.domain.episode.model.Episode
 
 @Execution(ExecutionMode.CONCURRENT)
-class MissingItemsTest {
+class MissingEpisodesTest {
 
     @Test
     fun `missingEpisodesCount returns 0 when empty list`() {

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.combine
 import tachiyomi.core.common.util.lang.compareToWithCollator
 import tachiyomi.domain.source.model.Source
 import tachiyomi.domain.source.repository.SourceRepository
-import tachiyomi.source.local.LocalAnimeSource
+import tachiyomi.source.local.LocalSource
 import java.util.Collections
 
 class GetSourcesWithFavoriteCount(
@@ -21,7 +21,7 @@ class GetSourcesWithFavoriteCount(
             repository.getAnimeSourcesWithFavoriteCount(),
         ) { direction, mode, list ->
             list
-                .filterNot { it.first.id == LocalAnimeSource.ID }
+                .filterNot { it.first.id == LocalSource.ID }
                 .sortedWith(sortFn(direction, mode))
         }
     }

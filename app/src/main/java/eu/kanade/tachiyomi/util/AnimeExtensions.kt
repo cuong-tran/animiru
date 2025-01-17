@@ -6,7 +6,7 @@ import eu.kanade.domain.anime.model.toSAnime
 import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.data.cache.CoverCache
 import tachiyomi.domain.anime.model.Anime
-import tachiyomi.source.local.image.LocalAnimeCoverManager
+import tachiyomi.source.local.image.LocalCoverManager
 import tachiyomi.source.local.isLocal
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
@@ -50,7 +50,7 @@ fun Anime.removeCovers(coverCache: CoverCache = Injekt.get()): Anime {
 }
 
 suspend fun Anime.editCover(
-    coverManager: LocalAnimeCoverManager,
+    coverManager: LocalCoverManager,
     stream: InputStream,
     updateAnime: UpdateAnime = Injekt.get(),
     coverCache: CoverCache = Injekt.get(),

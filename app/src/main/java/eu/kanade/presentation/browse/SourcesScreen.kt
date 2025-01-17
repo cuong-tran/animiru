@@ -57,7 +57,7 @@ import tachiyomi.presentation.core.screens.LoadingScreen
 import tachiyomi.presentation.core.theme.header
 import tachiyomi.presentation.core.util.plus
 import tachiyomi.presentation.core.util.shouldExpandFAB
-import tachiyomi.source.local.LocalAnimeSource
+import tachiyomi.source.local.LocalSource
 
 @Composable
 fun SourcesScreen(
@@ -207,7 +207,7 @@ private fun SourceItem(
                 TextButton(
                     onClick = { onClickItem(source, Listing.Latest) },
                     // AM (BROWSE) -->
-                    modifier = Modifier.takeIf { source.id == LocalAnimeSource.ID }?.padding(end = 48.dp) ?: Modifier,
+                    modifier = Modifier.takeIf { source.id == LocalSource.ID }?.padding(end = 48.dp) ?: Modifier,
                     // <-- AM (BROWSE)
                 ) {
                     Text(
@@ -219,7 +219,7 @@ private fun SourceItem(
                 }
             }
             // AM (BROWSE) -->
-            if (source.id != LocalAnimeSource.ID) {
+            if (source.id != LocalSource.ID) {
                 AnimeSourceSettingsButton(
                     navigator = navigator,
                     source = source,
@@ -305,7 +305,7 @@ fun SourceOptionsDialog(
                         .fillMaxWidth()
                         .padding(vertical = 16.dp),
                 )
-                if (source.id != LocalAnimeSource.ID) {
+                if (source.id != LocalSource.ID) {
                     Text(
                         text = stringResource(MR.strings.action_disable),
                         modifier = Modifier

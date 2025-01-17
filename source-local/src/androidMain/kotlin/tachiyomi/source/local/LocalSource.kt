@@ -30,10 +30,10 @@ import tachiyomi.core.metadata.tachiyomi.EpisodeDetails
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.episode.service.EpisodeRecognition
 import tachiyomi.i18n.MR
-import tachiyomi.source.local.filter.AnimeOrderBy
-import tachiyomi.source.local.image.LocalAnimeCoverManager
-import tachiyomi.source.local.io.ArchiveAnime
-import tachiyomi.source.local.io.LocalAnimeSourceFileSystem
+import tachiyomi.source.local.filter.OrderBy
+import tachiyomi.source.local.image.LocalCoverManager
+import tachiyomi.source.local.io.Archive
+import tachiyomi.source.local.io.LocalSourceFileSystem
 import uy.kohesive.injekt.injectLazy
 import java.io.File
 import java.text.SimpleDateFormat
@@ -41,19 +41,19 @@ import java.util.Locale
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
-actual class LocalAnimeSource(
+actual class LocalSource(
     private val context: Context,
-    private val fileSystem: LocalAnimeSourceFileSystem,
-    private val coverManager: LocalAnimeCoverManager,
+    private val fileSystem: LocalSourceFileSystem,
+    private val coverManager: LocalCoverManager,
 ) : AnimeCatalogueSource, UnmeteredSource {
 
     private val json: Json by injectLazy()
 
     @Suppress("PrivatePropertyName")
-    private val PopularFilters = AnimeFilterList(AnimeOrderBy.Popular(context))
+    private val PopularFilters = AnimeFilterList(OrderBy.Popular(context))
 
     @Suppress("PrivatePropertyName")
-    private val LatestFilters = AnimeFilterList(AnimeOrderBy.Latest(context))
+    private val LatestFilters = AnimeFilterList(OrderBy.Latest(context))
 
     override val name = context.stringResource(MR.strings.local_anime_source)
 
@@ -97,7 +97,7 @@ actual class LocalAnimeSource(
 
         filters.forEach { filter ->
             when (filter) {
-                is AnimeOrderBy.Popular -> {
+                is OrderBy.Popular -> {
                     animeDirs = if (filter.state!!.ascending) {
                         animeDirs.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name.orEmpty() })
                     } else {
@@ -107,7 +107,7 @@ actual class LocalAnimeSource(
                     }
                 }
 
-                is AnimeOrderBy.Latest -> {
+                is OrderBy.Latest -> {
                     animeDirs = if (filter.state!!.ascending) {
                         animeDirs.sortedBy(UniFile::lastModified)
                     } else {
@@ -212,7 +212,7 @@ actual class LocalAnimeSource(
 
         val episodes = fileSystem.getFilesInAnimeDirectory(anime.url)
             // Only keep supported formats
-            .filter { ArchiveAnime.isSupported(it) }
+            .filter { Archive.isSupported(it) }
             .map { episodeFile ->
                 SEpisode.create().apply {
                     url = "${anime.url}/${episodeFile.name}"
@@ -265,7 +265,7 @@ actual class LocalAnimeSource(
     }
 
     // Filters
-    override fun getFilterList() = AnimeFilterList(AnimeOrderBy.Popular(context))
+    override fun getFilterList() = AnimeFilterList(OrderBy.Popular(context))
 
     // Unused stuff
     override suspend fun getVideoList(episode: SEpisode): List<Video> = throw UnsupportedOperationException("Unused")
@@ -306,6 +306,6 @@ actual class LocalAnimeSource(
     }
 }
 
-fun Anime.isLocal(): Boolean = source == LocalAnimeSource.ID
+fun Anime.isLocal(): Boolean = source == LocalSource.ID
 
-fun AnimeSource.isLocal(): Boolean = id == LocalAnimeSource.ID
+fun AnimeSource.isLocal(): Boolean = id == LocalSource.ID

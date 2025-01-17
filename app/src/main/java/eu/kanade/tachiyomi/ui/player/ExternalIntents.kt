@@ -49,7 +49,7 @@ import tachiyomi.domain.history.model.HistoryUpdate
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.domain.track.interactor.GetTracks
 import tachiyomi.domain.track.interactor.InsertTrack
-import tachiyomi.source.local.LocalAnimeSource
+import tachiyomi.source.local.LocalSource
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 import uy.kohesive.injekt.injectLazy
@@ -134,7 +134,7 @@ class ExternalIntents {
         } else {
             val uri = video.videoUrl!!.toUri()
 
-            val isOnDevice = if (anime.source == LocalAnimeSource.ID) {
+            val isOnDevice = if (anime.source == LocalSource.ID) {
                 true
             } else {
                 downloadManager.isEpisodeDownloaded(

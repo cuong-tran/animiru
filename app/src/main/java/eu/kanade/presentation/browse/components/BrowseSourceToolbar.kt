@@ -22,7 +22,7 @@ import kotlinx.collections.immutable.persistentListOf
 import tachiyomi.domain.library.model.LibraryDisplayMode
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.i18n.stringResource
-import tachiyomi.source.local.LocalAnimeSource
+import tachiyomi.source.local.LocalSource
 
 @Composable
 fun BrowseSourceToolbar(
@@ -40,7 +40,7 @@ fun BrowseSourceToolbar(
 ) {
     // Avoid capturing unstable source in actions lambda
     val title = source?.name
-    val isLocalSource = source is LocalAnimeSource
+    val isLocalSource = source is LocalSource
     val isConfigurableSource = source is ConfigurableAnimeSource
 
     var selectingDisplayMode by remember { mutableStateOf(false) }

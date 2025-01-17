@@ -6,14 +6,14 @@ import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.util.storage.DiskUtil
 import tachiyomi.core.common.storage.nameWithoutExtension
 import tachiyomi.core.common.util.system.ImageUtil
-import tachiyomi.source.local.io.LocalAnimeSourceFileSystem
+import tachiyomi.source.local.io.LocalSourceFileSystem
 import java.io.InputStream
 
 private const val DEFAULT_COVER_NAME = "cover.jpg"
 
-actual class LocalAnimeCoverManager(
+actual class LocalCoverManager(
     private val context: Context,
-    private val fileSystem: LocalAnimeSourceFileSystem,
+    private val fileSystem: LocalSourceFileSystem,
 ) {
 
     actual fun find(animeUrl: String): UniFile? {

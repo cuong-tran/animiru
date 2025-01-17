@@ -3,7 +3,7 @@ package tachiyomi.source.local.io
 import com.hippo.unifile.UniFile
 import tachiyomi.core.common.storage.extension
 
-object ArchiveAnime {
+object Archive {
 
     private val SUPPORTED_ARCHIVE_TYPES = listOf("avi", "flv", "mkv", "mov", "mp4", "webm", "wmv")
 

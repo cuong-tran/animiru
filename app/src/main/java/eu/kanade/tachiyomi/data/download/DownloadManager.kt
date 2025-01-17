@@ -25,9 +25,9 @@ import tachiyomi.domain.episode.model.Episode
 import tachiyomi.domain.source.service.SourceManager
 import tachiyomi.domain.storage.service.StorageManager
 import tachiyomi.i18n.MR
-import tachiyomi.source.local.LocalAnimeSource
-import tachiyomi.source.local.io.ArchiveAnime
-import tachiyomi.source.local.io.LocalAnimeSourceFileSystem
+import tachiyomi.source.local.LocalSource
+import tachiyomi.source.local.io.Archive
+import tachiyomi.source.local.io.LocalSourceFileSystem
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
@@ -231,9 +231,9 @@ class DownloadManager(
      * @param anime the anime to check.
      */
     fun getDownloadCount(anime: Anime): Int {
-        return if (anime.source == LocalAnimeSource.ID) {
-            LocalAnimeSourceFileSystem(storageManager).getFilesInAnimeDirectory(anime.url)
-                .count { ArchiveAnime.isSupported(it) }
+        return if (anime.source == LocalSource.ID) {
+            LocalSourceFileSystem(storageManager).getFilesInAnimeDirectory(anime.url)
+                .count { Archive.isSupported(it) }
         } else {
             cache.getDownloadCount(anime)
         }
@@ -252,8 +252,8 @@ class DownloadManager(
      * @param anime the anime to check.
      */
     fun getDownloadSize(anime: Anime): Long {
-        return if (anime.source == LocalAnimeSource.ID) {
-            LocalAnimeSourceFileSystem(storageManager).getAnimeDirectory(anime.url)
+        return if (anime.source == LocalSource.ID) {
+            LocalSourceFileSystem(storageManager).getAnimeDirectory(anime.url)
                 ?.size() ?: 0L
         } else {
             cache.getDownloadSize(anime)

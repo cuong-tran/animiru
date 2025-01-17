@@ -13,7 +13,7 @@ import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.episode.model.Episode
 import tachiyomi.domain.storage.service.StorageManager
 import tachiyomi.i18n.MR
-import tachiyomi.source.local.io.LocalAnimeSourceFileSystem
+import tachiyomi.source.local.io.LocalSourceFileSystem
 import tachiyomi.source.local.isLocal
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
@@ -28,7 +28,7 @@ class DownloadProvider(
     private val context: Context,
     private val storageManager: StorageManager = Injekt.get(),
     // AM (FILE_SIZE) -->
-    private val localFileSystem: LocalAnimeSourceFileSystem = Injekt.get(),
+    private val localFileSystem: LocalSourceFileSystem = Injekt.get(),
     // <-- AM (FILE_SIZE)
 ) {
 

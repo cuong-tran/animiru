@@ -2,7 +2,7 @@ package tachiyomi.source.local.io
 
 import com.hippo.unifile.UniFile
 
-expect class LocalAnimeSourceFileSystem {
+expect class LocalSourceFileSystem {
 
     fun getBaseDirectory(): UniFile?
 

@@ -7,8 +7,8 @@ import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
 import eu.kanade.tachiyomi.data.download.DownloadManager
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.episode.model.Episode
-import tachiyomi.source.local.LocalAnimeSource
-import tachiyomi.source.local.io.LocalAnimeSourceFileSystem
+import tachiyomi.source.local.LocalSource
+import tachiyomi.source.local.io.LocalSourceFileSystem
 import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
@@ -33,7 +33,7 @@ class EpisodeLoader {
             return when {
                 isDownloaded -> isDownload(episode, anime, source)
                 source is AnimeHttpSource -> isHttp(episode, source)
-                source is LocalAnimeSource -> isLocal(episode)
+                source is LocalSource -> isLocal(episode)
                 else -> error("source not supported")
             }
         }
@@ -111,7 +111,7 @@ class EpisodeLoader {
         ): List<Video> {
             return try {
                 val (animeDirName, episodeName) = episode.url.split('/', limit = 2)
-                val fileSystem: LocalAnimeSourceFileSystem = Injekt.get()
+                val fileSystem: LocalSourceFileSystem = Injekt.get()
                 val videoFile = fileSystem.getBaseDirectory()
                     ?.findFile(animeDirName)
                     ?.findFile(episodeName)

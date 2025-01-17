@@ -3,7 +3,7 @@ package tachiyomi.source.local.io
 import com.hippo.unifile.UniFile
 import tachiyomi.domain.storage.service.StorageManager
 
-actual class LocalAnimeSourceFileSystem(
+actual class LocalSourceFileSystem(
     private val storageManager: StorageManager,
 ) {
 
