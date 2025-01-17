@@ -6,7 +6,7 @@ import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import eu.kanade.presentation.browse.MigrateAnimeSearchScreen
+import eu.kanade.presentation.browse.MigrateSearchScreen
 import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.ui.anime.AnimeScreen
 
@@ -26,7 +26,7 @@ class MigrateAnimeSearchScreen(private val animeId: Long) : Screen() {
         }
         val dialogState by dialogScreenModel.state.collectAsState()
 
-        MigrateAnimeSearchScreen(
+        MigrateSearchScreen(
             state = state,
             fromSourceId = dialogState.anime?.source,
             navigateUp = navigator::pop,

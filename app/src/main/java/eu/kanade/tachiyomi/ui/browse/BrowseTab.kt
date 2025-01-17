@@ -31,9 +31,9 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import eu.kanade.domain.source.model.installedExtension
 import eu.kanade.domain.source.model.updateSourceIdToExtensionMap
-import eu.kanade.presentation.browse.AnimeExtensionScreen
-import eu.kanade.presentation.browse.AnimeSourceOptionsDialog
-import eu.kanade.presentation.browse.AnimeSourcesScreen
+import eu.kanade.presentation.browse.ExtensionScreen
+import eu.kanade.presentation.browse.SourceOptionsDialog
+import eu.kanade.presentation.browse.SourcesScreen
 import eu.kanade.presentation.util.Tab
 import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.data.connection.discord.DiscordRPCService
@@ -123,7 +123,7 @@ class BrowseTab : Tab {
                 ),
             ) {
                 goToExtensions = false
-                AnimeSourcesScreen(
+                SourcesScreen(
                     state = sourcesState,
                     onClickItem = { source, listing ->
                         navigator.push(BrowseAnimeSourceScreen(source.id, listing.query))
@@ -149,7 +149,7 @@ class BrowseTab : Tab {
                 ),
             ) {
                 goToExtensions = true
-                AnimeExtensionScreen(
+                ExtensionScreen(
                     state = extensionsState,
                     searchQuery = extensionsState.searchQuery,
 
@@ -181,7 +181,7 @@ class BrowseTab : Tab {
 
         sourcesState.dialog?.let { dialog ->
             val source = dialog.source
-            AnimeSourceOptionsDialog(
+            SourceOptionsDialog(
                 source = source,
                 onClickPin = {
                     sourcesScreenModel.togglePin(source)
@@ -192,7 +192,7 @@ class BrowseTab : Tab {
                     sourcesScreenModel.closeDialog()
                 },
                 onClickUninstall = {
-                    val ext = source.installedExtension ?: return@AnimeSourceOptionsDialog
+                    val ext = source.installedExtension ?: return@SourceOptionsDialog
                     sourcesScreenModel.uninstallExtension(ext)
                     sourcesScreenModel.closeDialog()
                 },

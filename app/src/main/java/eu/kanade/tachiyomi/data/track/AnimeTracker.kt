@@ -2,7 +2,7 @@ package eu.kanade.tachiyomi.data.track
 
 import android.app.Application
 import dev.icerock.moko.resources.StringResource
-import eu.kanade.domain.track.interactor.AddAnimeTracks
+import eu.kanade.domain.track.interactor.AddTracks
 import eu.kanade.domain.track.model.toDomainTrack
 import eu.kanade.tachiyomi.data.database.models.AnimeTrack
 import eu.kanade.tachiyomi.data.track.model.AnimeTrackSearch
@@ -18,7 +18,7 @@ import uy.kohesive.injekt.api.get
 import uy.kohesive.injekt.injectLazy
 import tachiyomi.domain.track.model.AnimeTrack as DomainAnimeTrack
 
-private val addTracks: AddAnimeTracks by injectLazy()
+private val addTracks: AddTracks by injectLazy()
 private val insertTrack: InsertAnimeTrack by injectLazy()
 
 interface AnimeTracker {

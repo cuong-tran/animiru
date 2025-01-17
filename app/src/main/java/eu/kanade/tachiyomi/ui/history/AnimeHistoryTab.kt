@@ -14,9 +14,9 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.components.TabContent
-import eu.kanade.presentation.history.AnimeHistoryScreen
-import eu.kanade.presentation.history.HistoryDeleteAllDialog
-import eu.kanade.presentation.history.HistoryDeleteDialog
+import eu.kanade.presentation.history.HistoryScreen
+import eu.kanade.presentation.history.components.HistoryDeleteAllDialog
+import eu.kanade.presentation.history.components.HistoryDeleteDialog
 import eu.kanade.tachiyomi.ui.anime.AnimeScreen
 import eu.kanade.tachiyomi.ui.main.MainActivity
 import eu.kanade.tachiyomi.ui.recents.openEpisode
@@ -48,7 +48,7 @@ fun Screen.animeHistoryTab(
         // <-- AM (RECENTS)
         searchEnabled = true,
         content = { contentPadding, _ ->
-            AnimeHistoryScreen(
+            HistoryScreen(
                 state = state,
                 searchQuery = searchQuery,
                 snackbarHostState = snackbarHostState,

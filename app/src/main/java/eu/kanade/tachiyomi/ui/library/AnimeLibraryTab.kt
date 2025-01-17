@@ -32,9 +32,9 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import eu.kanade.presentation.anime.components.LibraryBottomActionMenu
 import eu.kanade.presentation.category.components.ChangeCategoryDialog
-import eu.kanade.presentation.library.AnimeLibraryContent
-import eu.kanade.presentation.library.AnimeLibrarySettingsDialog
-import eu.kanade.presentation.library.DeleteLibraryEntryDialog
+import eu.kanade.presentation.library.components.LibraryContent
+import eu.kanade.presentation.library.LibrarySettingsDialog
+import eu.kanade.presentation.library.DeleteLibraryAnimeDialog
 import eu.kanade.presentation.library.components.LibraryToolbar
 import eu.kanade.presentation.more.onboarding.GETTING_STARTED_URL
 import eu.kanade.presentation.util.Tab
@@ -235,7 +235,7 @@ data object AnimeLibraryTab : Tab {
                 }
 
                 else -> {
-                    AnimeLibraryContent(
+                    LibraryContent(
                         categories = state.categories,
                         searchQuery = state.searchQuery,
                         selection = state.selection,
@@ -283,7 +283,7 @@ data object AnimeLibraryTab : Tab {
                     onDismissRequest()
                     return@run
                 }
-                AnimeLibrarySettingsDialog(
+                LibrarySettingsDialog(
                     onDismissRequest = onDismissRequest,
                     screenModel = settingsScreenModel,
                     category = category,
@@ -311,7 +311,7 @@ data object AnimeLibraryTab : Tab {
             }
 
             is AnimeLibraryScreenModel.Dialog.DeleteAnime -> {
-                DeleteLibraryEntryDialog(
+                DeleteLibraryAnimeDialog(
                     containsLocalEntry = dialog.anime.any(Anime::isLocal),
                     onDismissRequest = onDismissRequest,
                     onConfirm = { deleteAnime, deleteEpisode ->

@@ -19,7 +19,7 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import eu.kanade.core.util.ifSourcesLoaded
-import eu.kanade.presentation.browse.BrowseAnimeSourceContent
+import eu.kanade.presentation.browse.BrowseSourceContent
 import eu.kanade.presentation.components.SearchToolbar
 import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
@@ -85,7 +85,7 @@ data class AnimeSourceSearchScreen(
             val openMigrateDialog: (Anime) -> Unit = {
                 screenModel.setDialog(BrowseAnimeSourceScreenModel.Dialog.Migrate(newAnime = it, oldAnime = oldAnime))
             }
-            BrowseAnimeSourceContent(
+            BrowseSourceContent(
                 source = screenModel.source,
                 animeList = pagingFlow.collectAsLazyPagingItems(),
                 columns = screenModel.getColumnsPreference(LocalConfiguration.current.orientation),
@@ -93,7 +93,7 @@ data class AnimeSourceSearchScreen(
                 snackbarHostState = snackbarHostState,
                 contentPadding = paddingValues,
                 onWebViewClick = {
-                    val source = screenModel.source as? AnimeHttpSource ?: return@BrowseAnimeSourceContent
+                    val source = screenModel.source as? AnimeHttpSource ?: return@BrowseSourceContent
                     navigator.push(
                         WebViewScreen(
                             url = source.baseUrl,

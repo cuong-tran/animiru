@@ -2,7 +2,7 @@ package eu.kanade.tachiyomi.extension
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import eu.kanade.domain.extension.interactor.TrustAnimeExtension
+import eu.kanade.domain.extension.interactor.TrustExtension
 import eu.kanade.domain.source.model.updateSourceIdToExtensionMap
 import eu.kanade.domain.source.service.SourcePreferences
 import eu.kanade.tachiyomi.extension.api.AnimeExtensionApi
@@ -44,7 +44,7 @@ import java.util.Locale
 class AnimeExtensionManager(
     private val context: Context,
     private val preferences: SourcePreferences = Injekt.get(),
-    private val trustExtension: TrustAnimeExtension = Injekt.get(),
+    private val trustExtension: TrustExtension = Injekt.get(),
 ) {
 
     val scope = CoroutineScope(SupervisorJob())

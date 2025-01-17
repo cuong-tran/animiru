@@ -38,11 +38,11 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import dev.icerock.moko.resources.StringResource
-import eu.kanade.domain.track.interactor.RefreshAnimeTracks
+import eu.kanade.domain.track.interactor.RefreshTracks
 import eu.kanade.domain.track.model.toDbTrack
 import eu.kanade.domain.ui.UiPreferences
-import eu.kanade.presentation.track.AnimeTrackInfoDialogHome
-import eu.kanade.presentation.track.AnimeTrackerSearch
+import eu.kanade.presentation.track.TrackInfoDialogHome
+import eu.kanade.presentation.track.TrackerSearch
 import eu.kanade.presentation.track.TrackDateSelector
 import eu.kanade.presentation.track.TrackItemSelector
 import eu.kanade.presentation.track.TrackScoreSelector
@@ -107,7 +107,7 @@ data class AnimeTrackInfoDialogHomeScreen(
         }
         val state by screenModel.state.collectAsState()
 
-        AnimeTrackInfoDialogHome(
+        TrackInfoDialogHome(
             trackItems = state.trackItems,
             dateFormat = dateFormat,
             onStatusClick = {
@@ -237,7 +237,7 @@ data class AnimeTrackInfoDialogHomeScreen(
         }
 
         private suspend fun refreshTrackers() {
-            val refreshTracks = Injekt.get<RefreshAnimeTracks>()
+            val refreshTracks = Injekt.get<RefreshTracks>()
             val context = Injekt.get<Application>()
 
             refreshTracks.await(animeId)
@@ -691,7 +691,7 @@ data class TrackServiceSearchScreen(
         val state by screenModel.state.collectAsState()
 
         val textFieldState = rememberTextFieldState(initialQuery)
-        AnimeTrackerSearch(
+        TrackerSearch(
             state = textFieldState,
             onDispatchQuery = { screenModel.trackingSearch(textFieldState.text.toString()) },
             queryResult = state.queryResult,

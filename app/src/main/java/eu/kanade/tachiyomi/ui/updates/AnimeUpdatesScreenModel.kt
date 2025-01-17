@@ -11,7 +11,7 @@ import eu.kanade.core.util.addOrRemove
 import eu.kanade.core.util.insertSeparators
 import eu.kanade.domain.episode.interactor.SetSeenStatus
 import eu.kanade.presentation.anime.components.EpisodeDownloadAction
-import eu.kanade.presentation.updates.AnimeUpdatesUiModel
+import eu.kanade.presentation.updates.UpdatesUiModel
 import eu.kanade.tachiyomi.data.download.AnimeDownloadCache
 import eu.kanade.tachiyomi.data.download.AnimeDownloadManager
 import eu.kanade.tachiyomi.data.download.model.AnimeDownload
@@ -409,14 +409,14 @@ class AnimeUpdatesScreenModel(
         val selected = items.filter { it.selected }
         val selectionMode = selected.isNotEmpty()
 
-        fun getUiModel(): List<AnimeUpdatesUiModel> {
+        fun getUiModel(): List<UpdatesUiModel> {
             return items
-                .map { AnimeUpdatesUiModel.Item(it) }
+                .map { UpdatesUiModel.Item(it) }
                 .insertSeparators { before, after ->
                     val beforeDate = before?.item?.update?.dateFetch?.toLocalDate()
                     val afterDate = after?.item?.update?.dateFetch?.toLocalDate()
                     when {
-                        beforeDate != afterDate && afterDate != null -> AnimeUpdatesUiModel.Header(afterDate)
+                        beforeDate != afterDate && afterDate != null -> UpdatesUiModel.Header(afterDate)
                         // Return null to avoid adding a separator between two items.
                         else -> null
                     }

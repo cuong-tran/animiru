@@ -41,7 +41,7 @@ fun BaseAnimeListItem(
 }
 
 private val defaultCover: @Composable RowScope.(Anime, () -> Unit) -> Unit = { anime, onClick ->
-    ItemCover.Square(
+    AnimeCover.Square(
         modifier = Modifier
             .padding(vertical = MaterialTheme.padding.small)
             .fillMaxHeight(),

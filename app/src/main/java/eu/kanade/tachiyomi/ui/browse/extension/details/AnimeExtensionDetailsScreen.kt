@@ -8,7 +8,7 @@ import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import eu.kanade.presentation.browse.AnimeExtensionDetailsScreen
+import eu.kanade.presentation.browse.ExtensionDetailsScreen
 import eu.kanade.presentation.util.Screen
 import kotlinx.coroutines.flow.collectLatest
 import tachiyomi.presentation.core.screens.LoadingScreen
@@ -35,7 +35,7 @@ data class AnimeExtensionDetailsScreen(
 
         val navigator = LocalNavigator.currentOrThrow
 
-        AnimeExtensionDetailsScreen(
+        ExtensionDetailsScreen(
             navigateUp = navigator::pop,
             state = state,
             onClickSourcePreferences = { navigator.push(AnimeSourcePreferencesScreen(it)) },

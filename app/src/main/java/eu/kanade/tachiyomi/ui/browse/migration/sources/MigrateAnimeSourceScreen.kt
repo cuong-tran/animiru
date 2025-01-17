@@ -8,7 +8,7 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import eu.kanade.presentation.browse.MigrateAnimeSourceScreen
+import eu.kanade.presentation.browse.MigrateSourceScreen
 import eu.kanade.tachiyomi.ui.browse.migration.anime.MigrateAnimeScreen
 
 class MigrateAnimeSourceScreen : Screen {
@@ -19,7 +19,7 @@ class MigrateAnimeSourceScreen : Screen {
         val screenModel = rememberScreenModel { MigrateAnimeSourceScreenModel() }
         val state by screenModel.state.collectAsState()
 
-        MigrateAnimeSourceScreen(
+        MigrateSourceScreen(
             state = state,
             navigateUp = navigator::pop,
             onClickItem = { source -> navigator.push(MigrateAnimeScreen(source.id)) },

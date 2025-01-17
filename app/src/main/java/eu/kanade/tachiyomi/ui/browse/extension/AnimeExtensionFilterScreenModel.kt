@@ -3,7 +3,7 @@ package eu.kanade.tachiyomi.ui.browse.extension
 import androidx.compose.runtime.Immutable
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import eu.kanade.domain.extension.interactor.GetAnimeExtensionLanguages
+import eu.kanade.domain.extension.interactor.GetExtensionLanguages
 import eu.kanade.domain.source.interactor.ToggleLanguage
 import eu.kanade.domain.source.service.SourcePreferences
 import kotlinx.collections.immutable.ImmutableList
@@ -26,7 +26,7 @@ import uy.kohesive.injekt.api.get
 
 class AnimeExtensionFilterScreenModel(
     private val preferences: SourcePreferences = Injekt.get(),
-    private val getExtensionLanguages: GetAnimeExtensionLanguages = Injekt.get(),
+    private val getExtensionLanguages: GetExtensionLanguages = Injekt.get(),
     private val toggleLanguage: ToggleLanguage = Injekt.get(),
 ) : StateScreenModel<AnimeExtensionFilterState>(AnimeExtensionFilterState.Loading) {
 

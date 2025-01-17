@@ -8,7 +8,7 @@ import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import eu.kanade.presentation.browse.AnimeExtensionFilterScreen
+import eu.kanade.presentation.browse.ExtensionFilterScreen
 import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.util.system.toast
 import kotlinx.coroutines.flow.collectLatest
@@ -31,7 +31,7 @@ class AnimeExtensionFilterScreen : Screen() {
 
         val successState = state as AnimeExtensionFilterState.Success
 
-        AnimeExtensionFilterScreen(
+        ExtensionFilterScreen(
             navigateUp = navigator::pop,
             state = successState,
             onClickToggle = screenModel::toggle,

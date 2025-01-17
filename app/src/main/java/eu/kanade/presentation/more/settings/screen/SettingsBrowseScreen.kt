@@ -11,7 +11,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import eu.kanade.domain.source.service.SourcePreferences
 import eu.kanade.presentation.more.settings.Preference
-import eu.kanade.presentation.more.settings.screen.browse.AnimeExtensionReposScreen
+import eu.kanade.presentation.more.settings.screen.browse.ExtensionReposScreen
 import eu.kanade.tachiyomi.util.system.AuthenticatorUtil.authenticate
 import kotlinx.collections.immutable.persistentListOf
 import mihon.domain.extensionrepo.interactor.GetAnimeExtensionRepoCount
@@ -54,7 +54,7 @@ object SettingsBrowseScreen : SearchableSettings {
                             animeReposCount,
                         ),
                         onClick = {
-                            navigator.push(AnimeExtensionReposScreen())
+                            navigator.push(ExtensionReposScreen())
                         },
                     ),
                 ),

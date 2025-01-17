@@ -8,7 +8,7 @@ import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import eu.kanade.presentation.browse.AnimeSourcesFilterScreen
+import eu.kanade.presentation.browse.SourcesFilterScreen
 import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.util.system.toast
 import tachiyomi.i18n.MR
@@ -38,7 +38,7 @@ class AnimeSourcesFilterScreen : Screen() {
 
         val successState = state as AnimeSourcesFilterScreenModel.State.Success
 
-        AnimeSourcesFilterScreen(
+        SourcesFilterScreen(
             navigateUp = navigator::pop,
             state = successState,
             onClickLanguage = screenModel::toggleLanguage,

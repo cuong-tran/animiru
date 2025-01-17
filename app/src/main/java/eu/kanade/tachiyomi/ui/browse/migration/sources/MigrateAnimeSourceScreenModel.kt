@@ -3,7 +3,7 @@ package eu.kanade.tachiyomi.ui.browse.migration.sources
 import androidx.compose.runtime.Immutable
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import eu.kanade.domain.source.interactor.GetAnimeSourcesWithFavoriteCount
+import eu.kanade.domain.source.interactor.GetSourcesWithFavoriteCount
 import eu.kanade.domain.source.interactor.SetMigrateSorting
 import eu.kanade.domain.source.service.SourcePreferences
 import kotlinx.collections.immutable.ImmutableList
@@ -25,7 +25,7 @@ import uy.kohesive.injekt.api.get
 
 class MigrateAnimeSourceScreenModel(
     preferences: SourcePreferences = Injekt.get(),
-    private val getSourcesWithFavoriteCount: GetAnimeSourcesWithFavoriteCount = Injekt.get(),
+    private val getSourcesWithFavoriteCount: GetSourcesWithFavoriteCount = Injekt.get(),
     private val setMigrateSorting: SetMigrateSorting = Injekt.get(),
 ) : StateScreenModel<MigrateAnimeSourceScreenModel.State>(State()) {
 

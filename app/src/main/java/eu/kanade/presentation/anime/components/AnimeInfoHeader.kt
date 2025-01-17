@@ -346,7 +346,7 @@ private fun AnimeAndSourceTitlesLarge(
             .padding(start = 16.dp, top = appBarPadding + 16.dp, end = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        ItemCover.Book(
+        AnimeCover.Book(
             modifier = Modifier.fillMaxWidth(0.65f),
             data = ImageRequest.Builder(LocalContext.current)
                 .data(anime)
@@ -385,7 +385,7 @@ private fun AnimeAndSourceTitlesSmall(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        ItemCover.Book(
+        AnimeCover.Book(
             modifier = Modifier
                 .sizeIn(maxWidth = 100.dp)
                 .align(Alignment.Top),

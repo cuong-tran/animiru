@@ -11,7 +11,7 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import eu.kanade.core.util.ifSourcesLoaded
-import eu.kanade.presentation.browse.GlobalAnimeSearchScreen
+import eu.kanade.presentation.browse.GlobalSearchScreen
 import eu.kanade.presentation.util.Screen
 import eu.kanade.tachiyomi.ui.anime.AnimeScreen
 import eu.kanade.tachiyomi.ui.browse.source.browse.BrowseAnimeSourceScreen
@@ -63,7 +63,7 @@ class GlobalAnimeSearchScreen(
                 }
             }
         } else {
-            GlobalAnimeSearchScreen(
+            GlobalSearchScreen(
                 state = state,
                 navigateUp = navigator::pop,
                 onChangeSearchQuery = screenModel::updateSearchQuery,

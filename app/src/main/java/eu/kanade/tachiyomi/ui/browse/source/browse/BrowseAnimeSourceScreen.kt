@@ -37,9 +37,9 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import eu.kanade.core.util.ifSourcesLoaded
 import eu.kanade.presentation.anime.DuplicateAnimeDialog
-import eu.kanade.presentation.browse.BrowseAnimeSourceContent
+import eu.kanade.presentation.browse.BrowseSourceContent
 import eu.kanade.presentation.browse.MissingSourceScreen
-import eu.kanade.presentation.browse.components.BrowseAnimeSourceToolbar
+import eu.kanade.presentation.browse.components.BrowseSourceToolbar
 import eu.kanade.presentation.browse.components.RemoveEntryDialog
 import eu.kanade.presentation.category.components.ChangeCategoryDialog
 import eu.kanade.presentation.util.AssistContentScreen
@@ -127,7 +127,7 @@ data class BrowseAnimeSourceScreen(
         Scaffold(
             topBar = {
                 Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
-                    BrowseAnimeSourceToolbar(
+                    BrowseSourceToolbar(
                         searchQuery = state.toolbarQuery,
                         onSearchQueryChange = screenModel::setToolbarQuery,
                         source = screenModel.source,
@@ -210,7 +210,7 @@ data class BrowseAnimeSourceScreen(
         ) { paddingValues ->
             val pagingFlow by screenModel.animePagerFlowFlow.collectAsState()
 
-            BrowseAnimeSourceContent(
+            BrowseSourceContent(
                 source = screenModel.source,
                 animeList = pagingFlow.collectAsLazyPagingItems(),
                 columns = screenModel.getColumnsPreference(LocalConfiguration.current.orientation),

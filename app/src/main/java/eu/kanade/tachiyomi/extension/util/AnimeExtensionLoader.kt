@@ -8,7 +8,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.content.pm.PackageInfoCompat
 import dalvik.system.PathClassLoader
-import eu.kanade.domain.extension.interactor.TrustAnimeExtension
+import eu.kanade.domain.extension.interactor.TrustExtension
 import eu.kanade.domain.source.service.SourcePreferences
 import eu.kanade.tachiyomi.animesource.AnimeCatalogueSource
 import eu.kanade.tachiyomi.animesource.AnimeSource
@@ -33,7 +33,7 @@ import java.io.File
 internal object AnimeExtensionLoader {
 
     private val preferences: SourcePreferences by injectLazy()
-    private val trustExtension: TrustAnimeExtension by injectLazy()
+    private val trustExtension: TrustExtension by injectLazy()
     private val loadNsfwSource by lazy {
         preferences.showNsfwSource().get()
     }

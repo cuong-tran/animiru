@@ -1,6 +1,6 @@
 package eu.kanade.domain.episode.interactor
 
-import eu.kanade.domain.download.interactor.DeleteEpisodeDownload
+import eu.kanade.domain.download.interactor.DeleteDownload
 import logcat.LogPriority
 import tachiyomi.core.common.util.lang.withNonCancellableContext
 import tachiyomi.core.common.util.system.logcat
@@ -13,7 +13,7 @@ import tachiyomi.domain.episode.repository.EpisodeRepository
 
 class SetSeenStatus(
     private val downloadPreferences: DownloadPreferences,
-    private val deleteDownload: DeleteEpisodeDownload,
+    private val deleteDownload: DeleteDownload,
     private val animeRepository: AnimeRepository,
     private val episodeRepository: EpisodeRepository,
 ) {

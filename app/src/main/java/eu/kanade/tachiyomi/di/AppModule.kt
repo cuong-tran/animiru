@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
-import eu.kanade.domain.track.store.DelayedAnimeTrackingStore
+import eu.kanade.domain.track.store.DelayedTrackingStore
 import eu.kanade.tachiyomi.BuildConfig
 import eu.kanade.tachiyomi.data.cache.AnimeCoverCache
 import eu.kanade.tachiyomi.data.connection.ConnectionManager
@@ -132,7 +132,7 @@ class AppModule(val app: Application) : InjektModule {
         addSingletonFactory { AnimeDownloadCache(app) }
 
         addSingletonFactory { TrackerManager(app) }
-        addSingletonFactory { DelayedAnimeTrackingStore(app) }
+        addSingletonFactory { DelayedTrackingStore(app) }
 
         // AM (CONNECTION) -->
         addSingletonFactory { ConnectionManager() }

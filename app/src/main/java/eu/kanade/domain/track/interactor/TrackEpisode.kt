@@ -3,8 +3,8 @@ package eu.kanade.domain.track.interactor
 import android.content.Context
 import eu.kanade.domain.track.model.toDbTrack
 import eu.kanade.domain.track.model.toDomainTrack
-import eu.kanade.domain.track.service.DelayedAnimeTrackingUpdateJob
-import eu.kanade.domain.track.store.DelayedAnimeTrackingStore
+import eu.kanade.domain.track.service.DelayedTrackingUpdateJob
+import eu.kanade.domain.track.store.DelayedTrackingStore
 import eu.kanade.tachiyomi.data.track.TrackerManager
 import eu.kanade.tachiyomi.util.system.isOnline
 import kotlinx.coroutines.async
@@ -19,7 +19,7 @@ class TrackEpisode(
     private val getTracks: GetAnimeTracks,
     private val trackerManager: TrackerManager,
     private val insertTrack: InsertAnimeTrack,
-    private val delayedTrackingStore: DelayedAnimeTrackingStore,
+    private val delayedTrackingStore: DelayedTrackingStore,
 ) {
 
     suspend fun await(context: Context, animeId: Long, episodeNumber: Double, setupJobOnFailure: Boolean = true) {
@@ -45,7 +45,7 @@ class TrackEpisode(
                         } else {
                             delayedTrackingStore.addAnime(track.id, episodeNumber)
                             if (setupJobOnFailure) {
-                                DelayedAnimeTrackingUpdateJob.setupTask(context)
+                                DelayedTrackingUpdateJob.setupTask(context)
                             }
                         }
                     }

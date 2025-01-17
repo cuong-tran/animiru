@@ -20,7 +20,7 @@ import eu.kanade.presentation.anime.EpisodeOptionsDialogScreen
 import eu.kanade.presentation.components.AppBar
 import eu.kanade.presentation.components.NavigatorAdaptiveSheet
 import eu.kanade.presentation.components.TabContent
-import eu.kanade.presentation.updates.AnimeUpdateScreen
+import eu.kanade.presentation.updates.UpdateScreen
 import eu.kanade.presentation.updates.UpdatesDeleteConfirmationDialog
 import eu.kanade.tachiyomi.ui.anime.AnimeScreen
 import eu.kanade.tachiyomi.ui.home.HomeScreen
@@ -57,7 +57,7 @@ fun Screen.animeUpdatesTab(
         // <-- AM (RECENTS)
         searchEnabled = false,
         content = { contentPadding, _ ->
-            AnimeUpdateScreen(
+            UpdateScreen(
                 state = state,
                 snackbarHostState = screenModel.snackbarHostState,
                 lastUpdated = screenModel.lastUpdated,

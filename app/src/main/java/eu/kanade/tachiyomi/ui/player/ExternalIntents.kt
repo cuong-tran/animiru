@@ -12,9 +12,9 @@ import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import eu.kanade.domain.base.BasePreferences
 import eu.kanade.domain.track.model.toDbTrack
-import eu.kanade.domain.track.service.DelayedAnimeTrackingUpdateJob
+import eu.kanade.domain.track.service.DelayedTrackingUpdateJob
 import eu.kanade.domain.track.service.TrackPreferences
-import eu.kanade.domain.track.store.DelayedAnimeTrackingStore
+import eu.kanade.domain.track.store.DelayedTrackingStore
 import eu.kanade.tachiyomi.animesource.AnimeSource
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
@@ -426,7 +426,7 @@ class ExternalIntents {
     private val getTracks: GetAnimeTracks = Injekt.get()
     private val insertTrack: InsertAnimeTrack = Injekt.get()
     private val downloadManager: AnimeDownloadManager by injectLazy()
-    private val delayedTrackingStore: DelayedAnimeTrackingStore = Injekt.get()
+    private val delayedTrackingStore: DelayedTrackingStore = Injekt.get()
     private val playerPreferences: PlayerPreferences = Injekt.get()
     private val downloadPreferences: DownloadPreferences = Injekt.get()
     private val trackPreferences: TrackPreferences = Injekt.get()
@@ -548,7 +548,7 @@ class ExternalIntents {
                                     insertTrack.await(updatedTrack)
                                 } else {
                                     delayedTrackingStore.addAnime(track.animeId, lastEpisodeSeen = episodeNumber)
-                                    DelayedAnimeTrackingUpdateJob.setupTask(context)
+                                    DelayedTrackingUpdateJob.setupTask(context)
                                 }
                             }
                         }

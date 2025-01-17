@@ -3,22 +3,22 @@ package eu.kanade.domain
 import android.app.Application
 import eu.kanade.domain.anime.interactor.SetAnimeViewerFlags
 import eu.kanade.domain.anime.interactor.UpdateAnime
-import eu.kanade.domain.download.interactor.DeleteEpisodeDownload
+import eu.kanade.domain.download.interactor.DeleteDownload
 import eu.kanade.domain.episode.interactor.SetSeenStatus
 import eu.kanade.domain.episode.interactor.SyncEpisodesWithSource
-import eu.kanade.domain.extension.interactor.GetAnimeExtensionLanguages
-import eu.kanade.domain.extension.interactor.GetAnimeExtensionSources
-import eu.kanade.domain.extension.interactor.GetAnimeExtensionsByType
-import eu.kanade.domain.extension.interactor.TrustAnimeExtension
-import eu.kanade.domain.source.interactor.GetAnimeSourcesWithFavoriteCount
-import eu.kanade.domain.source.interactor.GetEnabledAnimeSources
-import eu.kanade.domain.source.interactor.GetLanguagesWithAnimeSources
+import eu.kanade.domain.extension.interactor.GetExtensionLanguages
+import eu.kanade.domain.extension.interactor.GetExtensionSources
+import eu.kanade.domain.extension.interactor.GetExtensionsByType
+import eu.kanade.domain.extension.interactor.TrustExtension
+import eu.kanade.domain.source.interactor.GetSourcesWithFavoriteCount
+import eu.kanade.domain.source.interactor.GetEnabledSources
+import eu.kanade.domain.source.interactor.GetLanguagesWithSources
 import eu.kanade.domain.source.interactor.SetMigrateSorting
-import eu.kanade.domain.source.interactor.ToggleAnimeSource
-import eu.kanade.domain.source.interactor.ToggleAnimeSourcePin
+import eu.kanade.domain.source.interactor.ToggleSource
+import eu.kanade.domain.source.interactor.ToggleSourcePin
 import eu.kanade.domain.source.interactor.ToggleLanguage
-import eu.kanade.domain.track.interactor.AddAnimeTracks
-import eu.kanade.domain.track.interactor.RefreshAnimeTracks
+import eu.kanade.domain.track.interactor.AddTracks
+import eu.kanade.domain.track.interactor.RefreshTracks
 import eu.kanade.domain.track.interactor.SyncEpisodeProgressWithTrack
 import eu.kanade.domain.track.interactor.TrackEpisode
 import mihon.data.repository.AnimeExtensionRepoRepositoryImpl
@@ -139,8 +139,8 @@ class DomainModule : InjektModule {
 
         addSingletonFactory<AnimeTrackRepository> { AnimeTrackRepositoryImpl(get()) }
         addFactory { TrackEpisode(get(), get(), get(), get()) }
-        addFactory { AddAnimeTracks(get(), get(), get(), get()) }
-        addFactory { RefreshAnimeTracks(get(), get(), get(), get()) }
+        addFactory { AddTracks(get(), get(), get(), get()) }
+        addFactory { RefreshTracks(get(), get(), get(), get()) }
         addFactory { DeleteAnimeTrack(get()) }
         addFactory { GetTracksPerAnime(get()) }
         addFactory { GetAnimeTracks(get()) }
@@ -162,28 +162,28 @@ class DomainModule : InjektModule {
         addFactory { UpsertAnimeHistory(get()) }
         addFactory { RemoveAnimeHistory(get()) }
 
-        addFactory { DeleteEpisodeDownload(get(), get()) }
+        addFactory { DeleteDownload(get(), get()) }
 
-        addFactory { GetAnimeExtensionsByType(get(), get()) }
-        addFactory { GetAnimeExtensionSources(get()) }
-        addFactory { GetAnimeExtensionLanguages(get(), get()) }
+        addFactory { GetExtensionsByType(get(), get()) }
+        addFactory { GetExtensionSources(get()) }
+        addFactory { GetExtensionLanguages(get(), get()) }
 
         addSingletonFactory<AnimeUpdatesRepository> { AnimeUpdatesRepositoryImpl(get()) }
         addFactory { GetAnimeUpdates(get()) }
 
         addSingletonFactory<AnimeSourceRepository> { AnimeSourceRepositoryImpl(get(), get()) }
         addSingletonFactory<AnimeStubSourceRepository> { AnimeStubSourceRepositoryImpl(get()) }
-        addFactory { GetEnabledAnimeSources(get(), get()) }
-        addFactory { GetLanguagesWithAnimeSources(get(), get()) }
+        addFactory { GetEnabledSources(get(), get()) }
+        addFactory { GetLanguagesWithSources(get(), get()) }
         addFactory { GetRemoteAnime(get()) }
-        addFactory { GetAnimeSourcesWithFavoriteCount(get(), get()) }
+        addFactory { GetSourcesWithFavoriteCount(get(), get()) }
         addFactory { GetAnimeSourcesWithNonLibraryAnime(get()) }
-        addFactory { ToggleAnimeSource(get()) }
-        addFactory { ToggleAnimeSourcePin(get()) }
+        addFactory { ToggleSource(get()) }
+        addFactory { ToggleSourcePin(get()) }
 
         addFactory { SetMigrateSorting(get()) }
         addFactory { ToggleLanguage(get()) }
-        addFactory { TrustAnimeExtension(get(), get()) }
+        addFactory { TrustExtension(get(), get()) }
 
         addFactory { ExtensionRepoService(get(), get()) }
 

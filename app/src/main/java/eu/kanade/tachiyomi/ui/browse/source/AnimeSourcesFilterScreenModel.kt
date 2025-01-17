@@ -3,8 +3,8 @@ package eu.kanade.tachiyomi.ui.browse.source
 import androidx.compose.runtime.Immutable
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import eu.kanade.domain.source.interactor.GetLanguagesWithAnimeSources
-import eu.kanade.domain.source.interactor.ToggleAnimeSource
+import eu.kanade.domain.source.interactor.GetLanguagesWithSources
+import eu.kanade.domain.source.interactor.ToggleSource
 import eu.kanade.domain.source.interactor.ToggleLanguage
 import eu.kanade.domain.source.service.SourcePreferences
 import kotlinx.coroutines.flow.catch
@@ -19,8 +19,8 @@ import java.util.SortedMap
 
 class AnimeSourcesFilterScreenModel(
     private val preferences: SourcePreferences = Injekt.get(),
-    private val getLanguagesWithSources: GetLanguagesWithAnimeSources = Injekt.get(),
-    private val toggleSource: ToggleAnimeSource = Injekt.get(),
+    private val getLanguagesWithSources: GetLanguagesWithSources = Injekt.get(),
+    private val toggleSource: ToggleSource = Injekt.get(),
     private val toggleLanguage: ToggleLanguage = Injekt.get(),
 ) : StateScreenModel<AnimeSourcesFilterScreenModel.State>(State.Loading) {
 

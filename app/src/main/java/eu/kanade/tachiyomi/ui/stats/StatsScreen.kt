@@ -8,7 +8,7 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import eu.kanade.presentation.components.AppBar
-import eu.kanade.presentation.more.stats.AnimeStatsScreenContent
+import eu.kanade.presentation.more.stats.StatsScreenContent
 import eu.kanade.presentation.more.stats.StatsScreenState
 import eu.kanade.presentation.util.Screen
 import tachiyomi.i18n.MR
@@ -39,7 +39,7 @@ class StatsScreen : Screen() {
                 return@Scaffold
             }
 
-            AnimeStatsScreenContent(
+            StatsScreenContent(
                 state = state as? StatsScreenState.SuccessAnime ?: return@Scaffold,
                 paddingValues = paddingValues,
             )

@@ -17,7 +17,7 @@ import eu.kanade.domain.anime.model.downloadedFilter
 import eu.kanade.domain.anime.model.toSAnime
 import eu.kanade.domain.episode.interactor.SetSeenStatus
 import eu.kanade.domain.episode.interactor.SyncEpisodesWithSource
-import eu.kanade.domain.track.interactor.AddAnimeTracks
+import eu.kanade.domain.track.interactor.AddTracks
 import eu.kanade.domain.track.interactor.TrackEpisode
 import eu.kanade.domain.track.model.AutoTrackState
 import eu.kanade.domain.track.service.TrackPreferences
@@ -118,7 +118,7 @@ class AnimeScreenModel(
     private val syncEpisodesWithSource: SyncEpisodesWithSource = Injekt.get(),
     private val getCategories: GetAnimeCategories = Injekt.get(),
     private val getTracks: GetAnimeTracks = Injekt.get(),
-    private val addTracks: AddAnimeTracks = Injekt.get(),
+    private val addTracks: AddTracks = Injekt.get(),
     private val setAnimeCategories: SetAnimeCategories = Injekt.get(),
     private val animeRepository: AnimeRepository = Injekt.get(),
     private val filterEpisodesForDownload: FilterEpisodesForDownload = Injekt.get(),

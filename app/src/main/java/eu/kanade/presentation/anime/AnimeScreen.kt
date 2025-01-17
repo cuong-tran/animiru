@@ -57,12 +57,12 @@ import eu.kanade.domain.anime.model.episodesFiltered
 import eu.kanade.presentation.anime.components.AnimeActionRow
 import eu.kanade.presentation.anime.components.AnimeEpisodeListItem
 import eu.kanade.presentation.anime.components.AnimeInfoBox
-import eu.kanade.presentation.anime.components.EntryBottomActionMenu
-import eu.kanade.presentation.anime.components.EntryToolbar
+import eu.kanade.presentation.anime.components.AnimeBottomActionMenu
+import eu.kanade.presentation.anime.components.AnimeToolbar
 import eu.kanade.presentation.anime.components.EpisodeDownloadAction
 import eu.kanade.presentation.anime.components.ExpandableAnimeDescription
-import eu.kanade.presentation.anime.components.ItemHeader
-import eu.kanade.presentation.anime.components.MissingItemCountListItem
+import eu.kanade.presentation.anime.components.EpisodeHeader
+import eu.kanade.presentation.anime.components.MissingEpisodeCountListItem
 import eu.kanade.presentation.anime.components.NextEpisodeAiringListItem
 import eu.kanade.presentation.components.relativeDateText
 import eu.kanade.presentation.util.formatEpisodeNumber
@@ -367,7 +367,7 @@ private fun AnimeScreenSmallImpl(
                 if (!isFirstItemVisible || isFirstItemScrolled) 1f else 0f,
                 label = "Top Bar Background",
             )
-            EntryToolbar(
+            AnimeToolbar(
                 title = state.anime.title,
                 titleAlphaProvider = { animatedTitleAlpha },
                 backgroundAlphaProvider = { animatedBgAlpha },
@@ -518,7 +518,7 @@ private fun AnimeScreenSmallImpl(
                         val missingEpisodesCount = remember(episodes) {
                             episodes.map { it.episode.episodeNumber }.missingEpisodesCount()
                         }
-                        ItemHeader(
+                        EpisodeHeader(
                             enabled = !isAnySelected,
                             itemCount = episodes.size,
                             missingItemsCount = missingEpisodesCount,
@@ -669,7 +669,7 @@ fun AnimeScreenLargeImpl(
             val selectedChapterCount = remember(episodes) {
                 episodes.count { it.selected }
             }
-            EntryToolbar(
+            AnimeToolbar(
                 modifier = Modifier.onSizeChanged { topBarHeight = it.height },
                 title = state.anime.title,
                 titleAlphaProvider = { if (isAnySelected) 1f else 0f },
@@ -816,7 +816,7 @@ fun AnimeScreenLargeImpl(
                                 val missingEpisodesCount = remember(episodes) {
                                     episodes.map { it.episode.episodeNumber }.missingEpisodesCount()
                                 }
-                                ItemHeader(
+                                EpisodeHeader(
                                     enabled = !isAnySelected,
                                     itemCount = episodes.size,
                                     missingItemsCount = missingEpisodesCount,
@@ -892,7 +892,7 @@ private fun SharedAnimeBottomActionMenu(
     alwaysUseExternalPlayer: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    EntryBottomActionMenu(
+    AnimeBottomActionMenu(
         visible = selected.isNotEmpty(),
         modifier = modifier.fillMaxWidth(fillFraction),
         onBookmarkClicked = {
@@ -967,7 +967,7 @@ private fun LazyListScope.sharedEpisodeItems(
 
         when (episodeItem) {
             is EpisodeList.MissingCount -> {
-                MissingItemCountListItem(count = episodeItem.count)
+                MissingEpisodeCountListItem(count = episodeItem.count)
             }
             is EpisodeList.Item -> {
                 // AM (FILE_SIZE) -->
