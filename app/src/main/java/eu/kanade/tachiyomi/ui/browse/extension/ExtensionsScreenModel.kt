@@ -9,7 +9,7 @@ import eu.kanade.domain.base.BasePreferences
 import eu.kanade.domain.extension.interactor.GetExtensionsByType
 import eu.kanade.domain.source.service.SourcePreferences
 import eu.kanade.presentation.components.SEARCH_DEBOUNCE_MILLIS
-import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.source.online.HttpSource
 import eu.kanade.tachiyomi.extension.ExtensionManager
 import eu.kanade.tachiyomi.extension.model.Extension
 import eu.kanade.tachiyomi.extension.model.InstallStep
@@ -71,7 +71,7 @@ class ExtensionsScreenModel(
                             extension.sources.any {
                                 it.name.contains(input, ignoreCase = true) ||
                                     it.id == input.toLongOrNull() ||
-                                    if (it is AnimeHttpSource) {
+                                    if (it is HttpSource) {
                                         it.baseUrl.contains(
                                             input,
                                             ignoreCase = true,

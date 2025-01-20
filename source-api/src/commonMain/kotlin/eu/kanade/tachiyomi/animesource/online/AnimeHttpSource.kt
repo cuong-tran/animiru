@@ -1,7 +1,7 @@
 package eu.kanade.tachiyomi.animesource.online
 
-import eu.kanade.tachiyomi.animesource.AnimeCatalogueSource
-import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
+import eu.kanade.tachiyomi.source.CatalogueSource
+import eu.kanade.tachiyomi.source.model.FilterList
 import eu.kanade.tachiyomi.animesource.model.AnimesPage
 import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
@@ -27,7 +27,7 @@ import java.security.MessageDigest
  * A simple implementation for sources from a website.
  */
 @Suppress("unused")
-abstract class AnimeHttpSource : AnimeCatalogueSource {
+abstract class AnimeHttpSource : CatalogueSource {
     /**
      * Network service.
      */
@@ -146,7 +146,7 @@ abstract class AnimeHttpSource : AnimeCatalogueSource {
         "Use the non-RxJava API instead",
         ReplaceWith("getSearchAnime"),
     )
-    override fun fetchSearchAnime(page: Int, query: String, filters: AnimeFilterList): Observable<AnimesPage> {
+    override fun fetchSearchAnime(page: Int, query: String, filters: FilterList): Observable<AnimesPage> {
         return Observable.defer {
             try {
                 client.newCall(searchAnimeRequest(page, query, filters)).asObservableSuccess()
@@ -168,7 +168,7 @@ abstract class AnimeHttpSource : AnimeCatalogueSource {
      * @param query the search query.
      * @param filters the list of filters to apply.
      */
-    protected abstract fun searchAnimeRequest(page: Int, query: String, filters: AnimeFilterList): Request
+    protected abstract fun searchAnimeRequest(page: Int, query: String, filters: FilterList): Request
 
     /**
      * Parses the response from the site and returns a [AnimesPage] object.
@@ -524,5 +524,5 @@ abstract class AnimeHttpSource : AnimeCatalogueSource {
     /**
      * Returns the list of filters for the source.
      */
-    override fun getFilterList() = AnimeFilterList()
+    override fun getFilterList() = FilterList()
 }

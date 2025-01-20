@@ -1,6 +1,6 @@
 package eu.kanade.tachiyomi.animesource.online
 
-import eu.kanade.tachiyomi.animesource.AnimeSource
+import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 
@@ -9,7 +9,7 @@ import eu.kanade.tachiyomi.animesource.model.SEpisode
  *
  * @since extensions-lib 1.5
  */
-interface ResolvableAnimeSource : AnimeSource {
+interface ResolvableAnimeSource : Source {
 
     /**
      * Returns what the given URI may open.

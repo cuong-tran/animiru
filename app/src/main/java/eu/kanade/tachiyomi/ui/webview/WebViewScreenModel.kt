@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.core.net.toUri
 import cafe.adriel.voyager.core.model.StateScreenModel
 import eu.kanade.presentation.more.stats.StatsScreenState
-import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.source.online.HttpSource
 import eu.kanade.tachiyomi.network.NetworkHelper
 import eu.kanade.tachiyomi.util.system.openInBrowser
 import eu.kanade.tachiyomi.util.system.toShareIntent
@@ -25,7 +25,7 @@ class WebViewScreenModel(
     var headers = emptyMap<String, String>()
 
     init {
-        sourceId?.let { sourceManager.get(it) as? AnimeHttpSource }?.let { source ->
+        sourceId?.let { sourceManager.get(it) as? HttpSource }?.let { source ->
             try {
                 headers = source.headers.toMultimap().mapValues { it.value.getOrNull(0) ?: "" }
             } catch (e: Exception) {

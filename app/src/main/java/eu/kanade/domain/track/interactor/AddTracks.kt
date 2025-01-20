@@ -2,7 +2,7 @@ package eu.kanade.domain.track.interactor
 
 import eu.kanade.domain.track.model.toDbTrack
 import eu.kanade.domain.track.model.toDomainTrack
-import eu.kanade.tachiyomi.animesource.AnimeSource
+import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.data.database.models.Track
 import eu.kanade.tachiyomi.data.track.AnimeTracker
 import eu.kanade.tachiyomi.data.track.EnhancedTracker
@@ -78,7 +78,7 @@ class AddTracks(
         }
     }
 
-    suspend fun bindEnhancedTrackers(anime: Anime, source: AnimeSource) = withNonCancellableContext {
+    suspend fun bindEnhancedTrackers(anime: Anime, source: Source) = withNonCancellableContext {
         withIOContext {
             trackerManager.loggedInTrackers()
                 .filterIsInstance<EnhancedTracker>()

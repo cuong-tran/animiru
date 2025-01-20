@@ -24,7 +24,7 @@ import eu.kanade.domain.anime.interactor.UpdateAnime
 import eu.kanade.domain.anime.model.hasCustomCover
 import eu.kanade.domain.anime.model.toSAnime
 import eu.kanade.domain.episode.interactor.SyncEpisodesWithSource
-import eu.kanade.tachiyomi.animesource.AnimeSource
+import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.data.cache.CoverCache
 import eu.kanade.tachiyomi.data.download.DownloadManager
@@ -201,8 +201,8 @@ internal class MigrateAnimeDialogScreenModel(
     }
 
     private suspend fun migrateAnimeInternal(
-        oldSource: AnimeSource?,
-        newSource: AnimeSource,
+        oldSource: Source?,
+        newSource: Source,
         oldAnime: Anime,
         newAnime: Anime,
         sourceEpisodes: List<SEpisode>,

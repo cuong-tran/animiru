@@ -44,8 +44,8 @@ import eu.kanade.presentation.browse.components.RemoveEntryDialog
 import eu.kanade.presentation.category.components.ChangeCategoryDialog
 import eu.kanade.presentation.util.AssistContentScreen
 import eu.kanade.presentation.util.Screen
-import eu.kanade.tachiyomi.animesource.AnimeCatalogueSource
-import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.source.CatalogueSource
+import eu.kanade.tachiyomi.source.online.HttpSource
 import eu.kanade.tachiyomi.ui.anime.AnimeScreen
 import eu.kanade.tachiyomi.ui.browse.extension.details.SourcePreferencesScreen
 import eu.kanade.tachiyomi.ui.browse.migration.search.MigrateAnimeDialogScreenModel
@@ -110,7 +110,7 @@ data class BrowseSourceScreen(
 
         val onHelpClick = { uriHandler.openUri(LocalSource.HELP_URL) }
         val onWebViewClick = f@{
-            val source = screenModel.source as? AnimeHttpSource ?: return@f
+            val source = screenModel.source as? HttpSource ?: return@f
             navigator.push(
                 WebViewScreen(
                     url = source.baseUrl,
@@ -121,7 +121,7 @@ data class BrowseSourceScreen(
         }
 
         LaunchedEffect(screenModel.source) {
-            assistUrl = (screenModel.source as? AnimeHttpSource)?.baseUrl
+            assistUrl = (screenModel.source as? HttpSource)?.baseUrl
         }
 
         Scaffold(
@@ -164,7 +164,7 @@ data class BrowseSourceScreen(
                                 Text(text = stringResource(MR.strings.popular))
                             },
                         )
-                        if ((screenModel.source as AnimeCatalogueSource).supportsLatest) {
+                        if ((screenModel.source as CatalogueSource).supportsLatest) {
                             FilterChip(
                                 selected = state.listing == Listing.Latest,
                                 onClick = {

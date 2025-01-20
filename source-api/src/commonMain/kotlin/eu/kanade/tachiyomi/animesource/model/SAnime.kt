@@ -2,6 +2,7 @@
 
 package eu.kanade.tachiyomi.animesource.model
 
+import eu.kanade.tachiyomi.source.model.UpdateStrategy
 import java.io.Serializable
 
 interface SAnime : Serializable {
@@ -22,7 +23,7 @@ interface SAnime : Serializable {
 
     var thumbnail_url: String?
 
-    var update_strategy: AnimeUpdateStrategy
+    var update_strategy: UpdateStrategy
 
     var initialized: Boolean
 

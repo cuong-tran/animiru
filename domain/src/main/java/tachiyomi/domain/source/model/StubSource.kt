@@ -1,6 +1,6 @@
 package tachiyomi.domain.source.model
 
-import eu.kanade.tachiyomi.animesource.AnimeSource
+import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
 import eu.kanade.tachiyomi.animesource.model.Video
@@ -10,7 +10,7 @@ class StubSource(
     override val id: Long,
     override val lang: String,
     override val name: String,
-) : AnimeSource {
+) : Source {
 
     private val isInvalid: Boolean = name.isBlank() || lang.isBlank()
 
@@ -27,7 +27,7 @@ class StubSource(
         if (!isInvalid) "$name (${lang.uppercase()})" else id.toString()
 
     companion object {
-        fun from(source: AnimeSource): StubSource {
+        fun from(source: Source): StubSource {
             return StubSource(id = source.id, lang = source.lang, name = source.name)
         }
     }

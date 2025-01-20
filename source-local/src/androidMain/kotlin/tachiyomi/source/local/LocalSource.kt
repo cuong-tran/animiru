@@ -2,10 +2,10 @@ package tachiyomi.source.local
 
 import android.content.Context
 import com.hippo.unifile.UniFile
-import eu.kanade.tachiyomi.animesource.AnimeCatalogueSource
-import eu.kanade.tachiyomi.animesource.AnimeSource
+import eu.kanade.tachiyomi.source.CatalogueSource
+import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.animesource.UnmeteredSource
-import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
+import eu.kanade.tachiyomi.source.model.FilterList
 import eu.kanade.tachiyomi.animesource.model.AnimesPage
 import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.animesource.model.SEpisode
@@ -45,15 +45,15 @@ actual class LocalSource(
     private val context: Context,
     private val fileSystem: LocalSourceFileSystem,
     private val coverManager: LocalCoverManager,
-) : AnimeCatalogueSource, UnmeteredSource {
+) : CatalogueSource, UnmeteredSource {
 
     private val json: Json by injectLazy()
 
     @Suppress("PrivatePropertyName")
-    private val PopularFilters = AnimeFilterList(OrderBy.Popular(context))
+    private val PopularFilters = FilterList(OrderBy.Popular(context))
 
     @Suppress("PrivatePropertyName")
-    private val LatestFilters = AnimeFilterList(OrderBy.Latest(context))
+    private val LatestFilters = FilterList(OrderBy.Latest(context))
 
     override val name = context.stringResource(MR.strings.local_anime_source)
 
@@ -73,7 +73,7 @@ actual class LocalSource(
     override suspend fun getSearchAnime(
         page: Int,
         query: String,
-        filters: AnimeFilterList,
+        filters: FilterList,
     ): AnimesPage = withIOContext {
         val lastModifiedLimit = if (filters === LatestFilters) {
             System.currentTimeMillis() - LATEST_THRESHOLD
@@ -152,7 +152,7 @@ actual class LocalSource(
     override fun fetchLatestUpdates(page: Int) = fetchSearchAnime(page, "", LatestFilters)
 
     @Deprecated("Use the non-RxJava API instead", replaceWith = ReplaceWith("getSearchAnime"))
-    override fun fetchSearchAnime(page: Int, query: String, filters: AnimeFilterList): Observable<AnimesPage> {
+    override fun fetchSearchAnime(page: Int, query: String, filters: FilterList): Observable<AnimesPage> {
         return runBlocking {
             Observable.just(getSearchAnime(page, query, filters))
         }
@@ -265,7 +265,7 @@ actual class LocalSource(
     }
 
     // Filters
-    override fun getFilterList() = AnimeFilterList(OrderBy.Popular(context))
+    override fun getFilterList() = FilterList(OrderBy.Popular(context))
 
     // Unused stuff
     override suspend fun getVideoList(episode: SEpisode): List<Video> = throw UnsupportedOperationException("Unused")
@@ -308,4 +308,4 @@ actual class LocalSource(
 
 fun Anime.isLocal(): Boolean = source == LocalSource.ID
 
-fun AnimeSource.isLocal(): Boolean = id == LocalSource.ID
+fun Source.isLocal(): Boolean = id == LocalSource.ID

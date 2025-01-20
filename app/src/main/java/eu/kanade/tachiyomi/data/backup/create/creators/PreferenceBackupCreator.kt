@@ -1,6 +1,6 @@
 package eu.kanade.tachiyomi.data.backup.create.creators
 
-import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
+import eu.kanade.tachiyomi.source.ConfigurableSource
 import eu.kanade.tachiyomi.animesource.preferenceKey
 import eu.kanade.tachiyomi.animesource.sourcePreferences
 import eu.kanade.tachiyomi.data.backup.models.BackupPreference
@@ -29,7 +29,7 @@ class PreferenceBackupCreator(
 
     fun createSource(includePrivatePreferences: Boolean): List<BackupSourcePreferences> {
         val animePreferences = sourceManager.getCatalogueSources()
-            .filterIsInstance<ConfigurableAnimeSource>()
+            .filterIsInstance<ConfigurableSource>()
             .map {
                 BackupSourcePreferences(
                     it.preferenceKey(),

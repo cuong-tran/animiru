@@ -1,7 +1,7 @@
 package tachiyomi.domain.anime.model
 
 import androidx.compose.runtime.Immutable
-import eu.kanade.tachiyomi.animesource.model.AnimeUpdateStrategy
+import eu.kanade.tachiyomi.source.model.UpdateStrategy
 import eu.kanade.tachiyomi.animesource.model.SAnime
 import tachiyomi.core.common.preference.TriState
 import tachiyomi.domain.anime.interactor.GetCustomAnimeInfo
@@ -32,7 +32,7 @@ data class Anime(
     val ogStatus: Long,
     // SY <--
     val thumbnailUrl: String?,
-    val updateStrategy: AnimeUpdateStrategy,
+    val updateStrategy: UpdateStrategy,
     val initialized: Boolean,
     val lastModifiedAt: Long,
     val favoriteModifiedAt: Long?,
@@ -194,7 +194,7 @@ data class Anime(
             ogStatus = 0L,
             // SY <--
             thumbnailUrl = null,
-            updateStrategy = AnimeUpdateStrategy.ALWAYS_UPDATE,
+            updateStrategy = UpdateStrategy.ALWAYS_UPDATE,
             initialized = false,
             lastModifiedAt = 0L,
             favoriteModifiedAt = null,

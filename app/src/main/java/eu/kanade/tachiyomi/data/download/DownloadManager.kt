@@ -1,7 +1,7 @@
 package eu.kanade.tachiyomi.data.download
 
 import android.content.Context
-import eu.kanade.tachiyomi.animesource.AnimeSource
+import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.data.download.model.Download
 import eu.kanade.tachiyomi.util.size
@@ -171,7 +171,7 @@ class DownloadManager(
      * @param episode the downloaded episode.
      * @return an observable containing the list of pages from the episode.
      */
-    fun buildVideo(source: AnimeSource, anime: Anime, episode: Episode): Video {
+    fun buildVideo(source: Source, anime: Anime, episode: Episode): Video {
         // SY -->
         val episodeDir =
             provider.findEpisodeDir(episode.name, episode.scanlator, anime.ogTitle, source)
@@ -271,7 +271,7 @@ class DownloadManager(
      * @param anime the anime of the episodes.
      * @param source the source of the episodes.
      */
-    fun deleteEpisodes(episodes: List<Episode>, anime: Anime, source: AnimeSource) {
+    fun deleteEpisodes(episodes: List<Episode>, anime: Anime, source: Source) {
         launchIO {
             val filteredEpisodes = getEpisodesToDelete(episodes, anime)
             if (filteredEpisodes.isEmpty()) {
@@ -301,7 +301,7 @@ class DownloadManager(
      * @param source the source of the anime.
      * @param removeQueued whether to also remove queued downloads.
      */
-    fun deleteAnime(anime: Anime, source: AnimeSource, removeQueued: Boolean = true) {
+    fun deleteAnime(anime: Anime, source: Source, removeQueued: Boolean = true) {
         launchIO {
             if (removeQueued) {
                 downloader.removeFromQueue(anime)
@@ -363,7 +363,7 @@ class DownloadManager(
      * @param oldSource the old source.
      * @param newSource the new source.
      */
-    fun renameSource(oldSource: AnimeSource, newSource: AnimeSource) {
+    fun renameSource(oldSource: Source, newSource: Source) {
         val oldFolder = provider.findSourceDir(oldSource) ?: return
         val newName = provider.getSourceDirName(newSource)
 
@@ -391,7 +391,7 @@ class DownloadManager(
      * @param oldEpisode the existing episode with the old name.
      * @param newEpisode the target episode with the new name.
      */
-    suspend fun renameEpisode(source: AnimeSource, anime: Anime, oldEpisode: Episode, newEpisode: Episode) {
+    suspend fun renameEpisode(source: Source, anime: Anime, oldEpisode: Episode, newEpisode: Episode) {
         val oldNames = provider.getValidEpisodeDirNames(oldEpisode.name, oldEpisode.scanlator)
         // SY -->
         val animeDir = provider.getAnimeDir(anime.ogTitle, source)

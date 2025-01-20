@@ -4,9 +4,9 @@ import eu.kanade.domain.anime.interactor.UpdateAnime
 import eu.kanade.domain.anime.model.toSAnime
 import eu.kanade.domain.episode.model.copyFromSEpisode
 import eu.kanade.domain.episode.model.toSEpisode
-import eu.kanade.tachiyomi.animesource.AnimeSource
+import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.animesource.model.SEpisode
-import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.source.online.HttpSource
 import eu.kanade.tachiyomi.data.download.DownloadManager
 import eu.kanade.tachiyomi.data.download.DownloadProvider
 import tachiyomi.data.episode.EpisodeSanitizer
@@ -45,7 +45,7 @@ class SyncEpisodesWithSource(
     suspend fun await(
         rawSourceEpisodes: List<SEpisode>,
         anime: Anime,
-        source: AnimeSource,
+        source: Source,
         manualFetch: Boolean = false,
         fetchWindow: Pair<Long, Long> = Pair(0, 0),
     ): List<Episode> {
@@ -83,7 +83,7 @@ class SyncEpisodesWithSource(
             var episode = sourceEpisode
 
             // Update metadata from source if necessary.
-            if (source is AnimeHttpSource) {
+            if (source is HttpSource) {
                 val sEpisode = episode.toSEpisode()
                 source.prepareNewEpisode(sEpisode, anime.toSAnime())
                 episode = episode.copyFromSEpisode(sEpisode)

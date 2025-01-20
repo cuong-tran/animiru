@@ -15,9 +15,9 @@ import eu.kanade.domain.track.model.toDbTrack
 import eu.kanade.domain.track.service.DelayedTrackingUpdateJob
 import eu.kanade.domain.track.service.TrackPreferences
 import eu.kanade.domain.track.store.DelayedTrackingStore
-import eu.kanade.tachiyomi.animesource.AnimeSource
+import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.animesource.model.Video
-import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.source.online.HttpSource
 import eu.kanade.tachiyomi.data.connection.discord.DiscordRPCService
 import eu.kanade.tachiyomi.data.connection.discord.PlayerData
 import eu.kanade.tachiyomi.data.download.DownloadManager
@@ -63,7 +63,7 @@ class ExternalIntents {
      * Used to dictate what video is sent an external player.
      */
     lateinit var anime: Anime
-    lateinit var source: AnimeSource
+    lateinit var source: Source
     lateinit var episode: Episode
 
     /**
@@ -289,7 +289,7 @@ class ExternalIntents {
      */
     private fun addVideoHeaders(isSupportedPlayer: Boolean, video: Video, intent: Intent): Intent {
         return intent.apply {
-            val headers = video.headers ?: (source as? AnimeHttpSource)?.headers
+            val headers = video.headers ?: (source as? HttpSource)?.headers
             if (headers != null) {
                 var headersArray = arrayOf<String>()
                 for (header in headers) {

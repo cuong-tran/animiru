@@ -1,6 +1,6 @@
 package tachiyomi.data.anime
 
-import eu.kanade.tachiyomi.animesource.model.AnimeUpdateStrategy
+import eu.kanade.tachiyomi.source.model.UpdateStrategy
 import tachiyomi.domain.anime.model.Anime
 import tachiyomi.domain.library.model.LibraryAnime
 
@@ -24,7 +24,7 @@ object AnimeMapper {
         episodeFlags: Long,
         coverLastModified: Long,
         dateAdded: Long,
-        updateStrategy: AnimeUpdateStrategy,
+        updateStrategy: UpdateStrategy,
         calculateInterval: Long,
         lastModifiedAt: Long,
         favoriteModifiedAt: Long?,
@@ -78,7 +78,7 @@ object AnimeMapper {
         episodeFlags: Long,
         coverLastModified: Long,
         dateAdded: Long,
-        updateStrategy: AnimeUpdateStrategy,
+        updateStrategy: UpdateStrategy,
         calculateInterval: Long,
         lastModifiedAt: Long,
         favoriteModifiedAt: Long?,

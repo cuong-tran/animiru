@@ -1,9 +1,9 @@
 package tachiyomi.data.source
 
-import eu.kanade.tachiyomi.animesource.AnimeCatalogueSource
-import eu.kanade.tachiyomi.animesource.AnimeSource
-import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
-import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.source.CatalogueSource
+import eu.kanade.tachiyomi.source.Source
+import eu.kanade.tachiyomi.source.model.FilterList
+import eu.kanade.tachiyomi.source.online.HttpSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
@@ -33,7 +33,7 @@ class SourceRepositoryImpl(
     override fun getOnlineAnimeSources(): Flow<List<DomainSource>> {
         return sourceManager.catalogueSources.map { sources ->
             sources
-                .filterIsInstance<AnimeHttpSource>()
+                .filterIsInstance<HttpSource>()
                 .map(::mapSourceToDomainSource)
         }
     }
@@ -71,23 +71,23 @@ class SourceRepositoryImpl(
     override fun searchAnime(
         sourceId: Long,
         query: String,
-        filterList: AnimeFilterList,
+        filterList: FilterList,
     ): AnimeSourcePagingSourceType {
-        val source = sourceManager.get(sourceId) as AnimeCatalogueSource
+        val source = sourceManager.get(sourceId) as CatalogueSource
         return SourceSearchPagingSource(source, query, filterList)
     }
 
     override fun getPopularAnime(sourceId: Long): AnimeSourcePagingSourceType {
-        val source = sourceManager.get(sourceId) as AnimeCatalogueSource
+        val source = sourceManager.get(sourceId) as CatalogueSource
         return SourcePopularPagingSource(source)
     }
 
     override fun getLatestAnime(sourceId: Long): AnimeSourcePagingSourceType {
-        val source = sourceManager.get(sourceId) as AnimeCatalogueSource
+        val source = sourceManager.get(sourceId) as CatalogueSource
         return SourceLatestPagingSource(source)
     }
 
-    private fun mapSourceToDomainSource(source: AnimeSource): DomainSource = DomainSource(
+    private fun mapSourceToDomainSource(source: Source): DomainSource = DomainSource(
         id = source.id,
         lang = source.lang,
         name = source.name,

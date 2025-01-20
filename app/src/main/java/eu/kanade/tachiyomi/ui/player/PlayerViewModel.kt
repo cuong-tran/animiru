@@ -13,11 +13,11 @@ import eu.kanade.domain.episode.model.toDbEpisode
 import eu.kanade.domain.track.interactor.TrackEpisode
 import eu.kanade.domain.track.service.TrackPreferences
 import eu.kanade.domain.ui.UiPreferences
-import eu.kanade.tachiyomi.animesource.AnimeSource
+import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.animesource.model.SerializableVideo.Companion.toVideoList
 import eu.kanade.tachiyomi.animesource.model.Track
 import eu.kanade.tachiyomi.animesource.model.Video
-import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.source.online.HttpSource
 import eu.kanade.tachiyomi.data.connection.syncmiru.SyncDataJob
 import eu.kanade.tachiyomi.data.database.models.Episode
 import eu.kanade.tachiyomi.data.database.models.toDomainEpisode
@@ -129,7 +129,7 @@ class PlayerViewModel @JvmOverloads constructor(
     /**
      * The source used. It can be null when instantiated for a short time.
      */
-    val currentSource: AnimeSource?
+    val currentSource: Source?
         get() = state.value.source
 
     /**
@@ -339,7 +339,7 @@ class PlayerViewModel @JvmOverloads constructor(
     fun isEpisodeOnline(): Boolean? {
         val anime = currentAnime ?: return null
         val episode = currentEpisode ?: return null
-        return currentSource is AnimeHttpSource &&
+        return currentSource is HttpSource &&
             !EpisodeLoader.isDownload(
                 episode.toDomainEpisode()!!,
                 anime,
@@ -786,7 +786,7 @@ class PlayerViewModel @JvmOverloads constructor(
         val episodeList: List<Episode> = emptyList(),
         val episode: Episode? = null,
         val anime: Anime? = null,
-        val source: AnimeSource? = null,
+        val source: Source? = null,
         val videoStreams: VideoStreams = VideoStreams(),
         val isLoadingEpisode: Boolean = false,
         val dialog: Dialog? = null,

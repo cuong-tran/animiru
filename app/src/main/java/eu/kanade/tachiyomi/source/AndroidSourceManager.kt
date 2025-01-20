@@ -1,9 +1,7 @@
 package eu.kanade.tachiyomi.source
 
 import android.content.Context
-import eu.kanade.tachiyomi.animesource.AnimeCatalogueSource
-import eu.kanade.tachiyomi.animesource.AnimeSource
-import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.source.online.HttpSource
 import eu.kanade.tachiyomi.data.download.DownloadManager
 import eu.kanade.tachiyomi.extension.ExtensionManager
 import kotlinx.coroutines.CoroutineScope
@@ -39,19 +37,19 @@ class AndroidSourceManager(
 
     private val scope = CoroutineScope(Job() + Dispatchers.IO)
 
-    private val sourcesMapFlow = MutableStateFlow(ConcurrentHashMap<Long, AnimeSource>())
+    private val sourcesMapFlow = MutableStateFlow(ConcurrentHashMap<Long, Source>())
 
     private val stubSourcesMap = ConcurrentHashMap<Long, StubSource>()
 
-    override val catalogueSources: Flow<List<AnimeCatalogueSource>> = sourcesMapFlow.map {
-        it.values.filterIsInstance<AnimeCatalogueSource>()
+    override val catalogueSources: Flow<List<CatalogueSource>> = sourcesMapFlow.map {
+        it.values.filterIsInstance<CatalogueSource>()
     }
 
     init {
         scope.launch {
             extensionManager.installedExtensionsFlow
                 .collectLatest { extensions ->
-                    val mutableMap = ConcurrentHashMap<Long, AnimeSource>(
+                    val mutableMap = ConcurrentHashMap<Long, Source>(
                         mapOf(
                             LocalSource.ID to LocalSource(
                                 context,
@@ -82,19 +80,19 @@ class AndroidSourceManager(
         }
     }
 
-    override fun get(sourceKey: Long): AnimeSource? {
+    override fun get(sourceKey: Long): Source? {
         return sourcesMapFlow.value[sourceKey]
     }
 
-    override fun getOrStub(sourceKey: Long): AnimeSource {
+    override fun getOrStub(sourceKey: Long): Source {
         return sourcesMapFlow.value[sourceKey] ?: stubSourcesMap.getOrPut(sourceKey) {
             runBlocking { createStubSource(sourceKey) }
         }
     }
 
-    override fun getOnlineSources() = sourcesMapFlow.value.values.filterIsInstance<AnimeHttpSource>()
+    override fun getOnlineSources() = sourcesMapFlow.value.values.filterIsInstance<HttpSource>()
 
-    override fun getCatalogueSources() = sourcesMapFlow.value.values.filterIsInstance<AnimeCatalogueSource>()
+    override fun getCatalogueSources() = sourcesMapFlow.value.values.filterIsInstance<CatalogueSource>()
 
     override fun getStubSources(): List<StubSource> {
         val onlineSourceIds = getOnlineSources().map { it.id }

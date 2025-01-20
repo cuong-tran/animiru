@@ -1,6 +1,6 @@
 package eu.kanade.tachiyomi.data.backup.models
 
-import eu.kanade.tachiyomi.animesource.model.AnimeUpdateStrategy
+import eu.kanade.tachiyomi.source.model.UpdateStrategy
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.protobuf.ProtoNumber
 import tachiyomi.domain.anime.model.Anime
@@ -34,7 +34,7 @@ data class BackupAnime(
     // @ProtoNumber(102) var brokenHistory, legacy history model with non-compliant proto number
     @ProtoNumber(103) var viewer_flags: Int = 0,
     @ProtoNumber(104) var history: List<BackupHistory> = emptyList(),
-    @ProtoNumber(105) var updateStrategy: AnimeUpdateStrategy = AnimeUpdateStrategy.ALWAYS_UPDATE,
+    @ProtoNumber(105) var updateStrategy: UpdateStrategy = UpdateStrategy.ALWAYS_UPDATE,
     @ProtoNumber(106) var lastModifiedAt: Long = 0,
     @ProtoNumber(107) var favoriteModifiedAt: Long? = null,
     @ProtoNumber(109) var version: Long = 0,

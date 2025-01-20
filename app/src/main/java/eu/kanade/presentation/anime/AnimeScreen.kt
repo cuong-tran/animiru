@@ -66,8 +66,8 @@ import eu.kanade.presentation.anime.components.MissingEpisodeCountListItem
 import eu.kanade.presentation.anime.components.NextEpisodeAiringListItem
 import eu.kanade.presentation.components.relativeDateText
 import eu.kanade.presentation.util.formatEpisodeNumber
-import eu.kanade.tachiyomi.animesource.AnimeSource
-import eu.kanade.tachiyomi.animesource.ConfigurableAnimeSource
+import eu.kanade.tachiyomi.source.Source
+import eu.kanade.tachiyomi.source.ConfigurableSource
 import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.data.download.DownloadProvider
 import eu.kanade.tachiyomi.data.download.model.Download
@@ -166,7 +166,7 @@ fun AnimeScreen(
     val navigator = LocalNavigator.currentOrThrow
     val onSettingsClicked: (() -> Unit)? = {
         navigator.push(SourcePreferencesScreen(state.source.id))
-    }.takeIf { state.source is ConfigurableAnimeSource }
+    }.takeIf { state.source is ConfigurableSource }
 
     if (!isTabletUi) {
         AnimeScreenSmallImpl(
@@ -941,7 +941,7 @@ private fun SharedAnimeBottomActionMenu(
 private fun LazyListScope.sharedEpisodeItems(
     anime: Anime,
     // AM (FILE_SIZE) -->
-    source: AnimeSource,
+    source: Source,
     showFileSize: Boolean,
     // <-- AM (FILE_SIZE)
     episodes: List<EpisodeList>,

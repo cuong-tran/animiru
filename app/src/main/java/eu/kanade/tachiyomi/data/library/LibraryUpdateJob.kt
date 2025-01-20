@@ -20,7 +20,7 @@ import eu.kanade.domain.anime.interactor.UpdateAnime
 import eu.kanade.domain.anime.model.toSAnime
 import eu.kanade.domain.connection.SyncPreferences
 import eu.kanade.domain.episode.interactor.SyncEpisodesWithSource
-import eu.kanade.tachiyomi.animesource.model.AnimeUpdateStrategy
+import eu.kanade.tachiyomi.source.model.UpdateStrategy
 import eu.kanade.tachiyomi.animesource.model.SAnime
 import eu.kanade.tachiyomi.data.cache.CoverCache
 import eu.kanade.tachiyomi.data.connection.syncmiru.SyncDataJob
@@ -246,7 +246,7 @@ class LibraryUpdateJob(private val context: Context, workerParams: WorkerParamet
         animeToUpdate = listToUpdate
             .filter {
                 when {
-                    it.anime.updateStrategy != AnimeUpdateStrategy.ALWAYS_UPDATE -> {
+                    it.anime.updateStrategy != UpdateStrategy.ALWAYS_UPDATE -> {
                         skippedUpdates.add(
                             it.anime to context.stringResource(MR.strings.skipped_reason_not_always_update),
                         )

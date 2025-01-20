@@ -15,7 +15,7 @@ import com.hippo.unifile.UniFile
 import eu.kanade.domain.episode.model.toSEpisode
 import eu.kanade.tachiyomi.animesource.UnmeteredSource
 import eu.kanade.tachiyomi.animesource.model.Video
-import eu.kanade.tachiyomi.animesource.online.AnimeHttpSource
+import eu.kanade.tachiyomi.source.online.HttpSource
 import eu.kanade.tachiyomi.data.download.model.Download
 import eu.kanade.tachiyomi.data.download.model.DownloadPart
 import eu.kanade.tachiyomi.data.library.LibraryUpdateNotifier
@@ -303,7 +303,7 @@ class Downloader(
     ) {
         if (episodes.isEmpty()) return
 
-        val source = sourceManager.get(anime.source) as? AnimeHttpSource ?: return
+        val source = sourceManager.get(anime.source) as? HttpSource ?: return
         val wasEmpty = queueState.value.isEmpty()
 
         val episodesToQueue = episodes.asSequence()
@@ -1167,7 +1167,7 @@ class Downloader(
      */
     private fun downloadVideoExternal(
         video: Video,
-        source: AnimeHttpSource,
+        source: HttpSource,
         tmpDir: UniFile,
         filename: String,
     ): UniFile {

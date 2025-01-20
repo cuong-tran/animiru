@@ -1,11 +1,12 @@
 package eu.kanade.tachiyomi.animesource
 
-import eu.kanade.tachiyomi.animesource.model.AnimeFilterList
+import eu.kanade.tachiyomi.source.model.FilterList
 import eu.kanade.tachiyomi.animesource.model.AnimesPage
+import eu.kanade.tachiyomi.source.Source
 import rx.Observable
 import tachiyomi.core.common.util.lang.awaitSingle
 
-interface AnimeCatalogueSource : AnimeSource {
+interface AnimeCatalogueSource : Source {
 
     /**
      * An ISO 639-1 compliant language code (two letters in lower case).
@@ -37,7 +38,7 @@ interface AnimeCatalogueSource : AnimeSource {
      * @param filters the list of filters to apply.
      */
     @Suppress("DEPRECATION")
-    suspend fun getSearchAnime(page: Int, query: String, filters: AnimeFilterList): AnimesPage {
+    suspend fun getSearchAnime(page: Int, query: String, filters: FilterList): AnimesPage {
         return fetchSearchAnime(page, query, filters).awaitSingle()
     }
 
@@ -55,7 +56,7 @@ interface AnimeCatalogueSource : AnimeSource {
     /**
      * Returns the list of filters for the source.
      */
-    fun getFilterList(): AnimeFilterList
+    fun getFilterList(): FilterList
 
     // Should be replaced as soon as Anime Extension reach 1.5
     @Deprecated(
@@ -69,7 +70,7 @@ interface AnimeCatalogueSource : AnimeSource {
         "Use the non-RxJava API instead",
         ReplaceWith("getSearchAnime"),
     )
-    fun fetchSearchAnime(page: Int, query: String, filters: AnimeFilterList): Observable<AnimesPage>
+    fun fetchSearchAnime(page: Int, query: String, filters: FilterList): Observable<AnimesPage>
 
     // Should be replaced as soon as Anime Extension reach 1.5
     @Deprecated(

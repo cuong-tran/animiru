@@ -24,7 +24,7 @@ import eu.kanade.domain.track.service.TrackPreferences
 import eu.kanade.presentation.anime.DownloadAction
 import eu.kanade.presentation.anime.components.EpisodeDownloadAction
 import eu.kanade.presentation.util.formattedMessage
-import eu.kanade.tachiyomi.animesource.AnimeSource
+import eu.kanade.tachiyomi.source.Source
 import eu.kanade.tachiyomi.animesource.model.Video
 import eu.kanade.tachiyomi.data.download.DownloadCache
 import eu.kanade.tachiyomi.data.download.DownloadManager
@@ -139,7 +139,7 @@ class AnimeScreenModel(
     val anime: Anime?
         get() = successState?.anime
 
-    val source: AnimeSource?
+    val source: Source?
         get() = successState?.source
 
     private val isFavorited: Boolean
@@ -1199,7 +1199,7 @@ class AnimeScreenModel(
         data class DuplicateAnime(val anime: Anime, val duplicate: Anime) : Dialog
         data class Migrate(val newAnime: Anime, val oldAnime: Anime) : Dialog
         data class SetAnimeFetchInterval(val anime: Anime) : Dialog
-        data class ShowQualities(val episode: Episode, val anime: Anime, val source: AnimeSource) : Dialog
+        data class ShowQualities(val episode: Episode, val anime: Anime, val source: Source) : Dialog
 
         // SY -->
         data class EditAnimeInfo(val anime: Anime) : Dialog
@@ -1257,7 +1257,7 @@ class AnimeScreenModel(
         @Immutable
         data class Success(
             val anime: Anime,
-            val source: AnimeSource,
+            val source: Source,
             val isFromSource: Boolean,
             val episodes: List<EpisodeList.Item>,
             val trackingCount: Int = 0,
