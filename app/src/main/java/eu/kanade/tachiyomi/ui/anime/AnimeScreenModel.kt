@@ -14,6 +14,7 @@ import eu.kanade.core.util.insertSeparators
 import eu.kanade.domain.anime.interactor.SetAnimeViewerFlags
 import eu.kanade.domain.anime.interactor.UpdateAnime
 import eu.kanade.domain.anime.model.downloadedFilter
+import eu.kanade.domain.anime.model.episodesFiltered
 import eu.kanade.domain.anime.model.toSAnime
 import eu.kanade.domain.episode.interactor.SetSeenStatus
 import eu.kanade.domain.episode.interactor.SyncEpisodesWithSource
@@ -785,12 +786,12 @@ class AnimeScreenModel(
 
     fun runDownloadAction(action: DownloadAction) {
         val episodesToDownload = when (action) {
-            DownloadAction.NEXT_1_ITEM -> getUnseenEpisodesSorted().take(1)
-            DownloadAction.NEXT_5_ITEMS -> getUnseenEpisodesSorted().take(5)
-            DownloadAction.NEXT_10_ITEMS -> getUnseenEpisodesSorted().take(10)
-            DownloadAction.NEXT_25_ITEMS -> getUnseenEpisodesSorted().take(25)
+            DownloadAction.NEXT_1_EPISODE -> getUnseenEpisodesSorted().take(1)
+            DownloadAction.NEXT_5_EPISODES -> getUnseenEpisodesSorted().take(5)
+            DownloadAction.NEXT_10_EPISODES -> getUnseenEpisodesSorted().take(10)
+            DownloadAction.NEXT_25_EPISODES -> getUnseenEpisodesSorted().take(25)
 
-            DownloadAction.UNVIEWED_ITEMS -> getUnseenEpisodes()
+            DownloadAction.UNSEEN_EPISODES -> getUnseenEpisodes()
         }
         if (episodesToDownload.isNotEmpty()) {
             startDownload(episodesToDownload, false)
@@ -1313,6 +1314,9 @@ class AnimeScreenModel(
                 get() = nextAiringEpisode.second.times(1000L).minus(
                     Calendar.getInstance().timeInMillis,
                 )
+
+            val filterActive: Boolean
+                get() = anime.episodesFiltered()
 
             /**
              * Applies the view filters to the list of episodes obtained from the database.

@@ -35,7 +35,7 @@ interface AnimeRepository {
 
     suspend fun insertAnime(anime: Anime): Long?
 
-    suspend fun updateAnime(update: AnimeUpdate): Boolean
+    suspend fun update(update: AnimeUpdate): Boolean
 
-    suspend fun updateAllAnime(animeUpdates: List<AnimeUpdate>): Boolean
+    suspend fun updateAll(animeUpdates: List<AnimeUpdate>): Boolean
 }

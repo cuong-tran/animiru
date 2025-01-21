@@ -6,11 +6,11 @@ import tachiyomi.domain.episode.model.EpisodeUpdate
 
 interface EpisodeRepository {
 
-    suspend fun addAllEpisodes(episodes: List<Episode>): List<Episode>
+    suspend fun addAll(episodes: List<Episode>): List<Episode>
 
     suspend fun updateEpisode(episodeUpdate: EpisodeUpdate)
 
-    suspend fun updateAllEpisodes(episodeUpdates: List<EpisodeUpdate>)
+    suspend fun updateAll(episodeUpdates: List<EpisodeUpdate>)
 
     suspend fun removeEpisodesWithIds(episodeIds: List<Long>)
 

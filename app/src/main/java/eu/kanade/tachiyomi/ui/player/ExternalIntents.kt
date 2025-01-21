@@ -547,7 +547,7 @@ class ExternalIntents {
                                     tracker.animeService.update(updatedTrack.toDbTrack(), true)
                                     insertTrack.await(updatedTrack)
                                 } else {
-                                    delayedTrackingStore.addAnime(track.animeId, lastEpisodeSeen = episodeNumber)
+                                    delayedTrackingStore.add(track.animeId, lastEpisodeSeen = episodeNumber)
                                     DelayedTrackingUpdateJob.setupTask(context)
                                 }
                             }

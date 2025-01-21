@@ -207,12 +207,11 @@ data object LibraryTab : Tab {
                 LibraryBottomActionMenu(
                     visible = state.selectionMode,
                     onChangeCategoryClicked = screenModel::openChangeCategoryDialog,
-                    onMarkAsViewedClicked = { screenModel.markSeenSelection(true) },
-                    onMarkAsUnviewedClicked = { screenModel.markSeenSelection(false) },
+                    onMarkAsSeenClicked = { screenModel.markSeenSelection(true) },
+                    onMarkAsUnseenClicked = { screenModel.markSeenSelection(false) },
                     onDownloadClicked = screenModel::runDownloadActionSelection
                         .takeIf { state.selection.fastAll { !it.anime.isLocal() } },
                     onDeleteClicked = screenModel::openDeleteAnimeDialog,
-                    isManga = false,
                 )
             },
             snackbarHost = { SnackbarHost(hostState = snackbarHostState) },

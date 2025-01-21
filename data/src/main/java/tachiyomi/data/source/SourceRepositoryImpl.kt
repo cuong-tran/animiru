@@ -20,7 +20,7 @@ class SourceRepositoryImpl(
     private val handler: DatabaseHandler,
 ) : SourceRepository {
 
-    override fun getAnimeSources(): Flow<List<DomainSource>> {
+    override fun getSources(): Flow<List<DomainSource>> {
         return sourceManager.catalogueSources.map { sources ->
             sources.map {
                 mapSourceToDomainSource(it).copy(
@@ -30,7 +30,7 @@ class SourceRepositoryImpl(
         }
     }
 
-    override fun getOnlineAnimeSources(): Flow<List<DomainSource>> {
+    override fun getOnlineSources(): Flow<List<DomainSource>> {
         return sourceManager.catalogueSources.map { sources ->
             sources
                 .filterIsInstance<HttpSource>()
@@ -38,7 +38,7 @@ class SourceRepositoryImpl(
         }
     }
 
-    override fun getAnimeSourcesWithFavoriteCount(): Flow<List<Pair<DomainSource, Long>>> {
+    override fun getSourcesWithFavoriteCount(): Flow<List<Pair<DomainSource, Long>>> {
         return combine(
             handler.subscribeToList { animesQueries.getSourceIdWithFavoriteCount() },
             sourceManager.catalogueSources,

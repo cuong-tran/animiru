@@ -37,8 +37,6 @@ class SourcePreferences(
         SetMigrateSorting.Direction.ASCENDING,
     )
 
-    fun animeExtensionRepos() = preferenceStore.getStringSet("anime_extension_repos", emptySet())
-
     fun trustedExtensions() = preferenceStore.getStringSet(
         Preference.appStateKey("trusted_extensions"),
         emptySet(),
@@ -51,11 +49,11 @@ class SourcePreferences(
 
     // Mixture Sources
 
-    fun disabledAnimeSources() = preferenceStore.getStringSet("hidden_anime_catalogues", emptySet())
+    fun disabledSources() = preferenceStore.getStringSet("hidden_anime_catalogues", emptySet())
 
-    fun pinnedAnimeSources() = preferenceStore.getStringSet("pinned_anime_catalogues", emptySet())
+    fun pinnedSources() = preferenceStore.getStringSet("pinned_anime_catalogues", emptySet())
 
-    fun lastUsedAnimeSource() = preferenceStore.getLong(
+    fun lastUsedSource() = preferenceStore.getLong(
         Preference.appStateKey("last_anime_catalogue_source"),
         -1,
     )

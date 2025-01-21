@@ -83,8 +83,8 @@ data object RecentsTab : Tab {
             tabs = tabs,
             state = state,
             // Compatibility with hardcoded aniyomi code
-            mangaSearchQuery = animeSearchQuery,
-            onChangeMangaSearchQuery = historyScreenModel::search,
+            searchQuery = animeSearchQuery,
+            onChangeSearchQuery = historyScreenModel::search,
         )
 
         LaunchedEffect(Unit) {

@@ -125,7 +125,7 @@ class AnimeRepositoryImpl(
         }
     }
 
-    override suspend fun updateAnime(update: AnimeUpdate): Boolean {
+    override suspend fun update(update: AnimeUpdate): Boolean {
         return try {
             partialUpdateAnime(update)
             true
@@ -135,7 +135,7 @@ class AnimeRepositoryImpl(
         }
     }
 
-    override suspend fun updateAllAnime(animeUpdates: List<AnimeUpdate>): Boolean {
+    override suspend fun updateAll(animeUpdates: List<AnimeUpdate>): Boolean {
         return try {
             partialUpdateAnime(*animeUpdates.toTypedArray())
             true

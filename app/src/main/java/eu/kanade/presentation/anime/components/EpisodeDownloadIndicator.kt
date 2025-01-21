@@ -35,12 +35,10 @@ import androidx.compose.ui.unit.sp
 import eu.kanade.presentation.components.DropdownMenu
 import eu.kanade.tachiyomi.R
 import eu.kanade.tachiyomi.data.download.model.Download
-import tachiyomi.domain.download.service.DownloadPreferences
 import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.components.material.IconButtonTokens
 import tachiyomi.presentation.core.i18n.stringResource
 import tachiyomi.presentation.core.util.secondaryItemAlpha
-import uy.kohesive.injekt.injectLazy
 import java.math.BigDecimal
 import java.math.RoundingMode
 
@@ -319,4 +317,3 @@ internal val IndicatorModifier = Modifier
     .padding(IndicatorPadding)
 internal val ArrowModifier = Modifier
     .size(IndicatorSize - 7.dp)
-internal val preferences: DownloadPreferences by injectLazy()

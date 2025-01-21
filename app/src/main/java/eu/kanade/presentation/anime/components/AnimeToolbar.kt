@@ -54,7 +54,6 @@ fun AnimeToolbar(
     actionModeCounter: Int,
     onSelectAll: () -> Unit,
     onInvertSelection: () -> Unit,
-    isManga: Boolean,
     modifier: Modifier = Modifier,
     backgroundAlphaProvider: () -> Float = titleAlphaProvider,
 ) {
@@ -100,7 +99,6 @@ fun AnimeToolbar(
                             expanded = downloadExpanded,
                             onDismissRequest = onDismissRequest,
                             onDownloadClicked = onClickDownload,
-                            isManga = isManga,
                         )
                     }
 

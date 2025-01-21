@@ -11,11 +11,11 @@ typealias AnimeSourcePagingSourceType = PagingSource<Long, SAnime>
 
 interface SourceRepository {
 
-    fun getAnimeSources(): Flow<List<Source>>
+    fun getSources(): Flow<List<Source>>
 
-    fun getOnlineAnimeSources(): Flow<List<Source>>
+    fun getOnlineSources(): Flow<List<Source>>
 
-    fun getAnimeSourcesWithFavoriteCount(): Flow<List<Pair<Source, Long>>>
+    fun getSourcesWithFavoriteCount(): Flow<List<Pair<Source, Long>>>
 
     fun getSourcesWithNonLibraryAnime(): Flow<List<SourceWithCount>>
 

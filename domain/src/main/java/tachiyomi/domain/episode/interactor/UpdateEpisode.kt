@@ -19,7 +19,7 @@ class UpdateEpisode(
 
     suspend fun awaitAll(episodeUpdates: List<EpisodeUpdate>) {
         try {
-            episodeRepository.updateAllEpisodes(episodeUpdates)
+            episodeRepository.updateAll(episodeUpdates)
         } catch (e: Exception) {
             logcat(LogPriority.ERROR, e)
         }

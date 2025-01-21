@@ -246,9 +246,7 @@ fun ExpandableAnimeDescription(
             mutableStateOf(defaultExpandState)
         }
         val desc =
-            description.takeIf { !it.isNullOrBlank() } ?: stringResource(
-                MR.strings.description_placeholder,
-            )
+            description.takeIf { !it.isNullOrBlank() } ?: stringResource(MR.strings.description_placeholder)
         val trimmedDescription = remember(desc) {
             desc
                 .replace(whitespaceLineRegex, "\n")

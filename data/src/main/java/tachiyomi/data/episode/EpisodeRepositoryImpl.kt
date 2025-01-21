@@ -12,7 +12,7 @@ class EpisodeRepositoryImpl(
     private val handler: DatabaseHandler,
 ) : EpisodeRepository {
 
-    override suspend fun addAllEpisodes(episodes: List<Episode>): List<Episode> {
+    override suspend fun addAll(episodes: List<Episode>): List<Episode> {
         return try {
             handler.await(inTransaction = true) {
                 episodes.map { episode ->
@@ -48,7 +48,7 @@ class EpisodeRepositoryImpl(
         partialUpdate(episodeUpdate)
     }
 
-    override suspend fun updateAllEpisodes(episodeUpdates: List<EpisodeUpdate>) {
+    override suspend fun updateAll(episodeUpdates: List<EpisodeUpdate>) {
         partialUpdate(*episodeUpdates.toTypedArray())
     }
 

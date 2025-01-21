@@ -40,7 +40,7 @@ class AddTracks(
             insertTrack.await(track)
 
             // TODO: merge into [SyncEpisodeProgressWithTrack]?
-            // Update episode progress if newer episodes marked read locally
+            // Update episode progress if newer episodes marked seen locally
             if (hasSeenEpisodes) {
                 val latestLocalSeenEpisodeNumber = allEpisodes
                     .sortedBy { it.episodeNumber }

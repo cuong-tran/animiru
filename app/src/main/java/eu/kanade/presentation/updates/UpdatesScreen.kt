@@ -145,10 +145,10 @@ private fun AnimeUpdatesBottomBar(
             onMultiFillermarkClicked.invoke(selected, false)
         }.takeIf { selected.fastAll { it.update.fillermark } },
         // <-- AM (FILLERMARK)
-        onMarkAsViewedClicked = {
+        onMarkAsSeenClicked = {
             onMultiMarkAsSeenClicked(selected, true)
         }.takeIf { selected.fastAny { !it.update.seen } },
-        onMarkAsUnviewedClicked = {
+        onMarkAsUnseenClicked = {
             onMultiMarkAsSeenClicked(selected, false)
         }.takeIf { selected.fastAny { it.update.seen || it.update.lastSecondSeen > 0L } },
         onDownloadClicked = {
@@ -165,7 +165,6 @@ private fun AnimeUpdatesBottomBar(
         onInternalClicked = {
             onOpenEpisode(selected[0], true)
         }.takeIf { playerPreferences.alwaysUseExternalPlayer().get() && selected.size == 1 },
-        isManga = false,
     )
 }
 

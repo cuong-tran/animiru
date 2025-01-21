@@ -98,7 +98,7 @@ class BrowseSourceScreenModel(
         }
 
         if (!basePreferences.incognitoMode().get()) {
-            sourcePreferences.lastUsedAnimeSource().set(source.id)
+            sourcePreferences.lastUsedSource().set(source.id)
         }
     }
 

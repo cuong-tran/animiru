@@ -548,11 +548,11 @@ class LibraryScreenModel(
         val selection = state.value.selection
         val animes = selection.map { it.anime }.toList()
         when (action) {
-            DownloadAction.NEXT_1_ITEM -> downloadUnseenEpisodes(animes, 1)
-            DownloadAction.NEXT_5_ITEMS -> downloadUnseenEpisodes(animes, 5)
-            DownloadAction.NEXT_10_ITEMS -> downloadUnseenEpisodes(animes, 10)
-            DownloadAction.NEXT_25_ITEMS -> downloadUnseenEpisodes(animes, 25)
-            DownloadAction.UNVIEWED_ITEMS -> downloadUnseenEpisodes(animes, null)
+            DownloadAction.NEXT_1_EPISODE -> downloadUnseenEpisodes(animes, 1)
+            DownloadAction.NEXT_5_EPISODES -> downloadUnseenEpisodes(animes, 5)
+            DownloadAction.NEXT_10_EPISODES -> downloadUnseenEpisodes(animes, 10)
+            DownloadAction.NEXT_25_EPISODES -> downloadUnseenEpisodes(animes, 25)
+            DownloadAction.UNSEEN_EPISODES -> downloadUnseenEpisodes(animes, null)
         }
         clearSelection()
     }
