@@ -136,7 +136,7 @@ fun ExtensionDetailsScreen(
             return@Scaffold
         }
 
-        AnimeExtensionDetails(
+        ExtensionDetails(
             contentPadding = paddingValues,
             extension = state.extension,
             sources = state.sources,
@@ -148,7 +148,7 @@ fun ExtensionDetailsScreen(
 }
 
 @Composable
-private fun AnimeExtensionDetails(
+private fun ExtensionDetails(
     contentPadding: PaddingValues,
     extension: Extension.Installed,
     sources: ImmutableList<ExtensionSourceItem>,
@@ -430,7 +430,7 @@ private fun SourceSwitchPreference(
 }
 
 @Composable
-fun NsfwWarningDialog(
+private fun NsfwWarningDialog(
     onClickConfirm: () -> Unit,
 ) {
     AlertDialog(

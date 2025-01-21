@@ -40,7 +40,7 @@ import eu.kanade.presentation.anime.DuplicateAnimeDialog
 import eu.kanade.presentation.browse.BrowseSourceContent
 import eu.kanade.presentation.browse.MissingSourceScreen
 import eu.kanade.presentation.browse.components.BrowseSourceToolbar
-import eu.kanade.presentation.browse.components.RemoveEntryDialog
+import eu.kanade.presentation.browse.components.RemoveAnimeDialog
 import eu.kanade.presentation.category.components.ChangeCategoryDialog
 import eu.kanade.presentation.util.AssistContentScreen
 import eu.kanade.presentation.util.Screen
@@ -219,7 +219,7 @@ data class BrowseSourceScreen(
                 contentPadding = paddingValues,
                 onWebViewClick = onWebViewClick,
                 onHelpClick = { uriHandler.openUri(Constants.URL_HELP) },
-                onLocalAnimeSourceHelpClick = onHelpClick,
+                onLocalSourceHelpClick = onHelpClick,
                 onAnimeClick = { navigator.push((AnimeScreen(it.id, true))) },
                 onAnimeLongClick = { anime ->
                     scope.launchIO {
@@ -279,12 +279,12 @@ data class BrowseSourceScreen(
                 )
             }
             is BrowseSourceScreenModel.Dialog.RemoveAnime -> {
-                RemoveEntryDialog(
+                RemoveAnimeDialog(
                     onDismissRequest = onDismissRequest,
                     onConfirm = {
                         screenModel.changeAnimeFavorite(dialog.anime)
                     },
-                    entryToRemove = dialog.anime.title,
+                    animeToRemove = dialog.anime.title,
                 )
             }
             is BrowseSourceScreenModel.Dialog.ChangeAnimeCategory -> {

@@ -8,10 +8,10 @@ import tachiyomi.i18n.MR
 import tachiyomi.presentation.core.i18n.stringResource
 
 @Composable
-fun RemoveEntryDialog(
+fun RemoveAnimeDialog(
     onDismissRequest: () -> Unit,
     onConfirm: () -> Unit,
-    entryToRemove: String,
+    animeToRemove: String,
 ) {
     AlertDialog(
         onDismissRequest = onDismissRequest,
@@ -34,7 +34,7 @@ fun RemoveEntryDialog(
             Text(text = stringResource(MR.strings.are_you_sure))
         },
         text = {
-            Text(text = stringResource(MR.strings.remove_manga, entryToRemove))
+            Text(text = stringResource(MR.strings.remove_manga, animeToRemove))
         },
     )
 }

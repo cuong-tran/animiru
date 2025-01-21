@@ -175,8 +175,8 @@ private fun ExtensionContent(
     state: ExtensionsScreenModel.State,
     contentPadding: PaddingValues,
     onLongClickItem: (Extension) -> Unit,
-    onOpenWebView: (Extension.Available) -> Unit,
     onClickItemCancel: (Extension) -> Unit,
+    onOpenWebView: (Extension.Available) -> Unit,
     onInstallExtension: (Extension.Available) -> Unit,
     onUninstallExtension: (Extension) -> Unit,
     onUpdateExtension: (Extension.Installed) -> Unit,
@@ -251,8 +251,8 @@ private fun ExtensionContent(
                 },
             ) { item ->
                 ExtensionItem(
-                    item = item,
                     modifier = Modifier.animateItemFastScroll(),
+                    item = item,
                     onClickItem = {
                         when (it) {
                             is Extension.Available -> onInstallExtension(it)
@@ -281,7 +281,6 @@ private fun ExtensionContent(
                                     onOpenExtension(it)
                                 }
                             }
-
                             is Extension.Untrusted -> {
                                 trustState = it
                             }
@@ -315,8 +314,8 @@ private fun ExtensionItem(
     onLongClickItem: (Extension) -> Unit,
     onClickItemCancel: (Extension) -> Unit,
     onClickItemAction: (Extension) -> Unit,
-    modifier: Modifier = Modifier,
     onClickItemSecondaryAction: (Extension) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val (extension, installStep) = item
     // AM (BROWSE) -->
@@ -344,10 +343,7 @@ private fun ExtensionItem(
                     )
                 }
 
-                val padding by animateDpAsState(
-                    targetValue = if (idle) 0.dp else 8.dp,
-                    label = "iconPadding",
-                )
+                val padding by animateDpAsState(targetValue = if (idle) 0.dp else 8.dp)
                 ExtensionIcon(
                     extension = extension,
                     modifier = Modifier
@@ -389,6 +385,7 @@ private fun ExtensionItemContent(
             overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.bodyMedium,
         )
+
         // Won't look good but it's not like we can ellipsize overflowing content
         FlowRow(
             modifier = Modifier.secondaryItemAlpha(),
@@ -526,7 +523,7 @@ private fun ExtensionItemActions(
 }
 
 @Composable
-fun ExtensionHeader(
+private fun ExtensionHeader(
     textRes: StringResource,
     modifier: Modifier = Modifier,
     action: @Composable RowScope.() -> Unit = {},
@@ -539,7 +536,7 @@ fun ExtensionHeader(
 }
 
 @Composable
-fun ExtensionHeader(
+private fun ExtensionHeader(
     text: String,
     modifier: Modifier = Modifier,
     action: @Composable RowScope.() -> Unit = {},
@@ -560,7 +557,7 @@ fun ExtensionHeader(
 }
 
 @Composable
-fun ExtensionTrustDialog(
+private fun ExtensionTrustDialog(
     onClickConfirm: () -> Unit,
     onClickDismiss: () -> Unit,
     onDismissRequest: () -> Unit,

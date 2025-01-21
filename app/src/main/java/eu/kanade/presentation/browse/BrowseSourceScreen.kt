@@ -46,7 +46,7 @@ fun BrowseSourceContent(
     contentPadding: PaddingValues,
     onWebViewClick: () -> Unit,
     onHelpClick: () -> Unit,
-    onLocalAnimeSourceHelpClick: () -> Unit,
+    onLocalSourceHelpClick: () -> Unit,
     onAnimeClick: (Anime) -> Unit,
     onAnimeLongClick: (Anime) -> Unit,
 ) {
@@ -82,7 +82,7 @@ fun BrowseSourceContent(
                     EmptyScreenAction(
                         stringRes = MR.strings.local_source_help_guide,
                         icon = Icons.AutoMirrored.Outlined.HelpOutline,
-                        onClick = onLocalAnimeSourceHelpClick,
+                        onClick = onLocalSourceHelpClick,
                     ),
                 )
             } else {

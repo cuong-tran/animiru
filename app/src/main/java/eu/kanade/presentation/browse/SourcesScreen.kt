@@ -58,6 +58,7 @@ import tachiyomi.presentation.core.theme.header
 import tachiyomi.presentation.core.util.plus
 import tachiyomi.presentation.core.util.shouldExpandFAB
 import tachiyomi.source.local.LocalSource
+import tachiyomi.source.local.isLocal
 
 @Composable
 fun SourcesScreen(
@@ -131,26 +132,26 @@ fun SourcesScreen(
                             items = state.items,
                             contentType = {
                                 when (it) {
-                                    is AnimeSourceUiModel.Header -> "header"
-                                    is AnimeSourceUiModel.Item -> "item"
+                                    is SourceUiModel.Header -> "header"
+                                    is SourceUiModel.Item -> "item"
                                 }
                             },
                             key = {
                                 when (it) {
-                                    is AnimeSourceUiModel.Header -> it.hashCode()
-                                    is AnimeSourceUiModel.Item -> "source-${it.source.key()}"
+                                    is SourceUiModel.Header -> it.hashCode()
+                                    is SourceUiModel.Item -> "source-${it.source.key()}"
                                 }
                             },
                         ) { model ->
                             when (model) {
-                                is AnimeSourceUiModel.Header -> {
+                                is SourceUiModel.Header -> {
                                     SourceHeader(
                                         modifier = Modifier.animateItem(),
                                         language = model.language,
                                     )
                                 }
 
-                                is AnimeSourceUiModel.Item -> SourceItem(
+                                is SourceUiModel.Item -> SourceItem(
                                     modifier = Modifier.animateItem(),
                                     // AM (BROWSE) -->
                                     navigator = navigator,
@@ -305,7 +306,7 @@ fun SourceOptionsDialog(
                         .fillMaxWidth()
                         .padding(vertical = 16.dp),
                 )
-                if (source.id != LocalSource.ID) {
+                if (!source.isLocal()) {
                     Text(
                         text = stringResource(MR.strings.action_disable),
                         modifier = Modifier
@@ -330,7 +331,7 @@ fun SourceOptionsDialog(
     )
 }
 
-sealed interface AnimeSourceUiModel {
-    data class Item(val source: Source) : AnimeSourceUiModel
-    data class Header(val language: String) : AnimeSourceUiModel
+sealed interface SourceUiModel {
+    data class Item(val source: Source) : SourceUiModel
+    data class Header(val language: String) : SourceUiModel
 }

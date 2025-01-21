@@ -33,7 +33,7 @@ fun BrowseSourceList(
 
         items(count = animeList.itemCount) { index ->
             val anime by animeList[index]?.collectAsState() ?: return@items
-            BrowseAnimeSourceListItem(
+            BrowseSourceListItem(
                 anime = anime,
                 onClick = { onAnimeClick(anime) },
                 onLongClick = { onAnimeLongClick(anime) },
@@ -49,7 +49,7 @@ fun BrowseSourceList(
 }
 
 @Composable
-private fun BrowseAnimeSourceListItem(
+internal fun BrowseSourceListItem(
     anime: Anime,
     onClick: () -> Unit = {},
     onLongClick: () -> Unit = onClick,

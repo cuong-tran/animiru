@@ -38,7 +38,7 @@ fun ExtensionFilterScreen(
             )
             return@Scaffold
         }
-        AnimeExtensionFilterContent(
+        ExtensionFilterContent(
             contentPadding = contentPadding,
             state = state,
             onClickLang = onClickToggle,
@@ -47,7 +47,7 @@ fun ExtensionFilterScreen(
 }
 
 @Composable
-private fun AnimeExtensionFilterContent(
+private fun ExtensionFilterContent(
     contentPadding: PaddingValues,
     state: ExtensionFilterState.Success,
     onClickLang: (String) -> Unit,

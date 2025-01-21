@@ -40,6 +40,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
+import tachiyomi.domain.source.model.Source as DomainSource
 
 actual class LocalSource(
     private val context: Context,
@@ -309,3 +310,5 @@ actual class LocalSource(
 fun Anime.isLocal(): Boolean = source == LocalSource.ID
 
 fun Source.isLocal(): Boolean = id == LocalSource.ID
+
+fun DomainSource.isLocal(): Boolean = id == LocalSource.ID

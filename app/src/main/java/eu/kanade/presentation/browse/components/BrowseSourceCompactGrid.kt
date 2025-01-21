@@ -40,7 +40,7 @@ fun BrowseSourceCompactGrid(
 
         items(count = animeList.itemCount) { index ->
             val anime by animeList[index]?.collectAsState() ?: return@items
-            BrowseAnimeSourceCompactGridItem(
+            BrowseSourceCompactGridItem(
                 anime = anime,
                 onClick = { onAnimeClick(anime) },
                 onLongClick = { onAnimeLongClick(anime) },
@@ -56,7 +56,7 @@ fun BrowseSourceCompactGrid(
 }
 
 @Composable
-private fun BrowseAnimeSourceCompactGridItem(
+internal fun BrowseSourceCompactGridItem(
     anime: Anime,
     onClick: () -> Unit = {},
     onLongClick: () -> Unit = onClick,

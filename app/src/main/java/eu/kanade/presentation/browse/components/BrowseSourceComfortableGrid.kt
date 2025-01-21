@@ -40,7 +40,7 @@ fun BrowseSourceComfortableGrid(
 
         items(count = animeList.itemCount) { index ->
             val anime by animeList[index]?.collectAsState() ?: return@items
-            BrowseAnimeSourceComfortableGridItem(
+            BrowseSourceComfortableGridItem(
                 anime = anime,
                 onClick = { onAnimeClick(anime) },
                 onLongClick = { onAnimeLongClick(anime) },
@@ -56,7 +56,7 @@ fun BrowseSourceComfortableGrid(
 }
 
 @Composable
-private fun BrowseAnimeSourceComfortableGridItem(
+internal fun BrowseSourceComfortableGridItem(
     anime: Anime,
     onClick: () -> Unit = {},
     onLongClick: () -> Unit = onClick,

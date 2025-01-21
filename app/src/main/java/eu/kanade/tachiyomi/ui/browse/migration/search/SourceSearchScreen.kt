@@ -103,7 +103,7 @@ data class SourceSearchScreen(
                     )
                 },
                 onHelpClick = { uriHandler.openUri(Constants.URL_HELP) },
-                onLocalAnimeSourceHelpClick = { uriHandler.openUri(LocalSource.HELP_URL) },
+                onLocalSourceHelpClick = { uriHandler.openUri(LocalSource.HELP_URL) },
                 onAnimeClick = openMigrateDialog,
                 onAnimeLongClick = { navigator.push(AnimeScreen(it.id, true)) },
             )
